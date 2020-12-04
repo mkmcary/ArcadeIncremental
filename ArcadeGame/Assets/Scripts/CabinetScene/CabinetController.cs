@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class CabinetController : MonoBehaviour
@@ -10,10 +11,10 @@ public class CabinetController : MonoBehaviour
     public GameObject centerMachine;
     public GameObject rightMachine;
 
-    public Text machineTitle;
+    public Text machineLabel;
 
     public List<Sprite> sprites;
-    public List<String> titles;
+    public List<String> labels;
 
     private int currentMachine;
 
@@ -43,16 +44,21 @@ public class CabinetController : MonoBehaviour
         leftMachine.GetComponent<Image>().sprite = sprites[modulo(currentMachine - 1, sprites.Count)];
         centerMachine.GetComponent<Image>().sprite = sprites[currentMachine];
         rightMachine.GetComponent<Image>().sprite = sprites[modulo(currentMachine + 1, sprites.Count)];
-        setTitle();
+        setLabel();
     }
 
-    private void setTitle()
+    private void setLabel()
     {
-        machineTitle.text = titles[currentMachine];
+        machineLabel.text = labels[currentMachine];
     }
 
     private int modulo(int a, int b)
     {
         return a - b * Mathf.FloorToInt(((float)a) / b);
+    }
+
+    public void loadMachine()
+    {
+        SceneManager.LoadScene(labels[currentMachine]);
     }
 }

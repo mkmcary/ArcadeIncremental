@@ -303,17 +303,17 @@ MonoBehaviour:
   leftMachine: {fileID: 257517949}
   centerMachine: {fileID: 1999807378}
   rightMachine: {fileID: 882831427}
-  machineTitle: {fileID: 722154130}
+  machineLabel: {fileID: 722154130}
   sprites:
   - {fileID: 21300000, guid: 227cbe6f3cf29034492504ab37175456, type: 3}
   - {fileID: 21300000, guid: 03d977cf89008a14b8b48a1635ff19c0, type: 3}
   - {fileID: 21300000, guid: 5ee697e00dd0c01479e735a1110b3abd, type: 3}
   - {fileID: 21300000, guid: f7f4964ea4aa21b4f919561cb1e19f19, type: 3}
-  titles:
-  - ???
-  - MineSweeper
-  - Flappy Bird
-  - Galaga
+  labels:
+  - QuestionMarkScene
+  - MinesweeperScene
+  - FlappyBirdScene
+  - GalagaScene
 --- !u!1 &257517949
 GameObject:
   m_ObjectHideFlags: 0
@@ -1125,7 +1125,18 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1999807381}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 253415667}
+        m_MethodName: loadMachine
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1999807381
 MonoBehaviour:
   m_ObjectHideFlags: 0

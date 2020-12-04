@@ -4,5 +4,20 @@
 EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
-  m_Scenes: []
+  m_Scenes:
+  - enabled: 1
+    path: Assets/Scenes/CabinetScene.unity
+    guid: ff733ef9b22ae01489ad08aa12353920
+  - enabled: 1
+    path: Assets/Scenes/QuestionMarkScene.unity
+    guid: 68944ba175f028249924ea55f5eb9b1d
+  - enabled: 1
+    path: Assets/Scenes/FlappyBirdScene.unity
+    guid: f1859e45aa56f3849a0147f749310e6b
+  - enabled: 1
+    path: Assets/Scenes/GalagaScene.unity
+    guid: fb757f951fb851244bc8d622ba859f31
+  - enabled: 1
+    path: Assets/Scenes/MinesweeperScene.unity
+    guid: b96579be0610d7f4b8c69eed0633e9d4
   m_configObjects: {}
