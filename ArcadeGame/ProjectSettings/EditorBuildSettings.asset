@@ -23,4 +23,10 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/ArcadeCabinetScenes/DebugGame/DebugCabinetTitleScene.unity
     guid: 97e626f175625ae47a8f73317932267a
+  - enabled: 1
+    path: Assets/Scenes/ArcadeCabinetScenes/DebugGame/DebugGameScene.unity
+    guid: 7d2080838f61c4f4caf1ce99f315a7f5
+  - enabled: 1
+    path: Assets/Scenes/ArcadeCabinetScenes/DebugGame/DebugShopScene.unity
+    guid: 435379953a5b7a6408463712812d3d9f
   m_configObjects: {}
