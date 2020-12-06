@@ -7,49 +7,65 @@ using UnityEngine.UI;
 
 public class CabinetController : MonoBehaviour
 {
-    public GameObject leftMachine;
-    public GameObject centerMachine;
-    public GameObject rightMachine;
+    public GameObject leftCabinet;
+    public GameObject centerCabinet;
+    public GameObject rightCabinet;
+    public GameObject leftArrow;
+    public GameObject rightArrow;
 
     public Text machineLabel;
 
-    public List<Sprite> sprites;
-    public List<String> labels;
+    public List<ArcadeCabinet> arcadeCabinets;
 
-    private int currentMachine;
+    private int currentCabinet;
 
     // Start is called before the first frame update
     void Start()
     {
-        currentMachine = 1;
+        currentCabinet = 0;
         setMachine();
     }
 
     public void rotateLeft()
     {
         // a - b * FLOOR(a/b) C# modulo formula
-        currentMachine = modulo(currentMachine + 1, sprites.Count);
+        currentCabinet = modulo(currentCabinet + 1, arcadeCabinets.Count);
         setMachine();
     }
 
     public void rotateRight()
     {
         // a - b * FLOOR(a/b) C# modulo formula
-        currentMachine = modulo(currentMachine - 1, sprites.Count);
+        currentCabinet = modulo(currentCabinet - 1, arcadeCabinets.Count);
         setMachine();
     }
 
     private void setMachine()
     {
-        leftMachine.GetComponent<Image>().sprite = sprites[modulo(currentMachine - 1, sprites.Count)];
-        centerMachine.GetComponent<Image>().sprite = sprites[currentMachine];
-        rightMachine.GetComponent<Image>().sprite = sprites[modulo(currentMachine + 1, sprites.Count)];
+        centerCabinet.GetComponent<Image>().sprite = arcadeCabinets[currentCabinet].sprite;
         setLabel();
+        if (arcadeCabinets.Count > 1)
+        {
+            leftCabinet.GetComponent<Image>().sprite = arcadeCabinets[modulo(currentCabinet - 1, arcadeCabinets.Count)].sprite;
+            rightCabinet.GetComponent<Image>().sprite = arcadeCabinets[modulo(currentCabinet + 1, arcadeCabinets.Count)].sprite;
+            leftCabinet.SetActive(true);
+            rightCabinet.SetActive(true);
+            leftArrow.SetActive(true);
+            rightArrow.SetActive(true);
+        }
+        else
+        {
+            leftCabinet.SetActive(false);
+            rightCabinet.SetActive(false);
+            leftArrow.SetActive(false);
+            rightArrow.SetActive(false);
+        }
+
     }
 
     private void setLabel()
     {
-        machineLabel.text = labels[currentMachine];
+        machineLabel.text = arcadeCabinets[currentCabinet].title;
     }
 
     private int modulo(int a, int b)
@@ -59,6 +75,6 @@ public class CabinetController : MonoBehaviour
 
     public void loadMachine()
     {
-        SceneManager.LoadScene(labels[currentMachine]);
+        SceneManager.LoadScene(arcadeCabinets[currentCabinet].scene);
     }
 }
