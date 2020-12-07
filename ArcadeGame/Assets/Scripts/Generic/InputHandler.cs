@@ -8,19 +8,6 @@ public class InputHandler : MonoBehaviour
 
     public string targetScene;
 
-
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
     public void handleTouch()
     {
         if(gameObject.CompareTag("SceneButton"))

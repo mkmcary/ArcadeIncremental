@@ -42,6 +42,6 @@ public class DebugGameController : MonoBehaviour
         }
 
         //temporary functionality
-        SceneManager.LoadScene("DebugCabinetTitleScene");
+        SceneManager.LoadScene("DebugTitleScene");
     }
 }

@@ -5,12 +5,15 @@ using UnityEngine.UI;
 
 public class ShopUpgrade : MonoBehaviour
 {
+    public ShopController sc;
+
     public Image image;
 
     public Text nameText;
     public Text priceText;
 
     public string upgradeName;
+    public string description;
     public long upgradePrice;
 
     public Sprite sprite;
@@ -22,5 +25,14 @@ public class ShopUpgrade : MonoBehaviour
         image.sprite = sprite;
         nameText.text = upgradeName;
         priceText.text = "" + upgradePrice;
+    }
+
+    public void onUpgradeClick()
+    {
+        sc.sprite = sprite;
+        sc.upgradeName = upgradeName;
+        sc.price = upgradePrice;
+        sc.description = description;
+        sc.buttonWasClicked();
     }
 }

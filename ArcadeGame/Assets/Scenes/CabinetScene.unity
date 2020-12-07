@@ -428,7 +428,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   title: Debugger Tool
   sprite: {fileID: 21300000, guid: f7f4964ea4aa21b4f919561cb1e19f19, type: 3}
-  scene: DebugCabinetTitleScene
+  scene: DebugTitleScene
 --- !u!1 &519420028
 GameObject:
   m_ObjectHideFlags: 0
@@ -541,8 +541,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 052d688bb4bd0574398bab093eac15d2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  genericTickets: 0
-  debugGameTickets: 0
 --- !u!4 &561406520
 Transform:
   m_ObjectHideFlags: 0
