@@ -239,7 +239,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 248638828}
+      - m_Target: {fileID: 248638831}
         m_MethodName: closePopUp
         m_Mode: 1
         m_Arguments:
@@ -334,9 +334,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 248638827}
-  - component: {fileID: 248638828}
   - component: {fileID: 248638830}
   - component: {fileID: 248638829}
+  - component: {fileID: 248638831}
   m_Layer: 0
   m_Name: ShopController
   m_TagString: Untagged
@@ -358,26 +358,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &248638828
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 248638826}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3b42da7b8e7eb274cbc139f8e25454b1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  popUpPanel: {fileID: 911465341}
-  activeUpgrade: {fileID: 0}
-  image: {fileID: 689001099}
-  nameText: {fileID: 538552740}
-  descriptionText: {fileID: 769131633}
-  priceText: {fileID: 922794974}
-  ticketText: {fileID: 2129427752}
-  dcc: {fileID: 248638830}
 --- !u!114 &248638829
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -404,6 +384,28 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   initialized: 0
+--- !u!114 &248638831
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 248638826}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 652e5e3723f566e49ac5ecfcea629b66, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  popUpPanel: {fileID: 911465341}
+  activeUpgrade: {fileID: 0}
+  image: {fileID: 689001099}
+  nameText: {fileID: 538552740}
+  descriptionText: {fileID: 769131633}
+  priceText: {fileID: 922794974}
+  buyButton: {fileID: 437374661}
+  ticketText: {fileID: 2129427752}
+  dcc: {fileID: 248638830}
+  doublePoints: {fileID: 1577720996}
 --- !u!1 &437374659
 GameObject:
   m_ObjectHideFlags: 0
@@ -486,7 +488,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 248638828}
+      - m_Target: {fileID: 248638831}
         m_MethodName: buy
         m_Mode: 1
         m_Arguments:
@@ -1955,36 +1957,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1616926005}
     m_Modifications:
-    - target: {fileID: 2736340037693390560, guid: cb1b103ec33a7b44c8bf0ec2962bf778,
-        type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 2736340037693390560, guid: cb1b103ec33a7b44c8bf0ec2962bf778,
-        type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 2736340037693390560, guid: cb1b103ec33a7b44c8bf0ec2962bf778,
-        type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
-      value: 
-      objectReference: {fileID: 1577720996}
-    - target: {fileID: 2736340037693390560, guid: cb1b103ec33a7b44c8bf0ec2962bf778,
-        type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 2736340037693390560, guid: cb1b103ec33a7b44c8bf0ec2962bf778,
-        type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: onUpgradeClick
-      objectReference: {fileID: 0}
-    - target: {fileID: 2736340037693390560, guid: cb1b103ec33a7b44c8bf0ec2962bf778,
-        type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
-      value: UnityEngine.Object, UnityEngine
-      objectReference: {fileID: 0}
     - target: {fileID: 2736340037693390562, guid: cb1b103ec33a7b44c8bf0ec2962bf778,
         type: 3}
       propertyPath: m_Pivot.x
@@ -2094,7 +2066,7 @@ PrefabInstance:
         type: 3}
       propertyPath: sc
       value: 
-      objectReference: {fileID: 248638828}
+      objectReference: {fileID: 248638831}
     - target: {fileID: 2736340037693390563, guid: cb1b103ec33a7b44c8bf0ec2962bf778,
         type: 3}
       propertyPath: sprite
@@ -2104,7 +2076,7 @@ PrefabInstance:
     - target: {fileID: 2736340037693390563, guid: cb1b103ec33a7b44c8bf0ec2962bf778,
         type: 3}
       propertyPath: description
-      value: Doubles your points gained.
+      value: Doubles the points received upon ending a game.
       objectReference: {fileID: 0}
     - target: {fileID: 2736340037693390563, guid: cb1b103ec33a7b44c8bf0ec2962bf778,
         type: 3}

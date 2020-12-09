@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class ShopController : MonoBehaviour
+public class DebugShopController : MonoBehaviour
 {
     /** The PopUpPanel in the shop screen. */
     public GameObject popUpPanel;
@@ -11,11 +11,12 @@ public class ShopController : MonoBehaviour
     /** The currently viewed upgrade. */
     public ShopUpgrade activeUpgrade;
 
-    /** The Upgrade UI. */
+    /** The PopUp UI. */
     public Image image;
     public Text nameText;
     public Text descriptionText;
     public Text priceText;
+    public Button buyButton;
 
     /** The ticket text in the wallet. */
     public Text ticketText;
@@ -45,6 +46,7 @@ public class ShopController : MonoBehaviour
         }
         ds = dcc.ds;
         updateTicketText();
+        updateAllUpgrades();
     }
 
     /**
@@ -65,6 +67,17 @@ public class ShopController : MonoBehaviour
         nameText.text = activeUpgrade.upgradeName;
         descriptionText.text = activeUpgrade.description;
         priceText.text = activeUpgrade.upgradePrice + " Tickets";
+
+        if(activeUpgrade.currentLevel == activeUpgrade.maxLevel)
+        {
+            priceText.gameObject.SetActive(false);
+            buyButton.interactable = false; // or message
+        }
+        else
+        {
+            priceText.gameObject.SetActive(true);
+            buyButton.interactable = true;
+        }
     }
 
     /**
@@ -99,14 +112,51 @@ public class ShopController : MonoBehaviour
         switch (activeUpgrade.upgradeName)
         {
             case "Double Points":
-                ds.doublePoints++;
-                break;
+                if (doublePoints.currentLevel < doublePoints.maxLevel)
+                {
+                    // update the level
+                    ds.doublePoints++;
+                    // subtract tickets
+                    ds.tickets -= activeUpgrade.upgradePrice;
+                    // update the price
+                    doublePoints.upgradePrice *= 2;
+                    ds.doublePointsPrice = doublePoints.upgradePrice;
+                    break;
+                } 
+                else
+                {
+                    return;
+                }
             default:
                 Debug.LogError("Upgrade was not a valid name: " + activeUpgrade.upgradeName);
                 return;
         }
-        ds.tickets -= activeUpgrade.upgradePrice;
+        // update ui
+        updateAllUpgrades();
         updateTicketText();
         closePopUp();
+    }
+
+    private void updateAllUpgrades()
+    {
+        // double points
+        doublePoints.currentLevel = ds.doublePoints;
+        doublePoints.upgradePrice = ds.doublePointsPrice;
+        updateUpgradeUI(doublePoints);
+
+        // upgrade 2
+        // ...
+        // upgrade 3
+        // ...
+    }
+
+    private void updateUpgradeUI(ShopUpgrade upgrade)
+    {
+        upgrade.priceText.text = upgrade.upgradePrice + " Tickets";
+        upgrade.levelText.text = upgrade.currentLevel + " / " + upgrade.maxLevel;
+        if (upgrade.currentLevel == upgrade.maxLevel)
+        {
+            upgrade.priceText.gameObject.SetActive(false);
+        }
     }
 }

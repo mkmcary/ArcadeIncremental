@@ -16,6 +16,11 @@ public class DebugCabinetController : MonoBehaviour
         readFile();
     }
 
+    private void OnApplicationQuit()
+    {
+        writeDebugFile();
+    }
+
     public void writeDebugFile()
     {
         string serialized = JsonUtility.ToJson(ds);
@@ -40,17 +45,22 @@ public class DebugCabinetController : MonoBehaviour
     {
         public long tickets;
         public int doublePoints;
+        public long doublePointsPrice;
 
         public DebugStatus()
         {
             this.tickets = 0;
             this.doublePoints = 0;
+            this.doublePointsPrice = 1000; // default price for Double Points
         }
 
+        /**
         public DebugStatus(long tickets, int doublePoints)
         {
             this.tickets = tickets;
             this.doublePoints = doublePoints;
+            this.doublePointsPrice = 
         }
+        */
     }
 }

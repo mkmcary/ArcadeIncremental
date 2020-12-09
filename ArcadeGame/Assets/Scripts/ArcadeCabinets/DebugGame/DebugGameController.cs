@@ -6,24 +6,48 @@ using UnityEngine.UI;
 
 public class DebugGameController : MonoBehaviour
 {
-    private GameController gc;
+    /** The DebugCabinetController. */
+    public DebugCabinetController dcc;
+    /** The current debug game player status. */
+    private DebugCabinetController.DebugStatus ds;
 
+    /** The text where the user enters the number of points to receive. */
     public Text inputText;
+    /** The text to display the number of active points the user has. */
     public Text pointsText;
+    /** The text to display the number of tickets the user has. */
     public Text ticketsText;
 
+    /** The active number of points for this game session. */
     public long points;
 
 
-    // Start is called before the first frame update
+    /**
+     * Called on the first frame of the scene execution.
+     */
     void Start()
     {
-        gc = GameObject.FindGameObjectWithTag("GameController").GetComponent<GameController>();
-        points = 0;
-        pointsText.text = "Current Points: " + points;
-        ticketsText.text = "Current Tickets: " + gc.getDebugTickets();
+        StartCoroutine(initialize());
     }
 
+    /**
+     * Initializes the debug status and updates labels as appropriate.
+     */
+    IEnumerator initialize()
+    {
+        while (!dcc.initialized)
+        {
+            yield return null;
+        }
+        ds = dcc.ds;
+        points = 0;
+        pointsText.text = "Current Points: " + points;
+        ticketsText.text = "Current Tickets: " + ds.tickets;
+    }
+
+    /**
+     * Used to update the points from the input field.
+     */
     public void updatePoints()
     {
         string inputString = inputText.text;
@@ -34,14 +58,23 @@ public class DebugGameController : MonoBehaviour
         pointsText.text = "Current Points: " + points;
     }
 
+    /**
+     * Used to end the game.
+     */
     public void endGame()
     {
-        if (points > 0)
+        long pointsToAdd = points;
+
+        // deal with the double points upgrade
+        pointsToAdd = points * ((long) Mathf.Pow(2, ds.doublePoints));
+
+        if (pointsToAdd > 0)
         {
-            gc.incrementDebugTickets(points);
+            ds.tickets += pointsToAdd;
         }
 
         //temporary functionality
+        dcc.writeDebugFile();
         SceneManager.LoadScene("DebugTitleScene");
     }
 }
