@@ -29,10 +29,7 @@ public class ShopUpgrade : MonoBehaviour
 
     public void onUpgradeClick()
     {
-        sc.sprite = sprite;
-        sc.upgradeName = upgradeName;
-        sc.price = upgradePrice;
-        sc.description = description;
+        sc.activeUpgrade = this;
         sc.buttonWasClicked();
     }
 }

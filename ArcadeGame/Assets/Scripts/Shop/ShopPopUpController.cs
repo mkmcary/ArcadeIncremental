@@ -14,9 +14,9 @@ public class ShopPopUpController : MonoBehaviour
 
     public void initializePopUp()
     {
-        image.sprite = sc.sprite;
-        nameText.text = sc.upgradeName;
-        descriptionText.text = sc.description;
-        priceText.text = sc.price + " Tickets";
+        image.sprite = sc.activeUpgrade.sprite;
+        nameText.text = sc.activeUpgrade.upgradeName;
+        descriptionText.text = sc.activeUpgrade.description;
+        priceText.text = sc.activeUpgrade.upgradePrice + " Tickets";
     }
 }

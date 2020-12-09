@@ -335,6 +335,8 @@ GameObject:
   m_Component:
   - component: {fileID: 248638827}
   - component: {fileID: 248638828}
+  - component: {fileID: 248638830}
+  - component: {fileID: 248638829}
   m_Layer: 0
   m_Name: ShopController
   m_TagString: Untagged
@@ -369,14 +371,39 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   popUpPanel: {fileID: 911465341}
-  sprite: {fileID: 0}
-  description: 
-  upgradeName: 
-  price: 0
+  activeUpgrade: {fileID: 0}
   image: {fileID: 689001099}
   nameText: {fileID: 538552740}
   descriptionText: {fileID: 769131633}
   priceText: {fileID: 922794974}
+  ticketText: {fileID: 2129427752}
+  dcc: {fileID: 248638830}
+--- !u!114 &248638829
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 248638826}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c6c444c2e652b814bbfecdef2fa9323d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  targetScene: 
+--- !u!114 &248638830
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 248638826}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cd027f7a60892bc4991c6b766023158b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  initialized: 0
 --- !u!1 &437374659
 GameObject:
   m_ObjectHideFlags: 0
@@ -458,7 +485,18 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 437374662}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 248638828}
+        m_MethodName: buy
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &437374662
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1161,7 +1199,6 @@ GameObject:
   - component: {fileID: 1540523084}
   - component: {fileID: 1540523083}
   - component: {fileID: 1540523082}
-  - component: {fileID: 1540523081}
   m_Layer: 5
   m_Name: BackButton
   m_TagString: Untagged
@@ -1188,19 +1225,6 @@ RectTransform:
   m_AnchoredPosition: {x: 50, y: -50}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &1540523081
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1540523079}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c6c444c2e652b814bbfecdef2fa9323d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  targetScene: DebugTitleScene
 --- !u!114 &1540523082
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1244,8 +1268,19 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1540523081}
+      - m_Target: {fileID: 248638829}
         m_MethodName: changeScene
+        m_Mode: 5
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: DebugTitleScene
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 248638830}
+        m_MethodName: writeDebugFile
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -1769,7 +1804,7 @@ GameObject:
   - component: {fileID: 2129427753}
   - component: {fileID: 2129427752}
   m_Layer: 5
-  m_Name: Text
+  m_Name: Tickets
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
