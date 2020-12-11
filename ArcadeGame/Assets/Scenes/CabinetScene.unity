@@ -958,7 +958,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c6c444c2e652b814bbfecdef2fa9323d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  targetScene: TicketConversionScene
+  targetScene: TicketMenuScene
 --- !u!114 &1057986690
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1248,7 +1248,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Go to The Ticket Counter
+  m_Text: Go to The Ticket Menu
 --- !u!222 &1386503827
 CanvasRenderer:
   m_ObjectHideFlags: 0

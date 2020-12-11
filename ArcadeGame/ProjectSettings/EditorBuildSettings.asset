@@ -32,4 +32,10 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/TicketConversionScene.unity
     guid: 736e8d9c08315634182da1082d3e4352
+  - enabled: 1
+    path: Assets/Scenes/TicketMenuScene.unity
+    guid: a90b6d1f592206a4db5f8c71522ad403
+  - enabled: 1
+    path: Assets/Scenes/PrizeCounterScene.unity
+    guid: 3d1f409dc88fe0b438d03852d29fe444
   m_configObjects: {}
