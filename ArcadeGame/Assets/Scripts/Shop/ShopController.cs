@@ -3,49 +3,43 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class ShopController : MonoBehaviour
+public abstract class ShopController : MonoBehaviour
 {
+    /** The CabinetStatus for this Shop. */
+    public ArcadeStatus arcadeStatus;
+    public CabinetStatus status;
+
     /** The PopUpPanel in the shop screen. */
     public GameObject popUpPanel;
 
     /** The currently viewed upgrade. */
     public ShopUpgrade activeUpgrade;
+    public ShopUpgradeUI activeUpgradeUI;
+
+    /** All the ShopUpgradeUIs. */
+    public List<ShopUpgradeUI> upgradeUIs;
 
     /** The Upgrade UI. */
     public Image image;
     public Text nameText;
     public Text descriptionText;
     public Text priceText;
+    public Button buyButton;
 
     /** The ticket text in the wallet. */
     public Text ticketText;
-
-    /** The DebugCabinetController and its status. */
-    public DebugCabinetController dcc;
-    private DebugCabinetController.DebugStatus ds;
-
-    /** Upgrades. */
-    public ShopUpgrade doublePoints;
 
     // Start is called before the first frame update
     void Start()
     {
         popUpPanel.SetActive(false);
-        StartCoroutine(initialize());
+        initialize();
     }
 
     /**
-     * Used to initialize the DebugCabinetController.
+     * Used to initialize the CabinetStatus.
      */
-    IEnumerator initialize()
-    {
-        while (!dcc.initialized)
-        {
-            yield return null;
-        }
-        ds = dcc.ds;
-        updateTicketText();
-    }
+    public abstract void initialize();
 
     /**
      * Used to initialize the PopUp when an upgrade is selected. 
@@ -61,10 +55,21 @@ public class ShopController : MonoBehaviour
      */
     private void initializePopUp()
     {
-        image.sprite = activeUpgrade.sprite;
+        image.sprite = loadSprite(activeUpgrade.sprite);
         nameText.text = activeUpgrade.upgradeName;
         descriptionText.text = activeUpgrade.description;
-        priceText.text = activeUpgrade.upgradePrice + " Tickets";
+        priceText.text = activeUpgrade.price + " Tickets";
+
+        if (activeUpgrade.currentLevel == activeUpgrade.maxLevel)
+        {
+            priceText.gameObject.SetActive(false);
+            buyButton.interactable = false; // or message
+        }
+        else
+        {
+            priceText.gameObject.SetActive(true);
+            buyButton.interactable = true;
+        }
     }
 
     /**
@@ -81,32 +86,47 @@ public class ShopController : MonoBehaviour
      */
     public void updateTicketText()
     {
-        ticketText.text = "Debug Tickets:\n" + ds.tickets;
+        ticketText.text = "" + status.gameTickets;
     }
 
     /**
      * Called when the user presses the buy button.
      */
-    public void buy()
+    public abstract void buy();
+
+    public void loadUpgrades()
     {
-        if (activeUpgrade.upgradePrice > ds.tickets)
+        for (int i = 0; i < upgradeUIs.Count; i++)
         {
-            // ###########################################################
-            // add error message for trying to buy with not enough tickets
-            // ###########################################################
-            return;
+            upgradeUIs[i].activeUpgrade = status.upgrades[i];
+            updateUpgradeUI(upgradeUIs[i]);
         }
-        switch (activeUpgrade.upgradeName)
-        {
-            case "Double Points":
-                ds.doublePoints++;
-                break;
-            default:
-                Debug.LogError("Upgrade was not a valid name: " + activeUpgrade.upgradeName);
-                return;
-        }
-        ds.tickets -= activeUpgrade.upgradePrice;
-        updateTicketText();
-        closePopUp();
     }
+
+    public void updateUpgradeUI(ShopUpgradeUI ui)
+    {
+        //Debug.Log(Resources.Load<Sprite>("Sprites/Shop/Placeholder/doubleMult"));
+
+        ui.image.sprite = loadSprite(ui.activeUpgrade.sprite);//ui.activeUpgrade.sprite;
+        ui.nameText.text = ui.activeUpgrade.upgradeName;
+        ui.priceText.text = ui.activeUpgrade.price + " Tickets";
+        ui.levelText.text = ui.activeUpgrade.currentLevel + " / " + ui.activeUpgrade.maxLevel;
+        if (ui.activeUpgrade.currentLevel == ui.activeUpgrade.maxLevel)
+        {
+            ui.priceText.gameObject.SetActive(false);
+        }
+    }
+
+    public Sprite loadSprite(string path)
+    {
+        return Resources.Load<Sprite>(path);
+    }
+
+    public abstract void writeChanges();
+
+    public void OnApplicationQuit()
+    {
+        writeChanges();
+    }
+
 }

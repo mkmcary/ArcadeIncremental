@@ -168,7 +168,7 @@ GameObject:
   - component: {fileID: 2736340037693390574}
   - component: {fileID: 2736340037693390561}
   - component: {fileID: 2736340037693390560}
-  - component: {fileID: 2736340037693390563}
+  - component: {fileID: 4191816716734444587}
   m_Layer: 5
   m_Name: Upgrade
   m_TagString: Untagged
@@ -279,7 +279,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 2736340037693390563}
+      - m_Target: {fileID: 0}
         m_MethodName: onUpgradeClick
         m_Mode: 1
         m_Arguments:
@@ -290,7 +290,7 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
---- !u!114 &2736340037693390563
+--- !u!114 &4191816716734444587
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -299,7 +299,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 2736340037693390565}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 971796e825050884b9db7be00a7e334c, type: 3}
+  m_Script: {fileID: 11500000, guid: f041e89fea430c64db7a16c37b352dc1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   sc: {fileID: 0}
@@ -307,12 +307,6 @@ MonoBehaviour:
   nameText: {fileID: 2736340037122200580}
   priceText: {fileID: 2736340038083027343}
   levelText: {fileID: 663534005}
-  upgradeName: Name
-  description: Description
-  upgradePrice: -1
-  currentLevel: 0
-  maxLevel: 5
-  sprite: {fileID: 21300000, guid: 227cbe6f3cf29034492504ab37175456, type: 3}
 --- !u!1 &2736340038083027329
 GameObject:
   m_ObjectHideFlags: 0

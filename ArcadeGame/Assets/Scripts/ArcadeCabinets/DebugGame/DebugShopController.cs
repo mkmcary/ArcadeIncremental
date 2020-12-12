@@ -3,136 +3,64 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class DebugShopController : MonoBehaviour
+public class DebugShopController : ShopController
 {
-    /** The PopUpPanel in the shop screen. */
-    public GameObject popUpPanel;
-
-    /** The currently viewed upgrade. */
-    public ShopUpgrade activeUpgrade;
-
-    /** The PopUp UI. */
-    public Image image;
-    public Text nameText;
-    public Text descriptionText;
-    public Text priceText;
-    public Button buyButton;
-
-    /** The ticket text in the wallet. */
-    public Text ticketText;
-
-    /** The DebugCabinetController and its status. */
-    public DebugCabinetController dcc;
-    private DebugCabinetController.DebugStatus ds;
-
-    /** Upgrades. */
-    public ShopUpgrade doublePoints;
-
-    // Start is called before the first frame update
-    void Start()
-    {
-        popUpPanel.SetActive(false);
-        StartCoroutine(initialize());
-    }
 
     /**
-     * Used to initialize the DebugCabinetController.
+     * Used to initialize the DebugShopController.
      */
-    IEnumerator initialize()
+    public override void initialize()
     {
-        while (!dcc.initialized)
+        // read the file and initialize the CabinetStatus
+        string appPath = Application.dataPath + "/SaveData/ArcadeStatus.json";
+        if (!System.IO.File.Exists(appPath))
         {
-            yield return null;
-        }
-        ds = dcc.ds;
-        updateTicketText();
-        updateAllUpgrades();
-    }
-
-    /**
-     * Used to initialize the PopUp when an upgrade is selected. 
-     */
-    public void buttonWasClicked()
-    {
-        popUpPanel.SetActive(true);
-        initializePopUp();
-    }
-
-    /**
-     * Initializes the values of the PopUp.
-     */
-    private void initializePopUp()
-    {
-        image.sprite = activeUpgrade.sprite;
-        nameText.text = activeUpgrade.upgradeName;
-        descriptionText.text = activeUpgrade.description;
-        priceText.text = activeUpgrade.upgradePrice + " Tickets";
-
-        if(activeUpgrade.currentLevel == activeUpgrade.maxLevel)
-        {
-            priceText.gameObject.SetActive(false);
-            buyButton.interactable = false; // or message
+            arcadeStatus = new ArcadeStatus();
+            System.IO.File.WriteAllText(appPath, JsonUtility.ToJson(arcadeStatus, true));
+            //System.IO.File.WriteAllText(appPath, JsonUtility.ToJson(new DebugCabinetStatus(), true));
         }
         else
         {
-            priceText.gameObject.SetActive(true);
-            buyButton.interactable = true;
+            string readIn = System.IO.File.ReadAllText(appPath);
+            arcadeStatus = JsonUtility.FromJson<ArcadeStatus>(readIn);
         }
+        status = arcadeStatus.debugStatus;
+        updateTicketText();
+        loadUpgrades();
+        updateAllUpgrades();
     }
 
-    /**
-     * Closes the PopUp.
-     */
-    public void closePopUp()
+    public override void writeChanges()
     {
-        popUpPanel.SetActive(false);
-        activeUpgrade = null;
-    }
-
-    /**
-     * Updates the ticket text in the wallet.
-     */
-    public void updateTicketText()
-    {
-        ticketText.text = "Debug Tickets:\n" + ds.tickets;
+        string appPath = Application.dataPath + "/SaveData/ArcadeStatus.json";
+        System.IO.File.WriteAllText(appPath, JsonUtility.ToJson(arcadeStatus, true));
     }
 
     /**
      * Called when the user presses the buy button.
      */
-    public void buy()
+    public override void buy()
     {
-        if (activeUpgrade.upgradePrice > ds.tickets)
+        if (activeUpgrade.price > status.gameTickets)
         {
             // ###########################################################
             // add error message for trying to buy with not enough tickets
             // ###########################################################
             return;
         }
-        switch (activeUpgrade.upgradeName)
+
+        if (activeUpgrade.currentLevel < activeUpgrade.maxLevel)
         {
-            case "Double Points":
-                if (doublePoints.currentLevel < doublePoints.maxLevel)
-                {
-                    // update the level
-                    ds.doublePoints++;
-                    // subtract tickets
-                    ds.tickets -= activeUpgrade.upgradePrice;
-                    // update the price
-                    doublePoints.upgradePrice *= 2;
-                    ds.doublePointsPrice = doublePoints.upgradePrice;
-                    break;
-                } 
-                else
-                {
-                    return;
-                }
-            default:
-                Debug.LogError("Upgrade was not a valid name: " + activeUpgrade.upgradeName);
-                return;
+            status.gameTickets -= activeUpgrade.price;
+            activeUpgrade.LevelUp();
+        } else
+        {
+            // this upgrade is already at max level
         }
+
         // update ui
-        updateAllUpgrades();
+        updateUpgradeUI(activeUpgradeUI);
+        //updateAllUpgrades();
         updateTicketText();
         closePopUp();
     }
@@ -140,9 +68,7 @@ public class DebugShopController : MonoBehaviour
     private void updateAllUpgrades()
     {
         // double points
-        doublePoints.currentLevel = ds.doublePoints;
-        doublePoints.upgradePrice = ds.doublePointsPrice;
-        updateUpgradeUI(doublePoints);
+        //updateUpgradeUI();
 
         // upgrade 2
         // ...
@@ -150,13 +76,4 @@ public class DebugShopController : MonoBehaviour
         // ...
     }
 
-    private void updateUpgradeUI(ShopUpgrade upgrade)
-    {
-        upgrade.priceText.text = upgrade.upgradePrice + " Tickets";
-        upgrade.levelText.text = upgrade.currentLevel + " / " + upgrade.maxLevel;
-        if (upgrade.currentLevel == upgrade.maxLevel)
-        {
-            upgrade.priceText.gameObject.SetActive(false);
-        }
-    }
 }

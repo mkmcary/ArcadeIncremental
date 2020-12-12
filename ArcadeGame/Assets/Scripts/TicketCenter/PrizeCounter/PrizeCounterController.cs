@@ -53,12 +53,12 @@ public class PrizeCounterController : MonoBehaviour
     public void buttonWasClicked()
     {
         popUpPanel.SetActive(true);
-        initializePopUp();
+        //initializePopUp();
     }
 
     /**
      * Initializes the values of the PopUp.
-     */
+     
     private void initializePopUp()
     {
         image.sprite = activeUpgrade.sprite;
@@ -141,14 +141,14 @@ public class PrizeCounterController : MonoBehaviour
         // double points
         /*doublePoints.currentLevel = ds.doublePoints;
         doublePoints.upgradePrice = ds.doublePointsPrice; */
-        updateUpgradeUI(doublePoints);
+        //updateUpgradeUI(doublePoints);
 
         // upgrade 2
         // ...
         // upgrade 3
         // ...
     }
-
+    /*
     private void updateUpgradeUI(ShopUpgrade upgrade)
     {
         upgrade.priceText.text = upgrade.upgradePrice + " Tickets";
@@ -157,5 +157,5 @@ public class PrizeCounterController : MonoBehaviour
         {
             upgrade.priceText.gameObject.SetActive(false);
         }
-    }
+    }*/
 }
