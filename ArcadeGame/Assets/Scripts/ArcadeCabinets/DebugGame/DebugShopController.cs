@@ -12,18 +12,7 @@ public class DebugShopController : ShopController
     public override void initialize()
     {
         // read the file and initialize the CabinetStatus
-        string appPath = Application.dataPath + "/SaveData/ArcadeStatus.json";
-        if (!System.IO.File.Exists(appPath))
-        {
-            arcadeStatus = new ArcadeStatus();
-            System.IO.File.WriteAllText(appPath, JsonUtility.ToJson(arcadeStatus, true));
-            //System.IO.File.WriteAllText(appPath, JsonUtility.ToJson(new DebugCabinetStatus(), true));
-        }
-        else
-        {
-            string readIn = System.IO.File.ReadAllText(appPath);
-            arcadeStatus = JsonUtility.FromJson<ArcadeStatus>(readIn);
-        }
+        arcadeStatus = ArcadeManager.readArcadeStatus();
         status = arcadeStatus.debugStatus;
         updateTicketText();
         loadUpgrades();

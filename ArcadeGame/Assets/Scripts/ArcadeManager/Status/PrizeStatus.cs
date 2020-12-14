@@ -1,6 +1,8 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 
+[Serializable]
 public class PrizeStatus
 {
     public long prizeTickets;

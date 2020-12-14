@@ -17,16 +17,6 @@ public class ShopUpgradeUI : MonoBehaviour
     /** The upgrade we are displaying in this ShopUpgradeUI. */
     public ShopUpgrade activeUpgrade;
 
-    /*
-    // Start is called before the first frame update
-    void Start()
-    {
-        image.sprite = activeUpgrade.sprite;
-        nameText.text = activeUpgrade.upgradeName;
-        priceText.text = activeUpgrade.price + " Tickets";
-        levelText.text = activeUpgrade.currentLevel + " / " + activeUpgrade.maxLevel;
-    } */
-
     /**
      * Used to pass data to the ShopController on click.
      */

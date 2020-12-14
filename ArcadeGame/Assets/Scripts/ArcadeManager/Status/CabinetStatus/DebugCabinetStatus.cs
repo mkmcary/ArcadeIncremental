@@ -14,6 +14,8 @@ public class DebugCabinetStatus : CabinetStatus
 
     public DebugCabinetStatus() : base()
     {
+        isActive = true;
+
         // Empty until shop upgrade refactor
         // double points
         doublePoints = new ShopUpgrade();
