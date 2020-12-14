@@ -7,9 +7,11 @@ using UnityEngine.UI;
 public class DebugGameController : MonoBehaviour
 {
     /** The DebugCabinetController. */
-    public DebugCabinetController dcc;
+    //public DebugCabinetController dcc;
     /** The current debug game player status. */
-    private DebugCabinetController.DebugStatus ds;
+    //private DebugCabinetController.DebugStatus ds;
+
+    private ArcadeStatus arcadeStatus;
 
     /** The text where the user enters the number of points to receive. */
     public Text inputText;
@@ -27,22 +29,13 @@ public class DebugGameController : MonoBehaviour
      */
     void Start()
     {
-        StartCoroutine(initialize());
-    }
+        arcadeStatus = ArcadeManager.readArcadeStatus();
 
-    /**
-     * Initializes the debug status and updates labels as appropriate.
-     */
-    IEnumerator initialize()
-    {
-        while (!dcc.initialized)
-        {
-            yield return null;
-        }
-        ds = dcc.ds;
         points = 0;
         pointsText.text = "Current Points: " + points;
-        ticketsText.text = "Current Tickets: " + ds.tickets;
+        ticketsText.text = "Current Tickets: " + arcadeStatus.debugStatus.gameTickets;
+
+        //StartCoroutine(initialize());
     }
 
     /**
@@ -58,6 +51,8 @@ public class DebugGameController : MonoBehaviour
         pointsText.text = "Current Points: " + points;
     }
 
+
+
     /**
      * Used to end the game.
      */
@@ -66,15 +61,20 @@ public class DebugGameController : MonoBehaviour
         long pointsToAdd = points;
 
         // deal with the double points upgrade
-        pointsToAdd = points * ((long) Mathf.Pow(2, ds.doublePoints));
+        pointsToAdd = points * ((long) Mathf.Pow(2, arcadeStatus.debugStatus.doublePoints.currentLevel));
 
         if (pointsToAdd > 0)
         {
-            ds.tickets += pointsToAdd;
+            arcadeStatus.debugStatus.gameTickets += pointsToAdd;
         }
 
         //temporary functionality
-        dcc.writeDebugFile();
+        ArcadeManager.writeArcadeStatus(arcadeStatus);
         SceneManager.LoadScene("DebugTitleScene");
+    }
+
+    public void OnApplicationQuit()
+    {
+        ArcadeManager.writeArcadeStatus(arcadeStatus);
     }
 }

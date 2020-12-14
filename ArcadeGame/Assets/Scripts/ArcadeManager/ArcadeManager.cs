@@ -4,32 +4,25 @@ using UnityEngine;
 
 public class ArcadeManager : MonoBehaviour
 {
-    private ArcadeStatus arcadeStatus;
-
-    string appPath;
-
-    // Start is called before the first frame update
-    void Start()
+    public static ArcadeStatus readArcadeStatus()
     {
-        appPath = Application.dataPath + "/SaveData/ArcadeStatus.json";
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
-    void readFile()
-    {
-        if (System.IO.File.Exists(appPath))
+        string appPath = Application.dataPath + "/SaveData/ArcadeStatus.json";
+        if (!System.IO.File.Exists(appPath))
         {
-            string text = System.IO.File.ReadAllText(appPath);
-            arcadeStatus = JsonUtility.FromJson<ArcadeStatus>(text);
+            ArcadeStatus arcadeStatus = new ArcadeStatus();
+            System.IO.File.WriteAllText(appPath, JsonUtility.ToJson(arcadeStatus, true));
+            return arcadeStatus;
         }
         else
         {
-            arcadeStatus = new ArcadeStatus();
+            string readIn = System.IO.File.ReadAllText(appPath);
+            return JsonUtility.FromJson<ArcadeStatus>(readIn);
         }
+    }
+
+    public static void writeArcadeStatus(ArcadeStatus status)
+    {
+        string appPath = Application.dataPath + "/SaveData/ArcadeStatus.json";
+        System.IO.File.WriteAllText(appPath, JsonUtility.ToJson(status, true));
     }
 }

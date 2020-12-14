@@ -30,12 +30,6 @@ public class DebugShopController : ShopController
         updateAllUpgrades();
     }
 
-    public override void writeChanges()
-    {
-        string appPath = Application.dataPath + "/SaveData/ArcadeStatus.json";
-        System.IO.File.WriteAllText(appPath, JsonUtility.ToJson(arcadeStatus, true));
-    }
-
     /**
      * Called when the user presses the buy button.
      */

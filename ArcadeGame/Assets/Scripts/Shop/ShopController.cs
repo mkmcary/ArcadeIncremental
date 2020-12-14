@@ -122,11 +122,9 @@ public abstract class ShopController : MonoBehaviour
         return Resources.Load<Sprite>(path);
     }
 
-    public abstract void writeChanges();
-
     public void OnApplicationQuit()
     {
-        writeChanges();
+        ArcadeManager.writeArcadeStatus(arcadeStatus);
     }
 
 }
