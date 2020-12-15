@@ -7,7 +7,7 @@ public abstract class ShopController : MonoBehaviour
 {
     /** The CabinetStatus for this Shop. */
     public ArcadeStatus arcadeStatus;
-    public CabinetStatus status;
+    public LayerZeroStatus status;
 
     /** The PopUpPanel in the shop screen. */
     public GameObject popUpPanel;
@@ -55,10 +55,10 @@ public abstract class ShopController : MonoBehaviour
      */
     private void initializePopUp()
     {
-        image.sprite = loadSprite(activeUpgrade.sprite);
+        image.sprite = ArcadeManager.loadSprite(activeUpgrade.sprite);
         nameText.text = activeUpgrade.upgradeName;
         descriptionText.text = activeUpgrade.description;
-        priceText.text = activeUpgrade.price + " Tickets";
+        priceText.text = ArcadeManager.convertToScientific(activeUpgrade.price) + " Tickets";
 
         if (activeUpgrade.currentLevel == activeUpgrade.maxLevel)
         {
@@ -86,40 +86,45 @@ public abstract class ShopController : MonoBehaviour
      */
     public void updateTicketText()
     {
-        ticketText.text = "" + status.gameTickets;
+        ticketText.text = ArcadeManager.convertToScientific(status.tickets);
     }
 
     /**
      * Called when the user presses the buy button.
      */
-    public abstract void buy();
+    public void buy()
+    {
+        if (activeUpgrade.price > status.tickets)
+        {
+            // ###########################################################
+            // add error message for trying to buy with not enough tickets
+            // ###########################################################
+            return;
+        }
+
+        if (activeUpgrade.currentLevel < activeUpgrade.maxLevel)
+        {
+            status.tickets -= activeUpgrade.price;
+            activeUpgrade.LevelUp();
+        }
+        else
+        {
+            // this upgrade is already at max level
+        }
+
+        // update ui
+        activeUpgradeUI.populate();
+        updateTicketText();
+        closePopUp();
+    }
 
     public void loadUpgrades()
     {
         for (int i = 0; i < upgradeUIs.Count; i++)
         {
             upgradeUIs[i].activeUpgrade = status.upgrades[i];
-            updateUpgradeUI(upgradeUIs[i]);
+            upgradeUIs[i].populate();
         }
-    }
-
-    public void updateUpgradeUI(ShopUpgradeUI ui)
-    {
-        //Debug.Log(Resources.Load<Sprite>("Sprites/Shop/Placeholder/doubleMult"));
-
-        ui.image.sprite = loadSprite(ui.activeUpgrade.sprite);//ui.activeUpgrade.sprite;
-        ui.nameText.text = ui.activeUpgrade.upgradeName;
-        ui.priceText.text = ui.activeUpgrade.price + " Tickets";
-        ui.levelText.text = ui.activeUpgrade.currentLevel + " / " + ui.activeUpgrade.maxLevel;
-        if (ui.activeUpgrade.currentLevel == ui.activeUpgrade.maxLevel)
-        {
-            ui.priceText.gameObject.SetActive(false);
-        }
-    }
-
-    public Sprite loadSprite(string path)
-    {
-        return Resources.Load<Sprite>(path);
     }
 
     public void OnApplicationQuit()

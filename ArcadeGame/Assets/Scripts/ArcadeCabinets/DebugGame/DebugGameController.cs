@@ -6,11 +6,6 @@ using UnityEngine.UI;
 
 public class DebugGameController : MonoBehaviour
 {
-    /** The DebugCabinetController. */
-    //public DebugCabinetController dcc;
-    /** The current debug game player status. */
-    //private DebugCabinetController.DebugStatus ds;
-
     private ArcadeStatus arcadeStatus;
 
     /** The text where the user enters the number of points to receive. */
@@ -32,8 +27,8 @@ public class DebugGameController : MonoBehaviour
         arcadeStatus = ArcadeManager.readArcadeStatus();
 
         points = 0;
-        pointsText.text = "Current Points: " + points;
-        ticketsText.text = "Current Tickets: " + arcadeStatus.debugStatus.gameTickets;
+        pointsText.text = "Current Points: " + ArcadeManager.convertToScientific(points);
+        ticketsText.text = "Current Tickets: " + ArcadeManager.convertToScientific(arcadeStatus.debugStatus.tickets);
 
         //StartCoroutine(initialize());
     }
@@ -48,7 +43,7 @@ public class DebugGameController : MonoBehaviour
 
         points += pointsToAdd;
 
-        pointsText.text = "Current Points: " + points;
+        pointsText.text = "Current Points: " + ArcadeManager.convertToScientific(points);
     }
 
 
@@ -60,12 +55,13 @@ public class DebugGameController : MonoBehaviour
     {
         long pointsToAdd = points;
 
-        // deal with the double points upgrade
-        pointsToAdd = points * ((long) Mathf.Pow(2, arcadeStatus.debugStatus.doublePoints.currentLevel));
+        // deal with upgrades
+        pointsToAdd *= ((long) Mathf.Pow(2, arcadeStatus.debugStatus.doublePoints.currentLevel));
+        pointsToAdd *= ((long) Mathf.Pow(2, arcadeStatus.prizeStatus.doublePoints.currentLevel));
 
         if (pointsToAdd > 0)
         {
-            arcadeStatus.debugStatus.gameTickets += pointsToAdd;
+            arcadeStatus.debugStatus.tickets += pointsToAdd;
         }
 
         //temporary functionality

@@ -6,15 +6,18 @@ using UnityEngine.UI;
 
 public class TicketConversionController : MonoBehaviour
 {
-
+    // ArcadeStatus
     private ArcadeStatus arcadeStatus;
 
+    // Ticket Texts
     public Text prizeTicketText;
     public Text debugTicketText;
 
+    // Colors for the increment buttons
     public Color defaultColor;
     public Color selectedColor;
 
+    // Increment Buttons
     public Button incrementOneValue;
     public Button incrementTenValue;
     public Button incrementHundredValue;
@@ -22,19 +25,31 @@ public class TicketConversionController : MonoBehaviour
     public Button incrementTwentyFivePercent;
     public Button incrementMax;
 
+    // Currently Selected Increment
     private Button currentIncrementSelection;
 
+    // Ticket Conversion UIs
     public List<TicketConvertUI> ticketConvertUIs;
 
+    // All the ticket conversions
     private List<TicketConvert> ticketConverts;
+
+    // Conversion Pop Up Data.
+    public GameObject convertPopUp;
+    public Text conversionText;
+    private long prizeTicketsToReceive;
+
+    // Scroll Data
+    public Button scrollUpButton;
+    public Button scrollDownButton;
+    private int currentSetIndex;
 
     // Start is called before the first frame update
     void Start()
     {
         arcadeStatus = ArcadeManager.readArcadeStatus();
 
-        prizeTicketText.text = "" + arcadeStatus.prizeStatus.prizeTickets;
-        debugTicketText.text = "" + arcadeStatus.debugStatus.gameTickets;
+        setWalletText();
 
         incrementOneValue.image.color = defaultColor;
         incrementTenValue.image.color = defaultColor;
@@ -45,25 +60,44 @@ public class TicketConversionController : MonoBehaviour
         selectButton(incrementOneValue);
 
         initializeConversions();
+
+        convertPopUp.SetActive(false);
+        prizeTicketsToReceive = 0;
     }
 
+    private void setWalletText()
+    {
+        prizeTicketText.text = ArcadeManager.convertToScientific(arcadeStatus.prizeStatus.tickets);
+        debugTicketText.text = ArcadeManager.convertToScientific(arcadeStatus.debugStatus.tickets);
+    }
+
+    /**
+     * Used to create the ticket conversions and load UI.
+     */
     private void initializeConversions()
     {
         ticketConverts = new List<TicketConvert>();
         if (arcadeStatus.debugStatus.isActive)
         {
-            ticketConverts.Add(new TicketConvert("Sprites/Tickets/DebugTicket", "The Debugger", 1, 1, arcadeStatus.debugStatus));
+            ticketConverts.Add(new TicketConvert("Sprites/Tickets/DebugTicket", "The Debugger", 6, 1, arcadeStatus.debugStatus));
         }
         // copy the previous if statement for future games
         // ...
 
         // Initalize the UIs
-        initializeConvertUI(0, 2);
+        currentSetIndex = 0;
+        initializeConvertUI(0);
     }
 
-    private void initializeConvertUI(int min, int max)
+    /**
+     * Loads a new set of Ticket Conversions into the UI between indices min and max inclusive.
+     * @param min the minimum index.
+     */
+    private void initializeConvertUI(int min)
     {
-        if(max - min + 1 != ticketConvertUIs.Count)
+        int max = min + ticketConvertUIs.Count - 1;
+
+        if (max - min + 1 != ticketConvertUIs.Count)
         {
             Debug.LogError("Not a valid range");
             return;
@@ -84,8 +118,22 @@ public class TicketConversionController : MonoBehaviour
             ticketConvertUIs[i].gameObject.SetActive(false);
         }
 
+        // initialize the scroll buttons
+        if(min == 0)
+        {
+            scrollUpButton.gameObject.SetActive(false);
+        }
+        if(max == ticketConverts.Count - 1)
+        {
+            scrollDownButton.gameObject.SetActive(false);
+        }
+
     }
 
+    /**
+     * Selects an increment button.
+     * @param button the button to select.
+     */
     public void selectButton(Button button)
     {
         if(currentIncrementSelection != null)
@@ -96,16 +144,31 @@ public class TicketConversionController : MonoBehaviour
         button.image.color = selectedColor;
     }
 
+    /**
+     * Called by a ticket conversion increment button.
+     * @param ui the TicketConvertUI that should be incremented.
+     */
     public void incrementButton(TicketConvertUI ui)
     {
         increment(ui, true);
     }
 
+
+    /**
+     * Called by a ticket conversion decrement button.
+     * @param ui the TicketConvertUI that should be decremented.
+     */
     public void decrementButton(TicketConvertUI ui)
     {
         increment(ui, false);
     }
 
+
+    /**
+     * Helper method for increment/decrement.
+     * @param ui the TicketConvertUI that should be altered.
+     * @param increase should be true to increase the value, or false to decrease it.
+     */
     private void increment(TicketConvertUI ui, bool increase)
     {
         int scalar = 1;
@@ -129,18 +192,112 @@ public class TicketConversionController : MonoBehaviour
         }
         else if (currentIncrementSelection == incrementFivePercent)
         {
-            incrementValue = (long) (scalar * ((double) ui.activeConvert.status.gameTickets) * .05);
+            incrementValue = (long) (scalar * ((double) ui.activeConvert.status.tickets) * .05);
         }
         else if (currentIncrementSelection == incrementTwentyFivePercent)
         {
-            incrementValue = (long)(scalar * ((double)ui.activeConvert.status.gameTickets) * .25);
+            incrementValue = (long)(scalar * ((double)ui.activeConvert.status.tickets) * .25);
         }
         else if (currentIncrementSelection == incrementMax)
         {
-            incrementValue = scalar * ui.activeConvert.status.gameTickets;
+            incrementValue = scalar * ui.activeConvert.status.tickets;
         }
 
+        // actually increment the value
         ui.activeConvert.incrementCount(incrementValue);
         ui.populate();
+    }
+
+    public void initializePopUp()
+    {
+        convertPopUp.SetActive(true);
+
+        // calculate amount to receive
+        prizeTicketsToReceive = 0;
+        for(int i = 0; i < ticketConverts.Count; i++)
+        {
+            long amountToTurnIn = ticketConverts[i].getCount();
+
+            amountToTurnIn -= amountToTurnIn % ticketConverts[i].inputAmount;
+            long numberOfConversions = amountToTurnIn / ticketConverts[i].inputAmount;
+            prizeTicketsToReceive += numberOfConversions * ticketConverts[i].outputAmount;
+        }
+
+        conversionText.text = "You Will Receive:\n" + ArcadeManager.convertToScientific(prizeTicketsToReceive) + "\nPrize Tickets";
+    }
+
+    public void convert()
+    {
+        for(int i = 0; i < ticketConverts.Count; i++)
+        {
+            long amountToTurnIn = ticketConverts[i].getCount();
+            ticketConverts[i].status.tickets -= (amountToTurnIn - (amountToTurnIn % ticketConverts[i].inputAmount));
+
+            ticketConverts[i].resetCount();
+        }
+        initializeConvertUI(currentSetIndex);
+
+        arcadeStatus.prizeStatus.tickets += prizeTicketsToReceive;
+        prizeTicketsToReceive = 0;
+        setWalletText();
+        closePopUp();
+    }
+
+    public void closePopUp()
+    {
+        convertPopUp.SetActive(false);
+    }
+
+    public void OnApplicationQuit()
+    {
+        ArcadeManager.writeArcadeStatus(arcadeStatus);
+    }
+
+    public void scrollUp()
+    {
+        if (currentSetIndex == 0)
+        {
+            Debug.LogError("Should not be scrolling up.");
+            return;
+        }
+
+        currentSetIndex -= ticketConvertUIs.Count;
+        initializeConvertUI(currentSetIndex);
+
+        if (currentSetIndex == 0)
+        {
+            // if at top, disable up arrow
+            scrollUpButton.gameObject.SetActive(false);
+        } else { 
+            // else, make sure it is available
+            scrollUpButton.gameObject.SetActive(true);
+        }
+        // always make sure scroll down is available
+        scrollDownButton.gameObject.SetActive(true);
+    }
+
+    public void scrollDown()
+    {
+        if (currentSetIndex + ticketConvertUIs.Count >= ticketConverts.Count)
+        {
+            Debug.LogError("Should not be scrolling down.");
+            return;
+        }
+
+        currentSetIndex += ticketConvertUIs.Count;
+        initializeConvertUI(currentSetIndex);
+
+        if (currentSetIndex + ticketConvertUIs.Count >= ticketConverts.Count)
+        {
+            // if at bottom, disable down arrow
+            scrollDownButton.gameObject.SetActive(false);
+        }
+        else
+        {
+            // else, make sure it is available
+            scrollDownButton.gameObject.SetActive(true);
+        }
+        // always make sure scroll up is available
+        scrollUpButton.gameObject.SetActive(true);
     }
 }

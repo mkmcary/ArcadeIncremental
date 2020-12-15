@@ -54,6 +54,7 @@ public class ShopUpgrade
         else
         {
             currentLevel++;
+            Debug.Log("Leveled up: " + upgradeName + ", level is now " + currentLevel);
             scalePrice();
         }
     }

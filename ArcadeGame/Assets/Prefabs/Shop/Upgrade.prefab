@@ -307,6 +307,15 @@ MonoBehaviour:
   nameText: {fileID: 2736340037122200580}
   priceText: {fileID: 2736340038083027343}
   levelText: {fileID: 663534005}
+  activeUpgrade:
+    sprite: 
+    price: 0
+    upgradeName: 
+    description: 
+    currentLevel: 0
+    maxLevel: 1
+    priceScale: 1
+    sType: 1
 --- !u!1 &2736340038083027329
 GameObject:
   m_ObjectHideFlags: 0
@@ -373,10 +382,10 @@ MonoBehaviour:
       m_Calls: []
   m_FontData:
     m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
-    m_FontSize: 40
+    m_FontSize: 32
     m_FontStyle: 0
     m_BestFit: 0
-    m_MinSize: 4
+    m_MinSize: 3
     m_MaxSize: 60
     m_Alignment: 3
     m_AlignByGeometry: 0

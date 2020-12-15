@@ -1,26 +1,45 @@
 {
     "prizeStatus": {
-        "prizeTickets": 0
-    },
-    "debugStatus": {
-        "gameTickets": 210,
-        "highScore": 0,
-        "cumulativeScore": 0,
-        "isActive": true,
+        "tickets": 0,
         "upgrades": [
             {
                 "sprite": "Sprites/Shop/Placeholder/doubleMult",
-                "price": 1000,
+                "price": 2000,
                 "upgradeName": "Double Points",
                 "description": "Doubles the points received from playing this game.",
-                "currentLevel": 0,
+                "currentLevel": 1,
+                "maxLevel": 1,
+                "priceScale": 2.0,
+                "sType": 1
+            }
+        ],
+        "doublePoints": {
+            "sprite": "Sprites/Shop/Placeholder/doubleMult",
+            "price": 2000,
+            "upgradeName": "Double Points",
+            "description": "Doubles the points received from playing this game.",
+            "currentLevel": 1,
+            "maxLevel": 1,
+            "priceScale": 2.0,
+            "sType": 1
+        }
+    },
+    "debugStatus": {
+        "tickets": 2000,
+        "upgrades": [
+            {
+                "sprite": "Sprites/Shop/Placeholder/doubleMult",
+                "price": 2000,
+                "upgradeName": "Double Points",
+                "description": "Doubles the points received from playing this game.",
+                "currentLevel": 1,
                 "maxLevel": 5,
                 "priceScale": 2.0,
                 "sType": 1
             },
             {
                 "sprite": "Sprites/CabinetScene/Placeholder/redCabinet",
-                "price": 2000,
+                "price": 99999999999,
                 "upgradeName": "Red Upgrade",
                 "description": "This upgrade is red.",
                 "currentLevel": 0,
@@ -29,19 +48,22 @@
                 "sType": 0
             }
         ],
+        "highScore": 0,
+        "cumulativeScore": 0,
+        "isActive": true,
         "doublePoints": {
             "sprite": "Sprites/Shop/Placeholder/doubleMult",
-            "price": 1000,
+            "price": 2000,
             "upgradeName": "Double Points",
             "description": "Doubles the points received from playing this game.",
-            "currentLevel": 0,
+            "currentLevel": 1,
             "maxLevel": 5,
             "priceScale": 2.0,
             "sType": 1
         },
         "redUpgrade": {
             "sprite": "Sprites/CabinetScene/Placeholder/redCabinet",
-            "price": 2000,
+            "price": 99999999999,
             "upgradeName": "Red Upgrade",
             "description": "This upgrade is red.",
             "currentLevel": 0,

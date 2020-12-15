@@ -30,12 +30,12 @@ EditorBuildSettings:
     path: Assets/Scenes/ArcadeCabinetScenes/DebugGame/DebugShopScene.unity
     guid: 435379953a5b7a6408463712812d3d9f
   - enabled: 1
-    path: Assets/Scenes/TicketConversionScene.unity
+    path: Assets/Scenes/TicketCenter/TicketConversionScene.unity
     guid: 736e8d9c08315634182da1082d3e4352
   - enabled: 1
-    path: Assets/Scenes/TicketMenuScene.unity
+    path: Assets/Scenes/TicketCenter/TicketMenuScene.unity
     guid: a90b6d1f592206a4db5f8c71522ad403
   - enabled: 1
-    path: Assets/Scenes/PrizeCounterScene.unity
+    path: Assets/Scenes/TicketCenter/PrizeCounterScene.unity
     guid: 3d1f409dc88fe0b438d03852d29fe444
   m_configObjects: {}

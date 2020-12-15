@@ -3,18 +3,24 @@ using System.Collections;
 using System.Collections.Generic;
 
 [Serializable]
-public class PrizeStatus
+public class PrizeStatus : LayerZeroStatus
 {
-    public long prizeTickets;
+    // upgrades
+    public ShopUpgrade doublePoints;
 
-    // Prize Upgrades
-
-    // public PrizeShopUpgrade doublePoints;
-
-    public PrizeStatus()
+    public PrizeStatus() : base()
     {
-        prizeTickets = 0;
+        // double points
+        doublePoints = new ShopUpgrade();
+        doublePoints.upgradeName = "Double Points";
+        doublePoints.price = 1000;
+        doublePoints.description = "Doubles the points received from playing this game.";
+        doublePoints.currentLevel = 0;
+        doublePoints.maxLevel = 1;
+        doublePoints.priceScale = 2;
+        doublePoints.sType = ShopUpgrade.scaleType.MULT;
+        doublePoints.sprite = "Sprites/Shop/Placeholder/doubleMult";
 
-        // Intialize upgrades to base form, after refactor
+        upgrades.Add(doublePoints);
     }
 }

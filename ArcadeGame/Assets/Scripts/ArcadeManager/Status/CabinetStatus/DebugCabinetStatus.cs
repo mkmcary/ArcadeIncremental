@@ -16,7 +16,6 @@ public class DebugCabinetStatus : CabinetStatus
     {
         isActive = true;
 
-        // Empty until shop upgrade refactor
         // double points
         doublePoints = new ShopUpgrade();
         doublePoints.upgradeName = "Double Points";
@@ -32,7 +31,7 @@ public class DebugCabinetStatus : CabinetStatus
 
         redUpgrade = new ShopUpgrade();
         redUpgrade.upgradeName = "Red Upgrade";
-        redUpgrade.price = 2000;
+        redUpgrade.price = 99999999999;
         redUpgrade.description = "This upgrade is red.";
         redUpgrade.currentLevel = 0;
         redUpgrade.maxLevel = 3;

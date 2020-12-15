@@ -42,14 +42,19 @@ public class TicketConvert
         if(count < 0)
         {
             count = 0;
-        } else if(count > status.gameTickets)
+        } else if(count > status.tickets)
         {
-            count = status.gameTickets;
+            count = status.tickets;
         }
     }
 
     public long getCount()
     {
         return count;
+    }
+
+    public void resetCount()
+    {
+        this.count = 0;
     }
 }

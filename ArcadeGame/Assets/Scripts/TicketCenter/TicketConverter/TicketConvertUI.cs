@@ -22,6 +22,6 @@ public class TicketConvertUI : MonoBehaviour
         nameText.text = activeConvert.gameName;
         inputText.text = "" + activeConvert.inputAmount;
         outputText.text = "" + activeConvert.outputAmount;
-        countText.text = "" + activeConvert.getCount();
+        countText.text = ArcadeManager.convertToScientific(activeConvert.getCount());
     }
 }

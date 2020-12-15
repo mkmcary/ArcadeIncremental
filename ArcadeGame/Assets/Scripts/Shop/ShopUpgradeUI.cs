@@ -26,4 +26,16 @@ public class ShopUpgradeUI : MonoBehaviour
         sc.activeUpgradeUI = this;
         sc.buttonWasClicked();
     }
+
+    public virtual void populate()
+    {
+        image.sprite = ArcadeManager.loadSprite(activeUpgrade.sprite);
+        nameText.text = activeUpgrade.upgradeName;
+        priceText.text = ArcadeManager.convertToScientific(activeUpgrade.price) + " Tickets";
+        levelText.text = activeUpgrade.currentLevel + " / " + activeUpgrade.maxLevel;
+        if (activeUpgrade.currentLevel == activeUpgrade.maxLevel)
+        {
+            priceText.gameObject.SetActive(false);
+        }
+    }
 }
