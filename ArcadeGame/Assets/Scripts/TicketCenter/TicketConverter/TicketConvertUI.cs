@@ -20,8 +20,8 @@ public class TicketConvertUI : MonoBehaviour
         gameObject.SetActive(true);
         image.sprite = Resources.Load<Sprite>(activeConvert.sprite);
         nameText.text = activeConvert.gameName;
-        inputText.text = "" + activeConvert.inputAmount;
-        outputText.text = "" + activeConvert.outputAmount;
-        countText.text = ArcadeManager.convertToScientific(activeConvert.getCount());
+        inputText.text = ArcadeManager.bigIntToString(activeConvert.inputAmount);
+        outputText.text = ArcadeManager.bigIntToString(activeConvert.outputAmount);
+        countText.text = ArcadeManager.bigIntToString(activeConvert.getCount());
     }
 }

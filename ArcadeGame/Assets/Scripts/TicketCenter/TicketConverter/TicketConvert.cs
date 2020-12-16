@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Numerics;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -10,11 +11,11 @@ public class TicketConvert
     // Data for a ticket convert
     public string sprite;
     public string gameName;
-    public int inputAmount;
-    public int outputAmount;
+    public BigInteger inputAmount;
+    public BigInteger outputAmount;
     public CabinetStatus status;
 
-    private long count;
+    private BigInteger count;
 
     public TicketConvert()
     {
@@ -26,7 +27,7 @@ public class TicketConvert
         count = 0;
     }
 
-    public TicketConvert(string sprite, string gameName, int inputAmount, int outputAmount, CabinetStatus status)
+    public TicketConvert(string sprite, string gameName, BigInteger inputAmount, BigInteger outputAmount, CabinetStatus status)
     {
         this.sprite = sprite;
         this.gameName = gameName;
@@ -36,19 +37,20 @@ public class TicketConvert
         count = 0;
     }
 
-    public void incrementCount(long increment)
+    public void incrementCount(BigInteger increment)
     {
         count += increment;
         if(count < 0)
         {
             count = 0;
-        } else if(count > status.tickets)
+        }
+        else if(count > status.tickets.value)
         {
-            count = status.tickets;
+            count = status.tickets.value;
         }
     }
 
-    public long getCount()
+    public BigInteger getCount()
     {
         return count;
     }

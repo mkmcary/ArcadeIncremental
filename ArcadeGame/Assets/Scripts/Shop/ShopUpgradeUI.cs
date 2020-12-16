@@ -31,7 +31,7 @@ public class ShopUpgradeUI : MonoBehaviour
     {
         image.sprite = ArcadeManager.loadSprite(activeUpgrade.sprite);
         nameText.text = activeUpgrade.upgradeName;
-        priceText.text = ArcadeManager.convertToScientific(activeUpgrade.price) + " Tickets";
+        priceText.text = ArcadeManager.bigIntToString(activeUpgrade.price.value) + " Tickets";
         levelText.text = activeUpgrade.currentLevel + " / " + activeUpgrade.maxLevel;
         if (activeUpgrade.currentLevel == activeUpgrade.maxLevel)
         {

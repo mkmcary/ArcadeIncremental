@@ -58,7 +58,7 @@ public abstract class ShopController : MonoBehaviour
         image.sprite = ArcadeManager.loadSprite(activeUpgrade.sprite);
         nameText.text = activeUpgrade.upgradeName;
         descriptionText.text = activeUpgrade.description;
-        priceText.text = ArcadeManager.convertToScientific(activeUpgrade.price) + " Tickets";
+        priceText.text = ArcadeManager.bigIntToString(activeUpgrade.price.value) + " Tickets";
 
         if (activeUpgrade.currentLevel == activeUpgrade.maxLevel)
         {
@@ -86,7 +86,7 @@ public abstract class ShopController : MonoBehaviour
      */
     public void updateTicketText()
     {
-        ticketText.text = ArcadeManager.convertToScientific(status.tickets);
+        ticketText.text = ArcadeManager.bigIntToString(status.tickets.value);
     }
 
     /**
@@ -94,7 +94,7 @@ public abstract class ShopController : MonoBehaviour
      */
     public void buy()
     {
-        if (activeUpgrade.price > status.tickets)
+        if (activeUpgrade.price.value > status.tickets.value)
         {
             // ###########################################################
             // add error message for trying to buy with not enough tickets
@@ -104,7 +104,7 @@ public abstract class ShopController : MonoBehaviour
 
         if (activeUpgrade.currentLevel < activeUpgrade.maxLevel)
         {
-            status.tickets -= activeUpgrade.price;
+            status.tickets.value -= activeUpgrade.price.value;
             activeUpgrade.LevelUp();
         }
         else
@@ -120,9 +120,11 @@ public abstract class ShopController : MonoBehaviour
 
     public void loadUpgrades()
     {
+        List<ShopUpgrade> upgrades = status.getUpgrades();
+
         for (int i = 0; i < upgradeUIs.Count; i++)
         {
-            upgradeUIs[i].activeUpgrade = status.upgrades[i];
+            upgradeUIs[i].activeUpgrade = upgrades[i];
             upgradeUIs[i].populate();
         }
     }

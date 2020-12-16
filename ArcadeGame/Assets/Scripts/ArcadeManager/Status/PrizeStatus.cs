@@ -10,10 +10,12 @@ public class PrizeStatus : LayerZeroStatus
 
     public PrizeStatus() : base()
     {
+        List<ShopUpgrade> upgrades = getUpgrades();
+
         // double points
         doublePoints = new ShopUpgrade();
         doublePoints.upgradeName = "Double Points";
-        doublePoints.price = 1000;
+        doublePoints.price = new BigIntWrapper(1000);
         doublePoints.description = "Doubles the points received from playing this game.";
         doublePoints.currentLevel = 0;
         doublePoints.maxLevel = 1;

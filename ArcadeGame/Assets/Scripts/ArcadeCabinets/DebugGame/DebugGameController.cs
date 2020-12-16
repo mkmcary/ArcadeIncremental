@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.Numerics;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
@@ -16,7 +17,7 @@ public class DebugGameController : MonoBehaviour
     public Text ticketsText;
 
     /** The active number of points for this game session. */
-    public long points;
+    public BigInteger points;
 
 
     /**
@@ -27,8 +28,8 @@ public class DebugGameController : MonoBehaviour
         arcadeStatus = ArcadeManager.readArcadeStatus();
 
         points = 0;
-        pointsText.text = "Current Points: " + ArcadeManager.convertToScientific(points);
-        ticketsText.text = "Current Tickets: " + ArcadeManager.convertToScientific(arcadeStatus.debugStatus.tickets);
+        pointsText.text = "Current Points: " + ArcadeManager.bigIntToString(points);
+        ticketsText.text = "Current Tickets: " + ArcadeManager.bigIntToString(arcadeStatus.debugStatus.tickets.value);
 
         //StartCoroutine(initialize());
     }
@@ -43,7 +44,7 @@ public class DebugGameController : MonoBehaviour
 
         points += pointsToAdd;
 
-        pointsText.text = "Current Points: " + ArcadeManager.convertToScientific(points);
+        pointsText.text = "Current Points: " + ArcadeManager.bigIntToString(points);
     }
 
 
@@ -53,15 +54,15 @@ public class DebugGameController : MonoBehaviour
      */
     public void endGame()
     {
-        long pointsToAdd = points;
+        BigInteger pointsToAdd = points;
 
         // deal with upgrades
-        pointsToAdd *= ((long) Mathf.Pow(2, arcadeStatus.debugStatus.doublePoints.currentLevel));
-        pointsToAdd *= ((long) Mathf.Pow(2, arcadeStatus.prizeStatus.doublePoints.currentLevel));
+        pointsToAdd *= (BigInteger.Pow(2, arcadeStatus.debugStatus.doublePoints.currentLevel));
+        pointsToAdd *= (BigInteger.Pow(2, arcadeStatus.prizeStatus.doublePoints.currentLevel));
 
         if (pointsToAdd > 0)
         {
-            arcadeStatus.debugStatus.tickets += pointsToAdd;
+            arcadeStatus.debugStatus.tickets.value += pointsToAdd;
         }
 
         //temporary functionality

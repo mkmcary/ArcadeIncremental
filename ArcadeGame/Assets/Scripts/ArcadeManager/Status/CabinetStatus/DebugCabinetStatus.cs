@@ -14,12 +14,14 @@ public class DebugCabinetStatus : CabinetStatus
 
     public DebugCabinetStatus() : base()
     {
+        List<ShopUpgrade> upgrades = getUpgrades();
+
         isActive = true;
 
         // double points
         doublePoints = new ShopUpgrade();
         doublePoints.upgradeName = "Double Points";
-        doublePoints.price = 1000;
+        doublePoints.price = new BigIntWrapper(1000);
         doublePoints.description = "Doubles the points received from playing this game.";
         doublePoints.currentLevel = 0;
         doublePoints.maxLevel = 5;
@@ -31,7 +33,7 @@ public class DebugCabinetStatus : CabinetStatus
 
         redUpgrade = new ShopUpgrade();
         redUpgrade.upgradeName = "Red Upgrade";
-        redUpgrade.price = 99999999999;
+        redUpgrade.price = new BigIntWrapper(99999999999);
         redUpgrade.description = "This upgrade is red.";
         redUpgrade.currentLevel = 0;
         redUpgrade.maxLevel = 3;

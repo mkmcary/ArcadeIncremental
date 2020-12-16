@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Numerics;
 using UnityEngine;
 
 [Serializable]
@@ -8,12 +9,12 @@ public class ShopUpgrade
 {
     // Data For a ShopUpgrade
     public string sprite;
-    public long price;
+    public BigIntWrapper price;
     public string upgradeName;
     public string description;
     public int currentLevel;
     public int maxLevel;
-    public float priceScale;
+    public BigInteger priceScale;
     public scaleType sType;
 
     public enum scaleType
@@ -24,25 +25,13 @@ public class ShopUpgrade
     public ShopUpgrade()
     {
         sprite = null;
-        price = 0;
+        price = new BigIntWrapper();
         upgradeName = null;
         description = null;
         currentLevel = 0;
         maxLevel = 1;
         priceScale = 1;
         sType = scaleType.MULT;
-    }
-
-    public ShopUpgrade(string sprite, long price, string uName, string description, int currentLevel, int maxLevel, float priceScale, scaleType sType)
-    {
-        this.sprite = sprite;
-        this.price = price;
-        this.upgradeName = uName;
-        this.description = description;
-        this.currentLevel = currentLevel;
-        this.maxLevel = maxLevel;
-        this.priceScale = priceScale;
-        this.sType = sType;
     }
 
     public void LevelUp()
@@ -63,19 +52,20 @@ public class ShopUpgrade
     {
         if(sType == scaleType.MULT)
         {
-            price = (long)((float)price * priceScale);
+            price.value = (price.value * priceScale);
         } else if(sType == scaleType.ADD)
         {
-            price += (long)priceScale;
+            price.value += priceScale;
         } else if(sType == scaleType.EXP)
         {
-            long temp = (long)Mathf.Pow((float)price, priceScale);
-            if(temp == price)
+            // assuming that we will not have to deal with overflow on exponential scaling
+            BigInteger temp = BigInteger.Pow(price.value, (int)priceScale);
+            if(temp == price.value)
             {
-                price = temp + 1;
+                price.value = temp + 1;
             } else
             {
-                price = temp;
+                price.value = temp;
             }
         }
     }
