@@ -1,7 +1,7 @@
 {
     "prizeStatus": {
         "tickets": {
-            "valueString": "4125"
+            "valueString": "166"
         },
         "doublePoints": {
             "sprite": "Sprites/Shop/Placeholder/doubleMult",
@@ -17,7 +17,7 @@
     },
     "debugStatus": {
         "tickets": {
-            "valueString": "76250"
+            "valueString": "8004"
         },
         "highScore": {
             "valueString": "0"

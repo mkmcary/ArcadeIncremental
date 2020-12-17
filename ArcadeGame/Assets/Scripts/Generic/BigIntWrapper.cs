@@ -5,7 +5,7 @@ using System.Numerics;
 using UnityEngine;
 
 [Serializable]
-public class BigIntWrapper
+public class BigIntWrapper : ISerializationCallbackReceiver
 {
     public BigInteger value;
     [SerializeField]
@@ -23,14 +23,13 @@ public class BigIntWrapper
         valueString = num.ToString();
     }
 
-    public void updateValueString()
+    public void OnBeforeSerialize()
     {
         valueString = value.ToString();
     }
 
-    public void initializeValue()
+    public void OnAfterDeserialize()
     {
         value = BigInteger.Parse(valueString);
     }
-
 }

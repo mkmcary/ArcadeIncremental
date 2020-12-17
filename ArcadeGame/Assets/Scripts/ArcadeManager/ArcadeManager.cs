@@ -22,6 +22,7 @@ public class ArcadeManager : MonoBehaviour
 
             List<LayerZeroStatus> statuses = ret.getLayerZeroStatuses();
 
+            /*
             // initialize BigInteger values
             for(int i = 0; i < statuses.Count; i++)
             {
@@ -43,6 +44,7 @@ public class ArcadeManager : MonoBehaviour
                     cabStatus.highScore.initializeValue();
                 }
             }
+            */
 
             return ret;
         }
@@ -50,6 +52,7 @@ public class ArcadeManager : MonoBehaviour
 
     public static void writeArcadeStatus(ArcadeStatus status)
     {
+        /*
         // handle updating the BigInteger strings
         List<LayerZeroStatus> statuses = status.getLayerZeroStatuses();
         for (int i = 0; i < statuses.Count; i++)
@@ -72,6 +75,7 @@ public class ArcadeManager : MonoBehaviour
                 cabStatus.highScore.updateValueString();
             }
         }
+        */
 
         string appPath = Application.dataPath + "/SaveData/ArcadeStatus.json";
         System.IO.File.WriteAllText(appPath, JsonUtility.ToJson(status, true));
