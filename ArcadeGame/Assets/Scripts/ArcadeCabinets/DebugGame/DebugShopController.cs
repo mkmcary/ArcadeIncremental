@@ -15,6 +15,8 @@ public class DebugShopController : ShopController
         arcadeStatus = ArcadeManager.readArcadeStatus();
         status = arcadeStatus.debugStatus;
         updateTicketText();
-        loadUpgrades();
+
+        currentSetIndex = 0;
+        loadUpgrades(currentSetIndex);
     }
 }

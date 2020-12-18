@@ -21,5 +21,6 @@ public class PrizeUpgradeUI : ShopUpgradeUI
         {
             image.color = Color.white;
         }
+        gameObject.SetActive(true);
     }
 }

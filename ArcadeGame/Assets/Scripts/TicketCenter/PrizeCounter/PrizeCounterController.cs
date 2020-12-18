@@ -14,6 +14,8 @@ public class PrizeCounterController : ShopController
         arcadeStatus = ArcadeManager.readArcadeStatus();
         status = arcadeStatus.prizeStatus;
         updateTicketText();
-        loadUpgrades();
+
+        currentSetIndex = 0;
+        loadUpgrades(currentSetIndex);
     }
 }

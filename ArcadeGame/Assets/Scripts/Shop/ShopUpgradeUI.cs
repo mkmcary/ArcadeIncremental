@@ -37,5 +37,6 @@ public class ShopUpgradeUI : MonoBehaviour
         {
             priceText.gameObject.SetActive(false);
         }
+        gameObject.SetActive(true);
     }
 }

@@ -26,6 +26,11 @@ public abstract class ShopController : MonoBehaviour
     public Text priceText;
     public Button buyButton;
 
+    // Scroll Data
+    public Button scrollUpButton;
+    public Button scrollDownButton;
+    protected int currentSetIndex;
+
     /** The ticket text in the wallet. */
     public Text ticketText;
 
@@ -118,15 +123,98 @@ public abstract class ShopController : MonoBehaviour
         closePopUp();
     }
 
-    public void loadUpgrades()
+    public void loadUpgrades(int min)
     {
         List<ShopUpgrade> upgrades = status.getUpgrades();
 
-        for (int i = 0; i < upgradeUIs.Count; i++)
+        int max = min + upgradeUIs.Count - 1;
+
+        if(max - min + 1 != upgradeUIs.Count)
         {
-            upgradeUIs[i].activeUpgrade = upgrades[i];
-            upgradeUIs[i].populate();
+            Debug.LogError("Not a valid upgrade range");
+            return;
         }
+        if(max >= upgrades.Count)
+        {
+            max = upgrades.Count - 1;
+        }
+
+        int i = 0;
+        for (int j = min; j <= max; j++)
+        {
+            upgradeUIs[i].activeUpgrade = upgrades[j];
+            upgradeUIs[i].populate();
+            i++;
+        }
+        for(; i < upgradeUIs.Count; i++)
+        {
+            upgradeUIs[i].gameObject.SetActive(false);
+        }
+
+        // initialize the scroll buttons
+        if (scrollDownButton != null && scrollUpButton != null)
+        {
+            if (min == 0)
+            {
+                scrollUpButton.gameObject.SetActive(false);
+            }
+            if (max == upgrades.Count - 1)
+            {
+                scrollDownButton.gameObject.SetActive(false);
+            }
+        }
+    }
+
+    public void scrollUp()
+    {
+        if (currentSetIndex == 0)
+        {
+            Debug.LogError("Should not be scrolling up.");
+            return;
+        }
+
+        currentSetIndex -= upgradeUIs.Count;
+        loadUpgrades(currentSetIndex);
+
+        if (currentSetIndex == 0)
+        {
+            // if at top, disable up arrow
+            scrollUpButton.gameObject.SetActive(false);
+        }
+        else
+        {
+            // else, make sure it is available
+            scrollUpButton.gameObject.SetActive(true);
+        }
+        // always make sure scroll down is available
+        scrollDownButton.gameObject.SetActive(true);
+    }
+
+    public void scrollDown()
+    {
+
+        List<ShopUpgrade> upgrades = status.getUpgrades();
+        if (currentSetIndex + upgradeUIs.Count >= upgrades.Count)
+        {
+            Debug.LogError("Should not be scrolling down.");
+            return;
+        }
+
+        currentSetIndex += upgradeUIs.Count;
+        loadUpgrades(currentSetIndex);
+
+        if (currentSetIndex + upgradeUIs.Count >= upgrades.Count)
+        {
+            // if at bottom, disable down arrow
+            scrollDownButton.gameObject.SetActive(false);
+        }
+        else
+        {
+            // else, make sure it is available
+            scrollDownButton.gameObject.SetActive(true);
+        }
+        // always make sure scroll up is available
+        scrollUpButton.gameObject.SetActive(true);
     }
 
     public void OnApplicationQuit()
