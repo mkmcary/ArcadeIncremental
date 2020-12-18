@@ -1,0 +1,173 @@
+{
+    "prizeStatus": {
+        "tickets": {
+            "valueString": "3"
+        },
+        "doublePoints": {
+            "sprite": "Sprites/Shop/Placeholder/doubleMult",
+            "price": {
+                "valueString": "1000"
+            },
+            "upgradeName": "Double Points",
+            "description": "Doubles the points received from playing this game.",
+            "currentLevel": 0,
+            "maxLevel": 1,
+            "sType": 1
+        },
+        "redUpgrade": {
+            "sprite": "Sprites/CabinetScene/Placeholder/redCabinet",
+            "price": {
+                "valueString": "99999999999"
+            },
+            "upgradeName": "Red Upgrade",
+            "description": "This upgrade is red.",
+            "currentLevel": 0,
+            "maxLevel": 3,
+            "sType": 0
+        },
+        "blueUpgrade": {
+            "sprite": "Sprites/CabinetScene/Placeholder/blueCabinet",
+            "price": {
+                "valueString": "100"
+            },
+            "upgradeName": "Blue Upgrade",
+            "description": "This upgrade is blue.",
+            "currentLevel": 0,
+            "maxLevel": 4,
+            "sType": 0
+        },
+        "greenUpgrade": {
+            "sprite": "Sprites/CabinetScene/Placeholder/greenCabinet",
+            "price": {
+                "valueString": "3000"
+            },
+            "upgradeName": "Green Upgrade",
+            "description": "This upgrade is green.",
+            "currentLevel": 0,
+            "maxLevel": 2,
+            "sType": 0
+        },
+        "yellowUpgrade": {
+            "sprite": "Sprites/CabinetScene/Placeholder/yellowCabinet",
+            "price": {
+                "valueString": "7000"
+            },
+            "upgradeName": "Yellow Upgrade",
+            "description": "This upgrade is yellow.",
+            "currentLevel": 0,
+            "maxLevel": 10,
+            "sType": 0
+        },
+        "redUpgrade2": {
+            "sprite": "Sprites/CabinetScene/Placeholder/redCabinet",
+            "price": {
+                "valueString": "5"
+            },
+            "upgradeName": "Red Upgrade 2",
+            "description": "This upgrade is red, but a second time.",
+            "currentLevel": 0,
+            "maxLevel": 5,
+            "sType": 2
+        },
+        "blueUpgrade2": {
+            "sprite": "Sprites/CabinetScene/Placeholder/blueCabinet",
+            "price": {
+                "valueString": "30"
+            },
+            "upgradeName": "Blue Upgrade 2",
+            "description": "This upgrade is blue, but a second time.",
+            "currentLevel": 0,
+            "maxLevel": 3,
+            "sType": 1
+        }
+    },
+    "debugStatus": {
+        "tickets": {
+            "valueString": "2247"
+        },
+        "highScore": {
+            "valueString": "0"
+        },
+        "cumulativeScore": {
+            "valueString": "0"
+        },
+        "isActive": true,
+        "doublePoints": {
+            "sprite": "Sprites/Shop/Placeholder/doubleMult",
+            "price": {
+                "valueString": "2000"
+            },
+            "upgradeName": "Double Points",
+            "description": "Doubles the points received from playing this game.",
+            "currentLevel": 1,
+            "maxLevel": 5,
+            "sType": 1
+        },
+        "redUpgrade": {
+            "sprite": "Sprites/CabinetScene/Placeholder/redCabinet",
+            "price": {
+                "valueString": "99999999999"
+            },
+            "upgradeName": "Red Upgrade",
+            "description": "This upgrade is red.",
+            "currentLevel": 0,
+            "maxLevel": 3,
+            "sType": 0
+        },
+        "blueUpgrade": {
+            "sprite": "Sprites/CabinetScene/Placeholder/blueCabinet",
+            "price": {
+                "valueString": "300"
+            },
+            "upgradeName": "Blue Upgrade",
+            "description": "This upgrade is blue.",
+            "currentLevel": 2,
+            "maxLevel": 4,
+            "sType": 0
+        },
+        "greenUpgrade": {
+            "sprite": "Sprites/CabinetScene/Placeholder/greenCabinet",
+            "price": {
+                "valueString": "3000"
+            },
+            "upgradeName": "Green Upgrade",
+            "description": "This upgrade is green.",
+            "currentLevel": 0,
+            "maxLevel": 2,
+            "sType": 0
+        },
+        "yellowUpgrade": {
+            "sprite": "Sprites/CabinetScene/Placeholder/yellowCabinet",
+            "price": {
+                "valueString": "7000"
+            },
+            "upgradeName": "Yellow Upgrade",
+            "description": "This upgrade is yellow.",
+            "currentLevel": 0,
+            "maxLevel": 10,
+            "sType": 0
+        },
+        "redUpgrade2": {
+            "sprite": "Sprites/CabinetScene/Placeholder/redCabinet",
+            "price": {
+                "valueString": "5"
+            },
+            "upgradeName": "Red Upgrade 2",
+            "description": "This upgrade is red, but a second time.",
+            "currentLevel": 0,
+            "maxLevel": 5,
+            "sType": 2
+        },
+        "blueUpgrade2": {
+            "sprite": "Sprites/CabinetScene/Placeholder/blueCabinet",
+            "price": {
+                "valueString": "30"
+            },
+            "upgradeName": "Blue Upgrade 2",
+            "description": "This upgrade is blue, but a second time.",
+            "currentLevel": 0,
+            "maxLevel": 3,
+            "sType": 1
+        }
+    }
+}

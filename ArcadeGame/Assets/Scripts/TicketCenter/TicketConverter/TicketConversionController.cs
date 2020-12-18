@@ -251,7 +251,7 @@ public class TicketConversionController : MonoBehaviour
 
     public void OnApplicationQuit()
     {
-        ArcadeManager.writeArcadeStatus(arcadeStatus);
+        ArcadeManager.writeArcadeStatus();
     }
 
     public void scrollUp()

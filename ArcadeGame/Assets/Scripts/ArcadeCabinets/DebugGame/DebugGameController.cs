@@ -5,56 +5,36 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
-public class DebugGameController : MonoBehaviour
+public class DebugGameController : ArcadeGameController
 {
-    private ArcadeStatus arcadeStatus;
-
     /** The text where the user enters the number of points to receive. */
     public Text inputText;
-    /** The text to display the number of active points the user has. */
-    public Text pointsText;
     /** The text to display the number of tickets the user has. */
     public Text ticketsText;
 
-    /** The active number of points for this game session. */
-    public BigInteger points;
-
+    public override BigInteger initalScore
+    {
+        get { return 0; }
+    }
 
     /**
      * Called on the first frame of the scene execution.
      */
-    void Start()
+    public override void Start()
     {
-        arcadeStatus = ArcadeManager.readArcadeStatus();
+        base.Start();
 
-        points = 0;
-        pointsText.text = "Current Points: " + ArcadeManager.bigIntToString(points);
         ticketsText.text = "Current Tickets: " + ArcadeManager.bigIntToString(arcadeStatus.debugStatus.tickets.value);
 
         //StartCoroutine(initialize());
     }
 
     /**
-     * Used to update the points from the input field.
-     */
-    public void updatePoints()
-    {
-        string inputString = inputText.text;
-        long pointsToAdd = long.Parse(inputString);
-
-        points += pointsToAdd;
-
-        pointsText.text = "Current Points: " + ArcadeManager.bigIntToString(points);
-    }
-
-
-
-    /**
      * Used to end the game.
      */
-    public void endGame()
+    public override void endGame()
     {
-        BigInteger pointsToAdd = points;
+        BigInteger pointsToAdd = score;
 
         // deal with upgrades
         pointsToAdd *= (BigInteger.Pow(2, arcadeStatus.debugStatus.doublePoints.currentLevel));
@@ -66,12 +46,20 @@ public class DebugGameController : MonoBehaviour
         }
 
         //temporary functionality
-        ArcadeManager.writeArcadeStatus(arcadeStatus);
+        base.endGame();
         SceneManager.LoadScene("DebugTitleScene");
     }
 
-    public void OnApplicationQuit()
+    // Game specific methods
+    
+    /**
+     * Used to update the points from the input field.
+     */
+    public void gainScore()
     {
-        ArcadeManager.writeArcadeStatus(arcadeStatus);
+        string inputString = inputText.text;
+        long pointsToAdd = long.Parse(inputString);
+
+        updateScore(score + pointsToAdd);
     }
 }

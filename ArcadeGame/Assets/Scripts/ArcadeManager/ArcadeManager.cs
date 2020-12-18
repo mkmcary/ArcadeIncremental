@@ -6,103 +6,37 @@ using UnityEngine;
 
 public class ArcadeManager : MonoBehaviour
 {
+    private static ArcadeStatus arcadeStatus;
+
     public static ArcadeStatus readArcadeStatus()
     {
-        string appPath = Application.dataPath + "/SaveData/ArcadeStatus.json";
-        if (!System.IO.File.Exists(appPath))
+        if(arcadeStatus == null)
         {
-            ArcadeStatus arcadeStatus = new ArcadeStatus();
-            writeArcadeStatus(arcadeStatus);
-            return arcadeStatus;
-        }
-        else
-        {
-            string readIn = System.IO.File.ReadAllText(appPath);
-            ArcadeStatus ret = JsonUtility.FromJson<ArcadeStatus>(readIn);
-
-            List<LayerZeroStatus> statuses = ret.getLayerZeroStatuses();
-
-            /*
-            // initialize BigInteger values
-            for(int i = 0; i < statuses.Count; i++)
+            string appPath = Application.dataPath + "/SaveData/ArcadeStatus.json";
+            if (!System.IO.File.Exists(appPath))
             {
-                // tickets
-                statuses[i].tickets.initializeValue();
-
-                // upgrades
-                List<ShopUpgrade> upgrades = statuses[i].getUpgrades();
-                for (int j = 0; j < upgrades.Count; j++)
-                {
-                    upgrades[j].price.initializeValue();
-                }
-
-                // score
-                if (i != 0)
-                {
-                    CabinetStatus cabStatus = (CabinetStatus)statuses[i];
-                    cabStatus.cumulativeScore.initializeValue();
-                    cabStatus.highScore.initializeValue();
-                }
+                arcadeStatus = new ArcadeStatus();
+                writeArcadeStatus();
             }
-            */
-
-            return ret;
+            else
+            {
+                string readIn = System.IO.File.ReadAllText(appPath); 
+                arcadeStatus = JsonUtility.FromJson<ArcadeStatus>(readIn);
+            }
         }
+        return arcadeStatus;
     }
 
-    public static void writeArcadeStatus(ArcadeStatus status)
+    public static void writeArcadeStatus()
     {
-        /*
-        // handle updating the BigInteger strings
-        List<LayerZeroStatus> statuses = status.getLayerZeroStatuses();
-        for (int i = 0; i < statuses.Count; i++)
-        {
-            // tickets
-            statuses[i].tickets.updateValueString();
-
-            // upgrades
-            List<ShopUpgrade> upgrades = statuses[i].getUpgrades();
-            for (int j = 0; j < upgrades.Count; j++)
-            {
-                upgrades[j].price.updateValueString();
-            }
-
-            // score
-            if (i != 0)
-            {
-                CabinetStatus cabStatus = (CabinetStatus)statuses[i];
-                cabStatus.cumulativeScore.updateValueString();
-                cabStatus.highScore.updateValueString();
-            }
-        }
-        */
-
         string appPath = Application.dataPath + "/SaveData/ArcadeStatus.json";
-        System.IO.File.WriteAllText(appPath, JsonUtility.ToJson(status, true));
+        System.IO.File.WriteAllText(appPath, JsonUtility.ToJson(arcadeStatus, true));
     }
-
-    /**
-    public static string convertToScientific(long number)
-    {
-        if(number < 10000000)
-        {
-            return number.ToString();
-        }
-
-        string digits = number.ToString();
-
-        if(digits.Length - 1 > 9)
-        {
-            // remove a digit from the decimal if exponent is 2 digits
-            return digits[0] + "." + digits.Substring(1, 2) + "e" + (digits.Length - 1);
-        }
-
-        return digits[0] + "." + digits.Substring(1, 3) + "e" + (digits.Length - 1);
-    }
-    */
 
     /**
      * Used to format a BigInteger as a string for output to the player.
+     * @param number The value to format
+     * @return returns the custom formatted string of the number
      */
     public static string bigIntToString(BigInteger number)
     {

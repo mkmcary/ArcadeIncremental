@@ -219,7 +219,7 @@ public abstract class ShopController : MonoBehaviour
 
     public void OnApplicationQuit()
     {
-        ArcadeManager.writeArcadeStatus(arcadeStatus);
+        ArcadeManager.writeArcadeStatus();
     }
 
 }

@@ -19,6 +19,10 @@ public class CabinetController : MonoBehaviour
 
     private int currentCabinet;
 
+    //Contains the menus for the arcade games
+    public GameObject cabinetScreen;
+    public List<GameObject> cabinetMenus;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -75,6 +79,9 @@ public class CabinetController : MonoBehaviour
 
     public void loadMachine()
     {
-        SceneManager.LoadScene(arcadeCabinets[currentCabinet].scene);
+        //SceneManager.LoadScene(arcadeCabinets[currentCabinet].scene);
+
+        cabinetMenus[currentCabinet].SetActive(true);
+        cabinetScreen.SetActive(false);
     }
 }
