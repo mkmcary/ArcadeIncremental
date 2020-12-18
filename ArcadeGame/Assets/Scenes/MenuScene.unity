@@ -130,8 +130,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 429468}
+  - component: {fileID: 429469}
   m_Layer: 5
-  m_Name: Menu
+  m_Name: TicketCenterMenu
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -153,7 +154,6 @@ RectTransform:
   - {fileID: 974720746}
   - {fileID: 841646895}
   - {fileID: 1921275885}
-  - {fileID: 1159644932}
   m_Father: {fileID: 1260954615}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -162,6 +162,19 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &429469
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 429467}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9023d75f6848f3f41aa96b68d16408df, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  prizeText: {fileID: 1712431190}
 --- !u!1 &3756039
 GameObject:
   m_ObjectHideFlags: 0
@@ -534,7 +547,6 @@ GameObject:
   - component: {fileID: 61129774}
   - component: {fileID: 61129777}
   - component: {fileID: 61129776}
-  - component: {fileID: 61129775}
   m_Layer: 5
   m_Name: BackgroundTint
   m_TagString: Untagged
@@ -561,49 +573,6 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: -50}
   m_SizeDelta: {x: 1820, y: 880}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &61129775
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 61129773}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Navigation:
-    m_Mode: 3
-    m_SelectOnUp: {fileID: 0}
-    m_SelectOnDown: {fileID: 0}
-    m_SelectOnLeft: {fileID: 0}
-    m_SelectOnRight: {fileID: 0}
-  m_Transition: 1
-  m_Colors:
-    m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
-    m_HighlightedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
-    m_PressedColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 1}
-    m_SelectedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
-    m_DisabledColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0.5019608}
-    m_ColorMultiplier: 1
-    m_FadeDuration: 0.1
-  m_SpriteState:
-    m_HighlightedSprite: {fileID: 0}
-    m_PressedSprite: {fileID: 0}
-    m_SelectedSprite: {fileID: 0}
-    m_DisabledSprite: {fileID: 0}
-  m_AnimationTriggers:
-    m_NormalTrigger: Normal
-    m_HighlightedTrigger: Highlighted
-    m_PressedTrigger: Pressed
-    m_SelectedTrigger: Selected
-    m_DisabledTrigger: Disabled
-  m_Interactable: 1
-  m_TargetGraphic: {fileID: 61129776}
-  m_OnClick:
-    m_PersistentCalls:
-      m_Calls: []
 --- !u!114 &61129776
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -723,7 +692,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1945676741}
+      - m_Target: {fileID: 2104263565}
         m_MethodName: closePopUp
         m_Mode: 1
         m_Arguments:
@@ -2067,6 +2036,146 @@ RectTransform:
   m_AnchoredPosition: {x: 60, y: 0}
   m_SizeDelta: {x: 200, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!1 &279050808
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 279050809}
+  - component: {fileID: 279050812}
+  - component: {fileID: 279050811}
+  - component: {fileID: 279050810}
+  m_Layer: 5
+  m_Name: Back
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &279050809
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 279050808}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 865551892}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 0, y: -250}
+  m_SizeDelta: {x: 400, y: 200}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &279050810
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 279050808}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Navigation:
+    m_Mode: 3
+    m_SelectOnUp: {fileID: 0}
+    m_SelectOnDown: {fileID: 0}
+    m_SelectOnLeft: {fileID: 0}
+    m_SelectOnRight: {fileID: 0}
+  m_Transition: 1
+  m_Colors:
+    m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
+    m_HighlightedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
+    m_PressedColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 1}
+    m_SelectedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
+    m_DisabledColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0.5019608}
+    m_ColorMultiplier: 1
+    m_FadeDuration: 0.1
+  m_SpriteState:
+    m_HighlightedSprite: {fileID: 0}
+    m_PressedSprite: {fileID: 0}
+    m_SelectedSprite: {fileID: 0}
+    m_DisabledSprite: {fileID: 0}
+  m_AnimationTriggers:
+    m_NormalTrigger: Normal
+    m_HighlightedTrigger: Highlighted
+    m_PressedTrigger: Pressed
+    m_SelectedTrigger: Selected
+    m_DisabledTrigger: Disabled
+  m_Interactable: 1
+  m_TargetGraphic: {fileID: 279050811}
+  m_OnClick:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 865551891}
+        m_MethodName: SetActive
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 1009783792}
+        m_MethodName: SetActive
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 1
+        m_CallState: 2
+--- !u!114 &279050811
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 279050808}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_RaycastTarget: 1
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_Sprite: {fileID: 21300000, guid: d2425c486b8e67c48829b263b8b054d0, type: 3}
+  m_Type: 0
+  m_PreserveAspect: 0
+  m_FillCenter: 1
+  m_FillMethod: 4
+  m_FillAmount: 1
+  m_FillClockwise: 1
+  m_FillOrigin: 0
+  m_UseSpriteMesh: 0
+  m_PixelsPerUnitMultiplier: 1
+--- !u!222 &279050812
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 279050808}
+  m_CullTransparentMesh: 0
 --- !u!1 &307746760
 GameObject:
   m_ObjectHideFlags: 0
@@ -2129,7 +2238,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1817694736}
+      - m_Target: {fileID: 1164903770}
         m_MethodName: scrollDown
         m_Mode: 1
         m_Arguments:
@@ -2189,7 +2298,7 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1164903769}
-  m_RootOrder: 2
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -2315,7 +2424,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1945676741}
+      - m_Target: {fileID: 2104263565}
         m_MethodName: selectButton
         m_Mode: 2
         m_Arguments:
@@ -2597,7 +2706,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1945676741}
+      - m_Target: {fileID: 2104263565}
         m_MethodName: selectButton
         m_Mode: 2
         m_Arguments:
@@ -2692,17 +2801,6 @@ MonoBehaviour:
       - m_Target: {fileID: 1538540182}
         m_MethodName: SetActive
         m_Mode: 6
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: DebugTitleScene
-          m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 1814120345}
-        m_MethodName: OnApplicationQuit
-        m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -2895,7 +2993,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1817694736}
+      - m_Target: {fileID: 1164903770}
         m_MethodName: buy
         m_Mode: 1
         m_Arguments:
@@ -3102,7 +3200,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1945676741}
+      - m_Target: {fileID: 2104263565}
         m_MethodName: selectButton
         m_Mode: 2
         m_Arguments:
@@ -3535,7 +3633,7 @@ PrefabInstance:
         type: 3}
       propertyPath: sc
       value: 
-      objectReference: {fileID: 1814120345}
+      objectReference: {fileID: 1538540184}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: cb1b103ec33a7b44c8bf0ec2962bf778, type: 3}
 --- !u!114 &448714195 stripped
@@ -3666,7 +3764,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 862a4ee4ecb65644eb3175bed4ba0897, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  sc: {fileID: 1817694736}
+  sc: {fileID: 1164903770}
   image: {fileID: 468646840}
   nameText: {fileID: 0}
   priceText: {fileID: 0}
@@ -4230,7 +4328,7 @@ PrefabInstance:
         type: 3}
       propertyPath: sc
       value: 
-      objectReference: {fileID: 1814120345}
+      objectReference: {fileID: 1538540184}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: cb1b103ec33a7b44c8bf0ec2962bf778, type: 3}
 --- !u!114 &516985059 stripped
@@ -4411,7 +4509,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1945676741}
+      - m_Target: {fileID: 2104263565}
         m_MethodName: incrementButton
         m_Mode: 2
         m_Arguments:
@@ -5276,7 +5374,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 862a4ee4ecb65644eb3175bed4ba0897, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  sc: {fileID: 1817694736}
+  sc: {fileID: 1164903770}
   image: {fileID: 728701376}
   nameText: {fileID: 0}
   priceText: {fileID: 0}
@@ -5760,9 +5858,9 @@ MonoBehaviour:
           m_StringArgument: TicketConversionScene
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 2104263563}
-        m_MethodName: SetActive
-        m_Mode: 6
+      - m_Target: {fileID: 2104263565}
+        m_MethodName: Activate
+        m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -5896,7 +5994,7 @@ GameObject:
   m_Component:
   - component: {fileID: 865551892}
   m_Layer: 5
-  m_Name: Menu
+  m_Name: QuestionMarkMenu
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -5912,7 +6010,8 @@ RectTransform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
+  m_Children:
+  - {fileID: 279050809}
   m_Father: {fileID: 1454863259}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -6055,7 +6154,7 @@ RectTransform:
   - {fileID: 1892982605}
   - {fileID: 1747300045}
   m_Father: {fileID: 1164903769}
-  m_RootOrder: 4
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -6154,9 +6253,9 @@ MonoBehaviour:
           m_StringArgument: TicketMenuScene
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 429467}
-        m_MethodName: SetActive
-        m_Mode: 6
+      - m_Target: {fileID: 429469}
+        m_MethodName: Activate
+        m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -6333,7 +6432,7 @@ PrefabInstance:
         type: 3}
       propertyPath: sc
       value: 
-      objectReference: {fileID: 1814120345}
+      objectReference: {fileID: 1538540184}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: cb1b103ec33a7b44c8bf0ec2962bf778, type: 3}
 --- !u!114 &905623246 stripped
@@ -6548,7 +6647,7 @@ PrefabInstance:
         type: 3}
       propertyPath: sc
       value: 
-      objectReference: {fileID: 1814120345}
+      objectReference: {fileID: 1538540184}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: cb1b103ec33a7b44c8bf0ec2962bf778, type: 3}
 --- !u!114 &907117578 stripped
@@ -6650,7 +6749,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1817694736}
+      - m_Target: {fileID: 1164903770}
         m_MethodName: closePopUp
         m_Mode: 1
         m_Arguments:
@@ -6925,12 +7024,12 @@ GameObject:
   m_Component:
   - component: {fileID: 989534336}
   m_Layer: 5
-  m_Name: Menu
+  m_Name: TheDebuggerMenu
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &989534336
 RectTransform:
   m_ObjectHideFlags: 0
@@ -7085,7 +7184,7 @@ PrefabInstance:
         type: 3}
       propertyPath: sc
       value: 
-      objectReference: {fileID: 1814120345}
+      objectReference: {fileID: 1538540184}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: cb1b103ec33a7b44c8bf0ec2962bf778, type: 3}
 --- !u!114 &1001330728 stripped
@@ -7195,7 +7294,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1009783793
 Transform:
   m_ObjectHideFlags: 0
@@ -7296,7 +7395,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1945676741}
+      - m_Target: {fileID: 2104263565}
         m_MethodName: decrementButton
         m_Mode: 2
         m_Arguments:
@@ -7685,9 +7784,9 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 429467}
-        m_MethodName: SetActive
-        m_Mode: 6
+      - m_Target: {fileID: 429469}
+        m_MethodName: Activate
+        m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -7873,7 +7972,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1945676741}
+      - m_Target: {fileID: 2104263565}
         m_MethodName: scrollDown
         m_Mode: 1
         m_Arguments:
@@ -8021,7 +8120,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1945676741}
+      - m_Target: {fileID: 2104263565}
         m_MethodName: scrollUp
         m_Mode: 1
         m_Arguments:
@@ -8069,64 +8168,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1121135638}
   m_CullTransparentMesh: 0
---- !u!1 &1159644929
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1159644932}
-  - component: {fileID: 1159644930}
-  - component: {fileID: 1159644931}
-  m_Layer: 0
-  m_Name: MenuController
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &1159644930
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1159644929}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c6c444c2e652b814bbfecdef2fa9323d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  targetScene: 
---- !u!114 &1159644931
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1159644929}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9023d75f6848f3f41aa96b68d16408df, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  prizeText: {fileID: 1712431190}
---- !u!4 &1159644932
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1159644929}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 429468}
-  m_RootOrder: 5
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1163702902
 GameObject:
   m_ObjectHideFlags: 0
@@ -8214,6 +8255,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1164903769}
+  - component: {fileID: 1164903770}
   m_Layer: 5
   m_Name: PrizeCounter
   m_TagString: Untagged
@@ -8234,13 +8276,12 @@ RectTransform:
   m_Children:
   - {fileID: 143728575}
   - {fileID: 1325442070}
-  - {fileID: 307746764}
   - {fileID: 1302197201}
   - {fileID: 874323997}
   - {fileID: 1498575390}
   - {fileID: 1850686341}
+  - {fileID: 307746764}
   - {fileID: 1846799348}
-  - {fileID: 1817694735}
   m_Father: {fileID: 1260954615}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -8249,6 +8290,185 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &1164903770
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1164903768}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2f533f1384231e74699e6b4236ecf4db, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  arcadeStatus:
+    prizeStatus:
+      tickets:
+        valueString: 0
+      doublePoints:
+        sprite: Sprites/Shop/Placeholder/doubleMult
+        price:
+          valueString: 1000
+        upgradeName: Double Points
+        description: Doubles the points received from playing this game.
+        currentLevel: 0
+        maxLevel: 1
+        sType: 1
+      redUpgrade:
+        sprite: Sprites/CabinetScene/Placeholder/redCabinet
+        price:
+          valueString: 99999999999
+        upgradeName: Red Upgrade
+        description: This upgrade is red.
+        currentLevel: 0
+        maxLevel: 3
+        sType: 0
+      blueUpgrade:
+        sprite: Sprites/CabinetScene/Placeholder/blueCabinet
+        price:
+          valueString: 100
+        upgradeName: Blue Upgrade
+        description: This upgrade is blue.
+        currentLevel: 0
+        maxLevel: 4
+        sType: 0
+      greenUpgrade:
+        sprite: Sprites/CabinetScene/Placeholder/greenCabinet
+        price:
+          valueString: 3000
+        upgradeName: Green Upgrade
+        description: This upgrade is green.
+        currentLevel: 0
+        maxLevel: 2
+        sType: 0
+      yellowUpgrade:
+        sprite: Sprites/CabinetScene/Placeholder/yellowCabinet
+        price:
+          valueString: 7000
+        upgradeName: Yellow Upgrade
+        description: This upgrade is yellow.
+        currentLevel: 0
+        maxLevel: 10
+        sType: 0
+      redUpgrade2:
+        sprite: Sprites/CabinetScene/Placeholder/redCabinet
+        price:
+          valueString: 5
+        upgradeName: Red Upgrade 2
+        description: This upgrade is red, but a second time.
+        currentLevel: 0
+        maxLevel: 5
+        sType: 2
+      blueUpgrade2:
+        sprite: Sprites/CabinetScene/Placeholder/blueCabinet
+        price:
+          valueString: 30
+        upgradeName: Blue Upgrade 2
+        description: This upgrade is blue, but a second time.
+        currentLevel: 0
+        maxLevel: 3
+        sType: 1
+    debugStatus:
+      tickets:
+        valueString: 0
+      highScore:
+        valueString: 0
+      cumulativeScore:
+        valueString: 0
+      isActive: 1
+      doublePoints:
+        sprite: Sprites/Shop/Placeholder/doubleMult
+        price:
+          valueString: 1000
+        upgradeName: Double Points
+        description: Doubles the points received from playing this game.
+        currentLevel: 0
+        maxLevel: 5
+        sType: 1
+      redUpgrade:
+        sprite: Sprites/CabinetScene/Placeholder/redCabinet
+        price:
+          valueString: 99999999999
+        upgradeName: Red Upgrade
+        description: This upgrade is red.
+        currentLevel: 0
+        maxLevel: 3
+        sType: 0
+      blueUpgrade:
+        sprite: Sprites/CabinetScene/Placeholder/blueCabinet
+        price:
+          valueString: 100
+        upgradeName: Blue Upgrade
+        description: This upgrade is blue.
+        currentLevel: 0
+        maxLevel: 4
+        sType: 0
+      greenUpgrade:
+        sprite: Sprites/CabinetScene/Placeholder/greenCabinet
+        price:
+          valueString: 3000
+        upgradeName: Green Upgrade
+        description: This upgrade is green.
+        currentLevel: 0
+        maxLevel: 2
+        sType: 0
+      yellowUpgrade:
+        sprite: Sprites/CabinetScene/Placeholder/yellowCabinet
+        price:
+          valueString: 7000
+        upgradeName: Yellow Upgrade
+        description: This upgrade is yellow.
+        currentLevel: 0
+        maxLevel: 10
+        sType: 0
+      redUpgrade2:
+        sprite: Sprites/CabinetScene/Placeholder/redCabinet
+        price:
+          valueString: 5
+        upgradeName: Red Upgrade 2
+        description: This upgrade is red, but a second time.
+        currentLevel: 0
+        maxLevel: 5
+        sType: 2
+      blueUpgrade2:
+        sprite: Sprites/CabinetScene/Placeholder/blueCabinet
+        price:
+          valueString: 30
+        upgradeName: Blue Upgrade 2
+        description: This upgrade is blue, but a second time.
+        currentLevel: 0
+        maxLevel: 3
+        sType: 1
+  status:
+    tickets:
+      valueString: 0
+  popUpPanel: {fileID: 1846799347}
+  activeUpgrade:
+    sprite: 
+    price:
+      valueString: 0
+    upgradeName: 
+    description: 
+    currentLevel: 0
+    maxLevel: 1
+    sType: 1
+  activeUpgradeUI: {fileID: 0}
+  upgradeUIs:
+  - {fileID: 1937157578}
+  - {fileID: 1681834606}
+  - {fileID: 728701375}
+  - {fileID: 1916708703}
+  - {fileID: 468646839}
+  - {fileID: 1280974747}
+  image: {fileID: 1223815252}
+  nameText: {fileID: 2049444959}
+  descriptionText: {fileID: 2107835758}
+  priceText: {fileID: 1691029340}
+  buyButton: {fileID: 399410241}
+  scrollUpButton: {fileID: 1850686338}
+  scrollDownButton: {fileID: 307746761}
+  ticketText: {fileID: 1862006840}
 --- !u!1 &1220792343
 GameObject:
   m_ObjectHideFlags: 0
@@ -8802,7 +9022,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 862a4ee4ecb65644eb3175bed4ba0897, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  sc: {fileID: 1817694736}
+  sc: {fileID: 1164903770}
   image: {fileID: 1280974748}
   nameText: {fileID: 0}
   priceText: {fileID: 0}
@@ -9067,7 +9287,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1814120345}
+      - m_Target: {fileID: 1538540184}
         m_MethodName: scrollDown
         m_Mode: 1
         m_Arguments:
@@ -9127,7 +9347,7 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1538540183}
-  m_RootOrder: 6
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: -90}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -9165,7 +9385,7 @@ RectTransform:
   m_Children:
   - {fileID: 1013150336}
   m_Father: {fileID: 1164903769}
-  m_RootOrder: 3
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 1}
   m_AnchorMax: {x: 0.5, y: 1}
@@ -9405,7 +9625,7 @@ MonoBehaviour:
           m_StringArgument: TicketMenuScene
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 1817694736}
+      - m_Target: {fileID: 0}
         m_MethodName: OnApplicationQuit
         m_Mode: 1
         m_Arguments:
@@ -9416,9 +9636,9 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 429467}
-        m_MethodName: SetActive
-        m_Mode: 6
+      - m_Target: {fileID: 429469}
+        m_MethodName: Activate
+        m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -9622,7 +9842,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1945676741}
+      - m_Target: {fileID: 2104263565}
         m_MethodName: initializePopUp
         m_Mode: 1
         m_Arguments:
@@ -9747,6 +9967,59 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1425228056}
   m_CullTransparentMesh: 0
+--- !u!1 &1442309614
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1442309616}
+  - component: {fileID: 1442309615}
+  m_Layer: 0
+  m_Name: GameManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1442309615
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1442309614}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 25ceb5e55df0c1548a13b098ca099d31, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  allScreens:
+  - {fileID: 1009783792}
+  - {fileID: 989534335}
+  - {fileID: 1538540182}
+  - {fileID: 865551891}
+  - {fileID: 429467}
+  - {fileID: 2104263563}
+  - {fileID: 1164903768}
+  cabinetScreen: {fileID: 1009783792}
+  debugMenu: {fileID: 989534335}
+--- !u!4 &1442309616
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1442309614}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 3
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1448108597
 GameObject:
   m_ObjectHideFlags: 0
@@ -9972,19 +10245,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1814120345}
+      - m_Target: {fileID: 1538540184}
         m_MethodName: buy
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 1814120345}
-        m_MethodName: closePopUp
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -10061,7 +10323,7 @@ RectTransform:
   - {fileID: 1555828087}
   - {fileID: 1723445323}
   m_Father: {fileID: 1538540183}
-  m_RootOrder: 7
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -10199,7 +10461,7 @@ PrefabInstance:
         type: 3}
       propertyPath: sc
       value: 
-      objectReference: {fileID: 1814120345}
+      objectReference: {fileID: 1538540184}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: cb1b103ec33a7b44c8bf0ec2962bf778, type: 3}
 --- !u!114 &1484049411 stripped
@@ -10369,7 +10631,7 @@ RectTransform:
   - {fileID: 468646843}
   - {fileID: 1280974751}
   m_Father: {fileID: 1164903769}
-  m_RootOrder: 5
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -10539,8 +10801,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1538540183}
+  - component: {fileID: 1538540184}
   m_Layer: 5
-  m_Name: Shop
+  m_Name: TheDebuggerShop
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -10561,7 +10824,6 @@ RectTransform:
   - {fileID: 2070916679}
   - {fileID: 1553410057}
   - {fileID: 385602220}
-  - {fileID: 1814120347}
   - {fileID: 1703005009}
   - {fileID: 1294022522}
   - {fileID: 1475700646}
@@ -10573,6 +10835,185 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &1538540184
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1538540182}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 652e5e3723f566e49ac5ecfcea629b66, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  arcadeStatus:
+    prizeStatus:
+      tickets:
+        valueString: 0
+      doublePoints:
+        sprite: Sprites/Shop/Placeholder/doubleMult
+        price:
+          valueString: 1000
+        upgradeName: Double Points
+        description: Doubles the points received from playing this game.
+        currentLevel: 0
+        maxLevel: 1
+        sType: 1
+      redUpgrade:
+        sprite: Sprites/CabinetScene/Placeholder/redCabinet
+        price:
+          valueString: 99999999999
+        upgradeName: Red Upgrade
+        description: This upgrade is red.
+        currentLevel: 0
+        maxLevel: 3
+        sType: 0
+      blueUpgrade:
+        sprite: Sprites/CabinetScene/Placeholder/blueCabinet
+        price:
+          valueString: 100
+        upgradeName: Blue Upgrade
+        description: This upgrade is blue.
+        currentLevel: 0
+        maxLevel: 4
+        sType: 0
+      greenUpgrade:
+        sprite: Sprites/CabinetScene/Placeholder/greenCabinet
+        price:
+          valueString: 3000
+        upgradeName: Green Upgrade
+        description: This upgrade is green.
+        currentLevel: 0
+        maxLevel: 2
+        sType: 0
+      yellowUpgrade:
+        sprite: Sprites/CabinetScene/Placeholder/yellowCabinet
+        price:
+          valueString: 7000
+        upgradeName: Yellow Upgrade
+        description: This upgrade is yellow.
+        currentLevel: 0
+        maxLevel: 10
+        sType: 0
+      redUpgrade2:
+        sprite: Sprites/CabinetScene/Placeholder/redCabinet
+        price:
+          valueString: 5
+        upgradeName: Red Upgrade 2
+        description: This upgrade is red, but a second time.
+        currentLevel: 0
+        maxLevel: 5
+        sType: 2
+      blueUpgrade2:
+        sprite: Sprites/CabinetScene/Placeholder/blueCabinet
+        price:
+          valueString: 30
+        upgradeName: Blue Upgrade 2
+        description: This upgrade is blue, but a second time.
+        currentLevel: 0
+        maxLevel: 3
+        sType: 1
+    debugStatus:
+      tickets:
+        valueString: 0
+      highScore:
+        valueString: 0
+      cumulativeScore:
+        valueString: 0
+      isActive: 1
+      doublePoints:
+        sprite: Sprites/Shop/Placeholder/doubleMult
+        price:
+          valueString: 1000
+        upgradeName: Double Points
+        description: Doubles the points received from playing this game.
+        currentLevel: 0
+        maxLevel: 5
+        sType: 1
+      redUpgrade:
+        sprite: Sprites/CabinetScene/Placeholder/redCabinet
+        price:
+          valueString: 99999999999
+        upgradeName: Red Upgrade
+        description: This upgrade is red.
+        currentLevel: 0
+        maxLevel: 3
+        sType: 0
+      blueUpgrade:
+        sprite: Sprites/CabinetScene/Placeholder/blueCabinet
+        price:
+          valueString: 100
+        upgradeName: Blue Upgrade
+        description: This upgrade is blue.
+        currentLevel: 0
+        maxLevel: 4
+        sType: 0
+      greenUpgrade:
+        sprite: Sprites/CabinetScene/Placeholder/greenCabinet
+        price:
+          valueString: 3000
+        upgradeName: Green Upgrade
+        description: This upgrade is green.
+        currentLevel: 0
+        maxLevel: 2
+        sType: 0
+      yellowUpgrade:
+        sprite: Sprites/CabinetScene/Placeholder/yellowCabinet
+        price:
+          valueString: 7000
+        upgradeName: Yellow Upgrade
+        description: This upgrade is yellow.
+        currentLevel: 0
+        maxLevel: 10
+        sType: 0
+      redUpgrade2:
+        sprite: Sprites/CabinetScene/Placeholder/redCabinet
+        price:
+          valueString: 5
+        upgradeName: Red Upgrade 2
+        description: This upgrade is red, but a second time.
+        currentLevel: 0
+        maxLevel: 5
+        sType: 2
+      blueUpgrade2:
+        sprite: Sprites/CabinetScene/Placeholder/blueCabinet
+        price:
+          valueString: 30
+        upgradeName: blue Upgrade
+        description: This upgrade is blue, but a second time.
+        currentLevel: 0
+        maxLevel: 3
+        sType: 1
+  status:
+    tickets:
+      valueString: 0
+  popUpPanel: {fileID: 1475700645}
+  activeUpgrade:
+    sprite: 
+    price:
+      valueString: 0
+    upgradeName: 
+    description: 
+    currentLevel: 0
+    maxLevel: 1
+    sType: 1
+  activeUpgradeUI: {fileID: 0}
+  upgradeUIs:
+  - {fileID: 448714195}
+  - {fileID: 516985059}
+  - {fileID: 907117578}
+  - {fileID: 1001330728}
+  - {fileID: 905623246}
+  - {fileID: 1484049411}
+  image: {fileID: 73778443}
+  nameText: {fileID: 815149493}
+  descriptionText: {fileID: 572303723}
+  priceText: {fileID: 854093784}
+  buyButton: {fileID: 1456018892}
+  scrollUpButton: {fileID: 1703005006}
+  scrollDownButton: {fileID: 1294022519}
+  ticketText: {fileID: 265696761}
 --- !u!1 &1541097466
 GameObject:
   m_ObjectHideFlags: 0
@@ -10732,7 +11173,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1945676741}
+      - m_Target: {fileID: 2104263565}
         m_MethodName: incrementButton
         m_Mode: 2
         m_Arguments:
@@ -10862,7 +11303,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1945676741}
+      - m_Target: {fileID: 2104263565}
         m_MethodName: decrementButton
         m_Mode: 2
         m_Arguments:
@@ -11067,7 +11508,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1814120345}
+      - m_Target: {fileID: 1538540184}
         m_MethodName: closePopUp
         m_Mode: 1
         m_Arguments:
@@ -11275,7 +11716,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1945676741}
+      - m_Target: {fileID: 2104263565}
         m_MethodName: incrementButton
         m_Mode: 2
         m_Arguments:
@@ -11598,7 +12039,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1945676741}
+      - m_Target: {fileID: 2104263565}
         m_MethodName: selectButton
         m_Mode: 2
         m_Arguments:
@@ -11715,7 +12156,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 862a4ee4ecb65644eb3175bed4ba0897, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  sc: {fileID: 1817694736}
+  sc: {fileID: 1164903770}
   image: {fileID: 1681834607}
   nameText: {fileID: 0}
   priceText: {fileID: 0}
@@ -12132,7 +12573,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1814120345}
+      - m_Target: {fileID: 1538540184}
         m_MethodName: scrollUp
         m_Mode: 1
         m_Arguments:
@@ -12192,7 +12633,7 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1538540183}
-  m_RootOrder: 5
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 90}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -12944,7 +13385,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1945676741}
+      - m_Target: {fileID: 2104263565}
         m_MethodName: selectButton
         m_Mode: 2
         m_Arguments:
@@ -13078,454 +13519,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &1814120344
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1814120347}
-  - component: {fileID: 1814120346}
-  - component: {fileID: 1814120345}
-  m_Layer: 0
-  m_Name: DebugShopController
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &1814120345
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1814120344}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 652e5e3723f566e49ac5ecfcea629b66, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  arcadeStatus:
-    prizeStatus:
-      tickets:
-        valueString: 0
-      doublePoints:
-        sprite: Sprites/Shop/Placeholder/doubleMult
-        price:
-          valueString: 1000
-        upgradeName: Double Points
-        description: Doubles the points received from playing this game.
-        currentLevel: 0
-        maxLevel: 1
-        sType: 1
-      redUpgrade:
-        sprite: Sprites/CabinetScene/Placeholder/redCabinet
-        price:
-          valueString: 99999999999
-        upgradeName: Red Upgrade
-        description: This upgrade is red.
-        currentLevel: 0
-        maxLevel: 3
-        sType: 0
-      blueUpgrade:
-        sprite: Sprites/CabinetScene/Placeholder/blueCabinet
-        price:
-          valueString: 100
-        upgradeName: Blue Upgrade
-        description: This upgrade is blue.
-        currentLevel: 0
-        maxLevel: 4
-        sType: 0
-      greenUpgrade:
-        sprite: Sprites/CabinetScene/Placeholder/greenCabinet
-        price:
-          valueString: 3000
-        upgradeName: Green Upgrade
-        description: This upgrade is green.
-        currentLevel: 0
-        maxLevel: 2
-        sType: 0
-      yellowUpgrade:
-        sprite: Sprites/CabinetScene/Placeholder/yellowCabinet
-        price:
-          valueString: 7000
-        upgradeName: Yellow Upgrade
-        description: This upgrade is yellow.
-        currentLevel: 0
-        maxLevel: 10
-        sType: 0
-      redUpgrade2:
-        sprite: Sprites/CabinetScene/Placeholder/redCabinet
-        price:
-          valueString: 5
-        upgradeName: Red Upgrade 2
-        description: This upgrade is red, but a second time.
-        currentLevel: 0
-        maxLevel: 5
-        sType: 2
-      blueUpgrade2:
-        sprite: Sprites/CabinetScene/Placeholder/blueCabinet
-        price:
-          valueString: 30
-        upgradeName: Blue Upgrade 2
-        description: This upgrade is blue, but a second time.
-        currentLevel: 0
-        maxLevel: 3
-        sType: 1
-    debugStatus:
-      tickets:
-        valueString: 0
-      highScore:
-        valueString: 0
-      cumulativeScore:
-        valueString: 0
-      isActive: 1
-      doublePoints:
-        sprite: Sprites/Shop/Placeholder/doubleMult
-        price:
-          valueString: 1000
-        upgradeName: Double Points
-        description: Doubles the points received from playing this game.
-        currentLevel: 0
-        maxLevel: 5
-        sType: 1
-      redUpgrade:
-        sprite: Sprites/CabinetScene/Placeholder/redCabinet
-        price:
-          valueString: 99999999999
-        upgradeName: Red Upgrade
-        description: This upgrade is red.
-        currentLevel: 0
-        maxLevel: 3
-        sType: 0
-      blueUpgrade:
-        sprite: Sprites/CabinetScene/Placeholder/blueCabinet
-        price:
-          valueString: 100
-        upgradeName: Blue Upgrade
-        description: This upgrade is blue.
-        currentLevel: 0
-        maxLevel: 4
-        sType: 0
-      greenUpgrade:
-        sprite: Sprites/CabinetScene/Placeholder/greenCabinet
-        price:
-          valueString: 3000
-        upgradeName: Green Upgrade
-        description: This upgrade is green.
-        currentLevel: 0
-        maxLevel: 2
-        sType: 0
-      yellowUpgrade:
-        sprite: Sprites/CabinetScene/Placeholder/yellowCabinet
-        price:
-          valueString: 7000
-        upgradeName: Yellow Upgrade
-        description: This upgrade is yellow.
-        currentLevel: 0
-        maxLevel: 10
-        sType: 0
-      redUpgrade2:
-        sprite: Sprites/CabinetScene/Placeholder/redCabinet
-        price:
-          valueString: 5
-        upgradeName: Red Upgrade 2
-        description: This upgrade is red, but a second time.
-        currentLevel: 0
-        maxLevel: 5
-        sType: 2
-      blueUpgrade2:
-        sprite: Sprites/CabinetScene/Placeholder/blueCabinet
-        price:
-          valueString: 30
-        upgradeName: blue Upgrade
-        description: This upgrade is blue, but a second time.
-        currentLevel: 0
-        maxLevel: 3
-        sType: 1
-  status:
-    tickets:
-      valueString: 0
-  popUpPanel: {fileID: 1475700645}
-  activeUpgrade:
-    sprite: 
-    price:
-      valueString: 0
-    upgradeName: 
-    description: 
-    currentLevel: 0
-    maxLevel: 1
-    sType: 1
-  activeUpgradeUI: {fileID: 0}
-  upgradeUIs:
-  - {fileID: 448714195}
-  - {fileID: 516985059}
-  - {fileID: 907117578}
-  - {fileID: 1001330728}
-  - {fileID: 905623246}
-  - {fileID: 1484049411}
-  image: {fileID: 73778443}
-  nameText: {fileID: 815149493}
-  descriptionText: {fileID: 572303723}
-  priceText: {fileID: 854093784}
-  buyButton: {fileID: 1456018892}
-  scrollUpButton: {fileID: 1703005006}
-  scrollDownButton: {fileID: 1294022519}
-  ticketText: {fileID: 265696761}
---- !u!114 &1814120346
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1814120344}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c6c444c2e652b814bbfecdef2fa9323d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  targetScene: 
---- !u!4 &1814120347
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1814120344}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -960, y: -540.25977, z: 0}
-  m_LocalScale: {x: 2.077922, y: 2.077922, z: 2.077922}
-  m_Children: []
-  m_Father: {fileID: 1538540183}
-  m_RootOrder: 4
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &1817694734
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1817694735}
-  - component: {fileID: 1817694737}
-  - component: {fileID: 1817694736}
-  m_Layer: 0
-  m_Name: PrizeController
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &1817694735
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1817694734}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -960, y: -540.25977, z: 0}
-  m_LocalScale: {x: 2.077922, y: 2.077922, z: 2.077922}
-  m_Children: []
-  m_Father: {fileID: 1164903769}
-  m_RootOrder: 8
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1817694736
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1817694734}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2f533f1384231e74699e6b4236ecf4db, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  arcadeStatus:
-    prizeStatus:
-      tickets:
-        valueString: 0
-      doublePoints:
-        sprite: Sprites/Shop/Placeholder/doubleMult
-        price:
-          valueString: 1000
-        upgradeName: Double Points
-        description: Doubles the points received from playing this game.
-        currentLevel: 0
-        maxLevel: 1
-        sType: 1
-      redUpgrade:
-        sprite: Sprites/CabinetScene/Placeholder/redCabinet
-        price:
-          valueString: 99999999999
-        upgradeName: Red Upgrade
-        description: This upgrade is red.
-        currentLevel: 0
-        maxLevel: 3
-        sType: 0
-      blueUpgrade:
-        sprite: Sprites/CabinetScene/Placeholder/blueCabinet
-        price:
-          valueString: 100
-        upgradeName: Blue Upgrade
-        description: This upgrade is blue.
-        currentLevel: 0
-        maxLevel: 4
-        sType: 0
-      greenUpgrade:
-        sprite: Sprites/CabinetScene/Placeholder/greenCabinet
-        price:
-          valueString: 3000
-        upgradeName: Green Upgrade
-        description: This upgrade is green.
-        currentLevel: 0
-        maxLevel: 2
-        sType: 0
-      yellowUpgrade:
-        sprite: Sprites/CabinetScene/Placeholder/yellowCabinet
-        price:
-          valueString: 7000
-        upgradeName: Yellow Upgrade
-        description: This upgrade is yellow.
-        currentLevel: 0
-        maxLevel: 10
-        sType: 0
-      redUpgrade2:
-        sprite: Sprites/CabinetScene/Placeholder/redCabinet
-        price:
-          valueString: 5
-        upgradeName: Red Upgrade 2
-        description: This upgrade is red, but a second time.
-        currentLevel: 0
-        maxLevel: 5
-        sType: 2
-      blueUpgrade2:
-        sprite: Sprites/CabinetScene/Placeholder/blueCabinet
-        price:
-          valueString: 30
-        upgradeName: Blue Upgrade 2
-        description: This upgrade is blue, but a second time.
-        currentLevel: 0
-        maxLevel: 3
-        sType: 1
-    debugStatus:
-      tickets:
-        valueString: 0
-      highScore:
-        valueString: 0
-      cumulativeScore:
-        valueString: 0
-      isActive: 1
-      doublePoints:
-        sprite: Sprites/Shop/Placeholder/doubleMult
-        price:
-          valueString: 1000
-        upgradeName: Double Points
-        description: Doubles the points received from playing this game.
-        currentLevel: 0
-        maxLevel: 5
-        sType: 1
-      redUpgrade:
-        sprite: Sprites/CabinetScene/Placeholder/redCabinet
-        price:
-          valueString: 99999999999
-        upgradeName: Red Upgrade
-        description: This upgrade is red.
-        currentLevel: 0
-        maxLevel: 3
-        sType: 0
-      blueUpgrade:
-        sprite: Sprites/CabinetScene/Placeholder/blueCabinet
-        price:
-          valueString: 100
-        upgradeName: Blue Upgrade
-        description: This upgrade is blue.
-        currentLevel: 0
-        maxLevel: 4
-        sType: 0
-      greenUpgrade:
-        sprite: Sprites/CabinetScene/Placeholder/greenCabinet
-        price:
-          valueString: 3000
-        upgradeName: Green Upgrade
-        description: This upgrade is green.
-        currentLevel: 0
-        maxLevel: 2
-        sType: 0
-      yellowUpgrade:
-        sprite: Sprites/CabinetScene/Placeholder/yellowCabinet
-        price:
-          valueString: 7000
-        upgradeName: Yellow Upgrade
-        description: This upgrade is yellow.
-        currentLevel: 0
-        maxLevel: 10
-        sType: 0
-      redUpgrade2:
-        sprite: Sprites/CabinetScene/Placeholder/redCabinet
-        price:
-          valueString: 5
-        upgradeName: Red Upgrade 2
-        description: This upgrade is red, but a second time.
-        currentLevel: 0
-        maxLevel: 5
-        sType: 2
-      blueUpgrade2:
-        sprite: Sprites/CabinetScene/Placeholder/blueCabinet
-        price:
-          valueString: 30
-        upgradeName: Blue Upgrade 2
-        description: This upgrade is blue, but a second time.
-        currentLevel: 0
-        maxLevel: 3
-        sType: 1
-  status:
-    tickets:
-      valueString: 0
-  popUpPanel: {fileID: 1846799347}
-  activeUpgrade:
-    sprite: 
-    price:
-      valueString: 0
-    upgradeName: 
-    description: 
-    currentLevel: 0
-    maxLevel: 1
-    sType: 1
-  activeUpgradeUI: {fileID: 0}
-  upgradeUIs:
-  - {fileID: 1937157578}
-  - {fileID: 1681834606}
-  - {fileID: 728701375}
-  - {fileID: 1916708703}
-  - {fileID: 468646839}
-  - {fileID: 1280974747}
-  image: {fileID: 1223815252}
-  nameText: {fileID: 2049444959}
-  descriptionText: {fileID: 2107835758}
-  priceText: {fileID: 1691029340}
-  buyButton: {fileID: 399410241}
-  scrollUpButton: {fileID: 1850686338}
-  scrollDownButton: {fileID: 307746761}
-  ticketText: {fileID: 1862006840}
---- !u!114 &1817694737
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1817694734}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c6c444c2e652b814bbfecdef2fa9323d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  targetScene: 
 --- !u!1 &1821670122
 GameObject:
   m_ObjectHideFlags: 0
@@ -13608,7 +13601,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1945676741}
+      - m_Target: {fileID: 2104263565}
         m_MethodName: decrementButton
         m_Mode: 2
         m_Arguments:
@@ -13748,9 +13741,9 @@ MonoBehaviour:
           m_StringArgument: DebugShopScene
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 1538540182}
-        m_MethodName: SetActive
-        m_Mode: 6
+      - m_Target: {fileID: 1538540184}
+        m_MethodName: Activate
+        m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -14125,7 +14118,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1817694736}
+      - m_Target: {fileID: 1164903770}
         m_MethodName: scrollUp
         m_Mode: 1
         m_Arguments:
@@ -14185,7 +14178,7 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1164903769}
-  m_RootOrder: 6
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 180}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -14360,6 +14353,7 @@ GameObject:
   - component: {fileID: 1881522670}
   - component: {fileID: 1881522669}
   - component: {fileID: 1881522668}
+  - component: {fileID: 1881522671}
   m_Layer: 5
   m_Name: Play
   m_TagString: Untagged
@@ -14429,19 +14423,19 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
-        m_MethodName: changeScene
-        m_Mode: 5
+      - m_Target: {fileID: 1442309615}
+        m_MethodName: updateActiveScreen
+        m_Mode: 3
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
+          m_IntArgument: 1
           m_FloatArgument: 0
-          m_StringArgument: DebugGameScene
+          m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 0}
-        m_MethodName: writeDebugFile
+      - m_Target: {fileID: 1881522671}
+        m_MethodName: changeScene
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -14488,6 +14482,19 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1881522666}
   m_CullTransparentMesh: 0
+--- !u!114 &1881522671
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1881522666}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c6c444c2e652b814bbfecdef2fa9323d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  targetScene: DebugGameScene
 --- !u!1 &1892982604
 GameObject:
   m_ObjectHideFlags: 0
@@ -14716,7 +14723,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 862a4ee4ecb65644eb3175bed4ba0897, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  sc: {fileID: 1817694736}
+  sc: {fileID: 1164903770}
   image: {fileID: 1916708704}
   nameText: {fileID: 0}
   priceText: {fileID: 0}
@@ -14933,9 +14940,9 @@ MonoBehaviour:
           m_StringArgument: PrizeCounterScene
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 1164903768}
-        m_MethodName: SetActive
-        m_Mode: 6
+      - m_Target: {fileID: 1164903770}
+        m_MethodName: Activate
+        m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -15143,7 +15150,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 862a4ee4ecb65644eb3175bed4ba0897, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  sc: {fileID: 1817694736}
+  sc: {fileID: 1164903770}
   image: {fileID: 1937157579}
   nameText: {fileID: 0}
   priceText: {fileID: 0}
@@ -15268,81 +15275,6 @@ RectTransform:
   m_AnchoredPosition: {x: -500, y: 200}
   m_SizeDelta: {x: 250, y: 250}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!1 &1945676740
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1945676743}
-  - component: {fileID: 1945676741}
-  - component: {fileID: 1945676742}
-  m_Layer: 0
-  m_Name: TicketConversionController
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &1945676741
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1945676740}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 90a3841db3b658440b86465b354c9420, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  prizeTicketText: {fileID: 1263845367}
-  debugTicketText: {fileID: 1825419110}
-  defaultColor: {r: 1, g: 1, b: 1, a: 1}
-  selectedColor: {r: 0.9811321, g: 0.67105734, b: 0.85362476, a: 1}
-  incrementOneValue: {fileID: 308583410}
-  incrementTenValue: {fileID: 1677606034}
-  incrementHundredValue: {fileID: 403642655}
-  incrementFivePercent: {fileID: 365198573}
-  incrementTwentyFivePercent: {fileID: 2070467978}
-  incrementMax: {fileID: 1783959482}
-  ticketConvertUIs:
-  - {fileID: 869877780}
-  - {fileID: 152076932}
-  - {fileID: 1324483555}
-  convertPopUp: {fileID: 601811152}
-  conversionText: {fileID: 1743622749}
-  scrollUpButton: {fileID: 1121135640}
-  scrollDownButton: {fileID: 1078188477}
---- !u!114 &1945676742
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1945676740}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c6c444c2e652b814bbfecdef2fa9323d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  targetScene: 
---- !u!4 &1945676743
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1945676740}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -960, y: -540.25977, z: 0}
-  m_LocalScale: {x: 2.077922, y: 2.077922, z: 2.077922}
-  m_Children: []
-  m_Father: {fileID: 2104263564}
-  m_RootOrder: 11
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1946041409
 GameObject:
   m_ObjectHideFlags: 0
@@ -15462,7 +15394,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1945676741}
+      - m_Target: {fileID: 2104263565}
         m_MethodName: convert
         m_Mode: 1
         m_Arguments:
@@ -15938,7 +15870,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1945676741}
+      - m_Target: {fileID: 2104263565}
         m_MethodName: selectButton
         m_Mode: 2
         m_Arguments:
@@ -16033,6 +15965,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2104263564}
+  - component: {fileID: 2104263565}
   m_Layer: 5
   m_Name: TicketConverter
   m_TagString: Untagged
@@ -16062,7 +15995,6 @@ RectTransform:
   - {fileID: 1121135639}
   - {fileID: 1078188480}
   - {fileID: 601811153}
-  - {fileID: 1945676743}
   m_Father: {fileID: 1260954615}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -16071,6 +16003,36 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &2104263565
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2104263563}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 90a3841db3b658440b86465b354c9420, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  prizeTicketText: {fileID: 1263845367}
+  debugTicketText: {fileID: 1825419110}
+  defaultColor: {r: 1, g: 1, b: 1, a: 1}
+  selectedColor: {r: 0.9811321, g: 0.67105734, b: 0.85362476, a: 1}
+  incrementOneValue: {fileID: 308583410}
+  incrementTenValue: {fileID: 1677606034}
+  incrementHundredValue: {fileID: 403642655}
+  incrementFivePercent: {fileID: 365198573}
+  incrementTwentyFivePercent: {fileID: 2070467978}
+  incrementMax: {fileID: 1783959482}
+  ticketConvertUIs:
+  - {fileID: 869877780}
+  - {fileID: 152076932}
+  - {fileID: 1324483555}
+  convertPopUp: {fileID: 601811152}
+  conversionText: {fileID: 1743622749}
+  scrollUpButton: {fileID: 1121135640}
+  scrollDownButton: {fileID: 1078188477}
 --- !u!1 &2107835755
 GameObject:
   m_ObjectHideFlags: 0

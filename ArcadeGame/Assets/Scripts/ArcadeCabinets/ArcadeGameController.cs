@@ -40,10 +40,4 @@ public abstract class ArcadeGameController : MonoBehaviour
         this.score = score;
         scoreText.text = "Current Points: " + ArcadeManager.bigIntToString(score);
     }
-    
-    /** handles user closing the game on this screen. */
-    public void OnApplicationQuit()
-    {
-        ArcadeManager.writeArcadeStatus();
-    }
 }

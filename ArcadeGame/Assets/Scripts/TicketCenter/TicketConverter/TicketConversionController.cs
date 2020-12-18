@@ -46,7 +46,7 @@ public class TicketConversionController : MonoBehaviour
     private int currentSetIndex;
 
     // Start is called before the first frame update
-    void Start()
+    void Awake()
     {
         arcadeStatus = ArcadeManager.readArcadeStatus();
 
@@ -249,11 +249,6 @@ public class TicketConversionController : MonoBehaviour
         convertPopUp.SetActive(false);
     }
 
-    public void OnApplicationQuit()
-    {
-        ArcadeManager.writeArcadeStatus();
-    }
-
     public void scrollUp()
     {
         if (currentSetIndex == 0)
@@ -300,5 +295,11 @@ public class TicketConversionController : MonoBehaviour
         }
         // always make sure scroll up is available
         scrollUpButton.gameObject.SetActive(true);
+    }
+
+    public void Activate()
+    {
+        gameObject.SetActive(true);
+        Awake();
     }
 }

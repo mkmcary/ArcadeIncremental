@@ -8,6 +8,13 @@ public class ArcadeManager : MonoBehaviour
 {
     private static ArcadeStatus arcadeStatus;
 
+    public enum menuScreen {
+        debugGameMenu = 1, 
+        cabinetScreen = 0
+    }
+
+    public static menuScreen activeScreen;
+
     public static ArcadeStatus readArcadeStatus()
     {
         if(arcadeStatus == null)

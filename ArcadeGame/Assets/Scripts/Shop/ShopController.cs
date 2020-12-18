@@ -35,7 +35,7 @@ public abstract class ShopController : MonoBehaviour
     public Text ticketText;
 
     // Start is called before the first frame update
-    void Start()
+    void Awake()
     {
         popUpPanel.SetActive(false);
         initialize();
@@ -217,9 +217,10 @@ public abstract class ShopController : MonoBehaviour
         scrollUpButton.gameObject.SetActive(true);
     }
 
-    public void OnApplicationQuit()
+    public void Activate()
     {
-        ArcadeManager.writeArcadeStatus();
+        gameObject.SetActive(true);
+        Awake();
     }
 
 }

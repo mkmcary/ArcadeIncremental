@@ -8,9 +8,14 @@ public class TicketMenuController : MonoBehaviour
 {
     public Text prizeText;
 
-    // Start is called before the first frame update
-    void Start()
+    public void Awake()
     {
+        Activate();
+    }
+
+    public void Activate()
+    {
+        gameObject.SetActive(true);
         BigInteger prizeTickets = ArcadeManager.readArcadeStatus().prizeStatus.tickets.value;
         prizeText.text = ArcadeManager.bigIntToString(prizeTickets);
     }

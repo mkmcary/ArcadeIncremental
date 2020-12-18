@@ -25,8 +25,6 @@ public class DebugGameController : ArcadeGameController
         base.Start();
 
         ticketsText.text = "Current Tickets: " + ArcadeManager.bigIntToString(arcadeStatus.debugStatus.tickets.value);
-
-        //StartCoroutine(initialize());
     }
 
     /**
@@ -47,7 +45,7 @@ public class DebugGameController : ArcadeGameController
 
         //temporary functionality
         base.endGame();
-        SceneManager.LoadScene("DebugTitleScene");
+        SceneManager.LoadScene("MenuScene");
     }
 
     // Game specific methods
