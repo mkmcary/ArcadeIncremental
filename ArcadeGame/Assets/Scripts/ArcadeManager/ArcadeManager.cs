@@ -8,6 +8,9 @@ public class ArcadeManager : MonoBehaviour
 {
     private static ArcadeStatus arcadeStatus;
 
+    // Location of the game information .json
+    private static string arcadeStatusPath = Application.dataPath + "/SaveData/ArcadeStatus.json";
+
     public enum menuScreen {
         debugGameMenu = 1, 
         cabinetScreen = 0
@@ -19,25 +22,32 @@ public class ArcadeManager : MonoBehaviour
     {
         if(arcadeStatus == null)
         {
-            string appPath = Application.dataPath + "/SaveData/ArcadeStatus.json";
-            if (!System.IO.File.Exists(appPath))
+            if (!validFile())
             {
-                arcadeStatus = new ArcadeStatus();
                 writeArcadeStatus();
             }
             else
             {
-                string readIn = System.IO.File.ReadAllText(appPath); 
+                string readIn = System.IO.File.ReadAllText(arcadeStatusPath);
+                readIn = readIn.Substring(readIn.IndexOf("\n") + 2);
                 arcadeStatus = JsonUtility.FromJson<ArcadeStatus>(readIn);
             }
         }
         return arcadeStatus;
     }
 
+    private static bool validFile()
+    {
+        return System.IO.File.Exists(arcadeStatusPath) && System.IO.File.ReadAllText(arcadeStatusPath).Contains("ArcadeStatus.json\n\n");
+    }
+
     public static void writeArcadeStatus()
     {
-        string appPath = Application.dataPath + "/SaveData/ArcadeStatus.json";
-        System.IO.File.WriteAllText(appPath, JsonUtility.ToJson(arcadeStatus, true));
+        if(arcadeStatus == null)
+        {
+            arcadeStatus = new ArcadeStatus();
+        }
+        System.IO.File.WriteAllText(arcadeStatusPath, "ArcadeStatus.json\n\n" + JsonUtility.ToJson(arcadeStatus, true));
     }
 
     /**

@@ -80,7 +80,7 @@ public class TicketConversionController : MonoBehaviour
         ticketConverts = new List<TicketConvert>();
         if (arcadeStatus.debugStatus.isActive)
         {
-            ticketConverts.Add(new TicketConvert("Sprites/Tickets/DebugTicket", "The Debugger", 6, 1, arcadeStatus.debugStatus));
+            ticketConverts.Add(new TicketConvert("Sprites/Currency/Tickets/DebugTicket", "The Debugger", 6, 1, arcadeStatus.debugStatus));
         }
         // copy the previous if statement for future games
         // ...
