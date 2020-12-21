@@ -1,0 +1,22 @@
+PawnStatus.json
+{
+    "money": {
+        "valueString": "0"
+    },
+    "printers": [
+        {
+            "printer": 0,
+            "interval": 10.0,
+            "batchSize": {
+                "valueString": "1"
+            },
+            "capacity": {
+                "valueString": "100"
+            },
+            "luck": 0.0,
+            "isActive": false,
+            "ticket": 0,
+            "isAttended": false
+        }
+    ]
+}

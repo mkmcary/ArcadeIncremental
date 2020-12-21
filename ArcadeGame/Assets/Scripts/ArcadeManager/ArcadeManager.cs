@@ -29,7 +29,7 @@ public class ArcadeManager : MonoBehaviour
             else
             {
                 string readIn = System.IO.File.ReadAllText(arcadeStatusPath);
-                readIn = readIn.Substring(readIn.IndexOf("\n") + 2);
+                readIn = readIn.Substring(readIn.IndexOf("\n") + 1);
                 arcadeStatus = JsonUtility.FromJson<ArcadeStatus>(readIn);
             }
         }
@@ -38,7 +38,7 @@ public class ArcadeManager : MonoBehaviour
 
     private static bool validFile()
     {
-        return System.IO.File.Exists(arcadeStatusPath) && System.IO.File.ReadAllText(arcadeStatusPath).Contains("ArcadeStatus.json\n\n");
+        return System.IO.File.Exists(arcadeStatusPath) && System.IO.File.ReadAllText(arcadeStatusPath).Contains("ArcadeStatus.json\n");
     }
 
     public static void writeArcadeStatus()
@@ -47,7 +47,8 @@ public class ArcadeManager : MonoBehaviour
         {
             arcadeStatus = new ArcadeStatus();
         }
-        System.IO.File.WriteAllText(arcadeStatusPath, "ArcadeStatus.json\n\n" + JsonUtility.ToJson(arcadeStatus, true));
+        System.IO.Directory.CreateDirectory(Application.dataPath + "/SaveData");
+        System.IO.File.WriteAllText(arcadeStatusPath, "ArcadeStatus.json\n" + JsonUtility.ToJson(arcadeStatus, true));
     }
 
     /**
