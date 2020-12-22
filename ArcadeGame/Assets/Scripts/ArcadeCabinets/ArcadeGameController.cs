@@ -38,6 +38,6 @@ public abstract class ArcadeGameController : MonoBehaviour
     public void updateScore(BigInteger score)
     {
         this.score = score;
-        scoreText.text = "Current Points: " + ArcadeManager.bigIntToString(score);
+        scoreText.text = "Current Points: " + GameOperations.bigIntToString(score);
     }
 }

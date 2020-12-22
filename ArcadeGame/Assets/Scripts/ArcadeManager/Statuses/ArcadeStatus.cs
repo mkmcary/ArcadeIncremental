@@ -28,4 +28,17 @@ public class ArcadeStatus
     {
         return statuses;
     }
+
+    public void resetButPreserve()
+    {
+        statuses = new List<LayerZeroStatus>();
+
+        // PRIZE STATUS MUST BE FIRST IN THE LIST
+        prizeStatus = (PrizeStatus)prizeStatus.resetButPreserve();
+        statuses.Add(prizeStatus);
+
+        // OTHER STATUSES
+        debugStatus = (DebugCabinetStatus)debugStatus.resetButPreserve();
+        statuses.Add(debugStatus);
+    }
 }

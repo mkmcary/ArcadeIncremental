@@ -24,7 +24,7 @@ public class DebugGameController : ArcadeGameController
     {
         base.Start();
 
-        ticketsText.text = "Current Tickets: " + ArcadeManager.bigIntToString(arcadeStatus.debugStatus.tickets.value);
+        ticketsText.text = "Current Tickets: " + GameOperations.bigIntToString(arcadeStatus.debugStatus.Tickets.value);
     }
 
     /**
@@ -40,8 +40,12 @@ public class DebugGameController : ArcadeGameController
 
         if (pointsToAdd > 0)
         {
-            arcadeStatus.debugStatus.tickets.value += pointsToAdd;
+            arcadeStatus.debugStatus.Tickets.value += pointsToAdd;
         }
+
+        // cumulative and high score
+        arcadeStatus.debugStatus.highScore.value = BigInteger.Max(arcadeStatus.debugStatus.highScore.value, score);
+        arcadeStatus.debugStatus.cumulativeScore.value += score;
 
         //temporary functionality
         base.endGame();

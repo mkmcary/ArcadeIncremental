@@ -5,10 +5,23 @@ using System.Numerics;
 using UnityEngine;
 
 [Serializable]
-public class LayerZeroStatus
+public abstract class LayerZeroStatus
 {
-    public BigIntWrapper tickets;
+    [SerializeField]
+    private BigIntWrapper tickets;
     private List<ShopUpgrade> upgrades;
+
+    public BigIntWrapper Tickets
+    {
+        get { return tickets; }
+        set { tickets = value; }
+    }
+
+    public List<ShopUpgrade> Upgrades
+    {
+        get { return upgrades; }
+        set { upgrades = value; }
+    }
 
     public LayerZeroStatus()
     {
@@ -16,8 +29,5 @@ public class LayerZeroStatus
         upgrades = new List<ShopUpgrade>();
     }
 
-    public List<ShopUpgrade> getUpgrades()
-    {
-        return upgrades;
-    }
+    public abstract LayerZeroStatus resetButPreserve();
 }

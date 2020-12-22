@@ -68,8 +68,8 @@ public class TicketConversionController : MonoBehaviour
 
     private void setWalletText()
     {
-        prizeTicketText.text = ArcadeManager.bigIntToString(arcadeStatus.prizeStatus.tickets.value);
-        debugTicketText.text = ArcadeManager.bigIntToString(arcadeStatus.debugStatus.tickets.value);
+        prizeTicketText.text = GameOperations.bigIntToString(arcadeStatus.prizeStatus.Tickets.value);
+        debugTicketText.text = GameOperations.bigIntToString(arcadeStatus.debugStatus.Tickets.value);
     }
 
     /**
@@ -193,15 +193,15 @@ public class TicketConversionController : MonoBehaviour
         }
         else if (currentIncrementSelection == incrementFivePercent)
         {
-            incrementValue = (scalar * (ui.activeConvert.status.tickets.value) / 20);
+            incrementValue = (scalar * (ui.activeConvert.status.Tickets.value) / 20);
         }
         else if (currentIncrementSelection == incrementTwentyFivePercent)
         {
-            incrementValue = (scalar * (ui.activeConvert.status.tickets.value) / 4);
+            incrementValue = (scalar * (ui.activeConvert.status.Tickets.value) / 4);
         }
         else if (currentIncrementSelection == incrementMax)
         {
-            incrementValue = scalar * ui.activeConvert.status.tickets.value;
+            incrementValue = scalar * ui.activeConvert.status.Tickets.value;
         }
 
         // actually increment the value
@@ -224,7 +224,7 @@ public class TicketConversionController : MonoBehaviour
             prizeTicketsToReceive += numberOfConversions * ticketConverts[i].outputAmount;
         }
 
-        conversionText.text = "You Will Receive:\n" + ArcadeManager.bigIntToString(prizeTicketsToReceive) + "\nPrize Tickets";
+        conversionText.text = "You Will Receive:\n" + GameOperations.bigIntToString(prizeTicketsToReceive) + "\nPrize Tickets";
     }
 
     public void convert()
@@ -232,13 +232,13 @@ public class TicketConversionController : MonoBehaviour
         for(int i = 0; i < ticketConverts.Count; i++)
         {
             BigInteger amountToTurnIn = ticketConverts[i].getCount();
-            ticketConverts[i].status.tickets.value -= (amountToTurnIn - (amountToTurnIn % ticketConverts[i].inputAmount));
+            ticketConverts[i].status.Tickets.value -= (amountToTurnIn - (amountToTurnIn % ticketConverts[i].inputAmount));
 
             ticketConverts[i].resetCount();
         }
         initializeConvertUI(currentSetIndex);
 
-        arcadeStatus.prizeStatus.tickets.value += prizeTicketsToReceive;
+        arcadeStatus.prizeStatus.Tickets.value += prizeTicketsToReceive;
         prizeTicketsToReceive = 0;
         setWalletText();
         closePopUp();

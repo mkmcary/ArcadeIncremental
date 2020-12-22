@@ -60,10 +60,10 @@ public abstract class ShopController : MonoBehaviour
      */
     private void initializePopUp()
     {
-        image.sprite = ArcadeManager.loadSprite(activeUpgrade.sprite);
+        image.sprite = GameOperations.loadSpriteFromPath(activeUpgrade.sprite);
         nameText.text = activeUpgrade.upgradeName;
         descriptionText.text = activeUpgrade.description;
-        priceText.text = ArcadeManager.bigIntToString(activeUpgrade.price.value) + " Tickets";
+        priceText.text = GameOperations.bigIntToString(activeUpgrade.price.value) + " Tickets";
 
         if (activeUpgrade.currentLevel == activeUpgrade.maxLevel)
         {
@@ -91,7 +91,7 @@ public abstract class ShopController : MonoBehaviour
      */
     public void updateTicketText()
     {
-        ticketText.text = ArcadeManager.bigIntToString(status.tickets.value);
+        ticketText.text = GameOperations.bigIntToString(status.Tickets.value);
     }
 
     /**
@@ -99,7 +99,7 @@ public abstract class ShopController : MonoBehaviour
      */
     public void buy()
     {
-        if (activeUpgrade.price.value > status.tickets.value)
+        if (activeUpgrade.price.value > status.Tickets.value)
         {
             // ###########################################################
             // add error message for trying to buy with not enough tickets
@@ -109,7 +109,7 @@ public abstract class ShopController : MonoBehaviour
 
         if (activeUpgrade.currentLevel < activeUpgrade.maxLevel)
         {
-            status.tickets.value -= activeUpgrade.price.value;
+            status.Tickets.value -= activeUpgrade.price.value;
             activeUpgrade.LevelUp();
         }
         else
@@ -125,7 +125,7 @@ public abstract class ShopController : MonoBehaviour
 
     public void loadUpgrades(int min)
     {
-        List<ShopUpgrade> upgrades = status.getUpgrades();
+        List<ShopUpgrade> upgrades = status.Upgrades;
 
         int max = min + upgradeUIs.Count - 1;
 
@@ -193,7 +193,7 @@ public abstract class ShopController : MonoBehaviour
     public void scrollDown()
     {
 
-        List<ShopUpgrade> upgrades = status.getUpgrades();
+        List<ShopUpgrade> upgrades = status.Upgrades;
         if (currentSetIndex + upgradeUIs.Count >= upgrades.Count)
         {
             Debug.LogError("Should not be scrolling down.");

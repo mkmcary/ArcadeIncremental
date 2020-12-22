@@ -31,6 +31,7 @@ public class MenuManager : MonoBehaviour
     private void OnApplicationQuit()
     {
         ArcadeManager.writeArcadeStatus();
+        PawnManager.writePawnStatus();
     }
 
     public void updateActiveScreen(int screen)

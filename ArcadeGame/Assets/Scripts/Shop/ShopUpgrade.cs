@@ -15,9 +15,9 @@ public class ShopUpgrade
     public int currentLevel;
     public int maxLevel;
     public BigInteger priceScale;
-    public scaleType sType;
+    public ScaleType sType;
 
-    public enum scaleType
+    public enum ScaleType
     {
         ADD, MULT, EXP
     }
@@ -31,7 +31,7 @@ public class ShopUpgrade
         currentLevel = 0;
         maxLevel = 1;
         priceScale = 1;
-        sType = scaleType.MULT;
+        sType = ScaleType.MULT;
     }
 
     public void LevelUp()
@@ -49,13 +49,13 @@ public class ShopUpgrade
 
     private void scalePrice()
     {
-        if(sType == scaleType.MULT)
+        if(sType == ScaleType.MULT)
         {
             price.value = (price.value * priceScale);
-        } else if(sType == scaleType.ADD)
+        } else if(sType == ScaleType.ADD)
         {
             price.value += priceScale;
-        } else if(sType == scaleType.EXP)
+        } else if(sType == ScaleType.EXP)
         {
             // assuming that we will not have to deal with overflow on exponential scaling
             BigInteger temp = BigInteger.Pow(price.value, (int)priceScale);

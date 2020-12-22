@@ -19,7 +19,7 @@ public class DebugCabinetStatus : CabinetStatus
 
     public DebugCabinetStatus() : base()
     {
-        List<ShopUpgrade> upgrades = getUpgrades();
+        Upgrades = new List<ShopUpgrade>();
 
         isActive = true;
 
@@ -31,10 +31,10 @@ public class DebugCabinetStatus : CabinetStatus
         doublePoints.currentLevel = 0;
         doublePoints.maxLevel = 5;
         doublePoints.priceScale = 2;
-        doublePoints.sType = ShopUpgrade.scaleType.MULT;
+        doublePoints.sType = ShopUpgrade.ScaleType.MULT;
         doublePoints.sprite = "Sprites/Shop/Placeholder/doubleMult";
 
-        upgrades.Add(doublePoints);
+        Upgrades.Add(doublePoints);
 
         // red upgrade
         redUpgrade = new ShopUpgrade();
@@ -44,10 +44,10 @@ public class DebugCabinetStatus : CabinetStatus
         redUpgrade.currentLevel = 0;
         redUpgrade.maxLevel = 3;
         redUpgrade.priceScale = 100;
-        redUpgrade.sType = ShopUpgrade.scaleType.ADD;
+        redUpgrade.sType = ShopUpgrade.ScaleType.ADD;
         redUpgrade.sprite = "Sprites/CabinetScene/Placeholder/redCabinet";
 
-        upgrades.Add(redUpgrade);
+        Upgrades.Add(redUpgrade);
 
         // blue upgrade
         blueUpgrade = new ShopUpgrade();
@@ -57,10 +57,10 @@ public class DebugCabinetStatus : CabinetStatus
         blueUpgrade.currentLevel = 0;
         blueUpgrade.maxLevel = 4;
         blueUpgrade.priceScale = 100;
-        blueUpgrade.sType = ShopUpgrade.scaleType.ADD;
+        blueUpgrade.sType = ShopUpgrade.ScaleType.ADD;
         blueUpgrade.sprite = "Sprites/CabinetScene/Placeholder/blueCabinet";
 
-        upgrades.Add(blueUpgrade);
+        Upgrades.Add(blueUpgrade);
         
         // green upgrade
         greenUpgrade = new ShopUpgrade();
@@ -70,10 +70,10 @@ public class DebugCabinetStatus : CabinetStatus
         greenUpgrade.currentLevel = 0;
         greenUpgrade.maxLevel = 2;
         greenUpgrade.priceScale = 100;
-        greenUpgrade.sType = ShopUpgrade.scaleType.ADD;
+        greenUpgrade.sType = ShopUpgrade.ScaleType.ADD;
         greenUpgrade.sprite = "Sprites/CabinetScene/Placeholder/greenCabinet";
 
-        upgrades.Add(greenUpgrade);
+        Upgrades.Add(greenUpgrade);
 
         // yellow upgrade
         yellowUpgrade = new ShopUpgrade();
@@ -83,10 +83,10 @@ public class DebugCabinetStatus : CabinetStatus
         yellowUpgrade.currentLevel = 0;
         yellowUpgrade.maxLevel = 10;
         yellowUpgrade.priceScale = 100;
-        yellowUpgrade.sType = ShopUpgrade.scaleType.ADD;
+        yellowUpgrade.sType = ShopUpgrade.ScaleType.ADD;
         yellowUpgrade.sprite = "Sprites/CabinetScene/Placeholder/yellowCabinet";
 
-        upgrades.Add(yellowUpgrade);
+        Upgrades.Add(yellowUpgrade);
 
         // red upgrade 2
         redUpgrade2 = new ShopUpgrade();
@@ -96,10 +96,10 @@ public class DebugCabinetStatus : CabinetStatus
         redUpgrade2.currentLevel = 0;
         redUpgrade2.maxLevel = 5;
         redUpgrade2.priceScale = 2;
-        redUpgrade2.sType = ShopUpgrade.scaleType.EXP;
+        redUpgrade2.sType = ShopUpgrade.ScaleType.EXP;
         redUpgrade2.sprite = "Sprites/CabinetScene/Placeholder/redCabinet";
 
-        upgrades.Add(redUpgrade2);
+        Upgrades.Add(redUpgrade2);
 
         // blue upgrade 2
         blueUpgrade2 = new ShopUpgrade();
@@ -109,9 +109,17 @@ public class DebugCabinetStatus : CabinetStatus
         blueUpgrade2.currentLevel = 0;
         blueUpgrade2.maxLevel = 3;
         blueUpgrade2.priceScale = 100;
-        blueUpgrade2.sType = ShopUpgrade.scaleType.MULT;
+        blueUpgrade2.sType = ShopUpgrade.ScaleType.MULT;
         blueUpgrade2.sprite = "Sprites/CabinetScene/Placeholder/blueCabinet";
 
-        upgrades.Add(blueUpgrade2);
+        Upgrades.Add(blueUpgrade2);
+    }
+
+    public override LayerZeroStatus resetButPreserve()
+    {
+        DebugCabinetStatus newStat = new DebugCabinetStatus();
+        newStat.cumulativeScore = this.cumulativeScore;
+        newStat.highScore = this.highScore;
+        return newStat;
     }
 }
