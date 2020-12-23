@@ -1,12 +1,14 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using System.Numerics;
+using UnityEditor;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class MoneyMenuController : MonoBehaviour
 {
     private PawnStatus pawnStatus;
+    private ArcadeStatus arcadeStatus;
 
     // Money in the wallet menu
     public Text moneyText;
@@ -18,16 +20,27 @@ public class MoneyMenuController : MonoBehaviour
 
     [Header("Breakdown")]
     public GameObject breakDown;
+    public Text gameTicketsText;
+    public Text prizeTicketsText;
+    public Text prizesText;
+    public GameObject lineItemPrefab;
+    public GameObject totalPrefab;
+    public GameObject contentTab;
 
     // data on the trade
-    private BigInteger moneyToReceive;
     public static BigInteger PRIZE_TICKET_RATIO = 100;
     public static BigInteger GAME_TICKET_RATIO = 1000;
-    private ArcadeStatus arcadeStatus;
+    private BigInteger moneyToReceive;
+    private BigInteger moneyFromGameTickets;
+    private BigInteger moneyFromPrizeTickets;
+    private BigInteger moneyFromPrizes;
+    private List<PrizeUpgrade> prizesOwned;
+
 
     public void Activate()
     {
         gameObject.SetActive(true);
+        closePopUp();
         pawnStatus = PawnManager.readPawnStatus();
         arcadeStatus = ArcadeManager.readArcadeStatus();
         moneyText.text = GameOperations.bigIntToString(pawnStatus.Money.value);
@@ -49,24 +62,31 @@ public class MoneyMenuController : MonoBehaviour
         // tickets -> money
         List<LayerZeroStatus> gameStatuses = arcadeStatus.getLayerZeroStatuses();
         // generic tickets are worth more
-        moneyToReceive += (gameStatuses[0].Tickets.value / PRIZE_TICKET_RATIO);
+        moneyFromPrizeTickets = (gameStatuses[0].Tickets.value / PRIZE_TICKET_RATIO);
 
         // game tickets are all the same value
+        moneyFromGameTickets = 0;
         for (int i = 1; i < gameStatuses.Count; i++)
         {
-            moneyToReceive += (gameStatuses[i].Tickets.value / GAME_TICKET_RATIO);
+            moneyFromGameTickets += (gameStatuses[i].Tickets.value / GAME_TICKET_RATIO);
         }
 
         // prizes -> money
-        List<ShopUpgrade> prizes = gameStatuses[0].Upgrades;
+        moneyFromPrizes = 0;
+        List <ShopUpgrade> prizes = gameStatuses[0].Upgrades;
+        prizesOwned = new List<PrizeUpgrade>();
         for(int i = 0; i < prizes.Count; i++)
         {
             PrizeUpgrade prize = (PrizeUpgrade)prizes[i];
             if (prize.currentLevel != 0)
             {
-                moneyToReceive += prize.MoneyValue.value;
+                moneyFromPrizes += prize.MoneyValue.value;
+                prizesOwned.Add(prize);
             }
         }
+
+        // ending count
+        moneyToReceive = moneyFromGameTickets + moneyFromPrizeTickets + moneyFromPrizes;
     }
 
     public void closePopUp()
@@ -81,10 +101,59 @@ public class MoneyMenuController : MonoBehaviour
 
         // do whatever is needed to display breakdown data
         // show game tickets
+        gameTicketsText.text = "$" + GameOperations.bigIntToString(moneyFromGameTickets);
 
         // show prize tickets
+        prizeTicketsText.text = "$" + GameOperations.bigIntToString(moneyFromPrizeTickets);
 
         // show prizes
+        prizesText.text = "$" + GameOperations.bigIntToString(moneyFromPrizes);
+
+        // show individual prizes
+        int xPos = 50;
+        int yPos = -220;
+        int yOffset = -70;
+
+        for(int i = 0; i < prizesOwned.Count; i++)
+        {
+            // make item
+            GameObject lineItem =  Instantiate(lineItemPrefab);
+            lineItem.transform.SetParent(contentTab.transform);
+
+            // set position
+            RectTransform rt = lineItem.GetComponent<RectTransform>();
+            rt.anchorMin = new UnityEngine.Vector2(0, 0);
+            rt.anchorMax = new UnityEngine.Vector2(1, 1);
+            rt.anchoredPosition = new UnityEngine.Vector3(xPos, yPos, 0);
+
+            // increment position
+            yPos += yOffset;
+
+            // set text
+            lineItem.GetComponent<Text>().text = prizesOwned[i].upgradeName;
+            lineItem.transform.GetChild(0).GetComponent<Text>().text = "$" + GameOperations.bigIntToString(prizesOwned[i].MoneyValue.value);
+        }
+
+        // make total
+        GameObject total = Instantiate(totalPrefab);
+        total.transform.SetParent(contentTab.transform);
+
+        // set position
+        RectTransform totalTransform = total.GetComponent<RectTransform>();
+        totalTransform.anchorMin = new UnityEngine.Vector2(0, 0);
+        totalTransform.anchorMax = new UnityEngine.Vector2(1, 1);
+        total.GetComponent<RectTransform>().anchoredPosition = new UnityEngine.Vector3(10, yPos, 0);
+
+        // increment position
+        yPos += yOffset;
+
+        // set text
+        total.transform.GetChild(0).GetComponent<Text>().text = "$" + GameOperations.bigIntToString(moneyToReceive);
+
+        // adjust 
+        RectTransform contentTransform = contentTab.GetComponent<RectTransform>();
+        int newHeight = Mathf.Max(-yPos, 680);
+        contentTransform.sizeDelta = new UnityEngine.Vector2(850, newHeight);
     }
 
     public void closeBreakdown()
@@ -101,9 +170,6 @@ public class MoneyMenuController : MonoBehaviour
         // reset layer 0
         arcadeStatus.resetButPreserve();
         ArcadeManager.writeArcadeStatus();
-
-        Debug.Log("According to moneymenu: " + arcadeStatus.prizeStatus.Upgrades[0].currentLevel);
-        Debug.Log("According to arcademanager: " + ArcadeManager.readArcadeStatus().prizeStatus.Upgrades[0].currentLevel);
 
         // re-init
         Activate();
