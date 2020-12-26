@@ -11,6 +11,8 @@ public class PawnStatus
     [SerializeField]
     private List<TicketPrinter> printers;
 
+    private string[] initialPrinterPrices = { "100", "3000", "99999999999" };
+
     public BigIntWrapper Money
     {
         get { return money; }
@@ -26,9 +28,14 @@ public class PawnStatus
     public PawnStatus()
     {
         money = new BigIntWrapper();
-        printers = new List<TicketPrinter>
+        printers = new List<TicketPrinter>();
+
+        TicketPrinter printer = null;
+        for (int i = 0; i < initialPrinterPrices.Length; i++)
         {
-            TicketPrinter.createReceiptPrinter()
-        };
+            printer = TicketPrinter.createReceiptPrinter();
+            printer.PurchasePrice = new BigIntWrapper(initialPrinterPrices[i]);
+            printers.Add(printer);
+        }
     }
 }

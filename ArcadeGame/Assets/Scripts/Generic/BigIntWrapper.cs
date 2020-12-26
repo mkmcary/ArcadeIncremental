@@ -23,6 +23,12 @@ public class BigIntWrapper : ISerializationCallbackReceiver
         valueString = num.ToString();
     }
 
+    public BigIntWrapper(string num)
+    {
+        value = BigInteger.Parse(num);
+        valueString = num;
+    }
+
     public void OnBeforeSerialize()
     {
         valueString = value.ToString();

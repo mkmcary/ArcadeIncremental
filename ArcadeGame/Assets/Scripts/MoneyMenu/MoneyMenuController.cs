@@ -118,7 +118,7 @@ public class MoneyMenuController : MonoBehaviour
         {
             // make item
             GameObject lineItem =  Instantiate(lineItemPrefab);
-            lineItem.transform.SetParent(contentTab.transform);
+            lineItem.transform.SetParent(contentTab.transform, false);
 
             // set position
             RectTransform rt = lineItem.GetComponent<RectTransform>();
@@ -136,7 +136,7 @@ public class MoneyMenuController : MonoBehaviour
 
         // make total
         GameObject total = Instantiate(totalPrefab);
-        total.transform.SetParent(contentTab.transform);
+        total.transform.SetParent(contentTab.transform, false);
 
         // set position
         RectTransform totalTransform = total.GetComponent<RectTransform>();

@@ -24,6 +24,8 @@ public class TicketPrinter
     [SerializeField]
     private bool isActive;
     [SerializeField]
+    private BigIntWrapper purchasePrice;
+    [SerializeField]
     private TicketType ticket;
 
     //NYI - for later development date: TBD
@@ -64,6 +66,12 @@ public class TicketPrinter
     {
         get { return isActive; }
         set { isActive = value; }
+    }
+
+    public BigIntWrapper PurchasePrice
+    {
+        get { return purchasePrice; }
+        set { purchasePrice = value; }
     }
 
     public TicketType Ticket

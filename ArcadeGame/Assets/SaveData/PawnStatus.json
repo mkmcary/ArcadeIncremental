@@ -1,7 +1,7 @@
 PawnStatus.json
 {
     "money": {
-        "valueString": "101"
+        "valueString": "0"
     },
     "printers": [
         {
@@ -14,7 +14,44 @@ PawnStatus.json
                 "valueString": "100"
             },
             "luck": 0.0,
+            "isActive": true,
+            "purchasePrice": {
+                "valueString": "100"
+            },
+            "ticket": 0,
+            "isAttended": false
+        },
+        {
+            "printer": 0,
+            "interval": 10.0,
+            "batchSize": {
+                "valueString": "1"
+            },
+            "capacity": {
+                "valueString": "100"
+            },
+            "luck": 0.0,
             "isActive": false,
+            "purchasePrice": {
+                "valueString": "3000"
+            },
+            "ticket": 0,
+            "isAttended": false
+        },
+        {
+            "printer": 0,
+            "interval": 10.0,
+            "batchSize": {
+                "valueString": "1"
+            },
+            "capacity": {
+                "valueString": "100"
+            },
+            "luck": 0.0,
+            "isActive": false,
+            "purchasePrice": {
+                "valueString": "99999999999"
+            },
             "ticket": 0,
             "isAttended": false
         }
