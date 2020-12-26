@@ -108,10 +108,10 @@ ArcadeStatus.json
             "valueString": "0"
         },
         "highScore": {
-            "valueString": "0"
+            "valueString": "6000"
         },
         "cumulativeScore": {
-            "valueString": "0"
+            "valueString": "7000"
         },
         "isActive": true,
         "doublePoints": {

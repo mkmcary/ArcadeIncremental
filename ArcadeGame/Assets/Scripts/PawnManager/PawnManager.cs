@@ -8,6 +8,7 @@ public class PawnManager : MonoBehaviour
 
     // Location of the game information .json
     private static string pawnStatusPath = Application.dataPath + "/SaveData/PawnStatus.json";
+    private static string encryptedPawnStatusPath = Application.dataPath + "/SaveData/EncryptedPawnStatus.json";
 
     public static PawnStatus readPawnStatus()
     {
@@ -19,7 +20,8 @@ public class PawnManager : MonoBehaviour
             }
             else
             {
-                string readIn = System.IO.File.ReadAllText(pawnStatusPath);
+                string readIn = System.IO.File.ReadAllText(encryptedPawnStatusPath);
+                readIn = GameOperations.EncryptDecrypt(readIn);
                 readIn = readIn.Substring(readIn.IndexOf("\n") + 1);
                 pawnStatus = JsonUtility.FromJson<PawnStatus>(readIn);
             }
@@ -29,7 +31,8 @@ public class PawnManager : MonoBehaviour
 
     private static bool validFile()
     {
-        return System.IO.File.Exists(pawnStatusPath) && System.IO.File.ReadAllText(pawnStatusPath).Contains("PawnStatus.json\n");
+        return System.IO.File.Exists(encryptedPawnStatusPath) &&
+            System.IO.File.ReadAllText(encryptedPawnStatusPath).Contains(GameOperations.EncryptDecrypt("PawnStatus.json\n"));
     }
 
     public static void writePawnStatus()
@@ -39,6 +42,9 @@ public class PawnManager : MonoBehaviour
             pawnStatus = new PawnStatus();
         }
         System.IO.Directory.CreateDirectory(Application.dataPath + "/SaveData");
-        System.IO.File.WriteAllText(pawnStatusPath, "PawnStatus.json\n" + JsonUtility.ToJson(pawnStatus, true));
+        string unencrypted = "PawnStatus.json\n" + JsonUtility.ToJson(pawnStatus, true);
+        string encrypted = GameOperations.EncryptDecrypt(unencrypted);
+        System.IO.File.WriteAllText(pawnStatusPath, unencrypted);
+        System.IO.File.WriteAllText(encryptedPawnStatusPath, encrypted);
     }
 }

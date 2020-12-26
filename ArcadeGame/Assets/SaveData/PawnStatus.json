@@ -1,7 +1,7 @@
 PawnStatus.json
 {
     "money": {
-        "valueString": "0"
+        "valueString": "101"
     },
     "printers": [
         {

@@ -10,6 +10,7 @@ public class ArcadeManager : MonoBehaviour
 
     // Location of the game information .json
     private static string arcadeStatusPath = Application.dataPath + "/SaveData/ArcadeStatus.json";
+    private static string encryptedArcadeStatusPath = Application.dataPath + "/SaveData/EncryptedArcadeStatus.json";
 
     public enum menuScreen {
         debugGameMenu = 1, 
@@ -28,7 +29,8 @@ public class ArcadeManager : MonoBehaviour
             }
             else
             {
-                string readIn = System.IO.File.ReadAllText(arcadeStatusPath);
+                string readIn = System.IO.File.ReadAllText(encryptedArcadeStatusPath);
+                readIn = GameOperations.EncryptDecrypt(readIn);
                 readIn = readIn.Substring(readIn.IndexOf("\n") + 1);
                 arcadeStatus = JsonUtility.FromJson<ArcadeStatus>(readIn);
             }
@@ -38,7 +40,8 @@ public class ArcadeManager : MonoBehaviour
 
     private static bool validFile()
     {
-        return System.IO.File.Exists(arcadeStatusPath) && System.IO.File.ReadAllText(arcadeStatusPath).Contains("ArcadeStatus.json\n");
+        return System.IO.File.Exists(encryptedArcadeStatusPath) &&
+            System.IO.File.ReadAllText(encryptedArcadeStatusPath).Contains(GameOperations.EncryptDecrypt("ArcadeStatus.json\n"));
     }
 
     public static void writeArcadeStatus()
@@ -48,6 +51,9 @@ public class ArcadeManager : MonoBehaviour
             arcadeStatus = new ArcadeStatus();
         }
         System.IO.Directory.CreateDirectory(Application.dataPath + "/SaveData");
-        System.IO.File.WriteAllText(arcadeStatusPath, "ArcadeStatus.json\n" + JsonUtility.ToJson(arcadeStatus, true));
+        string unencrypted = "ArcadeStatus.json\n" + JsonUtility.ToJson(arcadeStatus, true);
+        string encrypted = GameOperations.EncryptDecrypt(unencrypted);
+        System.IO.File.WriteAllText(arcadeStatusPath, unencrypted);
+        System.IO.File.WriteAllText(encryptedArcadeStatusPath, encrypted);
     }
 }
