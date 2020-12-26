@@ -5,8 +5,11 @@ using UnityEngine.UI;
 
 public class TicketPrinterUI : MonoBehaviour
 {
-    public Color tintColor;
+    [Header("Controllers")]
+    public PrinterBuyer printerBuyer;
 
+    [Header("UI Elements")]
+    public Color tintColor;
     public Image image;
     public Text trayText;
 
@@ -21,7 +24,7 @@ public class TicketPrinterUI : MonoBehaviour
     public void Populate()
     {
         image.sprite = getPrinterSprite();
-        trayText.text = "XXXXX/XXXXX";
+        trayText.text = "0/" + GameOperations.bigIntToString(activePrinter.Capacity.value);
         if (!activePrinter.IsActive)
         {
             image.color = tintColor;
@@ -31,6 +34,18 @@ public class TicketPrinterUI : MonoBehaviour
         {
             image.color = Color.white;
             trayText.gameObject.SetActive(true);
+        }
+    }
+
+    public void onPrinterClick()
+    {
+        if(activePrinter.IsActive)
+        {
+            // go to the upgrader
+        } else
+        {
+            // go to the buyer
+            printerBuyer.initializePopUp(this);
         }
     }
 

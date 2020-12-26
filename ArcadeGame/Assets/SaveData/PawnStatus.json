@@ -1,7 +1,7 @@
 PawnStatus.json
 {
     "money": {
-        "valueString": "0"
+        "valueString": "3830579"
     },
     "printers": [
         {
@@ -31,7 +31,7 @@ PawnStatus.json
                 "valueString": "100"
             },
             "luck": 0.0,
-            "isActive": false,
+            "isActive": true,
             "purchasePrice": {
                 "valueString": "3000"
             },

@@ -5833,8 +5833,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 756625345}
-        m_MethodName: initializePopUp
+      - m_Target: {fileID: 506100185}
+        m_MethodName: onPrinterClick
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -5893,6 +5893,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 26b18f1995917014f8430881369bc8cd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  printerBuyer: {fileID: 756625345}
   tintColor: {r: 0, g: 0, b: 0, a: 0.57254905}
   image: {fileID: 506100183}
   trayText: {fileID: 1093235187}
@@ -6710,8 +6711,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 756625345}
-        m_MethodName: initializePopUp
+      - m_Target: {fileID: 571098681}
+        m_MethodName: onPrinterClick
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -6770,6 +6771,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 26b18f1995917014f8430881369bc8cd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  printerBuyer: {fileID: 756625345}
   tintColor: {r: 0, g: 0, b: 0, a: 0.57254905}
   image: {fileID: 571098679}
   trayText: {fileID: 522305705}
@@ -8197,8 +8199,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ef5eef6263cde53438c149ce0baf38ae, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  printRoomController: {fileID: 756625346}
   popUp: {fileID: 1688714913}
   purchaseText: {fileID: 1065635523}
+  buyButton: {fileID: 1288398350}
   ticketPrinterUIs:
   - {fileID: 571098681}
   - {fileID: 2010129291}
@@ -22127,8 +22131,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 756625345}
-        m_MethodName: initializePopUp
+      - m_Target: {fileID: 2010129291}
+        m_MethodName: onPrinterClick
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -22187,6 +22191,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 26b18f1995917014f8430881369bc8cd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  printerBuyer: {fileID: 756625345}
   tintColor: {r: 0, g: 0, b: 0, a: 0.57254905}
   image: {fileID: 2010129289}
   trayText: {fileID: 1203868991}
