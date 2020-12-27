@@ -10,7 +10,7 @@ public class TicketPrinter
     [SerializeField]
     private PrinterType printer;
     [SerializeField]
-    private float interval;
+    private float batchTime;
     [SerializeField]
     private BigIntWrapper batchSize;
 
@@ -18,7 +18,19 @@ public class TicketPrinter
     [SerializeField]
     private BigIntWrapper capacity;
     [SerializeField]
-    private float luck;
+    private BigIntWrapper capacityIncrement;
+    [SerializeField]
+    private int capacityCurrentLevel;
+    [SerializeField]
+    private int capacityMaxLevel;
+    [SerializeField]
+    private int luck;
+    [SerializeField]
+    private int luckIncrement;
+    [SerializeField]
+    private int luckCurrentLevel;
+    [SerializeField]
+    private int luckMaxLevel;
 
     // Determines if the printer is unlocked and which ticket it prints
     [SerializeField]
@@ -32,10 +44,10 @@ public class TicketPrinter
     [SerializeField]
     private bool isAttended;
 
-    public float Interval
+    public float BatchTime
     {
-        get { return interval; }
-        set { interval = value; }
+        get { return batchTime; }
+        set { batchTime = value; }
     }
 
     public BigIntWrapper BatchSize
@@ -50,10 +62,46 @@ public class TicketPrinter
         set { capacity = value; }
     }
 
-    public float Luck
+    public BigIntWrapper CapacityIncrement
+    {
+        get { return capacityIncrement; }
+        set { capacityIncrement = value; }
+    }
+
+    public int CapacityCurrentLevel
+    {
+        get { return capacityCurrentLevel; }
+        set { capacityCurrentLevel = value; }
+    }
+
+    public int CapacityMaxLevel
+    {
+        get { return capacityMaxLevel; }
+        set { capacityMaxLevel = value; }
+    }
+
+    public int Luck
     {
         get { return luck; }
         set { luck = value; }
+    }
+
+    public int LuckIncrement
+    {
+        get { return luckIncrement; }
+        set { luckIncrement = value; }
+    }
+
+    public int LuckCurrentLevel
+    {
+        get { return luckCurrentLevel; }
+        set { luckCurrentLevel = value; }
+    }
+
+    public int LuckMaxLevel
+    {
+        get { return luckMaxLevel; }
+        set { luckMaxLevel = value; }
     }
 
     public bool IsAttended
@@ -109,10 +157,12 @@ public class TicketPrinter
 
     private TicketPrinter()
     {
-        interval = 10;
+        batchTime = 30;
         batchSize = new BigIntWrapper(1);
         capacity = new BigIntWrapper(100);
+        capacityCurrentLevel = 0;
         luck = 0;
+        luckCurrentLevel = 0;
         isAttended = false;
         isActive = false;
         ticket = TicketType.None;
@@ -123,6 +173,36 @@ public class TicketPrinter
     {
         TicketPrinter printer = new TicketPrinter();
 
+        printer.capacityIncrement = new BigIntWrapper(10);
+        printer.capacityMaxLevel = 5;
+        printer.luckIncrement = 1;
+        printer.luckMaxLevel = 5;
+
         return printer;
+    }
+
+    /**
+     * Upgrades the capacity of this printer.
+     * @return true if the printer has reached max level,
+     *         and upgrading should be disabled.
+     */
+    public bool upgradeCapacity()
+    {
+        
+        this.capacity.value += this.capacityIncrement.value;
+        this.capacityCurrentLevel++;
+        return this.capacityCurrentLevel == this.capacityMaxLevel;
+    }
+
+    /**
+     * Upgrades the luck of this printer.
+     * @return true if the printer has reached max level,
+     *         and upgrading should be disabled.
+     */
+    public bool upgradeLuck()
+    {
+        this.luck += this.luckIncrement;
+        this.luckCurrentLevel++;
+        return this.luckCurrentLevel == this.luckMaxLevel;
     }
 }

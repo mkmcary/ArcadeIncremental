@@ -7,6 +7,7 @@ public class TicketPrinterUI : MonoBehaviour
 {
     [Header("Controllers")]
     public PrinterBuyer printerBuyer;
+    public PrinterModifier printerModifier;
 
     [Header("UI Elements")]
     public Color tintColor;
@@ -42,6 +43,7 @@ public class TicketPrinterUI : MonoBehaviour
         if(activePrinter.IsActive)
         {
             // go to the upgrader
+            printerModifier.initializePopUp(activePrinter);
         } else
         {
             // go to the buyer

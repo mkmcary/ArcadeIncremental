@@ -1,19 +1,27 @@
 PawnStatus.json
 {
     "money": {
-        "valueString": "3830579"
+        "valueString": "16566"
     },
     "printers": [
         {
             "printer": 0,
-            "interval": 10.0,
+            "batchTime": 30.0,
             "batchSize": {
                 "valueString": "1"
             },
             "capacity": {
                 "valueString": "100"
             },
-            "luck": 0.0,
+            "capacityIncrement": {
+                "valueString": "10"
+            },
+            "capacityCurrentLevel": 0,
+            "capacityMaxLevel": 5,
+            "luck": 0,
+            "luckIncrement": 1,
+            "luckCurrentLevel": 0,
+            "luckMaxLevel": 5,
             "isActive": true,
             "purchasePrice": {
                 "valueString": "100"
@@ -23,15 +31,23 @@ PawnStatus.json
         },
         {
             "printer": 0,
-            "interval": 10.0,
+            "batchTime": 30.0,
             "batchSize": {
                 "valueString": "1"
             },
             "capacity": {
                 "valueString": "100"
             },
-            "luck": 0.0,
-            "isActive": true,
+            "capacityIncrement": {
+                "valueString": "10"
+            },
+            "capacityCurrentLevel": 0,
+            "capacityMaxLevel": 5,
+            "luck": 0,
+            "luckIncrement": 1,
+            "luckCurrentLevel": 0,
+            "luckMaxLevel": 5,
+            "isActive": false,
             "purchasePrice": {
                 "valueString": "3000"
             },
@@ -40,14 +56,22 @@ PawnStatus.json
         },
         {
             "printer": 0,
-            "interval": 10.0,
+            "batchTime": 30.0,
             "batchSize": {
                 "valueString": "1"
             },
             "capacity": {
                 "valueString": "100"
             },
-            "luck": 0.0,
+            "capacityIncrement": {
+                "valueString": "10"
+            },
+            "capacityCurrentLevel": 0,
+            "capacityMaxLevel": 5,
+            "luck": 0,
+            "luckIncrement": 1,
+            "luckCurrentLevel": 0,
+            "luckMaxLevel": 5,
             "isActive": false,
             "purchasePrice": {
                 "valueString": "99999999999"
