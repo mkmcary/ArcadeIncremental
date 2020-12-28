@@ -33,6 +33,7 @@ public class SliderHelper : MonoBehaviour
 
         double value = BigInteger.Log10(number);
         value = value / 10f;
+        value += 0.1f;
 
         if(value < 1f)
         {

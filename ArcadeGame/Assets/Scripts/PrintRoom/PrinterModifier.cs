@@ -29,9 +29,9 @@ public class PrinterModifier : MonoBehaviour
 
     private void initializeSliders()
     {
-        batchSizeSlider.LogarithmicPopulate(printer.BatchSize.value);
+        batchSizeSlider.LogarithmicPopulate(printer.BatchSize);
         batchTimeSlider.timePopulate(printer.BatchTime);
-        capacitySlider.Populate(printer.Capacity.value, printer.CapacityCurrentLevel, printer.CapacityMaxLevel);
+        capacitySlider.Populate(printer.Capacity, printer.CapacityCurrentLevel, printer.CapacityMaxLevel);
         luckSlider.Populate(printer.Luck, printer.LuckCurrentLevel, printer.LuckMaxLevel);
     }
 

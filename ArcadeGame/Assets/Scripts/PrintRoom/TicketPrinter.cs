@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Numerics;
 using UnityEngine;
 
 [Serializable]
@@ -39,6 +40,10 @@ public class TicketPrinter
     private BigIntWrapper purchasePrice;
     [SerializeField]
     private TicketType ticket;
+    [SerializeField]
+    private BigIntWrapper ticketsPrinted;
+    [SerializeField]
+    private float printTimer;
 
     //NYI - for later development date: TBD
     [SerializeField]
@@ -50,22 +55,22 @@ public class TicketPrinter
         set { batchTime = value; }
     }
 
-    public BigIntWrapper BatchSize
+    public BigInteger BatchSize
     {
-        get { return batchSize; }
-        set { batchSize = value; }
+        get { return batchSize.value; }
+        set { batchSize.value = value; }
     }
 
-    public BigIntWrapper Capacity
+    public BigInteger Capacity
     {
-        get { return capacity; }
-        set { capacity = value; }
+        get { return capacity.value; }
+        set { capacity.value = value; }
     }
 
-    public BigIntWrapper CapacityIncrement
+    public BigInteger CapacityIncrement
     {
-        get { return capacityIncrement; }
-        set { capacityIncrement = value; }
+        get { return capacityIncrement.value; }
+        set { capacityIncrement.value = value; }
     }
 
     public int CapacityCurrentLevel
@@ -116,10 +121,10 @@ public class TicketPrinter
         set { isActive = value; }
     }
 
-    public BigIntWrapper PurchasePrice
+    public BigInteger PurchasePrice
     {
-        get { return purchasePrice; }
-        set { purchasePrice = value; }
+        get { return purchasePrice.value; }
+        set { purchasePrice.value = value; }
     }
 
     public TicketType Ticket
@@ -134,12 +139,24 @@ public class TicketPrinter
         set { printer = value; }
     }
 
+    public BigInteger TicketsPrinted
+    {
+        get { return ticketsPrinted.value; }
+        set { ticketsPrinted.value = value; }
+    }
+
+    public float PrintTimer
+    {
+        get { return printTimer; }
+        set { printTimer = value; }
+    }
+
     [Serializable]
     public enum TicketType
     {
         None,
         DebugTicket,
-        GenericTicket
+        PrizeTicket
     }
 
     [Serializable]
@@ -155,31 +172,7 @@ public class TicketPrinter
         Space
     }
 
-    private TicketPrinter()
-    {
-        batchTime = 30;
-        batchSize = new BigIntWrapper(1);
-        capacity = new BigIntWrapper(100);
-        capacityCurrentLevel = 0;
-        luck = 0;
-        luckCurrentLevel = 0;
-        isAttended = false;
-        isActive = false;
-        ticket = TicketType.None;
-        printer = PrinterType.Receipt;
-    }
-
-    public static TicketPrinter createReceiptPrinter()
-    {
-        TicketPrinter printer = new TicketPrinter();
-
-        printer.capacityIncrement = new BigIntWrapper(10);
-        printer.capacityMaxLevel = 5;
-        printer.luckIncrement = 1;
-        printer.luckMaxLevel = 5;
-
-        return printer;
-    }
+    
 
     /**
      * Upgrades the capacity of this printer.
@@ -204,5 +197,74 @@ public class TicketPrinter
         this.luck += this.luckIncrement;
         this.luckCurrentLevel++;
         return this.luckCurrentLevel == this.luckMaxLevel;
+    }
+
+    public bool updateTimer(float timeSinceLast)
+    {
+        if(TicketsPrinted == Capacity)
+        {
+            return false;
+        }
+        PrintTimer += timeSinceLast;
+        if(PrintTimer >= batchTime)
+        {
+            // The timer has reached batchTime. Now we print.
+            TicketsPrinted += BatchSize;
+            PrintTimer = 0.0f;
+            if(TicketsPrinted > Capacity)
+            {
+                TicketsPrinted = Capacity;
+            }
+            return true;
+        }
+        return false;
+    }
+
+    public TicketReturn collectTickets()
+    {
+        TicketReturn ticketReturn = new TicketReturn(TicketsPrinted, Ticket);
+        TicketsPrinted = 0;
+        return ticketReturn;
+    }
+
+    public class TicketReturn
+    {
+        public BigInteger Number { get; set; }
+        public TicketType Type { get; set; }
+
+        public TicketReturn(BigInteger number, TicketType type)
+        {
+            Number = number;
+            Type = type;
+        }
+    }
+    
+    private TicketPrinter()
+    {
+        batchTime = 10;
+        batchSize = new BigIntWrapper(1);
+        capacity = new BigIntWrapper(100);
+        capacityCurrentLevel = 0;
+        luck = 0;
+        luckCurrentLevel = 0;
+        isAttended = false;
+        isActive = false;
+        ticket = TicketType.PrizeTicket;
+        printer = PrinterType.Receipt;
+        purchasePrice = new BigIntWrapper();
+        ticketsPrinted = new BigIntWrapper();
+        capacityIncrement = new BigIntWrapper();
+    }
+
+    public static TicketPrinter createReceiptPrinter()
+    {
+        TicketPrinter printer = new TicketPrinter();
+
+        printer.capacityIncrement = new BigIntWrapper(10);
+        printer.capacityMaxLevel = 5;
+        printer.luckIncrement = 1;
+        printer.luckMaxLevel = 5;
+
+        return printer;
     }
 }

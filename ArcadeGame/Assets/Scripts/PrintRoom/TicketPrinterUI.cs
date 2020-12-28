@@ -25,7 +25,7 @@ public class TicketPrinterUI : MonoBehaviour
     public void Populate()
     {
         image.sprite = getPrinterSprite();
-        trayText.text = "0/" + GameOperations.bigIntToString(activePrinter.Capacity.value);
+        trayText.text = GameOperations.bigIntToString(activePrinter.TicketsPrinted) + "/" + GameOperations.bigIntToString(activePrinter.Capacity);
         if (!activePrinter.IsActive)
         {
             image.color = tintColor;

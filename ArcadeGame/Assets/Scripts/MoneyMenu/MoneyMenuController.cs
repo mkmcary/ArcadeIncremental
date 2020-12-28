@@ -43,7 +43,7 @@ public class MoneyMenuController : MonoBehaviour
         closePopUp();
         pawnStatus = PawnManager.readPawnStatus();
         arcadeStatus = ArcadeManager.readArcadeStatus();
-        moneyText.text = GameOperations.bigIntToString(pawnStatus.Money.value);
+        moneyText.text = GameOperations.bigIntToString(pawnStatus.Money);
     }
 
     public void initializePopUp()
@@ -164,7 +164,7 @@ public class MoneyMenuController : MonoBehaviour
     public void acceptTrade()
     {
         // get money
-        pawnStatus.Money.value += moneyToReceive;
+        pawnStatus.Money += moneyToReceive;
         moneyToReceive = 0;
 
         // reset layer 0

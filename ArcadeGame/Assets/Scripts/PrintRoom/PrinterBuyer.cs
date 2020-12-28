@@ -15,22 +15,11 @@ public class PrinterBuyer : MonoBehaviour
     public Text purchaseText;
     public Button buyButton;
 
-    [Header("Ticket Printer UIs")]
-    public List<TicketPrinterUI> ticketPrinterUIs;
-
     private TicketPrinterUI activePrinterUI;
 
     private void Start()
     {
         pawnStatus = PawnManager.readPawnStatus();
-
-        // temp (until scroll functionality added)
-        ticketPrinterUIs[0].ActivePrinter = pawnStatus.Printers[0];
-        ticketPrinterUIs[0].Populate();
-        ticketPrinterUIs[1].ActivePrinter = pawnStatus.Printers[1];
-        ticketPrinterUIs[1].Populate();
-        ticketPrinterUIs[2].ActivePrinter = pawnStatus.Printers[2];
-        ticketPrinterUIs[2].Populate();
     }
 
     public void declinePurchase()
@@ -42,7 +31,7 @@ public class PrinterBuyer : MonoBehaviour
     public void acceptPurchase()
     {
         // take away the money
-        pawnStatus.Money.value -= activePrinterUI.ActivePrinter.PurchasePrice.value;
+        pawnStatus.Money -= activePrinterUI.ActivePrinter.PurchasePrice;
 
         // set to active and update our UI to reflect this
         activePrinterUI.ActivePrinter.IsActive = true;
@@ -63,10 +52,10 @@ public class PrinterBuyer : MonoBehaviour
         this.activePrinterUI = printerUI;
 
         // display price text
-        purchaseText.text = "This Purchase Will Cost:\n$" + GameOperations.bigIntToString(activePrinterUI.ActivePrinter.PurchasePrice.value);
+        purchaseText.text = "This Purchase Will Cost:\n$" + GameOperations.bigIntToString(activePrinterUI.ActivePrinter.PurchasePrice);
 
         // check if they have enough money to actually buy it
-        if(pawnStatus.Money.value > activePrinterUI.ActivePrinter.PurchasePrice.value)
+        if(pawnStatus.Money >= activePrinterUI.ActivePrinter.PurchasePrice)
         {
             buyButton.interactable = true;
         }
