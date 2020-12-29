@@ -23,7 +23,7 @@ public class PrintRoomController : MonoBehaviour
     public void Activate()
     {
         pawnStatus = PawnManager.ReadPawnStatus();
-        arcadeStatus = ArcadeManager.readArcadeStatus();
+        arcadeStatus = ArcadeManager.ReadArcadeStatus();
         printers = new List<TicketPrinter>();
         for (int i = 0; i < pawnStatus.Printers.Count; i++)
         {
@@ -52,11 +52,15 @@ public class PrintRoomController : MonoBehaviour
     {
         for(int i = 0; i < printers.Count; i++)
         {
-            if (printers[i].UpdateTimer(Time.fixedDeltaTime))
+            if (printers[i].Ticket != TicketPrinter.TicketType.None)
             {
-                Repopulate();
+                if (printers[i].UpdateTimer(Time.fixedDeltaTime))
+                    Repopulate();
+            } 
+            else
+            {
+                printers[i].PrintTimer = 0f;
             }
-            
         }
     }
 
@@ -64,28 +68,34 @@ public class PrintRoomController : MonoBehaviour
     {
         for(int i = 0; i < printers.Count; i++)
         {
-            TicketPrinter.TicketReturn ticketReturn = printers[i].CollectTickets();
-            switch (ticketReturn.Type)
-            {
-                case TicketPrinter.TicketType.DebugTicket:
-                    arcadeStatus.DebugStatus.Tickets += ticketReturn.Number;
-                    break;
-                case TicketPrinter.TicketType.PrizeTicket:
-                    arcadeStatus.ArcadePrizeStatus.Tickets += ticketReturn.Number;
-                    break;
-                default:
-                    break;
-            }
+            CollectTicketsFromPrinter(printers[i]);
+        }
+    }
+
+    public void CollectTicketsFromPrinter(TicketPrinter printer)
+    {
+        TicketPrinter.TicketReturn ticketReturn = printer.CollectTickets();
+        switch (ticketReturn.Type)
+        {
+            case TicketPrinter.TicketType.DebugTicket:
+                arcadeStatus.DebugStatus.Tickets += ticketReturn.Number;
+                break;
+            case TicketPrinter.TicketType.PrizeTicket:
+                arcadeStatus.ArcadePrizeStatus.Tickets += ticketReturn.Number;
+                break;
+            default:
+                break;
         }
         Repopulate();
     }
 
-    private void Repopulate()
+    public void Repopulate()
     {
         for (int i = 0; i < ticketPrinterUIs.Count; i++)
         {
             ticketPrinterUIs[i].Populate();
         }
+        walletText.text = GameOperations.bigIntToString(pawnStatus.Money);
     }
 
     public void RecordTimeStamp()
@@ -103,14 +113,17 @@ public class PrintRoomController : MonoBehaviour
         for(int i = 0; i < printers.Count; i++)
         {
             TicketPrinter printer = printers[i];
-            float totalTime = (float) timeAway + printer.PrintTimer;
-            // Sets the timer to the remaining time left
-            printer.PrintTimer = totalTime % printer.BatchTime;
-            int batches = (int) Mathf.Floor( totalTime / printer.BatchTime);
-            printer.TicketsPrinted += printer.BatchSize * batches;
-            if(printer.TicketsPrinted > printer.Capacity)
+            if (printer.Ticket != TicketPrinter.TicketType.None)
             {
-                printer.TicketsPrinted = printer.Capacity;
+                float totalTime = (float)timeAway + printer.PrintTimer;
+                // Sets the timer to the remaining time left
+                printer.PrintTimer = totalTime % printer.BatchTime;
+                int batches = (int)Mathf.Floor(totalTime / printer.BatchTime);
+                printer.TicketsPrinted += printer.BatchSize * batches;
+                if (printer.TicketsPrinted > printer.Capacity)
+                {
+                    printer.TicketsPrinted = printer.Capacity;
+                }
             }
         }
     }

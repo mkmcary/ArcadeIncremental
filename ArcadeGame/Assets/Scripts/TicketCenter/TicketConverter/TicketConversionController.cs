@@ -48,7 +48,7 @@ public class TicketConversionController : MonoBehaviour
     // Start is called before the first frame update
     void Awake()
     {
-        arcadeStatus = ArcadeManager.readArcadeStatus();
+        arcadeStatus = ArcadeManager.ReadArcadeStatus();
 
         SetWalletText();
 

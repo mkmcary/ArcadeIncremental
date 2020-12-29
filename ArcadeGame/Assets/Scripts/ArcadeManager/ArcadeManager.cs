@@ -19,13 +19,13 @@ public class ArcadeManager : MonoBehaviour
 
     public static menuScreen activeScreen;
 
-    public static ArcadeStatus readArcadeStatus()
+    public static ArcadeStatus ReadArcadeStatus()
     {
         if(arcadeStatus == null)
         {
-            if (!validFile())
+            if (!ValidFile())
             {
-                writeArcadeStatus();
+                WriteArcadeStatus();
             }
             else
             {
@@ -44,7 +44,7 @@ public class ArcadeManager : MonoBehaviour
         return arcadeStatus;
     }
 
-    private static bool validFile()
+    private static bool ValidFile()
     {
         /*
         return System.IO.File.Exists(encryptedArcadeStatusPath) &&
@@ -54,7 +54,7 @@ public class ArcadeManager : MonoBehaviour
             System.IO.File.ReadAllText(arcadeStatusPath).Contains("ArcadeStatus.json\n");
     }
 
-    public static void writeArcadeStatus()
+    public static void WriteArcadeStatus()
     {
         if(arcadeStatus == null)
         {

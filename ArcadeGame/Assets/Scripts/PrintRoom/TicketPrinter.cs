@@ -19,6 +19,8 @@ public class TicketPrinter
     [SerializeField]
     private BigIntWrapper capacityIncrement;
     [SerializeField]
+    private BigIntWrapper capacityUpgradeCost;
+    [SerializeField]
     private int capacityCurrentLevel;
     [SerializeField]
     private int capacityMaxLevel;
@@ -26,6 +28,8 @@ public class TicketPrinter
     private int luck;
     [SerializeField]
     private int luckIncrement;
+    [SerializeField]
+    private BigIntWrapper luckUpgradeCost;
     [SerializeField]
     private int luckCurrentLevel;
     [SerializeField]
@@ -71,6 +75,12 @@ public class TicketPrinter
         set { capacityIncrement.value = value; }
     }
 
+    public BigInteger CapacityUpgradeCost
+    {
+        get { return capacityUpgradeCost.value; }
+        set { capacityUpgradeCost.value = value; }
+    }
+
     public int CapacityCurrentLevel
     {
         get { return capacityCurrentLevel; }
@@ -93,6 +103,12 @@ public class TicketPrinter
     {
         get { return luckIncrement; }
         set { luckIncrement = value; }
+    }
+
+    public BigInteger LuckUpgradeCost
+    {
+        get { return luckUpgradeCost.value; }
+        set { luckUpgradeCost.value = value; }
     }
 
     public int LuckCurrentLevel
@@ -161,7 +177,7 @@ public class TicketPrinter
     public enum PrinterType
     {
         Receipt,
-        InkJet,
+        Inkjet,
         Laser,
         Office,
         Industrial,
@@ -170,19 +186,16 @@ public class TicketPrinter
         Space
     }
 
-    
-
     /**
      * Upgrades the capacity of this printer.
      * @return true if the printer has reached max level,
      *         and upgrading should be disabled.
      */
-    public bool UpgradeCapacity()
+    public void UpgradeCapacity()
     {
-        
-        this.capacity.value += this.capacityIncrement.value;
-        this.capacityCurrentLevel++;
-        return this.capacityCurrentLevel == this.capacityMaxLevel;
+        Capacity += CapacityIncrement;
+        CapacityCurrentLevel++;
+        CapacityUpgradeCost *= 2;
     }
 
     /**
@@ -190,11 +203,11 @@ public class TicketPrinter
      * @return true if the printer has reached max level,
      *         and upgrading should be disabled.
      */
-    public bool UpgradeLuck()
+    public void UpgradeLuck()
     {
-        this.luck += this.luckIncrement;
-        this.luckCurrentLevel++;
-        return this.luckCurrentLevel == this.luckMaxLevel;
+        Luck += LuckIncrement;
+        LuckCurrentLevel++;
+        LuckUpgradeCost *= 2;
     }
 
     public bool UpdateTimer(float timeSinceLast)
@@ -207,15 +220,45 @@ public class TicketPrinter
         if(PrintTimer >= batchTime)
         {
             // The timer has reached batchTime. Now we print.
-            TicketsPrinted += BatchSize;
-            PrintTimer = 0.0f;
-            if(TicketsPrinted > Capacity)
+            if (Ticket != TicketType.None)
             {
-                TicketsPrinted = Capacity;
+                ApplyLuck();
+
+                PrintTimer = 0.0f;
+                if (TicketsPrinted > Capacity)
+                {
+                    TicketsPrinted = Capacity;
+                }
+                return true;
             }
-            return true;
         }
         return false;
+    }
+
+    private void ApplyLuck()
+    {
+        BigInteger amtToAdd = 0;
+        amtToAdd += BatchSize;
+        // calculate how many to add, given luck (Better way to do this?????)
+        if (BatchSize < 100)
+        {
+            // at low sizes
+            int random = UnityEngine.Random.Range(0, 100);
+            if (random < Luck)
+            {
+                amtToAdd *= 2;
+            }
+        }
+        else
+        {
+            // at large sizes
+            int percentage = UnityEngine.Random.Range(0, Luck) + 100;
+            amtToAdd *= percentage;
+            amtToAdd /= 100;
+        }
+
+        Debug.Log("Luck was applied, you should have gotten " + GameOperations.bigIntToString(amtToAdd));
+        TicketsPrinted += amtToAdd;
     }
 
     public TicketReturn CollectTickets()
@@ -239,29 +282,36 @@ public class TicketPrinter
     
     private TicketPrinter()
     {
-        batchTime = 10;
-        batchSize = new BigIntWrapper(1);
-        capacity = new BigIntWrapper(100);
+        batchTime = 0;
+        batchSize = new BigIntWrapper();
+        capacity = new BigIntWrapper();
         capacityCurrentLevel = 0;
         luck = 0;
         luckCurrentLevel = 0;
         isAttended = false;
         isActive = false;
-        ticket = TicketType.PrizeTicket;
+        ticket = TicketType.None;
         printer = PrinterType.Receipt;
         purchasePrice = new BigIntWrapper();
         ticketsPrinted = new BigIntWrapper();
         capacityIncrement = new BigIntWrapper();
+        capacityUpgradeCost = new BigIntWrapper();
+        luckUpgradeCost = new BigIntWrapper();
     }
 
     public static TicketPrinter CreateReceiptPrinter()
     {
         TicketPrinter printer = new TicketPrinter();
 
+        printer.batchTime = 30;
+        printer.batchSize = new BigIntWrapper(1);
+        printer.capacity = new BigIntWrapper(50);
         printer.capacityIncrement = new BigIntWrapper(10);
         printer.capacityMaxLevel = 5;
         printer.luckIncrement = 1;
         printer.luckMaxLevel = 5;
+        printer.capacityUpgradeCost = new BigIntWrapper(10);
+        printer.luckUpgradeCost = new BigIntWrapper(1);
 
         return printer;
     }

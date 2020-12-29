@@ -42,7 +42,7 @@ public class MoneyMenuController : MonoBehaviour
         gameObject.SetActive(true);
         closePopUp();
         pawnStatus = PawnManager.ReadPawnStatus();
-        arcadeStatus = ArcadeManager.readArcadeStatus();
+        arcadeStatus = ArcadeManager.ReadArcadeStatus();
         moneyText.text = GameOperations.bigIntToString(pawnStatus.Money);
     }
 
@@ -169,7 +169,7 @@ public class MoneyMenuController : MonoBehaviour
 
         // reset layer 0
         arcadeStatus.ResetButPreserve();
-        ArcadeManager.writeArcadeStatus();
+        ArcadeManager.WriteArcadeStatus();
 
         // re-init
         Activate();

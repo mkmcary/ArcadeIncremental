@@ -12,7 +12,7 @@ public class DebugShopController : ShopController
     public override void initialize()
     {
         // read the file and initialize the CabinetStatus
-        arcadeStatus = ArcadeManager.readArcadeStatus();
+        arcadeStatus = ArcadeManager.ReadArcadeStatus();
         status = arcadeStatus.DebugStatus;
         updateTicketText();
 

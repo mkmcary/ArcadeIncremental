@@ -20,7 +20,7 @@ public abstract class ArcadeGameController : MonoBehaviour
     // Start is called before the first frame update
     public virtual void Start()
     {
-        arcadeStatus = ArcadeManager.readArcadeStatus();
+        arcadeStatus = ArcadeManager.ReadArcadeStatus();
 
         updateScore(initalScore);
     }
@@ -28,7 +28,7 @@ public abstract class ArcadeGameController : MonoBehaviour
     /** The generic activity when a game is ended. */
     public virtual void endGame()
     {
-        ArcadeManager.writeArcadeStatus();
+        ArcadeManager.WriteArcadeStatus();
     }
 
     /**

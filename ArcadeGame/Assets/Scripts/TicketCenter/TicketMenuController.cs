@@ -11,7 +11,7 @@ public class TicketMenuController : MonoBehaviour
     public void Activate()
     {
         gameObject.SetActive(true);
-        BigInteger prizeTickets = ArcadeManager.readArcadeStatus().ArcadePrizeStatus.Tickets;
+        BigInteger prizeTickets = ArcadeManager.ReadArcadeStatus().ArcadePrizeStatus.Tickets;
         prizeText.text = GameOperations.bigIntToString(prizeTickets);
     }
 }

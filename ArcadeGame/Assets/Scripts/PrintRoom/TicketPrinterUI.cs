@@ -13,6 +13,7 @@ public class TicketPrinterUI : MonoBehaviour
     public Color tintColor;
     public Image image;
     public Text trayText;
+    public Slider slider;
 
     private TicketPrinter activePrinter;
 
@@ -30,12 +31,20 @@ public class TicketPrinterUI : MonoBehaviour
         {
             image.color = tintColor;
             trayText.gameObject.SetActive(false);
+            slider.gameObject.SetActive(false);
         } 
         else
         {
             image.color = Color.white;
             trayText.gameObject.SetActive(true);
+            slider.gameObject.SetActive(true);
         }
+        slider.maxValue = activePrinter.BatchTime;
+    }
+
+    private void FixedUpdate()
+    {
+        slider.value = activePrinter.PrintTimer;
     }
 
     public void OnPrinterClick()
@@ -59,8 +68,8 @@ public class TicketPrinterUI : MonoBehaviour
             case TicketPrinter.PrinterType.Receipt:
                 sprite = GameOperations.loadSpriteFromPath("Sprites/Printers/Receipt");
                 break;
-            case TicketPrinter.PrinterType.InkJet:
-                sprite = GameOperations.loadSpriteFromPath("Sprites/Printers/InkJet");
+            case TicketPrinter.PrinterType.Inkjet:
+                sprite = GameOperations.loadSpriteFromPath("Sprites/Printers/Inkjet");
                 break;
             case TicketPrinter.PrinterType.Laser:
                 sprite = GameOperations.loadSpriteFromPath("Sprites/Printers/Laser");

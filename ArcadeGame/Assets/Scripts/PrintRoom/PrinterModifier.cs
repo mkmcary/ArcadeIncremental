@@ -6,6 +6,10 @@ using UnityEngine.UI;
 public class PrinterModifier : MonoBehaviour
 {
     private TicketPrinter printer;
+    private PawnStatus pawnStatus;
+
+    [Header("Print Room Controller")]
+    public PrintRoomController printRoomController;
 
     [Header("Pop Up")]
     public GameObject popUp;
@@ -19,11 +23,26 @@ public class PrinterModifier : MonoBehaviour
     [Header("Dropdown")]
     public Dropdown ticketDropdown;
 
+    [Header("Upgrade Buttons")]
+    public Button upgradeBatchSizeButton;
+    public Text upgradeBatchSizeText;
+    public Button upgradeCapacityButton;
+    public Text upgradeCapacityText;
+    public Button upgradeLuckButton;
+    public Text upgradeLuckText;
+
+    private List<TicketAssociation> ticketAssociations;
+
     public void InitializePopUp(TicketPrinter printer)
     {
+        pawnStatus = PawnManager.ReadPawnStatus();
         this.printer = printer;
         popUp.SetActive(true);
         InitializeSliders();
+
+        // set up upgrade buttons
+        UpdateUpgradeButtons();
+
         InitializeTicketDropDown();
     }
 
@@ -37,51 +56,162 @@ public class PrinterModifier : MonoBehaviour
 
     private void InitializeTicketDropDown()
     {
-        // come back to this
+        ArcadeStatus arcadeStatus = ArcadeManager.ReadArcadeStatus();
+
+        ticketAssociations = new List<TicketAssociation>();
+        int index = 0;
+        // add the none option
+        TicketAssociation ticketAssociation = new TicketAssociation(index, TicketPrinter.TicketType.None, "None", "Sprites/Currency/Tickets/NoTicket");
+        ticketAssociations.Add(ticketAssociation);
+        index++;
+
+        // cabinet tickets
+        if (arcadeStatus.DebugStatus.IsActive)
+        {
+            ticketAssociation = new TicketAssociation(index, TicketPrinter.TicketType.DebugTicket, "Debug Ticket", "Sprites/Currency/Tickets/DebugTicket");
+            ticketAssociations.Add(ticketAssociation);
+            index++;
+        }
+
+        // ...
+        // Copy the above for each cabinet ticket
+        // ...
+
+        // prize tickets
+        if (true) // figure out condition upon which players can print prize tickets
+        {
+            ticketAssociation = new TicketAssociation(index, TicketPrinter.TicketType.PrizeTicket, "Prize Ticket", "Sprites/Currency/Tickets/PrizeTicket");
+            ticketAssociations.Add(ticketAssociation);
+            index++;
+        }
+
+        List<Dropdown.OptionData> options = new List<Dropdown.OptionData>();
+        TicketAssociation selection = null;
+
+        for(int i = 0; i < ticketAssociations.Count; i++)
+        {
+            // construct options
+            TicketAssociation curr = ticketAssociations[i];
+            options.Add(new Dropdown.OptionData(curr.label, GameOperations.loadSpriteFromPath(curr.imagePath)));
+
+            // find the one that matches our ticket type
+            if(curr.ticketType == printer.Ticket)
+            {
+                selection = curr;
+            }
+        }
+
+        // set the list of options
+        ticketDropdown.options = options;
+
+        // set to the current type
+        ticketDropdown.value = selection.listIndex;
+    }
+
+    private void UpdateUpgradeButtons()
+    {
+        upgradeBatchSizeText.text = "N/A";
+        upgradeLuckText.text = GameOperations.bigIntToString(printer.LuckUpgradeCost);
+        upgradeCapacityText.text = GameOperations.bigIntToString(printer.CapacityUpgradeCost);
+
+        // batch size
+        upgradeBatchSizeButton.gameObject.SetActive(false);
+
+        // luck
+        if (printer.LuckCurrentLevel == printer.LuckMaxLevel && pawnStatus.Money >= printer.LuckUpgradeCost)
+        {
+            upgradeLuckButton.interactable = false;
+            if(printer.LuckCurrentLevel == printer.LuckMaxLevel)
+            {
+                upgradeLuckText.text = "Max Level";
+            }
+        }
+        else
+        {
+            upgradeLuckButton.interactable = true;
+        }
+
+        // capacity
+        if (printer.CapacityCurrentLevel == printer.CapacityMaxLevel && pawnStatus.Money >= printer.CapacityUpgradeCost)
+        {
+            upgradeCapacityButton.interactable = false;
+            if (printer.CapacityCurrentLevel == printer.CapacityMaxLevel)
+            {
+                upgradeCapacityText.text = "Max Level";
+            }
+        }
+        else
+        {
+            upgradeCapacityButton.interactable = true;
+        }
     }
 
     public void ChangeTicketType(int index)
     {
         // associate dropdown index with ticket type
+        TicketAssociation ticketAssociation = null;
+        for (int i = 0; i < ticketAssociations.Count; i++)
+        {
+            if (ticketAssociations[i].listIndex == index)
+            {
+                ticketAssociation = ticketAssociations[i];
+                break;
+            }
+        }
 
-
+        if (ticketAssociation == null)
+        {
+            Debug.LogError("No Ticket Association was Found.");
+        }
 
         // collect all the tickets that were stored
-    }
+        printRoomController.CollectTicketsFromPrinter(printer);
 
-    public void ShowUpgradeCapacityPopUp()
-    {
-        // pop up to display how it would upgrade and how much it would cost
+        // update the ticket type
+        printer.Ticket = ticketAssociation.ticketType;
     }
 
     public void UpgradeCapacity()
     {
-        if(printer.UpgradeCapacity())
-        {
-            // disable the button
-        }
+        // transaction
+        pawnStatus.Money -= printer.CapacityUpgradeCost;
+        printer.UpgradeCapacity();
 
-        // take money from player
-
+        // ui updates
         InitializeSliders();
-    }
-
-    public void ShowUpgradeLuckPopUp()
-    {
-        // pop up to display how it would upgrade and how much it would cost
+        UpdateUpgradeButtons();
+        printRoomController.Repopulate();
     }
 
     public void UpgradeLuck()
     {
-        if(printer.UpgradeLuck())
-        {
-            // disable the button
-        }
+        // transaction
+        pawnStatus.Money -= printer.LuckUpgradeCost;
+        printer.UpgradeLuck();
 
-        // take money from player
-
+        // ui updates
         InitializeSliders();
+        UpdateUpgradeButtons();
+        printRoomController.Repopulate();
     }
 
+    public class TicketAssociation
+    {
+        // Association for index and ticket type
+        public int listIndex;
+        public TicketPrinter.TicketType ticketType;
+
+        // Dropdown UI data
+        public string label;
+        public string imagePath;
+
+        public TicketAssociation(int index, TicketPrinter.TicketType type, string label, string path)
+        {
+            this.listIndex = index;
+            this.ticketType = type;
+            this.label = label;
+            this.imagePath = path;
+        }
+    }
 
 }

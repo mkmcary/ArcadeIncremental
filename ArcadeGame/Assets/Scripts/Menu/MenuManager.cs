@@ -30,7 +30,7 @@ public class MenuManager : MonoBehaviour
 
     private void OnApplicationQuit()
     {
-        ArcadeManager.writeArcadeStatus();
+        ArcadeManager.WriteArcadeStatus();
         PawnManager.RecordTimeStamp();
         PawnManager.WritePawnStatus();
     }
