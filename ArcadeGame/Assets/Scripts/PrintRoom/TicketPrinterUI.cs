@@ -24,7 +24,7 @@ public class TicketPrinterUI : MonoBehaviour
 
     public void Populate()
     {
-        image.sprite = getPrinterSprite();
+        image.sprite = GetPrinterSprite();
         trayText.text = GameOperations.bigIntToString(activePrinter.TicketsPrinted) + "/" + GameOperations.bigIntToString(activePrinter.Capacity);
         if (!activePrinter.IsActive)
         {
@@ -38,20 +38,20 @@ public class TicketPrinterUI : MonoBehaviour
         }
     }
 
-    public void onPrinterClick()
+    public void OnPrinterClick()
     {
         if(activePrinter.IsActive)
         {
             // go to the upgrader
-            printerModifier.initializePopUp(activePrinter);
+            printerModifier.InitializePopUp(activePrinter);
         } else
         {
             // go to the buyer
-            printerBuyer.initializePopUp(this);
+            printerBuyer.InitializePopUp(this);
         }
     }
 
-    private Sprite getPrinterSprite()
+    private Sprite GetPrinterSprite()
     {
         Sprite sprite = null;
         switch (activePrinter.Printer)

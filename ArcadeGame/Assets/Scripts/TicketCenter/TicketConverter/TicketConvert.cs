@@ -44,9 +44,9 @@ public class TicketConvert
         {
             count = 0;
         }
-        else if(count > status.Tickets.value)
+        else if(count > status.Tickets)
         {
-            count = status.Tickets.value;
+            count = status.Tickets;
         }
     }
 

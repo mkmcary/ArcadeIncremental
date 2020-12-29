@@ -7,21 +7,34 @@ using UnityEngine;
 public class DebugCabinetStatus : CabinetStatus
 {
     // Add all the upgrades here
-    public ShopUpgrade doublePoints;
-    public ShopUpgrade redUpgrade;
-    public ShopUpgrade blueUpgrade;
-    public ShopUpgrade greenUpgrade;
-    public ShopUpgrade yellowUpgrade;
-    public ShopUpgrade redUpgrade2;
-    public ShopUpgrade blueUpgrade2;
+    [SerializeField]
+    private ShopUpgrade doublePoints;
+    [SerializeField]
+    private ShopUpgrade redUpgrade;
+    
+    //public ShopUpgrade blueUpgrade;
+    //public ShopUpgrade greenUpgrade;
+    //public ShopUpgrade yellowUpgrade;
+    //public ShopUpgrade redUpgrade2;
+    //public ShopUpgrade blueUpgrade2;
 
-    //public DebugShopUpgrade upgradeName;
+    public ShopUpgrade DoublePoints
+    {
+        get { return doublePoints; }
+        set { doublePoints = value; }
+    }
+
+    public ShopUpgrade RedUpgrade
+    {
+        get { return redUpgrade; }
+        set { redUpgrade = value; }
+    }
 
     public DebugCabinetStatus() : base()
     {
         Upgrades = new List<ShopUpgrade>();
 
-        isActive = true;
+        IsActive = true;
 
         // double points
         doublePoints = new ShopUpgrade();
@@ -49,6 +62,7 @@ public class DebugCabinetStatus : CabinetStatus
 
         Upgrades.Add(redUpgrade);
 
+        /*
         // blue upgrade
         blueUpgrade = new ShopUpgrade();
         blueUpgrade.upgradeName = "Blue Upgrade";
@@ -113,13 +127,14 @@ public class DebugCabinetStatus : CabinetStatus
         blueUpgrade2.sprite = "Sprites/CabinetScene/Placeholder/blueCabinet";
 
         Upgrades.Add(blueUpgrade2);
+        */
     }
 
-    public override LayerZeroStatus resetButPreserve()
+    public override LayerZeroStatus ResetButPreserve()
     {
         DebugCabinetStatus newStat = new DebugCabinetStatus();
-        newStat.cumulativeScore = this.cumulativeScore;
-        newStat.highScore = this.highScore;
+        newStat.CumulativeScore = this.CumulativeScore;
+        newStat.HighScore = this.HighScore;
         return newStat;
     }
 }

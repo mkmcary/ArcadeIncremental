@@ -22,7 +22,7 @@ public class PrintRoomController : MonoBehaviour
 
     public void Activate()
     {
-        pawnStatus = PawnManager.readPawnStatus();
+        pawnStatus = PawnManager.ReadPawnStatus();
         arcadeStatus = ArcadeManager.readArcadeStatus();
         printers = new List<TicketPrinter>();
         for (int i = 0; i < pawnStatus.Printers.Count; i++)
@@ -34,7 +34,7 @@ public class PrintRoomController : MonoBehaviour
         }
         walletText.text = GameOperations.bigIntToString(pawnStatus.Money);
 
-        updateFromReturn();
+        UpdateFromReturn();
         // Temp until Scroll
         for (int i = 0; i < ticketPrinterUIs.Count; i++)
         {
@@ -52,35 +52,35 @@ public class PrintRoomController : MonoBehaviour
     {
         for(int i = 0; i < printers.Count; i++)
         {
-            if (printers[i].updateTimer(Time.fixedDeltaTime))
+            if (printers[i].UpdateTimer(Time.fixedDeltaTime))
             {
-                repopulate();
+                Repopulate();
             }
             
         }
     }
 
-    public void collectTickets()
+    public void CollectTickets()
     {
         for(int i = 0; i < printers.Count; i++)
         {
-            TicketPrinter.TicketReturn ticketReturn = printers[i].collectTickets();
+            TicketPrinter.TicketReturn ticketReturn = printers[i].CollectTickets();
             switch (ticketReturn.Type)
             {
                 case TicketPrinter.TicketType.DebugTicket:
-                    arcadeStatus.debugStatus.Tickets.value += ticketReturn.Number;
+                    arcadeStatus.DebugStatus.Tickets += ticketReturn.Number;
                     break;
                 case TicketPrinter.TicketType.PrizeTicket:
-                    arcadeStatus.prizeStatus.Tickets.value += ticketReturn.Number;
+                    arcadeStatus.ArcadePrizeStatus.Tickets += ticketReturn.Number;
                     break;
                 default:
                     break;
             }
         }
-        repopulate();
+        Repopulate();
     }
 
-    private void repopulate()
+    private void Repopulate()
     {
         for (int i = 0; i < ticketPrinterUIs.Count; i++)
         {
@@ -88,12 +88,12 @@ public class PrintRoomController : MonoBehaviour
         }
     }
 
-    public void recordTimeStamp()
+    public void RecordTimeStamp()
     {
-        PawnManager.recordTimeStamp();
+        PawnManager.RecordTimeStamp();
     }
 
-    public void updateFromReturn()
+    public void UpdateFromReturn()
     {
         if(pawnStatus.TimeStamp == -1)
         {

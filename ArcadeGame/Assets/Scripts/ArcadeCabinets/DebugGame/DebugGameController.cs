@@ -24,7 +24,7 @@ public class DebugGameController : ArcadeGameController
     {
         base.Start();
 
-        ticketsText.text = "Current Tickets: " + GameOperations.bigIntToString(arcadeStatus.debugStatus.Tickets.value);
+        ticketsText.text = "Current Tickets: " + GameOperations.bigIntToString(arcadeStatus.DebugStatus.Tickets);
     }
 
     /**
@@ -35,17 +35,17 @@ public class DebugGameController : ArcadeGameController
         BigInteger pointsToAdd = score;
 
         // deal with upgrades
-        pointsToAdd *= (BigInteger.Pow(2, arcadeStatus.debugStatus.doublePoints.currentLevel));
-        pointsToAdd *= (BigInteger.Pow(2, arcadeStatus.prizeStatus.doublePoints.currentLevel));
+        pointsToAdd *= (BigInteger.Pow(2, arcadeStatus.DebugStatus.DoublePoints.currentLevel));
+        pointsToAdd *= (BigInteger.Pow(2, arcadeStatus.ArcadePrizeStatus.DoublePoints.currentLevel));
 
         if (pointsToAdd > 0)
         {
-            arcadeStatus.debugStatus.Tickets.value += pointsToAdd;
+            arcadeStatus.DebugStatus.Tickets += pointsToAdd;
         }
 
         // cumulative and high score
-        arcadeStatus.debugStatus.highScore.value = BigInteger.Max(arcadeStatus.debugStatus.highScore.value, score);
-        arcadeStatus.debugStatus.cumulativeScore.value += score;
+        arcadeStatus.DebugStatus.HighScore = BigInteger.Max(arcadeStatus.DebugStatus.HighScore, score);
+        arcadeStatus.DebugStatus.CumulativeScore += score;
 
         //temporary functionality
         base.endGame();

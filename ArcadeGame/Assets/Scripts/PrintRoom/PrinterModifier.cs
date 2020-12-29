@@ -19,28 +19,28 @@ public class PrinterModifier : MonoBehaviour
     [Header("Dropdown")]
     public Dropdown ticketDropdown;
 
-    public void initializePopUp(TicketPrinter printer)
+    public void InitializePopUp(TicketPrinter printer)
     {
         this.printer = printer;
         popUp.SetActive(true);
-        initializeSliders();
-        initializeTicketDropDown();
+        InitializeSliders();
+        InitializeTicketDropDown();
     }
 
-    private void initializeSliders()
+    private void InitializeSliders()
     {
         batchSizeSlider.LogarithmicPopulate(printer.BatchSize);
-        batchTimeSlider.timePopulate(printer.BatchTime);
+        batchTimeSlider.TimePopulate(printer.BatchTime);
         capacitySlider.Populate(printer.Capacity, printer.CapacityCurrentLevel, printer.CapacityMaxLevel);
         luckSlider.Populate(printer.Luck, printer.LuckCurrentLevel, printer.LuckMaxLevel);
     }
 
-    private void initializeTicketDropDown()
+    private void InitializeTicketDropDown()
     {
         // come back to this
     }
 
-    public void changeTicketType(int index)
+    public void ChangeTicketType(int index)
     {
         // associate dropdown index with ticket type
 
@@ -49,38 +49,38 @@ public class PrinterModifier : MonoBehaviour
         // collect all the tickets that were stored
     }
 
-    public void showUpgradeCapacityPopUp()
+    public void ShowUpgradeCapacityPopUp()
     {
         // pop up to display how it would upgrade and how much it would cost
     }
 
-    public void upgradeCapacity()
+    public void UpgradeCapacity()
     {
-        if(printer.upgradeCapacity())
+        if(printer.UpgradeCapacity())
         {
             // disable the button
         }
 
         // take money from player
 
-        initializeSliders();
+        InitializeSliders();
     }
 
-    public void showUpgradeLuckPopUp()
+    public void ShowUpgradeLuckPopUp()
     {
         // pop up to display how it would upgrade and how much it would cost
     }
 
-    public void upgradeLuck()
+    public void UpgradeLuck()
     {
-        if(printer.upgradeLuck())
+        if(printer.UpgradeLuck())
         {
             // disable the button
         }
 
         // take money from player
 
-        initializeSliders();
+        InitializeSliders();
     }
 
 

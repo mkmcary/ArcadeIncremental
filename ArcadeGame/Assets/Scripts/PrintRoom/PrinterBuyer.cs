@@ -19,16 +19,16 @@ public class PrinterBuyer : MonoBehaviour
 
     private void Start()
     {
-        pawnStatus = PawnManager.readPawnStatus();
+        pawnStatus = PawnManager.ReadPawnStatus();
     }
 
-    public void declinePurchase()
+    public void DeclinePurchase()
     {
         // just close this popup menu
-        closePopUp();
+        ClosePopUp();
     }
 
-    public void acceptPurchase()
+    public void AcceptPurchase()
     {
         // take away the money
         pawnStatus.Money -= activePrinterUI.ActivePrinter.PurchasePrice;
@@ -36,18 +36,18 @@ public class PrinterBuyer : MonoBehaviour
         // set to active and update our UI to reflect this
         activePrinterUI.ActivePrinter.IsActive = true;
         activePrinterUI.Populate();
-        closePopUp();
+        ClosePopUp();
 
         // update money UI
         printRoomController.Activate();
     }
 
-    private void closePopUp()
+    private void ClosePopUp()
     {
         popUp.SetActive(false);
     }
 
-    public void initializePopUp(TicketPrinterUI printerUI)
+    public void InitializePopUp(TicketPrinterUI printerUI)
     {
         this.activePrinterUI = printerUI;
 

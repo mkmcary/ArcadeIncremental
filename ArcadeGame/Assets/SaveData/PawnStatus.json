@@ -1,9 +1,9 @@
 PawnStatus.json
 {
     "money": {
-        "valueString": "900"
+        "valueString": "1157"
     },
-    "timeStamp": 1609189347,
+    "timeStamp": 1609255082,
     "printers": [
         {
             "printer": 0,
@@ -29,9 +29,9 @@ PawnStatus.json
             },
             "ticket": 2,
             "ticketsPrinted": {
-                "valueString": "99"
+                "valueString": "0"
             },
-            "printTimer": 9.220025062561036,
+            "printTimer": 7.520022869110107,
             "isAttended": false
         },
         {

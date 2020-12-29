@@ -91,7 +91,7 @@ public abstract class ShopController : MonoBehaviour
      */
     public void updateTicketText()
     {
-        ticketText.text = GameOperations.bigIntToString(status.Tickets.value);
+        ticketText.text = GameOperations.bigIntToString(status.Tickets);
     }
 
     /**
@@ -99,7 +99,7 @@ public abstract class ShopController : MonoBehaviour
      */
     public void buy()
     {
-        if (activeUpgrade.price.value > status.Tickets.value)
+        if (activeUpgrade.price.value > status.Tickets)
         {
             // ###########################################################
             // add error message for trying to buy with not enough tickets
@@ -109,7 +109,7 @@ public abstract class ShopController : MonoBehaviour
 
         if (activeUpgrade.currentLevel < activeUpgrade.maxLevel)
         {
-            status.Tickets.value -= activeUpgrade.price.value;
+            status.Tickets -= activeUpgrade.price.value;
             activeUpgrade.LevelUp();
         }
         else

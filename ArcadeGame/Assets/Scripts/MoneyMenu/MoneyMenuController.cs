@@ -41,7 +41,7 @@ public class MoneyMenuController : MonoBehaviour
     {
         gameObject.SetActive(true);
         closePopUp();
-        pawnStatus = PawnManager.readPawnStatus();
+        pawnStatus = PawnManager.ReadPawnStatus();
         arcadeStatus = ArcadeManager.readArcadeStatus();
         moneyText.text = GameOperations.bigIntToString(pawnStatus.Money);
     }
@@ -60,15 +60,15 @@ public class MoneyMenuController : MonoBehaviour
         moneyToReceive = 0;
 
         // tickets -> money
-        List<LayerZeroStatus> gameStatuses = arcadeStatus.getLayerZeroStatuses();
+        List<LayerZeroStatus> gameStatuses = arcadeStatus.Statuses;
         // generic tickets are worth more
-        moneyFromPrizeTickets = (gameStatuses[0].Tickets.value / PRIZE_TICKET_RATIO);
+        moneyFromPrizeTickets = (gameStatuses[0].Tickets / PRIZE_TICKET_RATIO);
 
         // game tickets are all the same value
         moneyFromGameTickets = 0;
         for (int i = 1; i < gameStatuses.Count; i++)
         {
-            moneyFromGameTickets += (gameStatuses[i].Tickets.value / GAME_TICKET_RATIO);
+            moneyFromGameTickets += (gameStatuses[i].Tickets / GAME_TICKET_RATIO);
         }
 
         // prizes -> money
@@ -168,7 +168,7 @@ public class MoneyMenuController : MonoBehaviour
         moneyToReceive = 0;
 
         // reset layer 0
-        arcadeStatus.resetButPreserve();
+        arcadeStatus.ResetButPreserve();
         ArcadeManager.writeArcadeStatus();
 
         // re-init

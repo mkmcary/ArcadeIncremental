@@ -50,7 +50,7 @@ public class TicketConversionController : MonoBehaviour
     {
         arcadeStatus = ArcadeManager.readArcadeStatus();
 
-        setWalletText();
+        SetWalletText();
 
         incrementOneValue.image.color = defaultColor;
         incrementTenValue.image.color = defaultColor;
@@ -58,43 +58,43 @@ public class TicketConversionController : MonoBehaviour
         incrementFivePercent.image.color = defaultColor;
         incrementTwentyFivePercent.image.color = defaultColor;
         incrementMax.image.color = defaultColor;
-        selectButton(incrementOneValue);
+        SelectButton(incrementOneValue);
 
-        initializeConversions();
+        InitializeConversions();
 
         convertPopUp.SetActive(false);
         prizeTicketsToReceive = 0;
     }
 
-    private void setWalletText()
+    private void SetWalletText()
     {
-        prizeTicketText.text = GameOperations.bigIntToString(arcadeStatus.prizeStatus.Tickets.value);
-        debugTicketText.text = GameOperations.bigIntToString(arcadeStatus.debugStatus.Tickets.value);
+        prizeTicketText.text = GameOperations.bigIntToString(arcadeStatus.ArcadePrizeStatus.Tickets);
+        debugTicketText.text = GameOperations.bigIntToString(arcadeStatus.DebugStatus.Tickets);
     }
 
     /**
      * Used to create the ticket conversions and load UI.
      */
-    private void initializeConversions()
+    private void InitializeConversions()
     {
         ticketConverts = new List<TicketConvert>();
-        if (arcadeStatus.debugStatus.isActive)
+        if (arcadeStatus.DebugStatus.IsActive)
         {
-            ticketConverts.Add(new TicketConvert("Sprites/Currency/Tickets/DebugTicket", "The Debugger", 6, 1, arcadeStatus.debugStatus));
+            ticketConverts.Add(new TicketConvert("Sprites/Currency/Tickets/DebugTicket", "The Debugger", 6, 1, arcadeStatus.DebugStatus));
         }
         // copy the previous if statement for future games
         // ...
 
         // Initalize the UIs
         currentSetIndex = 0;
-        initializeConvertUI(0);
+        InitializeConvertUI(0);
     }
 
     /**
      * Loads a new set of Ticket Conversions into the UI between indices min and max inclusive.
      * @param min the minimum index.
      */
-    private void initializeConvertUI(int min)
+    private void InitializeConvertUI(int min)
     {
         int max = min + ticketConvertUIs.Count - 1;
 
@@ -135,7 +135,7 @@ public class TicketConversionController : MonoBehaviour
      * Selects an increment button.
      * @param button the button to select.
      */
-    public void selectButton(Button button)
+    public void SelectButton(Button button)
     {
         if(currentIncrementSelection != null)
         {
@@ -149,9 +149,9 @@ public class TicketConversionController : MonoBehaviour
      * Called by a ticket conversion increment button.
      * @param ui the TicketConvertUI that should be incremented.
      */
-    public void incrementButton(TicketConvertUI ui)
+    public void IncrementButton(TicketConvertUI ui)
     {
-        increment(ui, true);
+        Increment(ui, true);
     }
 
 
@@ -159,9 +159,9 @@ public class TicketConversionController : MonoBehaviour
      * Called by a ticket conversion decrement button.
      * @param ui the TicketConvertUI that should be decremented.
      */
-    public void decrementButton(TicketConvertUI ui)
+    public void DecrementButton(TicketConvertUI ui)
     {
-        increment(ui, false);
+        Increment(ui, false);
     }
 
 
@@ -170,7 +170,7 @@ public class TicketConversionController : MonoBehaviour
      * @param ui the TicketConvertUI that should be altered.
      * @param increase should be true to increase the value, or false to decrease it.
      */
-    private void increment(TicketConvertUI ui, bool increase)
+    private void Increment(TicketConvertUI ui, bool increase)
     {
         int scalar = 1;
         if (!increase)
@@ -193,15 +193,15 @@ public class TicketConversionController : MonoBehaviour
         }
         else if (currentIncrementSelection == incrementFivePercent)
         {
-            incrementValue = (scalar * (ui.activeConvert.status.Tickets.value) / 20);
+            incrementValue = (scalar * (ui.activeConvert.status.Tickets) / 20);
         }
         else if (currentIncrementSelection == incrementTwentyFivePercent)
         {
-            incrementValue = (scalar * (ui.activeConvert.status.Tickets.value) / 4);
+            incrementValue = (scalar * (ui.activeConvert.status.Tickets) / 4);
         }
         else if (currentIncrementSelection == incrementMax)
         {
-            incrementValue = scalar * ui.activeConvert.status.Tickets.value;
+            incrementValue = scalar * ui.activeConvert.status.Tickets;
         }
 
         // actually increment the value
@@ -209,7 +209,7 @@ public class TicketConversionController : MonoBehaviour
         ui.populate();
     }
 
-    public void initializePopUp()
+    public void InitializePopUp()
     {
         convertPopUp.SetActive(true);
 
@@ -227,29 +227,29 @@ public class TicketConversionController : MonoBehaviour
         conversionText.text = "You Will Receive:\n" + GameOperations.bigIntToString(prizeTicketsToReceive) + "\nPrize Tickets";
     }
 
-    public void convert()
+    public void Convert()
     {
         for(int i = 0; i < ticketConverts.Count; i++)
         {
             BigInteger amountToTurnIn = ticketConverts[i].getCount();
-            ticketConverts[i].status.Tickets.value -= (amountToTurnIn - (amountToTurnIn % ticketConverts[i].inputAmount));
+            ticketConverts[i].status.Tickets -= (amountToTurnIn - (amountToTurnIn % ticketConverts[i].inputAmount));
 
             ticketConverts[i].resetCount();
         }
-        initializeConvertUI(currentSetIndex);
+        InitializeConvertUI(currentSetIndex);
 
-        arcadeStatus.prizeStatus.Tickets.value += prizeTicketsToReceive;
+        arcadeStatus.ArcadePrizeStatus.Tickets += prizeTicketsToReceive;
         prizeTicketsToReceive = 0;
-        setWalletText();
-        closePopUp();
+        SetWalletText();
+        ClosePopUp();
     }
 
-    public void closePopUp()
+    public void ClosePopUp()
     {
         convertPopUp.SetActive(false);
     }
 
-    public void scrollUp()
+    public void ScrollUp()
     {
         if (currentSetIndex == 0)
         {
@@ -258,7 +258,7 @@ public class TicketConversionController : MonoBehaviour
         }
 
         currentSetIndex -= ticketConvertUIs.Count;
-        initializeConvertUI(currentSetIndex);
+        InitializeConvertUI(currentSetIndex);
 
         if (currentSetIndex == 0)
         {
@@ -272,7 +272,7 @@ public class TicketConversionController : MonoBehaviour
         scrollDownButton.gameObject.SetActive(true);
     }
 
-    public void scrollDown()
+    public void ScrollDown()
     {
         if (currentSetIndex + ticketConvertUIs.Count >= ticketConverts.Count)
         {
@@ -281,7 +281,7 @@ public class TicketConversionController : MonoBehaviour
         }
 
         currentSetIndex += ticketConvertUIs.Count;
-        initializeConvertUI(currentSetIndex);
+        InitializeConvertUI(currentSetIndex);
 
         if (currentSetIndex + ticketConvertUIs.Count >= ticketConverts.Count)
         {

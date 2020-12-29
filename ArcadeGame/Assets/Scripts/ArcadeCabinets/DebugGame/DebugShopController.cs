@@ -13,7 +13,7 @@ public class DebugShopController : ShopController
     {
         // read the file and initialize the CabinetStatus
         arcadeStatus = ArcadeManager.readArcadeStatus();
-        status = arcadeStatus.debugStatus;
+        status = arcadeStatus.DebugStatus;
         updateTicketText();
 
         currentSetIndex = 0;

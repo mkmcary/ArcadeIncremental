@@ -12,7 +12,7 @@ public class PrizeCounterController : ShopController
     {
         // read the file and initialize the CabinetStatus
         arcadeStatus = ArcadeManager.readArcadeStatus();
-        status = arcadeStatus.prizeStatus;
+        status = arcadeStatus.ArcadePrizeStatus;
         updateTicketText();
 
         currentSetIndex = 0;

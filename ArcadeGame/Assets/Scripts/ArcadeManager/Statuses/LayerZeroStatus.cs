@@ -11,10 +11,10 @@ public abstract class LayerZeroStatus
     private BigIntWrapper tickets;
     private List<ShopUpgrade> upgrades;
 
-    public BigIntWrapper Tickets
+    public BigInteger Tickets
     {
-        get { return tickets; }
-        set { tickets = value; }
+        get { return tickets.value; }
+        set { tickets.value = value; }
     }
 
     public List<ShopUpgrade> Upgrades
@@ -29,5 +29,5 @@ public abstract class LayerZeroStatus
         upgrades = new List<ShopUpgrade>();
     }
 
-    public abstract LayerZeroStatus resetButPreserve();
+    public abstract LayerZeroStatus ResetButPreserve();
 }

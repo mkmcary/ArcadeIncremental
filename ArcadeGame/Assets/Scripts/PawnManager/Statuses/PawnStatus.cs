@@ -43,7 +43,7 @@ public class PawnStatus
         TicketPrinter printer = null;
         for (int i = 0; i < initialPrinterPrices.Length; i++)
         {
-            printer = TicketPrinter.createReceiptPrinter();
+            printer = TicketPrinter.CreateReceiptPrinter();
             printer.PurchasePrice = BigInteger.Parse(initialPrinterPrices[i]);
             printers.Add(printer);
         }

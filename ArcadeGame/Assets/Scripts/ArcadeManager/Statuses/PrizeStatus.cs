@@ -1,18 +1,34 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using UnityEngine;
 
 [Serializable]
 public class PrizeStatus : LayerZeroStatus
 {
     // upgrades
-    public PrizeUpgrade doublePoints;
-    public PrizeUpgrade redUpgrade;
-    public PrizeUpgrade blueUpgrade;
-    public PrizeUpgrade greenUpgrade;
-    public PrizeUpgrade yellowUpgrade;
-    public PrizeUpgrade redUpgrade2;
-    public PrizeUpgrade blueUpgrade2;
+    [SerializeField]
+    private PrizeUpgrade doublePoints;
+    [SerializeField]
+    private PrizeUpgrade redUpgrade;
+
+    //public PrizeUpgrade blueUpgrade;
+    //public PrizeUpgrade greenUpgrade;
+    //public PrizeUpgrade yellowUpgrade;
+    //public PrizeUpgrade redUpgrade2;
+    //public PrizeUpgrade blueUpgrade2;
+
+    public PrizeUpgrade DoublePoints
+    {
+        get { return doublePoints; }
+        set { doublePoints = value; }
+    }
+
+    public PrizeUpgrade RedUpgrade
+    {
+        get { return redUpgrade; }
+        set { redUpgrade = value; }
+    }
 
     public PrizeStatus() : base()
     {
@@ -35,16 +51,18 @@ public class PrizeStatus : LayerZeroStatus
         // red upgrade
         redUpgrade = new PrizeUpgrade();
         redUpgrade.upgradeName = "Red Upgrade";
-        redUpgrade.price = new BigIntWrapper(99999999999);
+        redUpgrade.price = new BigIntWrapper(5000);
         redUpgrade.description = "This upgrade is red.";
         redUpgrade.currentLevel = 0;
         redUpgrade.maxLevel = 3;
         redUpgrade.priceScale = 100;
         redUpgrade.sType = ShopUpgrade.ScaleType.ADD;
         redUpgrade.sprite = "Sprites/CabinetScene/Placeholder/redCabinet";
+        doublePoints.MoneyValue = new BigIntWrapper(100);
 
         Upgrades.Add(redUpgrade);
 
+        /*
         // blue upgrade
         blueUpgrade = new PrizeUpgrade();
         blueUpgrade.upgradeName = "Blue Upgrade";
@@ -110,9 +128,10 @@ public class PrizeStatus : LayerZeroStatus
         blueUpgrade2.sprite = "Sprites/CabinetScene/Placeholder/blueCabinet";
 
         Upgrades.Add(blueUpgrade2);
+        */
     }
 
-    public override LayerZeroStatus resetButPreserve()
+    public override LayerZeroStatus ResetButPreserve()
     {
         return new PrizeStatus();
     }

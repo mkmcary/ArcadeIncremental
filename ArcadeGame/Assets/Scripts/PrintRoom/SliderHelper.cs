@@ -46,7 +46,7 @@ public class SliderHelper : MonoBehaviour
         
     }
 
-    public void timePopulate(float number)
+    public void TimePopulate(float number)
     {
         valueText.text = number + " s";
 

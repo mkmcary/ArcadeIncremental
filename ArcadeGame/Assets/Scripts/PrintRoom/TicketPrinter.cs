@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Collections;
-using System.Collections.Generic;
 using System.Numerics;
 using UnityEngine;
 
@@ -179,7 +177,7 @@ public class TicketPrinter
      * @return true if the printer has reached max level,
      *         and upgrading should be disabled.
      */
-    public bool upgradeCapacity()
+    public bool UpgradeCapacity()
     {
         
         this.capacity.value += this.capacityIncrement.value;
@@ -192,14 +190,14 @@ public class TicketPrinter
      * @return true if the printer has reached max level,
      *         and upgrading should be disabled.
      */
-    public bool upgradeLuck()
+    public bool UpgradeLuck()
     {
         this.luck += this.luckIncrement;
         this.luckCurrentLevel++;
         return this.luckCurrentLevel == this.luckMaxLevel;
     }
 
-    public bool updateTimer(float timeSinceLast)
+    public bool UpdateTimer(float timeSinceLast)
     {
         if(TicketsPrinted == Capacity)
         {
@@ -220,7 +218,7 @@ public class TicketPrinter
         return false;
     }
 
-    public TicketReturn collectTickets()
+    public TicketReturn CollectTickets()
     {
         TicketReturn ticketReturn = new TicketReturn(TicketsPrinted, Ticket);
         TicketsPrinted = 0;
@@ -256,7 +254,7 @@ public class TicketPrinter
         capacityIncrement = new BigIntWrapper();
     }
 
-    public static TicketPrinter createReceiptPrinter()
+    public static TicketPrinter CreateReceiptPrinter()
     {
         TicketPrinter printer = new TicketPrinter();
 

@@ -1,15 +1,37 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using UnityEngine;
 
 [Serializable]
 public class ArcadeStatus
 {
     private List<LayerZeroStatus> statuses;
 
-    public PrizeStatus prizeStatus;
-    // Here we will contain all of the Cabinet Statuses
-    public DebugCabinetStatus debugStatus;
+    [SerializeField]
+    private PrizeStatus prizeStatus;
+
+    // Here we will have all of the Cabinet Statuses
+    [SerializeField]
+    private DebugCabinetStatus debugStatus;
+
+    public List<LayerZeroStatus> Statuses
+    {
+        get { return statuses; }
+        set { statuses = value; }
+    }
+
+    public PrizeStatus ArcadePrizeStatus
+    {
+        get { return prizeStatus; }
+        set { prizeStatus = value; }
+    }
+
+    public DebugCabinetStatus DebugStatus
+    {
+        get { return debugStatus; }
+        set { debugStatus = value; }
+    }
 
     public ArcadeStatus()
     {
@@ -24,21 +46,16 @@ public class ArcadeStatus
         statuses.Add(debugStatus);
     }
 
-    public List<LayerZeroStatus> getLayerZeroStatuses()
-    {
-        return statuses;
-    }
-
-    public void resetButPreserve()
+    public void ResetButPreserve()
     {
         statuses = new List<LayerZeroStatus>();
 
         // PRIZE STATUS MUST BE FIRST IN THE LIST
-        prizeStatus = (PrizeStatus)prizeStatus.resetButPreserve();
+        prizeStatus = (PrizeStatus)prizeStatus.ResetButPreserve();
         statuses.Add(prizeStatus);
 
         // OTHER STATUSES
-        debugStatus = (DebugCabinetStatus)debugStatus.resetButPreserve();
+        debugStatus = (DebugCabinetStatus)debugStatus.ResetButPreserve();
         statuses.Add(debugStatus);
     }
 }

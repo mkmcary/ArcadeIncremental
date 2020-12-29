@@ -11,13 +11,13 @@ public class PawnManager : MonoBehaviour
     private static string pawnStatusPath = Application.dataPath + "/SaveData/PawnStatus.json";
     private static string encryptedPawnStatusPath = Application.dataPath + "/SaveData/EncryptedPawnStatus.json";
 
-    public static PawnStatus readPawnStatus()
+    public static PawnStatus ReadPawnStatus()
     {
         if (pawnStatus == null)
         {
-            if (!validFile())
+            if (!ValidFile())
             {
-                writePawnStatus();
+                WritePawnStatus();
             }
             else
             {
@@ -35,7 +35,7 @@ public class PawnManager : MonoBehaviour
         return pawnStatus;
     }
 
-    private static bool validFile()
+    private static bool ValidFile()
     {
         /*
         return System.IO.File.Exists(encryptedPawnStatusPath) &&
@@ -45,7 +45,7 @@ public class PawnManager : MonoBehaviour
             System.IO.File.ReadAllText(pawnStatusPath).Contains("PawnStatus.json\n");
     }
 
-    public static void writePawnStatus()
+    public static void WritePawnStatus()
     {
         if (pawnStatus == null)
         {
@@ -58,8 +58,10 @@ public class PawnManager : MonoBehaviour
         System.IO.File.WriteAllText(encryptedPawnStatusPath, encrypted);
     }
 
-    public static void recordTimeStamp()
+    public static void RecordTimeStamp()
     {
+        // this makes sure that it is not null (in the case we never went to a pawn status scene)
+        ReadPawnStatus(); 
         pawnStatus.TimeStamp = DateTimeOffset.Now.ToUnixTimeSeconds();
     }
 }
