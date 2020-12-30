@@ -5,6 +5,12 @@ using UnityEngine;
 [Serializable]
 public class TicketPrinter
 {
+    public static readonly int[] PriceScaler = { 1, 2, 5 };
+
+    // Tracks the order of the printers for price scaling
+    [SerializeField]
+    private int printerIndex;
+
     // Interval and Batchsize are intrinsic value and can only be upgraded by going to the next printer type
     [SerializeField]
     private PrinterType printer;
@@ -51,6 +57,12 @@ public class TicketPrinter
     [SerializeField]
     private bool isAttended;
 
+    public int PrinterIndex
+    {
+        get { return printerIndex; }
+        set { printerIndex = value; }
+    }
+
     public float BatchTime
     {
         get { return batchTime; }
@@ -77,8 +89,8 @@ public class TicketPrinter
 
     public BigInteger CapacityUpgradeCost
     {
-        get { return capacityUpgradeCost.value; }
-        set { capacityUpgradeCost.value = value; }
+        get { return capacityUpgradeCost.value * PriceScaler[PrinterIndex]; }
+        set { capacityUpgradeCost.value = value;  }
     }
 
     public int CapacityCurrentLevel
@@ -107,7 +119,7 @@ public class TicketPrinter
 
     public BigInteger LuckUpgradeCost
     {
-        get { return luckUpgradeCost.value; }
+        get { return luckUpgradeCost.value * PriceScaler[PrinterIndex]; }
         set { luckUpgradeCost.value = value; }
     }
 
@@ -137,7 +149,7 @@ public class TicketPrinter
 
     public BigInteger PurchasePrice
     {
-        get { return purchasePrice.value; }
+        get { return purchasePrice.value * PriceScaler[PrinterIndex]; }
         set { purchasePrice.value = value; }
     }
 
@@ -279,40 +291,217 @@ public class TicketPrinter
             Type = type;
         }
     }
-    
+
+    public Sprite GetPrinterSprite()
+    {
+        Sprite sprite = null;
+        switch (Printer)
+        {
+            case TicketPrinter.PrinterType.Receipt:
+                sprite = GameOperations.loadSpriteFromPath("Sprites/Printers/Receipt");
+                break;
+            case TicketPrinter.PrinterType.Inkjet:
+                sprite = GameOperations.loadSpriteFromPath("Sprites/Printers/Inkjet");
+                break;
+            case TicketPrinter.PrinterType.Laser:
+                sprite = GameOperations.loadSpriteFromPath("Sprites/Printers/Laser");
+                break;
+            case TicketPrinter.PrinterType.Office:
+                sprite = GameOperations.loadSpriteFromPath("Sprites/Printers/Office");
+                break;
+            case TicketPrinter.PrinterType.Industrial:
+                sprite = GameOperations.loadSpriteFromPath("Sprites/Printers/Industrial");
+                break;
+            case TicketPrinter.PrinterType.Compact3D:
+                sprite = GameOperations.loadSpriteFromPath("Sprites/Printers/Compact3D");
+                break;
+            case TicketPrinter.PrinterType.Industrial3D:
+                sprite = GameOperations.loadSpriteFromPath("Sprites/Printers/Industrial3D");
+                break;
+            case TicketPrinter.PrinterType.Space:
+                sprite = GameOperations.loadSpriteFromPath("Sprites/Printers/Space");
+                break;
+            default:
+                sprite = GameOperations.loadSpriteFromPath("Sprites/Printers/Receipt");
+                break;
+        }
+        return sprite;
+    }
+
+    public TicketPrinter GetNextPrinter()
+    {
+        switch(Printer)
+        {
+            case TicketPrinter.PrinterType.Receipt:
+                return CreateTemporaryInkjet();
+            case TicketPrinter.PrinterType.Inkjet:
+                return CreateTemporaryLaser();
+            case TicketPrinter.PrinterType.Laser:
+                return null;
+            case TicketPrinter.PrinterType.Office:
+                return null;
+            case TicketPrinter.PrinterType.Industrial:
+                return null;
+            case TicketPrinter.PrinterType.Compact3D:
+                return null;
+            case TicketPrinter.PrinterType.Industrial3D:
+                return null;
+            case TicketPrinter.PrinterType.Space:
+                return null;
+            default:
+                return null;
+        }
+    }
+
+    public void TradeIn()
+    {
+        switch (Printer)
+        {
+            case TicketPrinter.PrinterType.Receipt:
+                UpgradeToInkjet();
+                break;
+            case TicketPrinter.PrinterType.Inkjet:
+                break;
+            case TicketPrinter.PrinterType.Laser:
+                break;
+            case TicketPrinter.PrinterType.Office:
+                break;
+            case TicketPrinter.PrinterType.Industrial:
+                break;
+            case TicketPrinter.PrinterType.Compact3D:
+                break;
+            case TicketPrinter.PrinterType.Industrial3D:
+                break;
+            case TicketPrinter.PrinterType.Space:
+                break;
+            default:
+                break;
+        }
+    }
+
     private TicketPrinter()
     {
-        batchTime = 0;
-        batchSize = new BigIntWrapper();
-        capacity = new BigIntWrapper();
-        capacityCurrentLevel = 0;
-        luck = 0;
-        luckCurrentLevel = 0;
-        isAttended = false;
-        isActive = false;
         ticket = TicketType.None;
+        isActive = false;
+        isAttended = false;
+        ticketsPrinted = new BigIntWrapper();
+
         printer = PrinterType.Receipt;
         purchasePrice = new BigIntWrapper();
-        ticketsPrinted = new BigIntWrapper();
+
+        batchTime = 0;
+        batchSize = new BigIntWrapper();
+
+        capacity = new BigIntWrapper();
+        capacityCurrentLevel = 0;
+        capacityMaxLevel = 1;
         capacityIncrement = new BigIntWrapper();
         capacityUpgradeCost = new BigIntWrapper();
+
+        luck = 0;
+        luckCurrentLevel = 0;
+        luckMaxLevel = 1;
+        luckIncrement = 1;
         luckUpgradeCost = new BigIntWrapper();
     }
 
     public static TicketPrinter CreateReceiptPrinter()
     {
-        TicketPrinter printer = new TicketPrinter();
+        TicketPrinter printer = new TicketPrinter
+        {
+            Printer = PrinterType.Receipt,
+            PurchasePrice = 100,
 
-        printer.batchTime = 30;
-        printer.batchSize = new BigIntWrapper(1);
-        printer.capacity = new BigIntWrapper(50);
-        printer.capacityIncrement = new BigIntWrapper(10);
-        printer.capacityMaxLevel = 5;
-        printer.luckIncrement = 1;
-        printer.luckMaxLevel = 5;
-        printer.capacityUpgradeCost = new BigIntWrapper(10);
-        printer.luckUpgradeCost = new BigIntWrapper(1);
+            BatchTime = 30,
+            BatchSize = 1,
+
+            Capacity = 50,
+            CapacityIncrement = 10,
+            CapacityMaxLevel = 5,
+            CapacityUpgradeCost = 10,
+
+            Luck = 0,
+            LuckIncrement = 1,
+            LuckMaxLevel = 5,
+            LuckUpgradeCost = 1
+        };
 
         return printer;
+    }
+
+    public static TicketPrinter CreateTemporaryInkjet()
+    {
+        TicketPrinter printer = new TicketPrinter
+        {
+            Printer = PrinterType.Inkjet,
+            PurchasePrice = 500,
+
+            BatchTime = 60,
+            BatchSize = 25,
+            Capacity = 250,
+            Luck = 3,
+        };
+
+        return printer;
+    }
+
+    public void UpgradeToInkjet()
+    {
+        Printer = PrinterType.Inkjet;
+        Ticket = TicketType.None;
+        PurchasePrice = 500;
+
+        BatchTime = 60;
+        BatchSize = 25;
+
+        Capacity = 250;
+        CapacityIncrement = 50;
+        CapacityCurrentLevel = 0;
+        CapacityMaxLevel = 10;
+        CapacityUpgradeCost = 100;
+
+        Luck = 3;
+        LuckIncrement = 1;
+        LuckCurrentLevel = 0;
+        LuckMaxLevel = 10;
+        LuckUpgradeCost = 3;
+    }
+
+    public static TicketPrinter CreateTemporaryLaser()
+    {
+        TicketPrinter printer = new TicketPrinter
+        {
+            Printer = PrinterType.Laser,
+            PurchasePrice = 1000000,
+
+            BatchTime = 90,
+            BatchSize = 100,
+            Capacity = 400,
+            Luck = 10,
+        };
+
+        return printer;
+    }
+
+    public void UpgradeToLaser()
+    {
+        Printer = PrinterType.Laser;
+        Ticket = TicketType.None;
+        PurchasePrice = 1000000;
+
+        BatchTime = 90;
+        BatchSize = 100;
+
+        Capacity = 400;
+        CapacityIncrement = 100;
+        CapacityCurrentLevel = 0;
+        CapacityMaxLevel = 10;
+        CapacityUpgradeCost = 100;
+
+        Luck = 10;
+        LuckIncrement = 1;
+        LuckCurrentLevel = 0;
+        LuckMaxLevel = 10;
+        LuckUpgradeCost = 5;
     }
 }

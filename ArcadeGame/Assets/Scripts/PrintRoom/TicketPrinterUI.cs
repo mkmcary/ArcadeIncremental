@@ -25,7 +25,7 @@ public class TicketPrinterUI : MonoBehaviour
 
     public void Populate()
     {
-        image.sprite = GetPrinterSprite();
+        image.sprite = activePrinter.GetPrinterSprite();
         trayText.text = GameOperations.bigIntToString(activePrinter.TicketsPrinted) + "/" + GameOperations.bigIntToString(activePrinter.Capacity);
         if (!activePrinter.IsActive)
         {
@@ -60,10 +60,10 @@ public class TicketPrinterUI : MonoBehaviour
         }
     }
 
-    private Sprite GetPrinterSprite()
+    public static Sprite GetPrinterSprite(TicketPrinter printer)
     {
         Sprite sprite = null;
-        switch (activePrinter.Printer)
+        switch (printer.Printer)
         {
             case TicketPrinter.PrinterType.Receipt:
                 sprite = GameOperations.loadSpriteFromPath("Sprites/Printers/Receipt");

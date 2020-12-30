@@ -4,7 +4,7 @@ using System.Numerics;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class SliderHelper : MonoBehaviour
+public class UpgradeBarHelper : MonoBehaviour
 {
     public Slider slider;
     public Text valueText;
@@ -15,7 +15,7 @@ public class SliderHelper : MonoBehaviour
         valueText.text = GameOperations.bigIntToString(number);
 
         // do scaling for the slider
-        slider.value = ((float) currentLevel) / ((float) maxLevel);
+        slider.value = ((float)currentLevel) / ((float)maxLevel);
     }
 
     public void Populate(int number, int currentLevel, int maxLevel)
@@ -35,15 +35,16 @@ public class SliderHelper : MonoBehaviour
         value = value / 10f;
         value += 0.1f;
 
-        if(value < 1f)
+        if (value < 1f)
         {
-            slider.value = (float) value;
-        } else
+            slider.value = (float)value;
+        }
+        else
         {
             // do further scaling (next overflow tier)
             Debug.Log("Next overflow tier should happen");
         }
-        
+
     }
 
     public void TimePopulate(float number)
@@ -51,7 +52,8 @@ public class SliderHelper : MonoBehaviour
         valueText.text = number + " s";
 
         // 600s -> 1 bar = 0.1
-        if(number == 600f) {
+        if (number == 600f)
+        {
             slider.value = 0.1f;
         }
 

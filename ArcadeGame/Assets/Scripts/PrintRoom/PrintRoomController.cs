@@ -45,6 +45,8 @@ public class PrintRoomController : MonoBehaviour
         gameObject.SetActive(true);
         buyPopUp.SetActive(false);
         upgradePopUp.SetActive(false);
+
+        GetComponent<PrinterTrader>().CloseTradeInPopUp();
     }
 
     // This method is called every .02 seconds.

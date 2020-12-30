@@ -1,81 +1,84 @@
 PawnStatus.json
 {
     "money": {
-        "valueString": "5900"
+        "valueString": "54106"
     },
-    "timeStamp": 1609275568,
+    "timeStamp": 1609362217,
     "printers": [
         {
-            "printer": 0,
-            "batchTime": 30.0,
+            "printerIndex": 0,
+            "printer": 1,
+            "batchTime": 60.0,
             "batchSize": {
-                "valueString": "1"
+                "valueString": "25"
             },
             "capacity": {
-                "valueString": "50"
+                "valueString": "300"
             },
             "capacityIncrement": {
-                "valueString": "10"
+                "valueString": "50"
             },
             "capacityUpgradeCost": {
-                "valueString": "10"
+                "valueString": "200"
             },
-            "capacityCurrentLevel": 0,
-            "capacityMaxLevel": 5,
-            "luck": 0,
+            "capacityCurrentLevel": 1,
+            "capacityMaxLevel": 10,
+            "luck": 3,
             "luckIncrement": 1,
             "luckUpgradeCost": {
-                "valueString": "1"
+                "valueString": "3"
             },
             "luckCurrentLevel": 0,
-            "luckMaxLevel": 5,
+            "luckMaxLevel": 10,
             "isActive": true,
             "purchasePrice": {
-                "valueString": "100"
+                "valueString": "10000"
             },
             "ticket": 1,
             "ticketsPrinted": {
-                "valueString": "1"
+                "valueString": "25"
             },
-            "printTimer": 12.340092658996582,
+            "printTimer": 4.519996643066406,
             "isAttended": false
         },
         {
-            "printer": 0,
-            "batchTime": 30.0,
+            "printerIndex": 1,
+            "printer": 1,
+            "batchTime": 60.0,
             "batchSize": {
-                "valueString": "1"
+                "valueString": "25"
             },
             "capacity": {
-                "valueString": "50"
+                "valueString": "250"
             },
             "capacityIncrement": {
-                "valueString": "10"
+                "valueString": "50"
             },
             "capacityUpgradeCost": {
-                "valueString": "10"
+                "valueString": "100"
             },
             "capacityCurrentLevel": 0,
-            "capacityMaxLevel": 5,
-            "luck": 0,
+            "capacityMaxLevel": 10,
+            "luck": 3,
             "luckIncrement": 1,
             "luckUpgradeCost": {
-                "valueString": "1"
+                "valueString": "3"
             },
             "luckCurrentLevel": 0,
-            "luckMaxLevel": 5,
-            "isActive": false,
+            "luckMaxLevel": 10,
+            "isActive": true,
             "purchasePrice": {
-                "valueString": "3000"
+                "valueString": "10000"
             },
-            "ticket": 0,
+            "ticket": 1,
             "ticketsPrinted": {
                 "valueString": "0"
             },
-            "printTimer": 0.0,
+            "printTimer": 58.721153259277347,
             "isAttended": false
         },
         {
+            "printerIndex": 2,
             "printer": 0,
             "batchTime": 30.0,
             "batchSize": {
@@ -101,7 +104,7 @@ PawnStatus.json
             "luckMaxLevel": 5,
             "isActive": false,
             "purchasePrice": {
-                "valueString": "99999999999"
+                "valueString": "100"
             },
             "ticket": 0,
             "ticketsPrinted": {

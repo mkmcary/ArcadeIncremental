@@ -35,13 +35,13 @@ ArcadeStatus.json
     },
     "debugStatus": {
         "tickets": {
-            "valueString": "0"
+            "valueString": "150"
         },
         "highScore": {
-            "valueString": "6000000"
+            "valueString": "33150000"
         },
         "cumulativeScore": {
-            "valueString": "6000000"
+            "valueString": "33550000"
         },
         "isActive": true,
         "doublePoints": {

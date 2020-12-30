@@ -13,12 +13,13 @@ public class PrinterModifier : MonoBehaviour
 
     [Header("Pop Up")]
     public GameObject popUp;
+    public Image printerImage;
 
-    [Header("Sliders")]
-    public SliderHelper batchSizeSlider;
-    public SliderHelper batchTimeSlider;
-    public SliderHelper capacitySlider;
-    public SliderHelper luckSlider;
+    [Header("Upgrade Bars")]
+    public UpgradeBarHelper batchSizeBar;
+    public UpgradeBarHelper batchTimeBar;
+    public UpgradeBarHelper capacityBar;
+    public UpgradeBarHelper luckBar;
 
     [Header("Dropdown")]
     public Dropdown ticketDropdown;
@@ -31,6 +32,14 @@ public class PrinterModifier : MonoBehaviour
     public Button upgradeLuckButton;
     public Text upgradeLuckText;
 
+    [Header("Pop Up Progress Bar")]
+    public Slider popUpProgressBar;
+    public Text popUpProgressText;
+
+    [Header("Trade In")]
+    public Image currentPrinterImage;
+    public Image nextPrinterImage;
+
     private List<TicketAssociation> ticketAssociations;
 
     public void InitializePopUp(TicketPrinter printer)
@@ -38,7 +47,10 @@ public class PrinterModifier : MonoBehaviour
         pawnStatus = PawnManager.ReadPawnStatus();
         this.printer = printer;
         popUp.SetActive(true);
-        InitializeSliders();
+        InitializeUpgradeBars();
+
+        printerImage.sprite = printer.GetPrinterSprite();
+        popUpProgressBar.maxValue = printer.BatchTime;
 
         // set up upgrade buttons
         UpdateUpgradeButtons();
@@ -46,12 +58,12 @@ public class PrinterModifier : MonoBehaviour
         InitializeTicketDropDown();
     }
 
-    private void InitializeSliders()
+    private void InitializeUpgradeBars()
     {
-        batchSizeSlider.LogarithmicPopulate(printer.BatchSize);
-        batchTimeSlider.TimePopulate(printer.BatchTime);
-        capacitySlider.Populate(printer.Capacity, printer.CapacityCurrentLevel, printer.CapacityMaxLevel);
-        luckSlider.Populate(printer.Luck, printer.LuckCurrentLevel, printer.LuckMaxLevel);
+        batchSizeBar.LogarithmicPopulate(printer.BatchSize);
+        batchTimeBar.TimePopulate(printer.BatchTime);
+        capacityBar.Populate(printer.Capacity, printer.CapacityCurrentLevel, printer.CapacityMaxLevel);
+        luckBar.Populate(printer.Luck, printer.LuckCurrentLevel, printer.LuckMaxLevel);
     }
 
     private void InitializeTicketDropDown()
@@ -105,7 +117,8 @@ public class PrinterModifier : MonoBehaviour
         ticketDropdown.options = options;
 
         // set to the current type
-        ticketDropdown.value = selection.listIndex;
+        ticketDropdown.SetValueWithoutNotify(selection.listIndex);
+        ticketDropdown.RefreshShownValue();
     }
 
     private void UpdateUpgradeButtons()
@@ -144,6 +157,10 @@ public class PrinterModifier : MonoBehaviour
         {
             upgradeCapacityButton.interactable = true;
         }
+
+        // Trade In Updates
+        currentPrinterImage.sprite = printer.GetPrinterSprite();
+        nextPrinterImage.sprite = printer.GetNextPrinter().GetPrinterSprite();
     }
 
     public void ChangeTicketType(int index)
@@ -178,7 +195,7 @@ public class PrinterModifier : MonoBehaviour
         printer.UpgradeCapacity();
 
         // ui updates
-        InitializeSliders();
+        InitializeUpgradeBars();
         UpdateUpgradeButtons();
         printRoomController.Repopulate();
     }
@@ -190,9 +207,14 @@ public class PrinterModifier : MonoBehaviour
         printer.UpgradeLuck();
 
         // ui updates
-        InitializeSliders();
+        InitializeUpgradeBars();
         UpdateUpgradeButtons();
         printRoomController.Repopulate();
+    }
+
+    public void InitializeTradeInPopUp()
+    {
+        GetComponent<PrinterTrader>().InitializePopUp(printer);
     }
 
     public class TicketAssociation
@@ -211,6 +233,16 @@ public class PrinterModifier : MonoBehaviour
             this.ticketType = type;
             this.label = label;
             this.imagePath = path;
+        }
+    }
+
+    private void FixedUpdate()
+    {
+        if(printer != null)
+        {
+            popUpProgressBar.value = printer.PrintTimer;
+            float timer = Mathf.Floor(printer.BatchTime - printer.PrintTimer);
+            popUpProgressText.text = timer.ToString("N0") + " S";
         }
     }
 
