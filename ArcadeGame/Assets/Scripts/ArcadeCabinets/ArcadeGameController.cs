@@ -13,20 +13,20 @@ public abstract class ArcadeGameController : MonoBehaviour
     public Text scoreText;
 
     /** The active number of points for this game session. */
-    public BigInteger score;
+    protected BigInteger score;
 
-    public abstract BigInteger initalScore { get; }
+    public abstract BigInteger InitalScore { get; }
 
     // Start is called before the first frame update
     public virtual void Start()
     {
         arcadeStatus = ArcadeManager.ReadArcadeStatus();
-
-        updateScore(initalScore);
+        score = InitalScore;
+        UpdateScore();
     }
     
     /** The generic activity when a game is ended. */
-    public virtual void endGame()
+    public virtual void EndGame()
     {
         ArcadeManager.WriteArcadeStatus();
     }
@@ -35,9 +35,8 @@ public abstract class ArcadeGameController : MonoBehaviour
      * Updates the game score to the given score.
      * @param score the new score.
      */
-    public void updateScore(BigInteger score)
+    public virtual void UpdateScore()
     {
-        this.score = score;
-        scoreText.text = "Current Points: " + GameOperations.bigIntToString(score);
+        scoreText.text = GameOperations.bigIntToString(score);
     }
 }

@@ -12,7 +12,7 @@ public class DebugGameController : ArcadeGameController
     /** The text to display the number of tickets the user has. */
     public Text ticketsText;
 
-    public override BigInteger initalScore
+    public override BigInteger InitalScore
     {
         get { return 0; }
     }
@@ -30,7 +30,7 @@ public class DebugGameController : ArcadeGameController
     /**
      * Used to end the game.
      */
-    public override void endGame()
+    public override void EndGame()
     {
         BigInteger pointsToAdd = score;
 
@@ -48,7 +48,7 @@ public class DebugGameController : ArcadeGameController
         arcadeStatus.DebugStatus.CumulativeScore += score;
 
         //temporary functionality
-        base.endGame();
+        base.EndGame();
         SceneManager.LoadScene("MenuScene");
     }
 
@@ -57,11 +57,13 @@ public class DebugGameController : ArcadeGameController
     /**
      * Used to update the points from the input field.
      */
-    public void gainScore()
+    public void GainScore()
     {
         string inputString = inputText.text;
         long pointsToAdd = long.Parse(inputString);
 
-        updateScore(score + pointsToAdd);
+        score += pointsToAdd;
+
+        UpdateScore();
     }
 }
