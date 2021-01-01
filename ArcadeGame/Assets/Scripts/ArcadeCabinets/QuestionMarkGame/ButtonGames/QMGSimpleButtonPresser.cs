@@ -13,12 +13,12 @@ public class QMGSimpleButtonPresser : QMGButtonTask
     [Header("Game Constants")]
     public int minClicks = 5;
     public int maxClicks = 10;
-    public int xMax = 835;
-    public int yMax = 415;
+    public List<RectTransform> Locations;
 
     // game values
     private int numTimesPressed;
     private int targetPresses;
+    private int currentPosition;
     
     public override void Activate()
     {
@@ -26,15 +26,22 @@ public class QMGSimpleButtonPresser : QMGButtonTask
 
         RandomizePosition();
         numTimesPressed = 0;
+        currentPosition = 0;
         targetPresses = Random.Range(minClicks, maxClicks);
         pressesText.text = "Presses Remaining: " + targetPresses;
     }
 
     private void RandomizePosition()
     {
-        int x = Random.Range(-xMax, xMax);
-        int y = Random.Range(-yMax, yMax);
+        int nextPosition = Random.Range(0, Locations.Count - 1);
+        while(nextPosition == currentPosition)
+        {
+            nextPosition = Random.Range(0, Locations.Count - 1);
+        }
+        int x = (int) Locations[nextPosition].localPosition.x;
+        int y = (int)Locations[nextPosition].localPosition.y;
         button.GetComponent<RectTransform>().anchoredPosition = new Vector2(x, y);
+        currentPosition = nextPosition;
     }
 
     public void OnButtonClick()

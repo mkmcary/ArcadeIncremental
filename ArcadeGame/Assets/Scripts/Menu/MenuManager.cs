@@ -4,17 +4,13 @@ using UnityEngine;
 
 public class MenuManager : MonoBehaviour
 {
-    public List<GameObject> allScreens;
-
     public GameObject cabinetScreen;
     public GameObject debugMenu;
+    public GameObject QMGMenu;
 
     private void Start()
     {
-        // set all to inactive
-        foreach(GameObject go in allScreens) {
-            go.SetActive(false);
-        }
+        HideAllScreens();
 
         // set the correct one to visible
         switch(ArcadeManager.activeScreen)
@@ -25,6 +21,24 @@ public class MenuManager : MonoBehaviour
             case ArcadeManager.menuScreen.debugGameMenu:
                 debugMenu.SetActive(true);
                 break;
+            case ArcadeManager.menuScreen.QMGMenu:
+                QMGMenu.SetActive(true);
+                break;
+        }
+    }
+
+    private void HideAllScreens()
+    {
+        List<GameObject> allScreens = new List<GameObject>();
+        // set all to inactive
+        GameObject[] menuScreens = GameObject.FindGameObjectsWithTag("MenuScreen");
+        GameObject[] cabinetScreens = GameObject.FindGameObjectsWithTag("CabinetMenuScreen");
+        allScreens.AddRange(menuScreens);
+        allScreens.AddRange(cabinetScreens);
+
+        foreach (GameObject go in allScreens)
+        {
+            go.SetActive(false);
         }
     }
 

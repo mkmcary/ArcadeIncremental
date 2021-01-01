@@ -6,11 +6,8 @@ using UnityEngine.UI;
 public abstract class ShopController : MonoBehaviour
 {
     /** The CabinetStatus for this Shop. */
-    public ArcadeStatus arcadeStatus;
-    public LayerZeroStatus status;
-
-    /** The PopUpPanel in the shop screen. */
-    public GameObject popUpPanel;
+    protected ArcadeStatus arcadeStatus;
+    protected LayerZeroStatus status;
 
     /** The currently viewed upgrade. */
     public ShopUpgrade activeUpgrade;
@@ -19,6 +16,9 @@ public abstract class ShopController : MonoBehaviour
     /** All the ShopUpgradeUIs. */
     public List<ShopUpgradeUI> upgradeUIs;
 
+    [Header("PopUp UI")]
+    /** The PopUpPanel in the shop screen. */
+    public GameObject popUpPanel;
     /** The Upgrade UI. */
     public Image image;
     public Text nameText;
@@ -60,10 +60,10 @@ public abstract class ShopController : MonoBehaviour
      */
     private void initializePopUp()
     {
-        image.sprite = GameOperations.loadSpriteFromPath(activeUpgrade.sprite);
+        image.sprite = GameOperations.LoadSpriteFromPath(activeUpgrade.sprite);
         nameText.text = activeUpgrade.upgradeName;
         descriptionText.text = activeUpgrade.description;
-        priceText.text = GameOperations.bigIntToString(activeUpgrade.price.value) + " Tickets";
+        priceText.text = GameOperations.BigIntToString(activeUpgrade.price.value) + " Tickets";
 
         if (activeUpgrade.currentLevel == activeUpgrade.maxLevel)
         {
@@ -91,7 +91,7 @@ public abstract class ShopController : MonoBehaviour
      */
     public void updateTicketText()
     {
-        ticketText.text = GameOperations.bigIntToString(status.Tickets);
+        ticketText.text = GameOperations.BigIntToString(status.Tickets);
     }
 
     /**

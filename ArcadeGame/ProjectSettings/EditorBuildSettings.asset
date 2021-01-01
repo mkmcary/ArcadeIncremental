@@ -6,36 +6,12 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/Scenes/Legacy/CabinetScene.unity
-    guid: ff733ef9b22ae01489ad08aa12353920
-  - enabled: 1
-    path: Assets/Scenes/Legacy/ArcadeCabinetScenes/QuestionMarkGame/QuestionMarkTitleScene.unity
-    guid: 68944ba175f028249924ea55f5eb9b1d
-  - enabled: 1
-    path: Assets/Scenes/ArcadeCabinetScenes/FlappyBirdScene.unity
-    guid: f1859e45aa56f3849a0147f749310e6b
-  - enabled: 1
-    path: Assets/Scenes/ArcadeCabinetScenes/GalagaScene.unity
-    guid: fb757f951fb851244bc8d622ba859f31
-  - enabled: 1
-    path: Assets/Scenes/ArcadeCabinetScenes/MinesweeperScene.unity
-    guid: b96579be0610d7f4b8c69eed0633e9d4
-  - enabled: 1
-    path: Assets/Scenes/Legacy/ArcadeCabinetScenes/DebugGame/DebugTitleScene.unity
-    guid: 97e626f175625ae47a8f73317932267a
+    path: Assets/Scenes/MenuScene.unity
+    guid: b80787205ff17c040a72cad10279fdc1
   - enabled: 1
     path: Assets/Scenes/ArcadeGames/DebugGameScene.unity
     guid: 7d2080838f61c4f4caf1ce99f315a7f5
   - enabled: 1
-    path: Assets/Scenes/Legacy/ArcadeCabinetScenes/DebugGame/DebugShopScene.unity
-    guid: 435379953a5b7a6408463712812d3d9f
-  - enabled: 1
-    path: Assets/Scenes/Legacy/TicketCenter/TicketConversionScene.unity
-    guid: 736e8d9c08315634182da1082d3e4352
-  - enabled: 1
-    path: Assets/Scenes/Legacy/TicketCenter/TicketMenuScene.unity
-    guid: a90b6d1f592206a4db5f8c71522ad403
-  - enabled: 1
-    path: Assets/Scenes/Legacy/TicketCenter/PrizeCounterScene.unity
-    guid: 3d1f409dc88fe0b438d03852d29fe444
+    path: Assets/Scenes/ArcadeGames/QMGGameScene.unity
+    guid: d858e61aae85e9f4b895297e5129970b
   m_configObjects: {}

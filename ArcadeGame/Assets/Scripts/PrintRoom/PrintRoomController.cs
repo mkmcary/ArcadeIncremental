@@ -32,7 +32,7 @@ public class PrintRoomController : MonoBehaviour
                 printers.Add(pawnStatus.Printers[i]);
             }
         }
-        walletText.text = GameOperations.bigIntToString(pawnStatus.Money);
+        walletText.text = GameOperations.BigIntToString(pawnStatus.Money);
 
         UpdateFromReturn();
         // Temp until Scroll
@@ -97,7 +97,7 @@ public class PrintRoomController : MonoBehaviour
         {
             ticketPrinterUIs[i].Populate();
         }
-        walletText.text = GameOperations.bigIntToString(pawnStatus.Money);
+        walletText.text = GameOperations.BigIntToString(pawnStatus.Money);
     }
 
     public void RecordTimeStamp()

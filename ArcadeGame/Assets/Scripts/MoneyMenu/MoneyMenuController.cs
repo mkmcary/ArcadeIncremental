@@ -43,7 +43,7 @@ public class MoneyMenuController : MonoBehaviour
         closePopUp();
         pawnStatus = PawnManager.ReadPawnStatus();
         arcadeStatus = ArcadeManager.ReadArcadeStatus();
-        moneyText.text = GameOperations.bigIntToString(pawnStatus.Money);
+        moneyText.text = GameOperations.BigIntToString(pawnStatus.Money);
     }
 
     public void initializePopUp()
@@ -52,7 +52,7 @@ public class MoneyMenuController : MonoBehaviour
         calculateMoneyToReceive();
 
         popUp.SetActive(true);
-        descriptionText.text = "Best I Can Do Is:\n$" + GameOperations.bigIntToString(moneyToReceive);
+        descriptionText.text = "Best I Can Do Is:\n$" + GameOperations.BigIntToString(moneyToReceive);
     }
 
     private void calculateMoneyToReceive()
@@ -101,13 +101,13 @@ public class MoneyMenuController : MonoBehaviour
 
         // do whatever is needed to display breakdown data
         // show game tickets
-        gameTicketsText.text = "$" + GameOperations.bigIntToString(moneyFromGameTickets);
+        gameTicketsText.text = "$" + GameOperations.BigIntToString(moneyFromGameTickets);
 
         // show prize tickets
-        prizeTicketsText.text = "$" + GameOperations.bigIntToString(moneyFromPrizeTickets);
+        prizeTicketsText.text = "$" + GameOperations.BigIntToString(moneyFromPrizeTickets);
 
         // show prizes
-        prizesText.text = "$" + GameOperations.bigIntToString(moneyFromPrizes);
+        prizesText.text = "$" + GameOperations.BigIntToString(moneyFromPrizes);
 
         // show individual prizes
         int xPos = 50;
@@ -131,7 +131,7 @@ public class MoneyMenuController : MonoBehaviour
 
             // set text
             lineItem.GetComponent<Text>().text = prizesOwned[i].upgradeName;
-            lineItem.transform.GetChild(0).GetComponent<Text>().text = "$" + GameOperations.bigIntToString(prizesOwned[i].MoneyValue.value);
+            lineItem.transform.GetChild(0).GetComponent<Text>().text = "$" + GameOperations.BigIntToString(prizesOwned[i].MoneyValue.value);
         }
 
         // make total
@@ -148,7 +148,7 @@ public class MoneyMenuController : MonoBehaviour
         yPos += yOffset;
 
         // set text
-        total.transform.GetChild(0).GetComponent<Text>().text = "$" + GameOperations.bigIntToString(moneyToReceive);
+        total.transform.GetChild(0).GetComponent<Text>().text = "$" + GameOperations.BigIntToString(moneyToReceive);
 
         // adjust 
         RectTransform contentTransform = contentTab.GetComponent<RectTransform>();

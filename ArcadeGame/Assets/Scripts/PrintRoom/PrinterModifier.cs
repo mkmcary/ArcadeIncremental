@@ -104,7 +104,7 @@ public class PrinterModifier : MonoBehaviour
         {
             // construct options
             TicketAssociation curr = ticketAssociations[i];
-            options.Add(new Dropdown.OptionData(curr.label, GameOperations.loadSpriteFromPath(curr.imagePath)));
+            options.Add(new Dropdown.OptionData(curr.label, GameOperations.LoadSpriteFromPath(curr.imagePath)));
 
             // find the one that matches our ticket type
             if(curr.ticketType == printer.Ticket)
@@ -124,8 +124,8 @@ public class PrinterModifier : MonoBehaviour
     private void UpdateUpgradeButtons()
     {
         upgradeBatchSizeText.text = "N/A";
-        upgradeLuckText.text = GameOperations.bigIntToString(printer.LuckUpgradeCost);
-        upgradeCapacityText.text = GameOperations.bigIntToString(printer.CapacityUpgradeCost);
+        upgradeLuckText.text = GameOperations.BigIntToString(printer.LuckUpgradeCost);
+        upgradeCapacityText.text = GameOperations.BigIntToString(printer.CapacityUpgradeCost);
 
         // batch size
         upgradeBatchSizeButton.gameObject.SetActive(false);

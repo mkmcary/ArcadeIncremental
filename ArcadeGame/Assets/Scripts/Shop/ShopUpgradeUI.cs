@@ -29,9 +29,9 @@ public class ShopUpgradeUI : MonoBehaviour
 
     public virtual void populate()
     {
-        image.sprite = GameOperations.loadSpriteFromPath(activeUpgrade.sprite);
+        image.sprite = GameOperations.LoadSpriteFromPath(activeUpgrade.sprite);
         nameText.text = activeUpgrade.upgradeName;
-        priceText.text = GameOperations.bigIntToString(activeUpgrade.price.value) + " Tickets";
+        priceText.text = GameOperations.BigIntToString(activeUpgrade.price.value) + " Tickets";
         levelText.text = activeUpgrade.currentLevel + " / " + activeUpgrade.maxLevel;
         if (activeUpgrade.currentLevel == activeUpgrade.maxLevel)
         {

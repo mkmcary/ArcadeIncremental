@@ -68,8 +68,8 @@ public class TicketConversionController : MonoBehaviour
 
     private void SetWalletText()
     {
-        prizeTicketText.text = GameOperations.bigIntToString(arcadeStatus.ArcadePrizeStatus.Tickets);
-        debugTicketText.text = GameOperations.bigIntToString(arcadeStatus.DebugStatus.Tickets);
+        prizeTicketText.text = GameOperations.BigIntToString(arcadeStatus.ArcadePrizeStatus.Tickets);
+        debugTicketText.text = GameOperations.BigIntToString(arcadeStatus.DebugStatus.Tickets);
     }
 
     /**
@@ -224,7 +224,7 @@ public class TicketConversionController : MonoBehaviour
             prizeTicketsToReceive += numberOfConversions * ticketConverts[i].outputAmount;
         }
 
-        conversionText.text = "You Will Receive:\n" + GameOperations.bigIntToString(prizeTicketsToReceive) + "\nPrize Tickets";
+        conversionText.text = "You Will Receive:\n" + GameOperations.BigIntToString(prizeTicketsToReceive) + "\nPrize Tickets";
     }
 
     public void Convert()

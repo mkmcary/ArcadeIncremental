@@ -35,13 +35,47 @@ ArcadeStatus.json
     },
     "debugStatus": {
         "tickets": {
-            "valueString": "150"
+            "valueString": "0"
         },
         "highScore": {
-            "valueString": "33150000"
+            "valueString": "0"
         },
         "cumulativeScore": {
-            "valueString": "33550000"
+            "valueString": "0"
+        },
+        "isActive": true,
+        "doublePoints": {
+            "sprite": "Sprites/Shop/Placeholder/doubleMult",
+            "price": {
+                "valueString": "1000"
+            },
+            "upgradeName": "Double Points",
+            "description": "Doubles the points received from playing this game.",
+            "currentLevel": 0,
+            "maxLevel": 5,
+            "sType": 1
+        },
+        "redUpgrade": {
+            "sprite": "Sprites/CabinetScene/Placeholder/redCabinet",
+            "price": {
+                "valueString": "99999999999"
+            },
+            "upgradeName": "Red Upgrade",
+            "description": "This upgrade is red.",
+            "currentLevel": 0,
+            "maxLevel": 3,
+            "sType": 0
+        }
+    },
+    "qmgStatus": {
+        "tickets": {
+            "valueString": "49"
+        },
+        "highScore": {
+            "valueString": "25"
+        },
+        "cumulativeScore": {
+            "valueString": "49"
         },
         "isActive": true,
         "doublePoints": {

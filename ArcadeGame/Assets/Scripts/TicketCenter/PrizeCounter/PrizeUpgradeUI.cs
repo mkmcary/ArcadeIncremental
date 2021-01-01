@@ -13,7 +13,7 @@ public class PrizeUpgradeUI : ShopUpgradeUI
      */
     public override void populate()
     {
-        image.sprite = GameOperations.loadSpriteFromPath(activeUpgrade.sprite);
+        image.sprite = GameOperations.LoadSpriteFromPath(activeUpgrade.sprite);
         if(activeUpgrade.currentLevel == 0)
         {
             image.color = tintColor;

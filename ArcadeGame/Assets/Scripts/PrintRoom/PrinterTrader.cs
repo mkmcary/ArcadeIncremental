@@ -30,7 +30,7 @@ public class PrinterTrader : MonoBehaviour
 
         popUp.SetActive(true);
         printerImage.sprite = nextPrinter.GetPrinterSprite();
-        priceText.text = "This Will Cost:\n$" + GameOperations.bigIntToString(nextPrinter.PurchasePrice);
+        priceText.text = "This Will Cost:\n$" + GameOperations.BigIntToString(nextPrinter.PurchasePrice);
 
         if(pawnStatus.Money < nextPrinter.PurchasePrice)
         {

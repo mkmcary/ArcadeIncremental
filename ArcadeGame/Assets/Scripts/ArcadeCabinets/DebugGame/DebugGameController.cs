@@ -24,7 +24,7 @@ public class DebugGameController : ArcadeGameController
     {
         base.Start();
 
-        ticketsText.text = "Current Tickets: " + GameOperations.bigIntToString(arcadeStatus.DebugStatus.Tickets);
+        ticketsText.text = "Current Tickets: " + GameOperations.BigIntToString(arcadeStatus.DebugStatus.Tickets);
     }
 
     /**

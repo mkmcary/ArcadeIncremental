@@ -9,7 +9,7 @@ public class GameOperations : MonoBehaviour
      * @param number The value to format
      * @return returns the custom formatted string of the number
      */
-    public static string bigIntToString(BigInteger number)
+    public static string BigIntToString(BigInteger number)
     {
         if (number < 10000000)
         {
@@ -44,7 +44,7 @@ public class GameOperations : MonoBehaviour
         return finalString.ToString();
     }
 
-    public static Sprite loadSpriteFromPath(string path)
+    public static Sprite LoadSpriteFromPath(string path)
     {
         return Resources.Load<Sprite>(path);
     }

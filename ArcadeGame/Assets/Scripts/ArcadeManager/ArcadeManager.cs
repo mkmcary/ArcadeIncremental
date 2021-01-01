@@ -13,7 +13,8 @@ public class ArcadeManager : MonoBehaviour
     private static string encryptedArcadeStatusPath = Application.dataPath + "/SaveData/EncryptedArcadeStatus.json";
 
     public enum menuScreen {
-        debugGameMenu = 1, 
+        debugGameMenu = 1,
+        QMGMenu = 2,
         cabinetScreen = 0
     }
 

@@ -37,6 +37,6 @@ public abstract class ArcadeGameController : MonoBehaviour
      */
     public virtual void UpdateScore()
     {
-        scoreText.text = GameOperations.bigIntToString(score);
+        scoreText.text = GameOperations.BigIntToString(score);
     }
 }

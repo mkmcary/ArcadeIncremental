@@ -12,7 +12,7 @@ public class UpgradeBarHelper : MonoBehaviour
     public void Populate(BigInteger number, int currentLevel, int maxLevel)
     {
         // display number
-        valueText.text = GameOperations.bigIntToString(number);
+        valueText.text = GameOperations.BigIntToString(number);
 
         // do scaling for the slider
         slider.value = ((float)currentLevel) / ((float)maxLevel);
@@ -21,7 +21,7 @@ public class UpgradeBarHelper : MonoBehaviour
     public void Populate(int number, int currentLevel, int maxLevel)
     {
         // display number
-        valueText.text = GameOperations.bigIntToString(new BigInteger(number));
+        valueText.text = GameOperations.BigIntToString(new BigInteger(number));
 
         // do scaling for the slider
         slider.value = ((float)currentLevel) / ((float)maxLevel);
@@ -29,7 +29,7 @@ public class UpgradeBarHelper : MonoBehaviour
 
     public void LogarithmicPopulate(BigInteger number)
     {
-        valueText.text = GameOperations.bigIntToString(number);
+        valueText.text = GameOperations.BigIntToString(number);
 
         double value = BigInteger.Log10(number);
         value = value / 10f;

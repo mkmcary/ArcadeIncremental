@@ -26,7 +26,7 @@ public class TicketPrinterUI : MonoBehaviour
     public void Populate()
     {
         image.sprite = activePrinter.GetPrinterSprite();
-        trayText.text = GameOperations.bigIntToString(activePrinter.TicketsPrinted) + "/" + GameOperations.bigIntToString(activePrinter.Capacity);
+        trayText.text = GameOperations.BigIntToString(activePrinter.TicketsPrinted) + "/" + GameOperations.BigIntToString(activePrinter.Capacity);
         if (!activePrinter.IsActive)
         {
             image.color = tintColor;
@@ -66,31 +66,31 @@ public class TicketPrinterUI : MonoBehaviour
         switch (printer.Printer)
         {
             case TicketPrinter.PrinterType.Receipt:
-                sprite = GameOperations.loadSpriteFromPath("Sprites/Printers/Receipt");
+                sprite = GameOperations.LoadSpriteFromPath("Sprites/Printers/Receipt");
                 break;
             case TicketPrinter.PrinterType.Inkjet:
-                sprite = GameOperations.loadSpriteFromPath("Sprites/Printers/Inkjet");
+                sprite = GameOperations.LoadSpriteFromPath("Sprites/Printers/Inkjet");
                 break;
             case TicketPrinter.PrinterType.Laser:
-                sprite = GameOperations.loadSpriteFromPath("Sprites/Printers/Laser");
+                sprite = GameOperations.LoadSpriteFromPath("Sprites/Printers/Laser");
                 break;
             case TicketPrinter.PrinterType.Office:
-                sprite = GameOperations.loadSpriteFromPath("Sprites/Printers/Office");
+                sprite = GameOperations.LoadSpriteFromPath("Sprites/Printers/Office");
                 break;
             case TicketPrinter.PrinterType.Industrial:
-                sprite = GameOperations.loadSpriteFromPath("Sprites/Printers/Industrial");
+                sprite = GameOperations.LoadSpriteFromPath("Sprites/Printers/Industrial");
                 break;
             case TicketPrinter.PrinterType.Compact3D:
-                sprite = GameOperations.loadSpriteFromPath("Sprites/Printers/Compact3D");
+                sprite = GameOperations.LoadSpriteFromPath("Sprites/Printers/Compact3D");
                 break;
             case TicketPrinter.PrinterType.Industrial3D:
-                sprite = GameOperations.loadSpriteFromPath("Sprites/Printers/Industrial3D");
+                sprite = GameOperations.LoadSpriteFromPath("Sprites/Printers/Industrial3D");
                 break;
             case TicketPrinter.PrinterType.Space:
-                sprite = GameOperations.loadSpriteFromPath("Sprites/Printers/Space");
+                sprite = GameOperations.LoadSpriteFromPath("Sprites/Printers/Space");
                 break;
             default:
-                sprite = GameOperations.loadSpriteFromPath("Sprites/Printers/Receipt");
+                sprite = GameOperations.LoadSpriteFromPath("Sprites/Printers/Receipt");
                 break;
         }
         return sprite;

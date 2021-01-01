@@ -52,7 +52,7 @@ public class PrinterBuyer : MonoBehaviour
         this.activePrinterUI = printerUI;
 
         // display price text
-        purchaseText.text = "This Purchase Will Cost:\n$" + GameOperations.bigIntToString(activePrinterUI.ActivePrinter.PurchasePrice);
+        purchaseText.text = "This Purchase Will Cost:\n$" + GameOperations.BigIntToString(activePrinterUI.ActivePrinter.PurchasePrice);
 
         // check if they have enough money to actually buy it
         if(pawnStatus.Money >= activePrinterUI.ActivePrinter.PurchasePrice)

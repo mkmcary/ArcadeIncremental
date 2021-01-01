@@ -5,6 +5,8 @@ TagManager:
   serializedVersion: 2
   tags:
   - SceneButton
+  - MenuScreen
+  - CabinetMenuScreen
   layers:
   - Default
   - TransparentFX
