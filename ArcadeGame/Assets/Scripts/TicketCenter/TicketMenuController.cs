@@ -8,6 +8,11 @@ public class TicketMenuController : MonoBehaviour
 {
     public Text prizeText;
 
+    private void Start()
+    {
+        Activate();
+    }
+
     public void Activate()
     {
         gameObject.SetActive(true);

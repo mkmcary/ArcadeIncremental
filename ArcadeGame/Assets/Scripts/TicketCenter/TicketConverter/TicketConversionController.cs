@@ -84,6 +84,10 @@ public class TicketConversionController : MonoBehaviour
         }
         // copy the previous if statement for future games
         // ...
+        if (arcadeStatus.QMGStatus.IsActive)
+        {
+            ticketConverts.Add(new TicketConvert("Sprites/Currency/Tickets/QMGTicket", "???", 3, 2, arcadeStatus.QMGStatus));
+        }
 
         // Initalize the UIs
         currentSetIndex = 0;

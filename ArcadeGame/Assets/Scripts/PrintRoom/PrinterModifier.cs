@@ -85,6 +85,13 @@ public class PrinterModifier : MonoBehaviour
             index++;
         }
 
+        if (arcadeStatus.QMGStatus.IsActive)
+        {
+            ticketAssociation = new TicketAssociation(index, TicketPrinter.TicketType.QMGTicket, "Mystery Ticket", "Sprites/Currency/Tickets/QMGTicket");
+            ticketAssociations.Add(ticketAssociation);
+            index++;
+        }
+
         // ...
         // Copy the above for each cabinet ticket
         // ...

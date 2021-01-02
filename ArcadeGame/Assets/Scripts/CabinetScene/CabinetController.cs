@@ -22,14 +22,7 @@ public class CabinetController : MonoBehaviour
     private int currentCabinet;
 
     //Contains the menus for the arcade games
-    public GameObject cabinetScreen;
     public List<GameObject> cabinetMenus;
-
-    // Start is called before the first frame update
-    void Start()
-    {
-        Activate();
-    }
 
     public void Activate()
     {
@@ -37,6 +30,7 @@ public class CabinetController : MonoBehaviour
 
         CreateCabinets();
         SetMachine();
+        gameObject.SetActive(true);
     }
 
     public void RotateLeft()
@@ -91,7 +85,7 @@ public class CabinetController : MonoBehaviour
         //SceneManager.LoadScene(arcadeCabinets[currentCabinet].scene);
 
         cabinetMenus[currentCabinet].SetActive(true);
-        cabinetScreen.SetActive(false);
+        gameObject.SetActive(false);
     }
 
     private void CreateCabinets()
