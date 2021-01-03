@@ -2,7 +2,7 @@ ArcadeStatus.json
 {
     "prizeStatus": {
         "tickets": {
-            "valueString": "216"
+            "valueString": "0"
         },
         "doublePoints": {
             "sprite": "Sprites/Shop/Placeholder/doubleMult",
@@ -35,13 +35,13 @@ ArcadeStatus.json
     },
     "debugStatus": {
         "tickets": {
-            "valueString": "0"
+            "valueString": "19000000"
         },
         "highScore": {
-            "valueString": "12120000"
+            "valueString": "15000000"
         },
         "cumulativeScore": {
-            "valueString": "12120000"
+            "valueString": "19000000"
         },
         "isActive": true,
         "doublePoints": {
@@ -69,13 +69,13 @@ ArcadeStatus.json
     },
     "qmgStatus": {
         "tickets": {
-            "valueString": "25"
+            "valueString": "0"
         },
         "highScore": {
-            "valueString": "25"
+            "valueString": "0"
         },
         "cumulativeScore": {
-            "valueString": "96"
+            "valueString": "0"
         },
         "isActive": true,
         "doublePoints": {
