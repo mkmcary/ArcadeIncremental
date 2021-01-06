@@ -138,7 +138,7 @@ public class PrinterModifier : MonoBehaviour
         upgradeBatchSizeButton.gameObject.SetActive(false);
 
         // luck
-        if (printer.LuckCurrentLevel == printer.LuckMaxLevel && pawnStatus.Money >= printer.LuckUpgradeCost)
+        if (printer.LuckCurrentLevel == printer.LuckMaxLevel || pawnStatus.Money < printer.LuckUpgradeCost)
         {
             upgradeLuckButton.interactable = false;
             if(printer.LuckCurrentLevel == printer.LuckMaxLevel)
@@ -152,7 +152,7 @@ public class PrinterModifier : MonoBehaviour
         }
 
         // capacity
-        if (printer.CapacityCurrentLevel == printer.CapacityMaxLevel && pawnStatus.Money >= printer.CapacityUpgradeCost)
+        if (printer.CapacityCurrentLevel == printer.CapacityMaxLevel || pawnStatus.Money < printer.CapacityUpgradeCost)
         {
             upgradeCapacityButton.interactable = false;
             if (printer.CapacityCurrentLevel == printer.CapacityMaxLevel)
@@ -198,8 +198,11 @@ public class PrinterModifier : MonoBehaviour
     public void UpgradeCapacity()
     {
         // transaction
-        pawnStatus.Money -= printer.CapacityUpgradeCost;
-        printer.UpgradeCapacity();
+        if (pawnStatus.Money >= printer.CapacityUpgradeCost)
+        {
+            pawnStatus.Money -= printer.CapacityUpgradeCost;
+            printer.UpgradeCapacity();
+        }
 
         // ui updates
         InitializeUpgradeBars();
@@ -210,8 +213,11 @@ public class PrinterModifier : MonoBehaviour
     public void UpgradeLuck()
     {
         // transaction
-        pawnStatus.Money -= printer.LuckUpgradeCost;
-        printer.UpgradeLuck();
+        if (pawnStatus.Money >= printer.LuckUpgradeCost)
+        {
+            pawnStatus.Money -= printer.LuckUpgradeCost;
+            printer.UpgradeLuck();
+        }
 
         // ui updates
         InitializeUpgradeBars();
