@@ -523,7 +523,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 309177890}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 15, y: 3.5, z: 0}
+  m_LocalPosition: {x: 15, y: 4, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1416996830}
@@ -842,7 +842,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 442524563}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: -3, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -889,12 +889,12 @@ Rigidbody2D:
   m_Mass: 1
   m_LinearDrag: 0
   m_AngularDrag: 0.05
-  m_GravityScale: 1
+  m_GravityScale: 2
   m_Material: {fileID: 0}
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 1
-  m_Constraints: 0
+  m_Constraints: 5
 --- !u!114 &442524568
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -907,7 +907,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1a20d7bfd882f404bbc18a6ea60759e1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  jumpHeight: 5
+  jumpHeight: 7
 --- !u!1 &563739533
 GameObject:
   m_ObjectHideFlags: 0
@@ -1495,9 +1495,26 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   groundSpawn: {fileID: 1971025363}
   ceilingSpawn: {fileID: 309177891}
-  spikeObstacle: {fileID: 8362316582686880170, guid: 5dcbf60e80359c34889e24ff7823babd,
-    type: 3}
-  wallObstacle: {fileID: 0}
+  spikeObstacles:
+  - {fileID: 2023615751564431234, guid: a61b5548e242b234eb8f4d539ecb8b83, type: 3}
+  - {fileID: 6185705744038938049, guid: a221bc714fa390d44ae2dbeddab13371, type: 3}
+  - {fileID: 276787947540364567, guid: b9f8a473a2b8a0744b213bfa1d4f5f28, type: 3}
+  - {fileID: 7073713442017471300, guid: a1b562b7c95290c4abb3c0b6c7a99a2a, type: 3}
+  - {fileID: 777003065223194495, guid: 48a485de7dff6d445bbb20fd750b11bc, type: 3}
+  wallObstacles:
+  - {fileID: 2134340362500310096, guid: b8a8ef160454e0b479e10c1bfc8a5fc0, type: 3}
+  - {fileID: 2898411284038488961, guid: 09d03e6e1df0ed14481e362969103e60, type: 3}
+  - {fileID: 4268440510845616013, guid: 7dd652a544c5f8046a049c768e0b4afc, type: 3}
+  - {fileID: 8087863207446403786, guid: b4cd2c385c984da499e74782e6e103db, type: 3}
+  - {fileID: 6643910084755242598, guid: 89f94b4ab15f0fc4481e73cddd4fdbf2, type: 3}
+  - {fileID: 3105361261614733614, guid: 72b8b577ae6656242b0bb02babb4cedc, type: 3}
+  - {fileID: 70658410252089909, guid: d134d7217f45e1a44822bc6d90884532, type: 3}
+  - {fileID: 3863857663607847018, guid: 20281659babe2ed4ba2ab00ecc3ba5d7, type: 3}
+  - {fileID: 2047897918997993677, guid: f8e2eb72cdefb254a8706eca090e5745, type: 3}
+  topSpikedWallObstacles:
+  - {fileID: 7111512776224174162, guid: 579515d037193e348bd72382071c7c49, type: 3}
+  - {fileID: 2125399259377943123, guid: 303ec1607ddc56642b6d10a1f221f039, type: 3}
+  - {fileID: 5880501288361755376, guid: 69d93aaaeb209b94aa5f37e1e299ab3c, type: 3}
 --- !u!4 &1416996830
 Transform:
   m_ObjectHideFlags: 0
@@ -2020,7 +2037,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1971025362}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 15, y: -3.5, z: 0}
+  m_LocalPosition: {x: 15, y: -4, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1416996830}
