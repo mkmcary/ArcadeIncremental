@@ -1410,7 +1410,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   runSpeed: 5
-  jumpForce: 6
+  jumpForce: 5
   climbSpeed: 2
   ladderMoveScalar: 0.2
 --- !u!1 &1170991246
