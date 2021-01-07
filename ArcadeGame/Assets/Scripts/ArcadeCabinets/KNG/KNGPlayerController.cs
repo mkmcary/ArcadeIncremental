@@ -46,11 +46,9 @@ public class KNGPlayerController : MonoBehaviour
         }
 
         // jump
-        if (Input.GetKeyDown(KeyCode.Space) && canJump)
+        if (Input.GetKeyDown(KeyCode.Space))
         {
-            rb.velocity = new Vector2(rb.velocity.x, jumpForce);
-            canJump = false;
-            isClimbing = false;
+            Jump();
         }
 
         // ladder climbing
@@ -97,6 +95,16 @@ public class KNGPlayerController : MonoBehaviour
         if(!isClimbing) 
         {
             rb.isKinematic = false;
+        }
+    }
+
+    public void Jump()
+    {
+        if (canJump)
+        {
+            rb.velocity = new Vector2(rb.velocity.x, jumpForce);
+            canJump = false;
+            isClimbing = false;
         }
     }
 

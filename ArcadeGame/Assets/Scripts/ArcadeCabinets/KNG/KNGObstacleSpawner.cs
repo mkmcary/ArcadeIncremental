@@ -12,7 +12,7 @@ public class KNGObstacleSpawner : MonoBehaviour
 
     private void Start()
     {
-        timer = 0;
+        timer = spawnInterval - 1f;
     }
 
     void FixedUpdate()

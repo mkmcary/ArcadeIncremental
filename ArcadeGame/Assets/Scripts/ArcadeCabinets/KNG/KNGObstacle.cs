@@ -5,18 +5,33 @@ using UnityEngine;
 public class KNGObstacle : MonoBehaviour
 {
     public float obstacleMomentum = 3f;
-    public bool goingLeft;
+    public float chanceToFall = 0.2f;
+
+
+    private bool goingLeft;
+    private bool grounded;
+    private Rigidbody2D rb;
 
     // Start is called before the first frame update
     void Start()
     {
         goingLeft = false;
+        grounded = false;
+        rb = gameObject.GetComponent<Rigidbody2D>();
     }
 
     // Update is called once per frame
-    void Update()
+    void FixedUpdate()
     {
-        
+        // limit speed
+        if(goingLeft && grounded)
+        {
+            rb.velocity = new Vector2(-obstacleMomentum, rb.velocity.y);
+        } 
+        else if(grounded)
+        {
+            rb.velocity = new Vector2(obstacleMomentum, rb.velocity.y);
+        }
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
@@ -34,27 +49,89 @@ public class KNGObstacle : MonoBehaviour
 
             if (platform != null)
             {
+                grounded = true;
                 if (platform.isObstacleFlipper)
                 {
                     // we hit a platform, flip momentum
-                    Rigidbody2D rb = gameObject.GetComponent<Rigidbody2D>();
-
-                    Debug.Log(rb.velocity.x);
-
-                    if (goingLeft)
-                    {
-                        rb.velocity = new Vector2(obstacleMomentum, 0);
-                        goingLeft = false;
-                    }
-                    else
-                    {
-                        rb.velocity = new Vector2(-obstacleMomentum, 0);
-                        goingLeft = true;
-                    }
-                    
-                    rb.angularVelocity = -rb.angularVelocity;
+                    ChangeDirection();
                 }
             }
         }
+    }
+
+    private void OnCollisionExit2D(Collision2D collision)
+    {
+        KNGPlatform platform = collision.gameObject.GetComponent<KNGPlatform>();
+
+        if (platform != null)
+        {
+            grounded = false;
+        }
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        KNGObstacleDropPoint drop = collision.gameObject.GetComponent<KNGObstacleDropPoint>();
+        if (drop != null)
+        {
+            KNGLadder ladder = drop.ladder;
+
+            // we need to decide whether to fall down this ladder or not
+            float rand = Random.Range(0f, 1f);
+            if (rand < chanceToFall)
+            {
+                // trigger fall
+                StartCoroutine(FallDownLadder(ladder));
+            }
+        }
+    }
+
+    private IEnumerator FallDownLadder(KNGLadder ladder)
+    {
+        CircleCollider2D coll = gameObject.GetComponent<CircleCollider2D>();
+
+        // set rigidbody to kinematic, collider to trigger
+        rb.isKinematic = true;
+        coll.isTrigger = true;
+        grounded = false;
+
+        rb.velocity = Vector2.zero;
+        rb.angularVelocity = 0f;
+        
+        Vector3 startPos = ladder.topOfLadder.position;
+        Vector3 endPos = ladder.bottomOfLadder.position;
+
+        // interpolate position between these two
+        for(float t = 0f; t <= 1f; t += 0.01f)
+        {
+            transform.position = Vector3.Lerp(startPos, endPos, t);
+            yield return new WaitForSeconds(0.01f);
+        }
+
+        // set back to original values
+        rb.isKinematic = false;
+        coll.isTrigger = false;
+
+        // change direction
+        ChangeDirection();
+    }
+
+    private void ChangeDirection()
+    {
+        /*
+        if (goingLeft)
+        {
+            rb.velocity = new Vector2(obstacleMomentum, 0);
+            goingLeft = false;
+        }
+        else
+        {
+            rb.velocity = new Vector2(-obstacleMomentum, 0);
+            goingLeft = true;
+        }*/
+        goingLeft = !goingLeft;
+        grounded = true;
+
+        rb.angularVelocity = -rb.angularVelocity;
     }
 }
