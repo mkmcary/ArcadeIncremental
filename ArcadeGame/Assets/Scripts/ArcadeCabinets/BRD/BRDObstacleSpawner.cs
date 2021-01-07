@@ -3,6 +3,8 @@ using UnityEngine;
 
 public class BRDObstacleSpawner : MonoBehaviour
 {
+    private BRDGameController gameController;
+
     // Spawn Locations
     public Transform groundSpawn;
     public Transform ceilingSpawn;
@@ -13,10 +15,20 @@ public class BRDObstacleSpawner : MonoBehaviour
     public List<GameObject> topSpikedWallObstacles;
 
     private float timer = 0;
-    private float interval = 3f;
+    private float interval = 1f;
+
+    private void Start()
+    {
+        gameController = GameObject.FindObjectOfType<BRDGameController>();
+    }
 
     private void FixedUpdate()
     {
+        if (!gameController.isPlaying)
+        {
+            return;
+        }
+
         timer += Time.fixedDeltaTime;
         if (timer >= interval)
         {

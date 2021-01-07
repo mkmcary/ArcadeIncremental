@@ -4,21 +4,30 @@ using UnityEngine;
 
 public class BRDObstacle : MonoBehaviour
 {
+    private BRDGameController gameController;
+
     public Vector2 velocity;
 
     private Rigidbody2D rigid;
 
-    private float killLocation = -10f;
+    private float killLocation = -20f;
 
     private void Start()
     {
         velocity = new Vector2(-5f, 0);
 
+        gameController = GameObject.FindObjectOfType<BRDGameController>();
         rigid = gameObject.GetComponent<Rigidbody2D>();
     }
 
     private void FixedUpdate()
     {
+        if (!gameController.isPlaying)
+        {
+            rigid.velocity = new Vector2(0, 0);
+            return;
+        }
+
         rigid.velocity = velocity;
         
         if(transform.position.x <= killLocation)
@@ -31,7 +40,7 @@ public class BRDObstacle : MonoBehaviour
     {
         if(collision.gameObject.GetComponent<BRDPlayerController>() != null)
         {
-            Debug.Log("Hit player");
+            gameController.EndGame();
         }
     }
 }

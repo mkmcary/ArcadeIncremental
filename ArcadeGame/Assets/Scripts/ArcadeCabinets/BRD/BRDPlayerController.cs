@@ -7,16 +7,15 @@ public class BRDPlayerController : MonoBehaviour
 {
     public float jumpHeight = 5f;
 
-    private SpriteRenderer spriteRenderer;
     private Rigidbody2D rigid;
 
-    private bool isFlipped;
+    public bool isFlipped;
 
     // Start is called before the first frame update
     void Start()
     {
-        spriteRenderer = gameObject.GetComponent<SpriteRenderer>();
         rigid = gameObject.GetComponent<Rigidbody2D>();
+
         isFlipped = false;
     }
 
@@ -42,5 +41,10 @@ public class BRDPlayerController : MonoBehaviour
         rigid.gravityScale *= -1;
     }
 
-    
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        BRDGameController gameController = FindObjectOfType<BRDGameController>();
+        gameController.RestoreJumps();
+        gameController.RestoreFlips();
+    }
 }
