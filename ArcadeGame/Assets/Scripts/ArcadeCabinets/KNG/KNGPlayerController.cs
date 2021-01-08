@@ -11,6 +11,9 @@ public class KNGPlayerController : MonoBehaviour
     public float climbSpeed = 2f;
     public float ladderMoveScalar = 0.2f;
 
+    // camera movement
+    public KNGCameraFollow cam;
+
     // the player's rigidbody component
     private Rigidbody2D rb;
 
@@ -33,11 +36,11 @@ public class KNGPlayerController : MonoBehaviour
     void Update()
     {
         // left and right
-        if(Input.GetKey(KeyCode.D))
+        if(Input.GetKey(KeyCode.D) && !isClimbing)
         {
             rb.velocity = new Vector2(runSpeed, rb.velocity.y);
         }
-        else if (Input.GetKey(KeyCode.A))
+        else if (Input.GetKey(KeyCode.A) && !isClimbing)
         {
             rb.velocity = new Vector2(-runSpeed, rb.velocity.y);
         } else
@@ -67,6 +70,7 @@ public class KNGPlayerController : MonoBehaviour
                 {
                     isClimbing = true;
                     rb.isKinematic = true;
+                    transform.position = new Vector3(currentLadder.transform.position.x, transform.position.y, transform.position.z);
                 }
 
                 // move up
@@ -105,6 +109,7 @@ public class KNGPlayerController : MonoBehaviour
             rb.velocity = new Vector2(rb.velocity.x, jumpForce);
             canJump = false;
             isClimbing = false;
+            cam.moveCam = false;
         }
     }
 
@@ -116,6 +121,7 @@ public class KNGPlayerController : MonoBehaviour
         {
             // we hit a platform, we can jump
             canJump = true;
+            cam.moveCam = true;
         }
         else if(other.GetComponent<KNGObstacle>() != null)
         {
