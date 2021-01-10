@@ -336,7 +336,7 @@ EdgeCollider2D:
   m_EdgeRadius: 0
   m_Points:
   - {x: -0.5, y: 0}
-  - {x: -0.49694067, y: 3.9942966}
+  - {x: -0.49987766, y: 3.9804635}
 --- !u!50 &2546470721532548738
 Rigidbody2D:
   serializedVersion: 4
@@ -356,7 +356,7 @@ Rigidbody2D:
   m_Material: {fileID: 0}
   m_Interpolate: 0
   m_SleepingMode: 1
-  m_CollisionDetection: 0
+  m_CollisionDetection: 1
   m_Constraints: 0
 --- !u!114 &735926689933513163
 MonoBehaviour:

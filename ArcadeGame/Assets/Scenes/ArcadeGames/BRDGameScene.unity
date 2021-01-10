@@ -745,7 +745,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: bce901e038b23fb4bb1f889485dd5a09, type: 3}
+  m_Sprite: {fileID: 21300000, guid: a364267c164be3c47843cb70912000de, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -783,18 +783,18 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
+  m_Offset: {x: -0.005256772, y: -0.0475384}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 1, y: 1}
+    oldSize: {x: 1.6, y: 1.6}
     newSize: {x: 1.5, y: 1.5}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 1, y: 1}
+  m_Size: {x: 1.3487873, y: 1.1008103}
   m_EdgeRadius: 0
 --- !u!50 &442524567
 Rigidbody2D:
@@ -829,7 +829,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1a20d7bfd882f404bbc18a6ea60759e1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  jumpHeight: 7
+  jumpHeight: 8
   isFlipped: 0
 --- !u!1 &563739533
 GameObject:
@@ -908,9 +908,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   scoreText: {fileID: 173613439}
   isPlaying: 0
+  isSpawning: 0
   jumpButton: {fileID: 1840152646}
   popUp: {fileID: 1015070917}
+  endGameText: {fileID: 1949806568}
   playerController: {fileID: 442524568}
+  winCondition: 0
 --- !u!1 &755544736
 GameObject:
   m_ObjectHideFlags: 0
@@ -1223,6 +1226,7 @@ RectTransform:
   m_Children:
   - {fileID: 919147495}
   - {fileID: 51511437}
+  - {fileID: 1949806567}
   m_Father: {fileID: 906295997}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -1440,6 +1444,10 @@ MonoBehaviour:
   - {fileID: 7111512776224174162, guid: 579515d037193e348bd72382071c7c49, type: 3}
   - {fileID: 2125399259377943123, guid: 303ec1607ddc56642b6d10a1f221f039, type: 3}
   - {fileID: 5880501288361755376, guid: 69d93aaaeb209b94aa5f37e1e299ab3c, type: 3}
+  bonusPoints: {fileID: 2642184796429988267, guid: e7781bd8b3557f94e9a541b0064e3cd6,
+    type: 3}
+  finishLine: {fileID: 594997648692230918, guid: c9701513278ac174ea5a26674c1c440f,
+    type: 3}
 --- !u!4 &1416996830
 Transform:
   m_ObjectHideFlags: 0
@@ -1935,6 +1943,84 @@ CanvasRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1874477159}
+  m_CullTransparentMesh: 0
+--- !u!1 &1949806566
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1949806567}
+  - component: {fileID: 1949806569}
+  - component: {fileID: 1949806568}
+  m_Layer: 5
+  m_Name: EndGameText
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &1949806567
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1949806566}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1015070918}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 0, y: 400}
+  m_SizeDelta: {x: 400, y: 70}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &1949806568
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1949806566}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5f7201a12d95ffc409449d95f23cf332, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_RaycastTarget: 1
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_FontData:
+    m_Font: {fileID: 12800000, guid: aa504f7fb9ae1f94fb5c3e2c0feecd5b, type: 3}
+    m_FontSize: 64
+    m_FontStyle: 0
+    m_BestFit: 0
+    m_MinSize: 6
+    m_MaxSize: 64
+    m_Alignment: 4
+    m_AlignByGeometry: 0
+    m_RichText: 1
+    m_HorizontalOverflow: 0
+    m_VerticalOverflow: 0
+    m_LineSpacing: 1
+  m_Text: You Died!
+--- !u!222 &1949806569
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1949806566}
   m_CullTransparentMesh: 0
 --- !u!1 &1971025362
 GameObject:

@@ -274,7 +274,7 @@ EdgeCollider2D:
   m_Offset: {x: 0, y: 0}
   m_EdgeRadius: 0
   m_Points:
-  - {x: -0.49027944, y: 6.9970665}
+  - {x: -0.49983737, y: 7.0001783}
   - {x: -0.49534333, y: 8.012624}
 --- !u!50 &7352326778601227914
 Rigidbody2D:
@@ -295,7 +295,7 @@ Rigidbody2D:
   m_Material: {fileID: 0}
   m_Interpolate: 0
   m_SleepingMode: 1
-  m_CollisionDetection: 0
+  m_CollisionDetection: 1
   m_Constraints: 0
 --- !u!114 &6968317912005597825
 MonoBehaviour:

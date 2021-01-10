@@ -1,16 +1,17 @@
 ﻿using System.Collections.Generic;
 using System.Numerics;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class BRDGameController : ArcadeGameController
 {
-    
-
     public bool isPlaying;
+    public bool isSpawning;
 
     [Header("UI")]
     public GameObject jumpButton;
     public GameObject popUp;
+    public Text endGameText;
 
     // Player Data
     public BRDPlayerController playerController;
@@ -30,6 +31,12 @@ public class BRDGameController : ArcadeGameController
     private float scoreTimer;
     private float scoreInterval;
 
+    // Win conditions
+    public bool winCondition;
+    private BigInteger scoreToWin;
+    private int multOnWin;
+
+
     // Start is called before the first frame update
     public override void Start()
     {
@@ -41,13 +48,14 @@ public class BRDGameController : ArcadeGameController
             playerController.Flip();
             RotateJumpButton();
         }
-        jumpsCap = 3;
-        flipsCap = 1;
+        jumpsCap = 5;
+        flipsCap = 3;
         RestoreJumps();
         RestoreFlips();
 
         DestroyObstacles();
 
+        endGameText.text = "You Died!";
         popUp.SetActive(false);
 
         scoreCounter = 0;
@@ -55,6 +63,11 @@ public class BRDGameController : ArcadeGameController
         scoreInterval = 5f;
         scoreIncrement = 10;
         scoreBreakPoint = 10;
+
+        isSpawning = true;
+        winCondition = false;
+        multOnWin = 2;
+        scoreToWin = 500;
     }
 
     private void FixedUpdate()
@@ -66,11 +79,18 @@ public class BRDGameController : ArcadeGameController
         scoreTimer += Time.fixedDeltaTime;
         if(scoreTimer >= scoreInterval)
         {
-            score += scoreIncrement;
+            GainScore(scoreIncrement);
             scoreTimer = 0;
             CheckScore();
             base.UpdateScore();
         }
+    }
+
+    public void GainScore(BigInteger score)
+    {
+        this.score += score;
+        CheckScore();
+        base.UpdateScore();
     }
 
     private void CheckScore()
@@ -80,6 +100,10 @@ public class BRDGameController : ArcadeGameController
         {
             scoreIncrement *= scoreCounter;
         }
+        if(score >= scoreToWin)
+        {
+            winCondition = true;
+        }
     }
 
     private void DestroyObstacles()
@@ -88,6 +112,18 @@ public class BRDGameController : ArcadeGameController
         for (int i = 0; i < obstacles.Length; i++){
             GameObject.Destroy(obstacles[i].gameObject);
         }
+        BRDFinishLine finishLine = FindObjectOfType<BRDFinishLine>();
+        if(finishLine != null)
+        {
+            GameObject.Destroy(finishLine.gameObject);
+        }
+    }
+
+    public void Win()
+    {
+        score *= multOnWin;
+        endGameText.text = "You Win!";
+        EndGame();
     }
 
     private void RotateJumpButton()

@@ -40,7 +40,17 @@ public class BRDObstacle : MonoBehaviour
     {
         if(collision.gameObject.GetComponent<BRDPlayerController>() != null)
         {
-            gameController.EndGame();
+            BRDBonusPoints bp = gameObject.GetComponent<BRDBonusPoints>();
+            if(bp != null)
+            {
+                gameController.GainScore(bp.points);
+                GameObject.Destroy(bp.gameObject);
+            }
+            else
+            {
+                gameController.EndGame();
+            }
+            
         }
     }
 }

@@ -13,9 +13,13 @@ public class BRDObstacleSpawner : MonoBehaviour
     public List<GameObject> spikeObstacles;
     public List<GameObject> wallObstacles;
     public List<GameObject> topSpikedWallObstacles;
+    public GameObject bonusPoints;
+    public GameObject finishLine;
+
+    private bool spawnPoints = false;
 
     private float timer = 0;
-    private float interval = 1f;
+    private float interval = 1.5f;
 
     private void Start()
     {
@@ -30,7 +34,7 @@ public class BRDObstacleSpawner : MonoBehaviour
         }
 
         timer += Time.fixedDeltaTime;
-        if (timer >= interval)
+        if (timer >= interval && gameController.isSpawning)
         {
             int topOrBottomRoll = Random.Range(0, 2);
             if (topOrBottomRoll == 0)
@@ -45,6 +49,12 @@ public class BRDObstacleSpawner : MonoBehaviour
             {
                 SpawnObstacle(groundSpawn.position);
                 SpawnObstacle(ceilingSpawn.position);
+            }
+
+            if (gameController.winCondition)
+            {
+                gameController.isSpawning = false;
+                SpawnFinishLine();
             }
 
             timer = 0;
@@ -81,6 +91,8 @@ public class BRDObstacleSpawner : MonoBehaviour
     {
         int length = Random.Range(0, spikeObstacles.Count);
         GameObject spike = Instantiate(spikeObstacles[length], location, Quaternion.identity);
+        float randomHeight = Random.Range(1, 5);
+        SpawnBonusPoints(location, flipped, randomHeight + .5f , length / 2);
         if (flipped)
         {
             Vector2 vTemp = spike.transform.localScale;
@@ -114,6 +126,7 @@ public class BRDObstacleSpawner : MonoBehaviour
     {
         int index = Random.Range(0, wallObstacles.Count);
         GameObject wall = Instantiate(wallObstacles[index], location, Quaternion.identity);
+        SpawnBonusPoints(location, flipped, index, 2);
         if (flipped)
         {
             Vector2 vTemp = wall.transform.localScale;
@@ -126,11 +139,39 @@ public class BRDObstacleSpawner : MonoBehaviour
     {
         int index = Random.Range(0, topSpikedWallObstacles.Count);
         GameObject spikedWall = Instantiate(topSpikedWallObstacles[index], location, Quaternion.identity);
+        SpawnBonusPoints(location, flipped, index + 3, 0);
         if (flipped)
         {
             Vector2 vTemp = spikedWall.transform.localScale;
             vTemp.y *= -1;
             spikedWall.transform.localScale = vTemp;
         }
+    }
+
+    private void SpawnBonusPoints(Vector3 location, bool flipped, float heightOffset, float xOffset)
+    {
+        if (spawnPoints)
+        {
+            heightOffset += .5f;
+            if (flipped)
+            {
+                heightOffset *= -1;
+                xOffset *= -1;
+            }
+            Vector2 temp = location;
+            temp.y += heightOffset;
+            temp.x += xOffset;
+            location = temp;
+            Instantiate(bonusPoints, location, Quaternion.identity);
+        }
+        spawnPoints = !spawnPoints;
+    }
+
+    private void SpawnFinishLine()
+    {
+        Vector3 spawn = groundSpawn.position;
+        spawn.x += 10;
+        spawn.y = 0;
+        Instantiate(finishLine, spawn, Quaternion.identity);
     }
 }

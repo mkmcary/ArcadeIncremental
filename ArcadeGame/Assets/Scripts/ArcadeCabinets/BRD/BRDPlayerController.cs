@@ -43,8 +43,13 @@ public class BRDPlayerController : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        BRDGameController gameController = FindObjectOfType<BRDGameController>();
-        gameController.RestoreJumps();
-        gameController.RestoreFlips();
+        if((!isFlipped && collision.gameObject.transform.position.y < transform.position.y) ||
+            (isFlipped && collision.gameObject.transform.position.y > transform.position.y))
+        {
+            BRDGameController gameController = FindObjectOfType<BRDGameController>();
+            gameController.RestoreJumps();
+            gameController.RestoreFlips();
+        }
+        
     }
 }
