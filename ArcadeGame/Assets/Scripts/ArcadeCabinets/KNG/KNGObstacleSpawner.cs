@@ -9,19 +9,28 @@ public class KNGObstacleSpawner : MonoBehaviour
     public float spawnInterval = 3f;
 
     private float timer;
+    private KNGGameController gameController;
 
     private void Start()
     {
+        gameController = GameObject.FindObjectOfType<KNGGameController>();
         timer = spawnInterval - 1f;
     }
 
     void FixedUpdate()
     {
-        timer += Time.fixedDeltaTime;
-        if(timer >= spawnInterval)
+        if (gameController.IsPlaying)
         {
-            SpawnObstacle();
-            timer = 0;
+            timer += Time.fixedDeltaTime;
+            if (timer >= spawnInterval)
+            {
+                SpawnObstacle();
+                timer = 0;
+            }
+        } 
+        else
+        {
+            timer = spawnInterval - 1f;
         }
     }
 

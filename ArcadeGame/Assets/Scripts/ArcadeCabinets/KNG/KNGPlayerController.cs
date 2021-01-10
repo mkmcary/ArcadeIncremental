@@ -24,9 +24,13 @@ public class KNGPlayerController : MonoBehaviour
     private KNGLadder currentLadder;
     private bool isClimbing;
 
+    // game controller
+    private KNGGameController gameController;
+
     // Start is called before the first frame update
     void Start()
     {
+        gameController = GameObject.FindObjectOfType<KNGGameController>();
         rb = GetComponent<Rigidbody2D>();
         currentLadder = null;
         isClimbing = false;
@@ -35,76 +39,81 @@ public class KNGPlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        // left and right
-        if(Input.GetKey(KeyCode.D) && !isClimbing)
+        if (gameController.IsPlaying)
         {
-            rb.velocity = new Vector2(runSpeed, rb.velocity.y);
-        }
-        else if (Input.GetKey(KeyCode.A) && !isClimbing)
-        {
-            rb.velocity = new Vector2(-runSpeed, rb.velocity.y);
-        } else
-        {
-            rb.velocity = new Vector2(0, rb.velocity.y);
-        }
-
-        // jump
-        if (Input.GetKeyDown(KeyCode.Space))
-        {
-            Jump();
-        }
-
-        // ladder climbing
-        if (currentLadder != null)
-        {
-            // make sure the player can jump while on a ladder
-            if(!canJump)
+            // left and right
+            if (Input.GetKey(KeyCode.D) && !isClimbing)
             {
-                canJump = true;
+                rb.velocity = new Vector2(runSpeed, rb.velocity.y);
+            }
+            else if (Input.GetKey(KeyCode.A) && !isClimbing)
+            {
+                rb.velocity = new Vector2(-runSpeed, rb.velocity.y);
+            }
+            else
+            {
+                rb.velocity = new Vector2(0, rb.velocity.y);
             }
 
-            if (Input.GetKey(KeyCode.W))
+            // jump
+            if (Input.GetKeyDown(KeyCode.Space))
             {
-                // update if needed
-                if (!isClimbing)
+                Jump();
+            }
+
+            // ladder climbing
+            if (currentLadder != null)
+            {
+                // make sure the player can jump while on a ladder
+                if (!canJump)
                 {
-                    isClimbing = true;
-                    rb.isKinematic = true;
-                    transform.position = new Vector3(currentLadder.transform.position.x, transform.position.y, transform.position.z);
+                    canJump = true;
                 }
 
-                // move up
-                rb.velocity = new Vector2(rb.velocity.x * ladderMoveScalar, climbSpeed);
-            }
-            else if (Input.GetKey(KeyCode.S))
-            {
-                // make sure we arent too low
-                if (transform.position.y > currentLadder.bottomOfLadder.position.y)
+                if (Input.GetKey(KeyCode.W))
                 {
-                    // move down
-                    rb.velocity = new Vector2(rb.velocity.x * ladderMoveScalar, -climbSpeed);
-                } else
+                    // update if needed
+                    if (!isClimbing)
+                    {
+                        isClimbing = true;
+                        rb.isKinematic = true;
+                        transform.position = new Vector3(currentLadder.transform.position.x, transform.position.y, transform.position.z);
+                    }
+
+                    // move up
+                    rb.velocity = new Vector2(rb.velocity.x * ladderMoveScalar, climbSpeed);
+                }
+                else if (Input.GetKey(KeyCode.S))
                 {
-                    // we are at the bottom, detach
-                    isClimbing = false;
+                    // make sure we arent too low
+                    if (transform.position.y > currentLadder.bottomOfLadder.position.y)
+                    {
+                        // move down
+                        rb.velocity = new Vector2(rb.velocity.x * ladderMoveScalar, -climbSpeed);
+                    }
+                    else
+                    {
+                        // we are at the bottom, detach
+                        isClimbing = false;
+                    }
+                }
+                else if (isClimbing)
+                {
+                    rb.velocity = new Vector2(rb.velocity.x * ladderMoveScalar, 0);
                 }
             }
-            else if (isClimbing)
-            {
-                rb.velocity = new Vector2(rb.velocity.x * ladderMoveScalar, 0);
-            }
-        }
 
-        // if we arent climbing, act as normal
-        if(!isClimbing) 
-        {
-            rb.isKinematic = false;
+            // if we arent climbing, act as normal
+            if (!isClimbing)
+            {
+                rb.isKinematic = false;
+            }
         }
     }
 
     public void Jump()
     {
-        if (canJump)
+        if (gameController.IsPlaying && canJump)
         {
             rb.velocity = new Vector2(rb.velocity.x, jumpForce);
             canJump = false;
@@ -125,20 +134,23 @@ public class KNGPlayerController : MonoBehaviour
         }
         else if(other.GetComponent<KNGObstacle>() != null)
         {
-            // we hit an obstacle, game over
-            Debug.Log("Hit an obstacle.");
+            // we hit an obstacle
+            gameController.HitObstacle();
         }
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        Debug.Log("Trigger entered.");
         KNGLadder ladder = collision.gameObject.GetComponent<KNGLadder>();
+        KNGObjective objective = collision.gameObject.GetComponent<KNGObjective>();
         if (ladder != null)
         {
             // we are on a ladder, we can climb
             currentLadder = ladder;
-            Debug.Log("Attached to ladder.");
+        } else if(objective != null)
+        {
+            // we reached the end of this level, figure out what to do next
+            gameController.ReachedObjective();
         }
     }
 

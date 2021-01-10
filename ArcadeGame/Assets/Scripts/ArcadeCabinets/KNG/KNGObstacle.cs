@@ -90,9 +90,9 @@ public class KNGObstacle : MonoBehaviour
     {
         CircleCollider2D coll = gameObject.GetComponent<CircleCollider2D>();
 
-        // set rigidbody to kinematic, collider to trigger
+        // set rigidbody to kinematic
         rb.isKinematic = true;
-        coll.isTrigger = true;
+        //coll.isTrigger = true;
         grounded = false;
 
         rb.velocity = Vector2.zero;
@@ -110,7 +110,7 @@ public class KNGObstacle : MonoBehaviour
 
         // set back to original values
         rb.isKinematic = false;
-        coll.isTrigger = false;
+        //coll.isTrigger = false;
 
         // change direction
         ChangeDirection();
@@ -118,17 +118,6 @@ public class KNGObstacle : MonoBehaviour
 
     private void ChangeDirection()
     {
-        /*
-        if (goingLeft)
-        {
-            rb.velocity = new Vector2(obstacleMomentum, 0);
-            goingLeft = false;
-        }
-        else
-        {
-            rb.velocity = new Vector2(-obstacleMomentum, 0);
-            goingLeft = true;
-        }*/
         goingLeft = !goingLeft;
         grounded = true;
 
