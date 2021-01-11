@@ -61,6 +61,12 @@ public class KNGGameController : ArcadeGameController
         {
             GameObject.Destroy(obstacles[i].gameObject);
         }
+
+        KNGFallingObstacle[] fallingObstacles = GameObject.FindObjectsOfType<KNGFallingObstacle>();
+        for (int i = 0; i < fallingObstacles.Length; i++)
+        {
+            GameObject.Destroy(fallingObstacles[i].gameObject);
+        }
     }
 
     public void CollectPoints(int basePoints)

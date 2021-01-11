@@ -13,7 +13,7 @@ public class KNGObstacle : MonoBehaviour
     private Rigidbody2D rb;
 
     // Start is called before the first frame update
-    void Start()
+    private void Start()
     {
         goingLeft = false;
         grounded = false;
@@ -21,7 +21,7 @@ public class KNGObstacle : MonoBehaviour
     }
 
     // Update is called once per frame
-    void FixedUpdate()
+    private void FixedUpdate()
     {
         // limit speed
         if(goingLeft && grounded)
@@ -40,7 +40,6 @@ public class KNGObstacle : MonoBehaviour
         if (other.GetComponent<KNGKillZone>() != null)
         {
             // we hit a kill zone, destroy this object
-            Debug.Log("Destroying self.");
             GameObject.Destroy(gameObject);
         }
         else
@@ -92,7 +91,6 @@ public class KNGObstacle : MonoBehaviour
 
         // set rigidbody to kinematic
         rb.isKinematic = true;
-        //coll.isTrigger = true;
         grounded = false;
 
         rb.velocity = Vector2.zero;
@@ -110,7 +108,6 @@ public class KNGObstacle : MonoBehaviour
 
         // set back to original values
         rb.isKinematic = false;
-        //coll.isTrigger = false;
 
         // change direction
         ChangeDirection();

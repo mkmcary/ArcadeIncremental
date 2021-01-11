@@ -20,10 +20,14 @@ public class KNGCollectible : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (interactable)
+        KNGPlayerController player = collision.gameObject.GetComponent<KNGPlayerController>();
+        if (player != null)
         {
-            gameController.CollectPoints(basePoints);
-            SetInteractiblity(false);
+            if (this.interactable)
+            {
+                gameController.CollectPoints(basePoints);
+                SetInteractiblity(false);
+            }
         }
     }
 
