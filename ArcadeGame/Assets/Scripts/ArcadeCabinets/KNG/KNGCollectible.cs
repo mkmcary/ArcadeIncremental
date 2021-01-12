@@ -8,14 +8,14 @@ public class KNGCollectible : MonoBehaviour
 
     public int basePoints;
 
-    private bool interactable;
+    private bool interact;
     private SpriteRenderer spriteRenderer;
 
     private void Start()
     {
         gameController = GameObject.FindObjectOfType<KNGGameController>();
-        spriteRenderer = GetComponent<SpriteRenderer>();
-        interactable = true;
+        spriteRenderer = gameObject.GetComponent<SpriteRenderer>();
+        interact = true;
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -23,7 +23,7 @@ public class KNGCollectible : MonoBehaviour
         KNGPlayerController player = collision.gameObject.GetComponent<KNGPlayerController>();
         if (player != null)
         {
-            if (this.interactable)
+            if (this.interact)
             {
                 gameController.CollectPoints(basePoints);
                 SetInteractiblity(false);
@@ -33,7 +33,11 @@ public class KNGCollectible : MonoBehaviour
 
     public void SetInteractiblity(bool interactable)
     {
-        this.interactable = interactable;
-        spriteRenderer.enabled = this.interactable;
+        interact = interactable;
+        if(spriteRenderer == null)
+        {
+            spriteRenderer = gameObject.GetComponent<SpriteRenderer>();
+        }
+        spriteRenderer.enabled = interact;
     }
 }

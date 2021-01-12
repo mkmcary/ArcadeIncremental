@@ -4,12 +4,20 @@ using UnityEngine;
 
 public class KNGObstacle : MonoBehaviour
 {
+    // movement vars
     public float obstacleMomentum = 3f;
     public float chanceToFall = 0.2f;
+    public float ladderFallSpeed = 2f;
 
-
+    // game status
     private bool goingLeft;
     private bool grounded;
+
+    // falling down ladder
+    private bool isFalling;
+    private KNGLadder ladder;
+
+    // rigidbody
     private Rigidbody2D rb;
 
     // Start is called before the first frame update
@@ -17,6 +25,7 @@ public class KNGObstacle : MonoBehaviour
     {
         goingLeft = false;
         grounded = false;
+        isFalling = false;
         rb = gameObject.GetComponent<Rigidbody2D>();
     }
 
@@ -31,6 +40,18 @@ public class KNGObstacle : MonoBehaviour
         else if(grounded)
         {
             rb.velocity = new Vector2(obstacleMomentum, rb.velocity.y);
+        }
+
+        // check ladder fall
+        if(isFalling)
+        {
+            if(transform.position.y <= ladder.bottomOfLadder.position.y)
+            {
+                isFalling = false;
+                rb.gravityScale = 1;
+                gameObject.GetComponent<CircleCollider2D>().isTrigger = false;
+                ChangeDirection();
+            }
         }
     }
 
@@ -73,44 +94,32 @@ public class KNGObstacle : MonoBehaviour
         KNGObstacleDropPoint drop = collision.gameObject.GetComponent<KNGObstacleDropPoint>();
         if (drop != null)
         {
-            KNGLadder ladder = drop.ladder;
+            KNGLadder newLadder = drop.ladder;
 
             // we need to decide whether to fall down this ladder or not
             float rand = Random.Range(0f, 1f);
             if (rand < chanceToFall)
             {
                 // trigger fall
-                StartCoroutine(FallDownLadder(ladder));
+                this.ladder = newLadder;
+                FallDownLadder();
+
             }
         }
     }
 
-    private IEnumerator FallDownLadder(KNGLadder ladder)
+    private void FallDownLadder()
     {
-        CircleCollider2D coll = gameObject.GetComponent<CircleCollider2D>();
-
-        // set rigidbody to kinematic
-        rb.isKinematic = true;
+        // initialize values
+        rb.gravityScale = 0;
+        gameObject.GetComponent<CircleCollider2D>().isTrigger = true;
         grounded = false;
+        isFalling = true;
 
-        rb.velocity = Vector2.zero;
+        // position and speed
+        transform.position = ladder.topOfLadder.position;
         rb.angularVelocity = 0f;
-        
-        Vector3 startPos = ladder.topOfLadder.position;
-        Vector3 endPos = ladder.bottomOfLadder.position;
-
-        // interpolate position between these two
-        for(float t = 0f; t <= 1f; t += 0.01f)
-        {
-            transform.position = Vector3.Lerp(startPos, endPos, t);
-            yield return new WaitForSeconds(0.01f);
-        }
-
-        // set back to original values
-        rb.isKinematic = false;
-
-        // change direction
-        ChangeDirection();
+        rb.velocity = new Vector2(0, -ladderFallSpeed);
     }
 
     private void ChangeDirection()

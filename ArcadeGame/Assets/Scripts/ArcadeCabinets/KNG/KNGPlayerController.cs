@@ -142,12 +142,18 @@ public class KNGPlayerController : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D collision)
     {
         KNGLadder ladder = collision.gameObject.GetComponent<KNGLadder>();
+        KNGObstacle rollingObstacle = collision.gameObject.GetComponent<KNGObstacle>();
         KNGFallingObstacle fallingObstacle = collision.gameObject.GetComponent<KNGFallingObstacle>();
         KNGObjective objective = collision.gameObject.GetComponent<KNGObjective>();
         if (ladder != null)
         {
             // we are on a ladder, we can climb
             currentLadder = ladder;
+        } 
+        else if (rollingObstacle != null)
+        {
+            // we hit an obstacle that is falling down a ladder
+            gameController.HitObstacle();
         }
         else if(fallingObstacle != null)
         {
