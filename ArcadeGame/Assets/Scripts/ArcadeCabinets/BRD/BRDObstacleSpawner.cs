@@ -61,6 +61,7 @@ public class BRDObstacleSpawner : MonoBehaviour
         }
     }
 
+    // Could be beneficial to refactor parent setting to this method.
     private void SpawnObstacle(Vector3 location)
     {
         bool flipped = location == ceilingSpawn.position;
@@ -99,6 +100,8 @@ public class BRDObstacleSpawner : MonoBehaviour
             vTemp.y *= -1;
             spike.transform.localScale = vTemp;
         }
+
+        spike.transform.SetParent(transform);
     }
 
     private void SpawnCeilingAndGroundSpike(Vector3 location, bool flipped)
@@ -133,6 +136,7 @@ public class BRDObstacleSpawner : MonoBehaviour
             vTemp.y *= -1;
             wall.transform.localScale = vTemp;
         }
+        wall.transform.SetParent(transform);
     }
 
     private void SpawnTopSpikedWall(Vector3 location, bool flipped)
@@ -146,6 +150,7 @@ public class BRDObstacleSpawner : MonoBehaviour
             vTemp.y *= -1;
             spikedWall.transform.localScale = vTemp;
         }
+        spikedWall.transform.SetParent(transform);
     }
 
     private void SpawnBonusPoints(Vector3 location, bool flipped, float heightOffset, float xOffset)
@@ -162,7 +167,8 @@ public class BRDObstacleSpawner : MonoBehaviour
             temp.y += heightOffset;
             temp.x += xOffset;
             location = temp;
-            Instantiate(bonusPoints, location, Quaternion.identity);
+            GameObject bonus = Instantiate(bonusPoints, location, Quaternion.identity);
+            bonus.transform.SetParent(transform);
         }
         spawnPoints = !spawnPoints;
     }

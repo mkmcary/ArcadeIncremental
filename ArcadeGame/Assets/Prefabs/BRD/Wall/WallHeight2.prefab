@@ -133,7 +133,9 @@ EdgeCollider2D:
   m_EdgeRadius: 0
   m_Points:
   - {x: -0.5, y: 0}
-  - {x: -0.5032172, y: 1.9913604}
+  - {x: -0.49884444, y: 0.97645646}
+  - {x: -0.5476287, y: 0.9729569}
+  - {x: -0.5475026, y: 1.6760483}
 --- !u!50 &2898411284038488975
 Rigidbody2D:
   serializedVersion: 4
@@ -181,7 +183,7 @@ GameObject:
   - component: {fileID: 3880453791289739438}
   - component: {fileID: 5096029198185015600}
   m_Layer: 0
-  m_Name: Wall
+  m_Name: Battlement
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -195,8 +197,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2898411284718405187}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 1.5, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalPosition: {x: 0, y: 1.525, z: 0}
+  m_LocalScale: {x: 1.1, y: 1.1, z: 1}
   m_Children: []
   m_Father: {fileID: 2898411284038488973}
   m_RootOrder: 1
@@ -240,7 +242,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 692f95e9c5e9a8d4f952af94de4d6b33, type: 3}
+  m_Sprite: {fileID: 21300000, guid: e2f29ad44c03a534c81ed87c4ad45ed0, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -283,7 +285,7 @@ EdgeCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 1
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0.5}
+  m_Offset: {x: 0, y: 0.16}
   m_EdgeRadius: 0
   m_Points:
   - {x: -0.5, y: 0}
