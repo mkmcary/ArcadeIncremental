@@ -11,6 +11,8 @@ public class BRDGameController : ArcadeGameController
     [Header("UI")]
     public GameObject jumpButton;
     public GameObject popUp;
+    public Text gainText;
+    public Text popUpText;
     public Text endGameText;
 
     // Player Data
@@ -186,9 +188,23 @@ public class BRDGameController : ArcadeGameController
 
     public override void EndGame()
     {
-        base.EndGame();
         isPlaying = false;
 
+        // calculate new data
+        BigInteger tickets = score; // decide how many tickets to give
+        BRDCabinetStatus brdStatus = arcadeStatus.BRDStatus;
+        brdStatus.CumulativeScore += score;
+        brdStatus.HighScore = BigInteger.Max(brdStatus.HighScore, score);
+        brdStatus.Tickets += tickets;
+
+        // update popup
+        UpdateScore();
+        popUpText.text = "Your Score: " + score
+            + "\nCumulative Score: " + GameOperations.BigIntToString(brdStatus.CumulativeScore)
+            + "\nTicket Count: " + GameOperations.BigIntToString(brdStatus.Tickets);
+        gainText.text = "(+" + GameOperations.BigIntToString(tickets) + ")";
         popUp.SetActive(true);
+
+        base.EndGame();
     }
 }

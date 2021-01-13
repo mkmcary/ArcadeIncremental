@@ -2,7 +2,7 @@ ArcadeStatus.json
 {
     "prizeStatus": {
         "tickets": {
-            "valueString": "631"
+            "valueString": "0"
         },
         "doublePoints": {
             "sprite": "Sprites/Shop/Placeholder/doubleMult",
@@ -41,7 +41,7 @@ ArcadeStatus.json
             "valueString": "15000000"
         },
         "cumulativeScore": {
-            "valueString": "19001000"
+            "valueString": "24001000"
         },
         "isActive": true,
         "doublePoints": {
@@ -103,7 +103,7 @@ ArcadeStatus.json
     },
     "kngStatus": {
         "tickets": {
-            "valueString": "503"
+            "valueString": "0"
         },
         "highScore": {
             "valueString": "800"
@@ -120,6 +120,29 @@ ArcadeStatus.json
             "upgradeName": "Bananas",
             "description": "Bananas are now worth more points.",
             "currentLevel": 0,
+            "maxLevel": 5,
+            "sType": 1
+        }
+    },
+    "brdStatus": {
+        "tickets": {
+            "valueString": "1103"
+        },
+        "highScore": {
+            "valueString": "1780"
+        },
+        "cumulativeScore": {
+            "valueString": "2090"
+        },
+        "isActive": true,
+        "robeUpgrade": {
+            "sprite": "Sprites/ArcadeCabinets/BRD/Wizard",
+            "price": {
+                "valueString": "2000"
+            },
+            "upgradeName": "Robes",
+            "description": "Your robes now can handle more damage",
+            "currentLevel": 1,
             "maxLevel": 5,
             "sType": 1
         }

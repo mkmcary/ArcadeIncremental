@@ -28,6 +28,10 @@ public class CurrencyViewUI : MonoBehaviour
         {
             return GameOperations.LoadSpriteFromPath("Sprites/Currency/Tickets/KNGTicket");
         }
+        if(status is BRDCabinetStatus)
+        {
+            return GameOperations.LoadSpriteFromPath("Sprites/Currency/Tickets/BRDTicket");
+        }
         // This is bad if this happens double check.
         return null;
     }

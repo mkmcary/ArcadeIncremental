@@ -911,8 +911,12 @@ MonoBehaviour:
   isSpawning: 0
   jumpButton: {fileID: 1840152646}
   popUp: {fileID: 1015070917}
+  gainText: {fileID: 2056502040}
+  popUpText: {fileID: 377002078}
   endGameText: {fileID: 1949806568}
   playerController: {fileID: 442524568}
+  jumpsCap: 0
+  flipsCap: 0
   winCondition: 0
 --- !u!1 &755544736
 GameObject:
@@ -1561,7 +1565,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 1781618403}
-        m_MethodName: 
+        m_MethodName: changeScene
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}

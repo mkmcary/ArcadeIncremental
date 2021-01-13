@@ -16,6 +16,7 @@ public class ArcadeManager : MonoBehaviour
         debugGameMenu = 1,
         QMGMenu = 2,
         KNGMenu = 3,
+        BRDMenu = 4,
         ticketMenuScreen = 0
     }
 

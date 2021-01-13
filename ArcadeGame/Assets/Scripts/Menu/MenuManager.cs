@@ -8,6 +8,7 @@ public class MenuManager : MonoBehaviour
     public GameObject debugMenu;
     public GameObject QMGMenu;
     public GameObject KNGMenu;
+    public GameObject BRDMenu;
 
     private void Start()
     {
@@ -27,6 +28,9 @@ public class MenuManager : MonoBehaviour
                 break;
             case ArcadeManager.menuScreen.KNGMenu:
                 KNGMenu.SetActive(true);
+                break;
+            case ArcadeManager.menuScreen.BRDMenu:
+                BRDMenu.SetActive(true);
                 break;
         }
     }

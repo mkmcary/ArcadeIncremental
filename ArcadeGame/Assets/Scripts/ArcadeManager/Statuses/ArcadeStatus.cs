@@ -18,6 +18,8 @@ public class ArcadeStatus
     private QMGCabinetStatus qmgStatus;
     [SerializeField]
     private KNGCabinetStatus kngStatus;
+    [SerializeField]
+    private BRDCabinetStatus brdStatus;
 
     public List<LayerZeroStatus> Statuses
     {
@@ -49,6 +51,12 @@ public class ArcadeStatus
         set { kngStatus = value; }
     }
 
+    public BRDCabinetStatus BRDStatus
+    {
+        get { return brdStatus; }
+        set { brdStatus = value; }
+    }
+
     public ArcadeStatus()
     {
         statuses = new List<LayerZeroStatus>();
@@ -66,6 +74,9 @@ public class ArcadeStatus
 
         kngStatus = new KNGCabinetStatus();
         statuses.Add(kngStatus);
+
+        brdStatus = new BRDCabinetStatus();
+        statuses.Add(brdStatus);
     }
 
     public void ResetButPreserve()
@@ -85,5 +96,8 @@ public class ArcadeStatus
 
         kngStatus = (KNGCabinetStatus)kngStatus.ResetButPreserve();
         statuses.Add(kngStatus);
+
+        brdStatus = (BRDCabinetStatus)brdStatus.ResetButPreserve();
+        statuses.Add(brdStatus);
     }
 }

@@ -184,6 +184,7 @@ public class TicketPrinter
         DebugTicket,
         QMGTicket,
         KNGTicket,
+        BRDTicket,
         PrizeTicket
     }
 

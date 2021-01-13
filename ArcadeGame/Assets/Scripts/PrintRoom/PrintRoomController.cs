@@ -88,6 +88,9 @@ public class PrintRoomController : MonoBehaviour
             case TicketPrinter.TicketType.KNGTicket:
                 arcadeStatus.KNGStatus.Tickets += ticketReturn.Number;
                 break;
+            case TicketPrinter.TicketType.BRDTicket:
+                arcadeStatus.BRDStatus.Tickets += ticketReturn.Number;
+                break;
             case TicketPrinter.TicketType.PrizeTicket:
                 arcadeStatus.ArcadePrizeStatus.Tickets += ticketReturn.Number;
                 break;
