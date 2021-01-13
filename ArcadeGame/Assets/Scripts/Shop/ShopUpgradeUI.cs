@@ -24,7 +24,7 @@ public class ShopUpgradeUI : MonoBehaviour
     {
         sc.activeUpgrade = activeUpgrade;
         sc.activeUpgradeUI = this;
-        sc.buttonWasClicked();
+        sc.ButtonWasClicked();
     }
 
     public virtual void populate()

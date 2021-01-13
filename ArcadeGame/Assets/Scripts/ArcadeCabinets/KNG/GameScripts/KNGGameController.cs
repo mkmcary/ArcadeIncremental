@@ -2,11 +2,14 @@
 using System.Collections.Generic;
 using System.Numerics;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class KNGGameController : ArcadeGameController
 {
     [Header("Pop Up")]
     public GameObject popUp;
+    public Text popUpText;
+    public Text gainText;
 
     public override BigInteger InitalScore => 0;
 
@@ -50,7 +53,22 @@ public class KNGGameController : ArcadeGameController
     public override void EndGame()
     {
         IsPlaying = false;
+
+        // calculate new data
+        BigInteger tickets = score; // decide how many tickets to give
+        KNGCabinetStatus kngStatus = arcadeStatus.KNGStatus;
+        kngStatus.CumulativeScore += score;
+        kngStatus.HighScore = BigInteger.Max(kngStatus.HighScore, score);
+        kngStatus.Tickets += tickets;
+
+        // update popup
+        popUpText.text = "Your Score: " + score
+            + "\nCumulative Score: " + GameOperations.BigIntToString(kngStatus.CumulativeScore)
+            + "\nTicket Count: " + GameOperations.BigIntToString(kngStatus.Tickets);
+        gainText.text = "(+" + GameOperations.BigIntToString(tickets) + ")";
         popUp.SetActive(true);
+
+        // write to file
         base.EndGame();
     }
 

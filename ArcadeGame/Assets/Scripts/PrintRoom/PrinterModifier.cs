@@ -84,6 +84,10 @@ public class PrinterModifier : MonoBehaviour
             ticketAssociations.Add(ticketAssociation);
             index++;
         }
+        
+        // ...
+        // Copy the above for each cabinet ticket
+        // ...
 
         if (arcadeStatus.QMGStatus.IsActive)
         {
@@ -92,9 +96,12 @@ public class PrinterModifier : MonoBehaviour
             index++;
         }
 
-        // ...
-        // Copy the above for each cabinet ticket
-        // ...
+        if (arcadeStatus.KNGStatus.IsActive)
+        {
+            ticketAssociation = new TicketAssociation(index, TicketPrinter.TicketType.KNGTicket, "Banana Ticket", "Sprites/Currency/Tickets/KNGTicket");
+            ticketAssociations.Add(ticketAssociation);
+            index++;
+        }
 
         // prize tickets
         if (true) // figure out condition upon which players can print prize tickets

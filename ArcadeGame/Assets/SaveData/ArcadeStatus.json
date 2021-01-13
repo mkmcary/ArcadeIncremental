@@ -100,5 +100,28 @@ ArcadeStatus.json
             "maxLevel": 3,
             "sType": 0
         }
+    },
+    "kngStatus": {
+        "tickets": {
+            "valueString": "1477"
+        },
+        "highScore": {
+            "valueString": "800"
+        },
+        "cumulativeScore": {
+            "valueString": "1450"
+        },
+        "isActive": true,
+        "bananaUpgrade": {
+            "sprite": "Sprites/ArcadeCabinets/KNG/JungleTheme/Collectibles/BananaBunch",
+            "price": {
+                "valueString": "1000"
+            },
+            "upgradeName": "Bananas",
+            "description": "Bananas are now worth more points.",
+            "currentLevel": 0,
+            "maxLevel": 5,
+            "sType": 1
+        }
     }
 }

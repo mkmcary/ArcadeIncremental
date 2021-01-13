@@ -38,27 +38,27 @@ public abstract class ShopController : MonoBehaviour
     void Awake()
     {
         popUpPanel.SetActive(false);
-        initialize();
+        Initialize();
     }
 
     /**
      * Used to initialize the CabinetStatus.
      */
-    public abstract void initialize();
+    public abstract void Initialize();
 
     /**
      * Used to initialize the PopUp when an upgrade is selected. 
      */
-    public void buttonWasClicked()
+    public void ButtonWasClicked()
     {
         popUpPanel.SetActive(true);
-        initializePopUp();
+        InitializePopUp();
     }
 
     /**
      * Initializes the values of the PopUp.
      */
-    private void initializePopUp()
+    private void InitializePopUp()
     {
         image.sprite = GameOperations.LoadSpriteFromPath(activeUpgrade.sprite);
         nameText.text = activeUpgrade.upgradeName;
@@ -80,7 +80,7 @@ public abstract class ShopController : MonoBehaviour
     /**
      * Closes the PopUp.
      */
-    public void closePopUp()
+    public void ClosePopUp()
     {
         popUpPanel.SetActive(false);
         activeUpgrade = null;
@@ -89,7 +89,7 @@ public abstract class ShopController : MonoBehaviour
     /**
      * Updates the ticket text in the wallet.
      */
-    public void updateTicketText()
+    public void UpdateTicketText()
     {
         ticketText.text = GameOperations.BigIntToString(status.Tickets);
     }
@@ -97,7 +97,7 @@ public abstract class ShopController : MonoBehaviour
     /**
      * Called when the user presses the buy button.
      */
-    public void buy()
+    public void Buy()
     {
         if (activeUpgrade.price.value > status.Tickets)
         {
@@ -119,11 +119,11 @@ public abstract class ShopController : MonoBehaviour
 
         // update ui
         activeUpgradeUI.populate();
-        updateTicketText();
-        closePopUp();
+        UpdateTicketText();
+        ClosePopUp();
     }
 
-    public void loadUpgrades(int min)
+    public void LoadUpgrades(int min)
     {
         List<ShopUpgrade> upgrades = status.Upgrades;
 
@@ -165,7 +165,7 @@ public abstract class ShopController : MonoBehaviour
         }
     }
 
-    public void scrollUp()
+    public void ScrollUp()
     {
         if (currentSetIndex == 0)
         {
@@ -174,7 +174,7 @@ public abstract class ShopController : MonoBehaviour
         }
 
         currentSetIndex -= upgradeUIs.Count;
-        loadUpgrades(currentSetIndex);
+        LoadUpgrades(currentSetIndex);
 
         if (currentSetIndex == 0)
         {
@@ -190,7 +190,7 @@ public abstract class ShopController : MonoBehaviour
         scrollDownButton.gameObject.SetActive(true);
     }
 
-    public void scrollDown()
+    public void ScrollDown()
     {
 
         List<ShopUpgrade> upgrades = status.Upgrades;
@@ -201,7 +201,7 @@ public abstract class ShopController : MonoBehaviour
         }
 
         currentSetIndex += upgradeUIs.Count;
-        loadUpgrades(currentSetIndex);
+        LoadUpgrades(currentSetIndex);
 
         if (currentSetIndex + upgradeUIs.Count >= upgrades.Count)
         {

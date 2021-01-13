@@ -15,6 +15,7 @@ public class ArcadeManager : MonoBehaviour
     public enum menuScreen {
         debugGameMenu = 1,
         QMGMenu = 2,
+        KNGMenu = 3,
         ticketMenuScreen = 0
     }
 

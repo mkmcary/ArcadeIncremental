@@ -7,14 +7,14 @@ public class QMGShopController : ShopController
     /**
       * Used to initialize the QMGShopController.
       */
-    public override void initialize()
+    public override void Initialize()
     {
         // read the file and initialize the CabinetStatus
         arcadeStatus = ArcadeManager.ReadArcadeStatus();
         status = arcadeStatus.QMGStatus;
-        updateTicketText();
+        UpdateTicketText();
 
         currentSetIndex = 0;
-        loadUpgrades(currentSetIndex);
+        LoadUpgrades(currentSetIndex);
     }
 }

@@ -9,14 +9,14 @@ public class DebugShopController : ShopController
     /**
      * Used to initialize the DebugShopController.
      */
-    public override void initialize()
+    public override void Initialize()
     {
         // read the file and initialize the CabinetStatus
         arcadeStatus = ArcadeManager.ReadArcadeStatus();
         status = arcadeStatus.DebugStatus;
-        updateTicketText();
+        UpdateTicketText();
 
         currentSetIndex = 0;
-        loadUpgrades(currentSetIndex);
+        LoadUpgrades(currentSetIndex);
     }
 }

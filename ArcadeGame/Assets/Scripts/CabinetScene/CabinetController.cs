@@ -102,6 +102,10 @@ public class CabinetController : MonoBehaviour
         {
             arcadeCabinets.Add(new ArcadeCabinet("???", "Sprites/CabinetScene/Placeholder/BlankCabinet"));
         }
+        if(arcadeStatus.KNGStatus.IsActive)
+        {
+            arcadeCabinets.Add(new ArcadeCabinet("Banana Quest", "Sprites/CabinetScene/Placeholder/BlankCabinet"));
+        }
     }
 
     private class ArcadeCabinet

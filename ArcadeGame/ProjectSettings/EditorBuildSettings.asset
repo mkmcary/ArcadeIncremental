@@ -14,4 +14,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/ArcadeGames/QMGGameScene.unity
     guid: d858e61aae85e9f4b895297e5129970b
+  - enabled: 1
+    path: Assets/Scenes/ArcadeGames/KNGGameScene.unity
+    guid: bdd737e48844f8e45b1693c777e3ea75
   m_configObjects: {}

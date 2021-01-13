@@ -88,6 +88,10 @@ public class TicketConversionController : MonoBehaviour
         {
             ticketConverts.Add(new TicketConvert("Sprites/Currency/Tickets/QMGTicket", "???", 3, 2, arcadeStatus.QMGStatus));
         }
+        if (arcadeStatus.KNGStatus.IsActive)
+        {
+            ticketConverts.Add(new TicketConvert("Sprites/Currency/Tickets/KNGTicket", "Banana Quest", 4, 1, arcadeStatus.KNGStatus));
+        }
 
         // Initalize the UIs
         currentSetIndex = 0;
