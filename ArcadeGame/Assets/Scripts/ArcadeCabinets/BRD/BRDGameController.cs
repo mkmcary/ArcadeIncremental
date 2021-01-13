@@ -16,8 +16,8 @@ public class BRDGameController : ArcadeGameController
     // Player Data
     public BRDPlayerController playerController;
 
-    private int jumpsCap;
-    private int flipsCap;
+    public int jumpsCap;
+    public int flipsCap;
     private int jumpsRemaining;
     private int flipsRemaining;
 
@@ -43,27 +43,33 @@ public class BRDGameController : ArcadeGameController
         base.Start();
         isPlaying = true;
 
+        // Orient player if last game ended upside-down
         if (playerController.GetComponent<Rigidbody2D>().gravityScale < 0)
         {
             playerController.Flip();
             RotateJumpButton();
         }
+
+        // Destroy all obstacles from previous game
+        DestroyObstacles();
+
+        // Set the players initial resources
         jumpsCap = 5;
         flipsCap = 3;
         RestoreJumps();
         RestoreFlips();
 
-        DestroyObstacles();
-
-        endGameText.text = "You Died!";
+        // Deactivate pop up
         popUp.SetActive(false);
 
+        // Initialize all of the score details
         scoreCounter = 0;
         scoreTimer = 0;
         scoreInterval = 5f;
         scoreIncrement = 10;
         scoreBreakPoint = 10;
 
+        // Initalize win conditions
         isSpawning = true;
         winCondition = false;
         multOnWin = 2;
@@ -95,9 +101,10 @@ public class BRDGameController : ArcadeGameController
 
     private void CheckScore()
     {
-        scoreCounter++;
+        // If the score reaches the breakpoint, scale up passive gain.
         if(score >= BigInteger.Pow(scoreBreakPoint, scoreCounter))
         {
+            scoreCounter++;
             scoreIncrement *= scoreCounter;
         }
         if(score >= scoreToWin)

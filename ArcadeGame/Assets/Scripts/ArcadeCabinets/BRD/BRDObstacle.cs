@@ -48,6 +48,7 @@ public class BRDObstacle : MonoBehaviour
             }
             else
             {
+                gameController.endGameText.text = "You Were Captured!";
                 gameController.EndGame();
             }
             
