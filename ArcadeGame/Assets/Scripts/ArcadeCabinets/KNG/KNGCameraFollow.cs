@@ -4,15 +4,19 @@ using UnityEngine;
 
 public class KNGCameraFollow : MonoBehaviour
 {
+    // player location
     public Transform player;
+
+    // offsets for movement
     public float moveUpPoint;
     public float moveDownPoint;
     public float moveUpOffset;
     public float moveDownOffset;
-    //public List<Transform> cameraMoveSpots;
 
+    // used to determine whether the camera should move
     public bool moveCam;
 
+    // tracks whether we are actively moving.
     private bool isMoving;
 
     // Start is called before the first frame update
@@ -25,7 +29,7 @@ public class KNGCameraFollow : MonoBehaviour
     // Update is called once per frame
     void LateUpdate()
     {
-        if (true)
+        if (moveCam)
         {
             float yDiff = transform.position.y - player.position.y;
             if (yDiff < moveUpPoint && !isMoving)
