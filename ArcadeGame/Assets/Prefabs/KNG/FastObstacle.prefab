@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 2788812510157927778}
   - component: {fileID: 2788812510157927709}
   - component: {fileID: 2788812510157927777}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: FastObstacle
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -135,3 +135,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   obstacleMomentum: 3.5
   chanceToFall: 0.1
+  ladderFallSpeed: 2

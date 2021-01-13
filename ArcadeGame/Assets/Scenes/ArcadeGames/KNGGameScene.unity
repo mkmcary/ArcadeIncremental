@@ -1287,7 +1287,7 @@ Camera:
   m_Depth: 0
   m_CullingMask:
     serializedVersion: 2
-    m_Bits: 4294967295
+    m_Bits: 55
   m_RenderingPath: -1
   m_TargetTexture: {fileID: 8400000, guid: 8d7d11bf0b39e87459230d74db2cc481, type: 2}
   m_TargetDisplay: 0
@@ -14202,7 +14202,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1923623331}
   - component: {fileID: 1923623330}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: WaterfallBackground
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -15990,7 +15990,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 0.24705882}
+  m_Color: {r: 1, g: 1, b: 1, a: 0.47058824}
   m_RaycastTarget: 1
   m_Maskable: 1
   m_OnCullStateChanged:

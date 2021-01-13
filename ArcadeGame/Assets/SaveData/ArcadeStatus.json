@@ -2,7 +2,7 @@ ArcadeStatus.json
 {
     "prizeStatus": {
         "tickets": {
-            "valueString": "0"
+            "valueString": "631"
         },
         "doublePoints": {
             "sprite": "Sprites/Shop/Placeholder/doubleMult",
@@ -103,13 +103,13 @@ ArcadeStatus.json
     },
     "kngStatus": {
         "tickets": {
-            "valueString": "1477"
+            "valueString": "503"
         },
         "highScore": {
             "valueString": "800"
         },
         "cumulativeScore": {
-            "valueString": "1450"
+            "valueString": "3000"
         },
         "isActive": true,
         "bananaUpgrade": {
