@@ -35,15 +35,15 @@ ArcadeStatus.json
     },
     "debugStatus": {
         "tickets": {
-            "valueString": "0"
+            "valueString": "6000"
         },
         "highScore": {
             "valueString": "15000000"
         },
         "cumulativeScore": {
-            "valueString": "24001000"
+            "valueString": "24007000"
         },
-        "isActive": true,
+        "isActive": false,
         "doublePoints": {
             "sprite": "Sprites/Shop/Placeholder/doubleMult",
             "price": {
@@ -103,7 +103,7 @@ ArcadeStatus.json
     },
     "kngStatus": {
         "tickets": {
-            "valueString": "0"
+            "valueString": "54"
         },
         "highScore": {
             "valueString": "800"

@@ -19,7 +19,6 @@ public class PrintRoomController : MonoBehaviour
 
     private List<TicketPrinter> printers;
 
-
     public void Activate()
     {
         pawnStatus = PawnManager.ReadPawnStatus();
@@ -30,6 +29,7 @@ public class PrintRoomController : MonoBehaviour
             if (pawnStatus.Printers[i].IsActive)
             {
                 printers.Add(pawnStatus.Printers[i]);
+                ValidatePrinter(pawnStatus.Printers[i]);
             }
         }
         walletText.text = GameOperations.BigIntToString(pawnStatus.Money);
@@ -47,6 +47,47 @@ public class PrintRoomController : MonoBehaviour
         upgradePopUp.SetActive(false);
 
         GetComponent<PrinterTrader>().CloseTradeInPopUp();
+    }
+
+    /**
+     * Validates that a printer is printing a valid type of tickets.
+     */
+    private void ValidatePrinter(TicketPrinter printer)
+    {
+        switch(printer.Ticket)
+        {
+            case TicketPrinter.TicketType.DebugTicket:
+                if (!arcadeStatus.DebugStatus.IsActive)
+                    ResetPrinterState(printer);
+                break;
+            case TicketPrinter.TicketType.QMGTicket:
+                if (!arcadeStatus.QMGStatus.IsActive)
+                    ResetPrinterState(printer);
+                break;
+            case TicketPrinter.TicketType.KNGTicket:
+                if (!arcadeStatus.KNGStatus.IsActive)
+                    ResetPrinterState(printer);
+                break;
+            case TicketPrinter.TicketType.BRDTicket:
+                if (!arcadeStatus.BRDStatus.IsActive)
+                    ResetPrinterState(printer);
+                break;
+            case TicketPrinter.TicketType.PrizeTicket:
+                // check if we have the ability to print prize tickets???
+                break;
+            default:
+                break;
+        }
+    }
+
+    /**
+     * Resets a printer to have no ticket type, base timer, and no tickets printed.
+     */
+    private void ResetPrinterState(TicketPrinter printer)
+    {
+        printer.Ticket = TicketPrinter.TicketType.None;
+        printer.TicketsPrinted = 0;
+        printer.PrintTimer = 0;
     }
 
     // This method is called every .02 seconds.

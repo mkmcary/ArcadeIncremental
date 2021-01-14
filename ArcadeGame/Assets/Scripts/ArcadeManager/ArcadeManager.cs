@@ -12,6 +12,9 @@ public class ArcadeManager : MonoBehaviour
     private static string arcadeStatusPath = Application.dataPath + "/SaveData/ArcadeStatus.json";
     private static string encryptedArcadeStatusPath = Application.dataPath + "/SaveData/EncryptedArcadeStatus.json";
 
+    // FLAG TO ENABLE "THE DEBUGGER" - MAKE SURE FALSE WHEN BUILDING
+    private static bool DEBUGGING = false;
+
     public enum menuScreen {
         debugGameMenu = 1,
         QMGMenu = 2,
@@ -43,6 +46,11 @@ public class ArcadeManager : MonoBehaviour
                 readIn = readIn.Substring(readIn.IndexOf("\n") + 1);
                 arcadeStatus = JsonUtility.FromJson<ArcadeStatus>(readIn);
             }
+        }
+        arcadeStatus.DebugStatus.IsActive = DEBUGGING;
+        if(DEBUGGING)
+        {
+            Debug.Log("Debugging is active.");
         }
         return arcadeStatus;
     }
