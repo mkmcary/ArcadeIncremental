@@ -104,11 +104,11 @@ public class CabinetController : MonoBehaviour
         }
         if(arcadeStatus.KNGStatus.IsActive)
         {
-            arcadeCabinets.Add(new ArcadeCabinet("Banana Quest", "Sprites/CabinetScene/Placeholder/BlankCabinet"));
+            arcadeCabinets.Add(new ArcadeCabinet("", "Sprites/CabinetScene/Placeholder/BananaQuest"));
         }
         if (arcadeStatus.BRDStatus.IsActive)
         {
-            arcadeCabinets.Add(new ArcadeCabinet("Magic Quest", "Sprites/CabinetScene/Placeholder/BlankCabinet"));
+            arcadeCabinets.Add(new ArcadeCabinet("", "Sprites/CabinetScene/Placeholder/WallysWorld"));
         }
     }
 
