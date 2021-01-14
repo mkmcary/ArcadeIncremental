@@ -2,16 +2,16 @@ ArcadeStatus.json
 {
     "prizeStatus": {
         "tickets": {
-            "valueString": "0"
+            "valueString": "291"
         },
         "doublePoints": {
             "sprite": "Sprites/Shop/Placeholder/doubleMult",
             "price": {
-                "valueString": "1000"
+                "valueString": "2000"
             },
             "upgradeName": "Double Points",
             "description": "Doubles the points received from playing this game.",
-            "currentLevel": 0,
+            "currentLevel": 1,
             "maxLevel": 1,
             "sType": 1,
             "moneyValue": {
@@ -103,36 +103,36 @@ ArcadeStatus.json
     },
     "kngStatus": {
         "tickets": {
-            "valueString": "54"
+            "valueString": "767"
         },
         "highScore": {
-            "valueString": "800"
+            "valueString": "850"
         },
         "cumulativeScore": {
-            "valueString": "3000"
+            "valueString": "4200"
         },
         "isActive": true,
         "bananaUpgrade": {
             "sprite": "Sprites/ArcadeCabinets/KNG/JungleTheme/Collectibles/BananaBunch",
             "price": {
-                "valueString": "1000"
+                "valueString": "2000"
             },
             "upgradeName": "Bananas",
             "description": "Bananas are now worth more points.",
-            "currentLevel": 0,
+            "currentLevel": 1,
             "maxLevel": 5,
             "sType": 1
         }
     },
     "brdStatus": {
         "tickets": {
-            "valueString": "1103"
+            "valueString": "1"
         },
         "highScore": {
             "valueString": "1780"
         },
         "cumulativeScore": {
-            "valueString": "2090"
+            "valueString": "5900"
         },
         "isActive": true,
         "robeUpgrade": {

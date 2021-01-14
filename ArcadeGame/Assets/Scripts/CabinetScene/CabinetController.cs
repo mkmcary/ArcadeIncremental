@@ -84,7 +84,7 @@ public class CabinetController : MonoBehaviour
     {
         //SceneManager.LoadScene(arcadeCabinets[currentCabinet].scene);
 
-        cabinetMenus[currentCabinet].SetActive(true);
+        arcadeCabinets[currentCabinet].menuScreen.SetActive(true);
         gameObject.SetActive(false);
     }
 
@@ -96,19 +96,19 @@ public class CabinetController : MonoBehaviour
 
         if (arcadeStatus.DebugStatus.IsActive)
         {
-            arcadeCabinets.Add(new ArcadeCabinet("The Debugger", "Sprites/CabinetScene/Placeholder/debugCabinet"));
+            arcadeCabinets.Add(new ArcadeCabinet("The Debugger", "Sprites/CabinetScene/Placeholder/debugCabinet", cabinetMenus[0]));
         }
         if (arcadeStatus.QMGStatus.IsActive)
         {
-            arcadeCabinets.Add(new ArcadeCabinet("???", "Sprites/CabinetScene/Placeholder/BlankCabinet"));
+            arcadeCabinets.Add(new ArcadeCabinet("???", "Sprites/CabinetScene/Placeholder/BlankCabinet", cabinetMenus[1]));
         }
         if(arcadeStatus.KNGStatus.IsActive)
         {
-            arcadeCabinets.Add(new ArcadeCabinet("", "Sprites/CabinetScene/Placeholder/BananaQuest"));
+            arcadeCabinets.Add(new ArcadeCabinet("", "Sprites/CabinetScene/Placeholder/BananaQuest", cabinetMenus[2]));
         }
         if (arcadeStatus.BRDStatus.IsActive)
         {
-            arcadeCabinets.Add(new ArcadeCabinet("", "Sprites/CabinetScene/Placeholder/WallysWorld"));
+            arcadeCabinets.Add(new ArcadeCabinet("", "Sprites/CabinetScene/Placeholder/WallysWorld", cabinetMenus[3]));
         }
     }
 
@@ -116,11 +116,13 @@ public class CabinetController : MonoBehaviour
     {
         public string title;
         public string sprite;
-        
-        public ArcadeCabinet(string title, string sprite)
+        public GameObject menuScreen;
+
+        public ArcadeCabinet(string title, string sprite, GameObject menuScreen)
         {
             this.title = title;
             this.sprite = sprite;
+            this.menuScreen = menuScreen;
         }
     }
 }

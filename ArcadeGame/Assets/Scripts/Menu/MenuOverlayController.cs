@@ -19,11 +19,15 @@ public class MenuOverlayController : MonoBehaviour
     public Text moneyText;
     public Text prizeTicketText;
 
+    // items related to the currency view
     private List<GameObject> lineItems;
-
-
     private ArcadeStatus arcadeStatus;
     private PawnStatus pawnStatus;
+
+    [Header("Tabs")]
+    public GameObject settingsTab;
+    public GameObject achievementsTab;
+    public GameObject questsTab;
 
     // Start is called before the first frame update
     void Start()
@@ -34,6 +38,7 @@ public class MenuOverlayController : MonoBehaviour
     public void OpenMenu()
     {
         InitializeCurrencyView();
+        OpenSettings();
 
         overlayWhenClosed.SetActive(false);
         overlayWhenOpen.SetActive(true);
@@ -109,6 +114,31 @@ public class MenuOverlayController : MonoBehaviour
         }
         int newHeight = Mathf.Max(-yPos, 720);
         scrollViewTransform.sizeDelta = new Vector2(225, newHeight);
+    }
+
+    private void CloseAllTabs()
+    {
+        settingsTab.SetActive(false);
+        achievementsTab.SetActive(false);
+        questsTab.SetActive(false);
+    }
+
+    public void OpenSettings()
+    {
+        CloseAllTabs();
+        settingsTab.SetActive(true);
+    }
+
+    public void OpenAchievements()
+    {
+        CloseAllTabs();
+        achievementsTab.SetActive(true);
+    }
+
+    public void OpenQuests()
+    {
+        CloseAllTabs();
+        questsTab.SetActive(true);
     }
 
 }
