@@ -2,46 +2,36 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-[RequireComponent(typeof(Rigidbody2D))]
 public class SNKPlayerController : MonoBehaviour
 {
-    Vector2 velocity = new Vector2(1, 0);
-
-    Rigidbody2D rigid;
-
-    private List<GameObject> body;
-    public GameObject headSegment;
+    public SNKPlayerBodySegment headSegment;
     public GameObject bodySegment;
-    public GameObject tailSegment;
+    private SNKPlayerBodySegment tailSegment;
 
     // Start is called before the first frame update
     void Start()
     {
-        rigid = gameObject.GetComponent<Rigidbody2D>();
-        rigid.velocity = velocity;
-        ResetBody();
-
+        tailSegment = headSegment;
     }
 
-    private void ResetBody()
+    // New Segments are being added too close to the head. Figure out when it should start moving
+    public void AddBodySegment()
     {
-        body = new List<GameObject>();
-        body.Add(headSegment);
-        body.Add(tailSegment);
-    }
+        GameObject newPiece = Instantiate(bodySegment, tailSegment.transform.position, Quaternion.identity);
+        newPiece.transform.SetParent(transform);
+        SNKPlayerBodySegment newSegment = newPiece.GetComponent<SNKPlayerBodySegment>();
+        SNKPlayerBodySegment prevTail = tailSegment;
 
-    public void AddBodySegement()
-    {
-        GameObject newPiece = Instantiate(bodySegment, transform.position, Quaternion.identity);
-        body.Insert(body.Count - 2, newPiece);
-        newPiece.GetComponent<Rigidbody2D>().velocity = body[body.Count - 3].GetComponent<Rigidbody2D>().velocity;
-    }
+        // Set the previously last body segment before the tail to be ahead of the newest body segment
+        prevTail.Behind = newSegment;
+        newSegment.Ahead = prevTail;
 
-    private void RecalculateVelocity()
-    {
-        for(int i = body.Count; i >= 1; i--)
+        if(prevTail != headSegment)
         {
-            body[i].GetComponent<Rigidbody2D>().velocity = body[i - 1].GetComponent<Rigidbody2D>().velocity;
+            prevTail.GetComponent<SpriteRenderer>().sprite = GameOperations.LoadSpriteFromPath("Sprites/ArcadeCabinets/SNK/CenterSegment");
         }
+        
+        // Set the tail segment to be the new segment
+        tailSegment = newSegment;
     }
 }
