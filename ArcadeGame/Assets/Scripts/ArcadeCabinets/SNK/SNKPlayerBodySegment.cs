@@ -13,14 +13,28 @@ public class SNKPlayerBodySegment : MonoBehaviour
 
     Rigidbody2D rigid;
 
+    // Flags for spawning and updating movement
     private bool initialized;
+    public bool IsMoving { get; set; }
+
+
+    protected Quaternion upRotation;
+    protected Quaternion leftRotation;
+    protected Quaternion rightRotation;
+    protected Quaternion downRotation;
 
     // Start is called before the first frame update
     protected virtual void Start()
     {
         rigid = gameObject.GetComponent<Rigidbody2D>();
-        Speed = 3f;
+        Speed = 2f;
         initialized = false;
+        IsMoving = true;
+
+        upRotation = Quaternion.Euler(0, 0, 0);
+        leftRotation = Quaternion.Euler(0, 0, 90);
+        rightRotation = Quaternion.Euler(0, 0, 270);
+        downRotation = Quaternion.Euler(0, 0, 180);
     }
 
     // Update is called once per frame
@@ -28,18 +42,48 @@ public class SNKPlayerBodySegment : MonoBehaviour
     {
         if(Ahead != null)
         {
-            if (!initialized || transform.position == DesiredPosition)
+            if (!initialized)
             {
                 UpdateDesiredPosition();
+            }
+            if (transform.position == DesiredPosition)
+            {
+                IsMoving = false;
             }
             transform.position = Vector3.MoveTowards(transform.position, DesiredPosition, Speed * Time.deltaTime);
         }
         
     }
 
-    protected virtual void UpdateDesiredPosition()
+    public virtual void UpdateDesiredPosition()
     {
-        initialized = true;
-        DesiredPosition = Ahead.transform.position;
+        if (!initialized)
+        {
+            DesiredPosition = transform.position;
+            initialized = true;
+        }
+        else
+        {
+            DesiredPosition = Ahead.transform.position;
+            IsMoving = true;
+        }
+
+        //Rotates the sprites
+        if (DesiredPosition.y > transform.position.y)
+        {
+            transform.rotation = upRotation;
+        }
+        else if (DesiredPosition.x < transform.position.x)
+        {
+            transform.rotation = leftRotation;
+        }
+        else if (DesiredPosition.x > transform.position.x)
+        {
+            transform.rotation = rightRotation;
+        }
+        else if (DesiredPosition.y < transform.position.y)
+        {
+            transform.rotation = downRotation;
+        }
     }
 }

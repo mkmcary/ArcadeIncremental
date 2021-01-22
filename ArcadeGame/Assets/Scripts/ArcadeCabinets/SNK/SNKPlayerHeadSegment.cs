@@ -21,6 +21,8 @@ public class SNKPlayerHeadSegment : SNKPlayerBodySegment
         NextPosition = DesiredPosition + nextDirection;
 
         playerController = FindObjectOfType<SNKPlayerController>();
+
+        
     }
 
     // Update is called once per frame
@@ -45,19 +47,37 @@ public class SNKPlayerHeadSegment : SNKPlayerBodySegment
 
         if (transform.position == DesiredPosition)
         {
-            UpdateDesiredPosition();
+            IsMoving = false;
         }
         transform.position = Vector3.MoveTowards(transform.position, DesiredPosition, Speed * Time.deltaTime);
+
+        
     }
 
-    protected override void UpdateDesiredPosition()
+    public override void UpdateDesiredPosition()
     {
-        DesiredPosition = NextPosition;
         NextPosition = DesiredPosition + nextDirection;
+        DesiredPosition = NextPosition;
+
         currentDirection = nextDirection;
-        if(Random.Range(0,10) == 0)
+        IsMoving = true;
+
+        //Rotates the sprites
+        if (currentDirection == Vector3.up)
         {
-            playerController.AddBodySegment();
+            transform.rotation = upRotation;
+        }
+        else if (currentDirection == Vector3.left)
+        {
+            transform.rotation = leftRotation;
+        }
+        else if (currentDirection == Vector3.right)
+        {
+            transform.rotation = rightRotation;
+        }
+        else if (currentDirection == Vector3.down)
+        {
+            transform.rotation = downRotation;
         }
     }
 }

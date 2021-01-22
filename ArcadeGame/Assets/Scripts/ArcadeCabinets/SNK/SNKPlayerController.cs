@@ -14,6 +14,31 @@ public class SNKPlayerController : MonoBehaviour
         tailSegment = headSegment;
     }
 
+    private void Update()
+    {
+        bool startNewMovement = true;
+        SNKPlayerBodySegment temp = tailSegment;
+        while(temp != null)
+        {
+            if (temp.IsMoving)
+            {
+                startNewMovement = false;
+                break;
+            }
+            temp = temp.Ahead;
+        }
+
+        temp = tailSegment;
+        if (startNewMovement)
+        {
+            while(temp != null)
+            {
+                temp.UpdateDesiredPosition();
+                temp = temp.Ahead;
+            }
+        }
+    }
+
     // New Segments are being added too close to the head. Figure out when it should start moving
     public void AddBodySegment()
     {
