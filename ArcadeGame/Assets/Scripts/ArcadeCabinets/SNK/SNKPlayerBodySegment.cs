@@ -13,6 +13,8 @@ public class SNKPlayerBodySegment : MonoBehaviour
 
     Rigidbody2D rigid;
 
+    public int BodyIndex { get; set; }
+
     // Flags for spawning and updating movement
     private bool initialized;
     public bool IsMoving { get; set; }
@@ -27,7 +29,7 @@ public class SNKPlayerBodySegment : MonoBehaviour
     protected virtual void Start()
     {
         rigid = gameObject.GetComponent<Rigidbody2D>();
-        Speed = 2f;
+        Speed = 3f;
         initialized = false;
         IsMoving = true;
 

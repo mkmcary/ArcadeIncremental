@@ -22,7 +22,7 @@ public class SNKPlayerHeadSegment : SNKPlayerBodySegment
 
         playerController = FindObjectOfType<SNKPlayerController>();
 
-        
+        BodyIndex = 0;
     }
 
     // Update is called once per frame
@@ -78,6 +78,15 @@ public class SNKPlayerHeadSegment : SNKPlayerBodySegment
         else if (currentDirection == Vector3.down)
         {
             transform.rotation = downRotation;
+        }
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        SNKPlayerBodySegment collidedSegment = collision.gameObject.GetComponent<SNKPlayerBodySegment>();
+        if (collidedSegment != null && collidedSegment.BodyIndex > 3)
+        {
+            playerController.SelfCollide(collidedSegment);
         }
     }
 }

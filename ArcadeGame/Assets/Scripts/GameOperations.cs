@@ -66,4 +66,28 @@ public class GameOperations : MonoBehaviour
         }
         return outSb.ToString();
     }
+
+    /**
+     * Takes in two BigIntegers to divide and return a float
+     * @param b1 the dividend of the equation
+     * @param b2 the divisor of the equation
+     * @returns the approximate quotient as a float
+     */ 
+    public static float BigIntDivideToFloat(BigInteger b1, BigInteger b2)
+    {
+        string dividend = b1.ToString();
+        string divisor = b2.ToString();
+
+        if(dividend.Length > divisor.Length)
+        {
+            dividend = dividend.Substring(0, dividend.Length - divisor.Length + 1);
+            divisor = divisor.Substring(0, 1);
+        }
+        else
+        {
+            divisor = divisor.Substring(0, divisor.Length - dividend.Length + 1);
+            dividend = dividend.Substring(0, 1);
+        }
+        return float.Parse(dividend) / float.Parse(divisor);
+    }
 }
