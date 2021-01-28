@@ -61,11 +61,27 @@ public class SPCPlayerController : MonoBehaviour
         while (shouldFire) {
             // spawn
             GameObject projectile = Instantiate(projectileToSpawn, transform.position, Quaternion.identity);
-            projectile.GetComponent<SPCProjectile>().StartMoving(5f, new Color(Random.Range(0f, 1f), Random.Range(0f, 1f), Random.Range(0f, 1f)));
+            SPCProjectile proj = projectile.GetComponent<SPCProjectile>();
+            proj.StartMoving(5f, new Color(Random.Range(0f, 1f), Random.Range(0f, 1f), Random.Range(0f, 1f)));
+            proj.PlayerProjectile = true;
 
             // wait
             yield return new WaitForSeconds(fireInterval);
         }
         isFiring = false;
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        SPCProjectile proj = collision.gameObject.GetComponent<SPCProjectile>();
+        if (proj != null)
+        {
+            if (!proj.PlayerProjectile)
+            {
+                // lose (animation?)
+                Debug.Log("YOU LOST");
+                GameObject.Destroy(proj.gameObject);
+            }
+        }
     }
 }

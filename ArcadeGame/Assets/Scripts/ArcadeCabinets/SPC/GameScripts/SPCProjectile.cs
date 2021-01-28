@@ -8,6 +8,8 @@ public class SPCProjectile : MonoBehaviour
     private bool isMoving = false;
     private float timer = 0f;
 
+    public bool PlayerProjectile { get; set; }
+
     private void FixedUpdate()
     {
         if(isMoving)
