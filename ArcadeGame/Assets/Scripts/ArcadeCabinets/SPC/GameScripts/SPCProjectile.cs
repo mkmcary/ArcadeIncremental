@@ -22,10 +22,10 @@ public class SPCProjectile : MonoBehaviour
         }
     }
 
-    public void StartMoving(float movementSpeed, Color color)
+    public void StartMoving(float xSpeed, float ySpeed, Color color)
     {
         Rigidbody2D rb = GetComponent<Rigidbody2D>();
-        rb.velocity = new Vector2(0f, movementSpeed);
+        rb.velocity = new Vector2(xSpeed, ySpeed);
         GetComponent<SpriteRenderer>().color = color;
 
         isMoving = true;

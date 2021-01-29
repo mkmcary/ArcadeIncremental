@@ -39,7 +39,7 @@ public class SPCHorizontalTarget : SPCTarget
         isShooting = true;
         GameObject projectile = Instantiate(projectilePrefab, transform.position, Quaternion.identity);
         SPCProjectile proj = projectile.GetComponent<SPCProjectile>();
-        proj.StartMoving(-5f, Color.green);
+        proj.StartMoving(0f, -5f, Color.green);
         proj.PlayerProjectile = false;
 
         yield return new WaitForSeconds(2f);

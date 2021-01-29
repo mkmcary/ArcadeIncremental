@@ -12,11 +12,11 @@ public class SPCBarrier : MonoBehaviour
         if (proj != null)
         {
             health--;
+            GameObject.Destroy(proj.gameObject);
         }
 
         if(health == 0)
         {
-            GameObject.Destroy(proj.gameObject);
             GameObject.Destroy(gameObject);
         }
     }
