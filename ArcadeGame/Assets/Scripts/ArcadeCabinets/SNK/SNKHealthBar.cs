@@ -28,7 +28,6 @@ public class SNKHealthBar : MonoBehaviour
     private void UpdateHealthBar()
     {        
         barUI.value = GameOperations.BigIntDivideToFloat(currentHealth, maxHealth);
-        Debug.Log(GameOperations.BigIntDivideToFloat(currentHealth, maxHealth));
 
         Color gradColor = gradient.Evaluate(barUI.value);
         fill.color = gradColor;
@@ -42,6 +41,10 @@ public class SNKHealthBar : MonoBehaviour
     public void IncrementMaxHealth(BigInteger increment)
     {
         maxHealth += increment;
+        if(currentHealth > maxHealth)
+        {
+            currentHealth = maxHealth;
+        }
         IncrementCurrentHealth(increment);
     }
 

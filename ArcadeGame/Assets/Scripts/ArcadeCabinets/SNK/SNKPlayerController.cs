@@ -14,6 +14,11 @@ public class SNKPlayerController : MonoBehaviour
 
     public int bodyLength = 1;
 
+    public bool isSelfColliding = false;
+    private bool isDeleting = false;
+
+    public GameObject trash;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -75,6 +80,63 @@ public class SNKPlayerController : MonoBehaviour
         // Set Ahead of the collided to the tail
         // for loop through body and destroy gameobjects
         // make sure length if correct.
-        health.IncrementCurrentHealth(-healthPerSegment);
+
+        /*
+        isSelfColliding = true;
+        tailSegment = collidedSegment.Ahead;
+        tailSegment.Behind = null;
+        int segementsLost = bodyLength - collidedSegment.BodyIndex;
+        tailSegment.GetComponent<SpriteRenderer>().sprite = GameOperations.LoadSpriteFromPath("Sprites/ArcadeCabinets/SNK/TailSegment");
+        int segmentNum = collidedSegment.BodyIndex;
+        SNKPlayerBodySegment nextSegment = collidedSegment;
+        if (!isDeleting)
+        {
+            isDeleting = true;
+            for (int i = segmentNum; i < bodyLength; i++)
+            {
+                SNKPlayerBodySegment currentSegment = nextSegment;
+                nextSegment = currentSegment.Behind;
+                GameObject.Destroy(currentSegment.gameObject, 1f);
+            }
+
+            bodyLength = tailSegment.BodyIndex + 1;
+
+            health.IncrementMaxHealth(-healthPerSegment * segementsLost);
+            isSelfColliding = false;
+        }
+        isDeleting = false;
+        */
+
+        isSelfColliding = true;
+
+        // Sever connections between last remaining segment and collided segment.
+        tailSegment = collidedSegment.Ahead;
+        tailSegment.Behind = null;
+        collidedSegment.Ahead = null;
+
+        int oldLength = bodyLength;
+
+        MoveToTrash(collidedSegment);
+
+        int segmentsLost = oldLength - bodyLength;
+
+        health.IncrementMaxHealth(-healthPerSegment * segmentsLost);
+
+        isSelfColliding = false;
+    }
+
+    private void MoveToTrash(SNKPlayerBodySegment segment)
+    {
+        if(segment == null)
+        {
+            return;
+        }
+
+        segment.gameObject.transform.SetParent(trash.transform);
+        segment.transform.localPosition = UnityEngine.Vector3.zero;
+
+        bodyLength--;
+
+        MoveToTrash(segment.Behind);
     }
 }

@@ -84,7 +84,11 @@ public class SNKPlayerHeadSegment : SNKPlayerBodySegment
     private void OnTriggerEnter2D(Collider2D collision)
     {
         SNKPlayerBodySegment collidedSegment = collision.gameObject.GetComponent<SNKPlayerBodySegment>();
-        if (collidedSegment != null && collidedSegment.BodyIndex > 3)
+        if(collidedSegment != null && !playerController.isSelfColliding)
+        {
+            Debug.Log(System.DateTime.Now.Ticks / System.TimeSpan.TicksPerMillisecond + " Collided with index: " + collidedSegment.BodyIndex);
+        }
+        if (collidedSegment != null && collidedSegment.BodyIndex > 3 && !playerController.isSelfColliding)
         {
             playerController.SelfCollide(collidedSegment);
         }
