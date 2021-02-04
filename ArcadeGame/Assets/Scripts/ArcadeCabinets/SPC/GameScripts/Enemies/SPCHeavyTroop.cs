@@ -3,12 +3,12 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [RequireComponent(typeof(Rigidbody2D))]
-public class SPCStandardTroop : MonoBehaviour
+public class SPCHeavyTroop : MonoBehaviour
 {
-    public long pointValue = 100;
+    public long pointValue = 500;
     public GameObject projectilePrefab;
     public float speed = 1f;
-    public float health = 1;
+    public int health = 3;
     private Rigidbody2D rb;
 
     private bool inMotion;
@@ -23,7 +23,7 @@ public class SPCStandardTroop : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (!inMotion)
+        if(!inMotion)
         {
             StartCoroutine(MoveAndShoot());
         }
@@ -36,6 +36,7 @@ public class SPCStandardTroop : MonoBehaviour
         {
             if (proj.PlayerProjectile)
             {
+                GameObject.Destroy(proj.gameObject);
                 health--;
 
                 if (health <= 0)
@@ -44,24 +45,8 @@ public class SPCStandardTroop : MonoBehaviour
                     Debug.Log("You earned " + pointValue + " points");
 
                     // destroy (maybe a custom method to play animation?)
-                    GameObject.Destroy(proj.gameObject);
                     GameObject.Destroy(gameObject);
                 }
-            }
-        }
-
-        SPCExplosion explosion = collision.gameObject.GetComponent<SPCExplosion>();
-        if (explosion != null)
-        {
-            health-= explosion.damage;
-
-            if (health <= 0)
-            {
-                // give points (game controller)
-                Debug.Log("You earned " + pointValue + " points");
-
-                // destroy (maybe a custom method to play animation?)
-                GameObject.Destroy(gameObject);
             }
         }
     }
@@ -73,7 +58,7 @@ public class SPCStandardTroop : MonoBehaviour
         // start moving
         rb.velocity = new Vector3(0, -speed, 0);
         yield return new WaitForSeconds(0.5f);
-        
+
         // stop moving
         rb.velocity = Vector3.zero;
         yield return new WaitForSeconds(0.75f);
@@ -87,9 +72,25 @@ public class SPCStandardTroop : MonoBehaviour
 
     private void Shoot()
     {
-        GameObject projectile = Instantiate(projectilePrefab, transform.position, Quaternion.identity);
-        SPCProjectile proj = projectile.GetComponent<SPCProjectile>();
-        proj.StartMoving(0f, -5f, Color.green);
-        proj.PlayerProjectile = false;
+        Color col = Color.yellow;
+
+        // 1st
+        GameObject projectile1 = Instantiate(projectilePrefab, transform.position, Quaternion.identity);
+        SPCProjectile proj1 = projectile1.GetComponent<SPCProjectile>();
+        proj1.PlayerProjectile = false;
+
+        // 2nd
+        GameObject projectile2 = Instantiate(projectilePrefab, transform.position, Quaternion.identity);
+        SPCProjectile proj2 = projectile2.GetComponent<SPCProjectile>();
+        proj2.PlayerProjectile = false;
+
+        // 3rd
+        GameObject projectile3 = Instantiate(projectilePrefab, transform.position, Quaternion.identity);
+        SPCProjectile proj3 = projectile3.GetComponent<SPCProjectile>();
+        proj3.PlayerProjectile = false;
+
+        proj1.StartMoving(-0.75f, -5f, col);
+        proj2.StartMoving(0, -5f, col);
+        proj3.StartMoving(0.75f, -5f, col);
     }
 }
