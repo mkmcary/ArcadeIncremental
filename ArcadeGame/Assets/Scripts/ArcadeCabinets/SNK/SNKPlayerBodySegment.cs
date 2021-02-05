@@ -29,7 +29,7 @@ public class SNKPlayerBodySegment : MonoBehaviour
     protected virtual void Start()
     {
         rigid = gameObject.GetComponent<Rigidbody2D>();
-        Speed = 3f;
+        Speed = 5f;
         initialized = false;
         IsMoving = true;
 

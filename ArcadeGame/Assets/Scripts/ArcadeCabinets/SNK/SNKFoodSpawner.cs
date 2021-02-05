@@ -5,6 +5,8 @@ using UnityEngine;
 public class SNKFoodSpawner : MonoBehaviour
 {
     public GameObject asteroidFood;
+    public GameObject shooterFood;
+    public GameObject healerFood;
 
     private int foodCap;
     public int foodCount;

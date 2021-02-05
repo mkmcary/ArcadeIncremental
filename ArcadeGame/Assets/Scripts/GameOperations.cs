@@ -78,15 +78,20 @@ public class GameOperations : MonoBehaviour
         string dividend = b1.ToString();
         string divisor = b2.ToString();
 
-        if(dividend.Length > divisor.Length)
+        if (dividend.Length > divisor.Length)
         {
             dividend = dividend.Substring(0, dividend.Length - divisor.Length + 1);
             divisor = divisor.Substring(0, 1);
         }
-        else
+        else if (dividend.Length < divisor.Length)
         {
             divisor = divisor.Substring(0, divisor.Length - dividend.Length + 1);
             dividend = dividend.Substring(0, 1);
+        }
+        else
+        {
+            divisor = divisor.Substring(0, Mathf.Min(divisor.Length, 3));
+            dividend = dividend.Substring(0, Mathf.Min(dividend.Length, 3));
         }
         return float.Parse(dividend) / float.Parse(divisor);
     }

@@ -6,7 +6,7 @@ using UnityEngine;
 public class SNKPlayerController : MonoBehaviour
 {
     public SNKHealthBar health;
-    public BigInteger healthPerSegment = 10;
+    public BigInteger healthPerSegment = 100;
 
     public SNKPlayerBodySegment headSegment;
     public GameObject bodySegment;
@@ -15,9 +15,8 @@ public class SNKPlayerController : MonoBehaviour
     public int bodyLength = 1;
 
     public bool isSelfColliding = false;
-    private bool isDeleting = false;
 
-    public GameObject trash;
+    public SNKTrashCan trash;
 
     // Start is called before the first frame update
     void Start()
@@ -64,7 +63,7 @@ public class SNKPlayerController : MonoBehaviour
 
         if(prevTail != headSegment)
         {
-            prevTail.GetComponent<SpriteRenderer>().sprite = GameOperations.LoadSpriteFromPath("Sprites/ArcadeCabinets/SNK/CenterSegment");
+            prevTail.GetComponent<SpriteRenderer>().sprite = GameOperations.LoadSpriteFromPath("Sprites/ArcadeCabinets/SNK/CenterSegment3");
         }
         
         // Set the tail segment to be the new segment
@@ -110,8 +109,14 @@ public class SNKPlayerController : MonoBehaviour
         isSelfColliding = true;
 
         // Sever connections between last remaining segment and collided segment.
+        if(collidedSegment.Ahead == null)
+        {
+            isSelfColliding = false;
+            return;
+        }
         tailSegment = collidedSegment.Ahead;
         tailSegment.Behind = null;
+        tailSegment.GetComponent<SpriteRenderer>().sprite = GameOperations.LoadSpriteFromPath("Sprites/ArcadeCabinets/SNK/TailSegment3");
         collidedSegment.Ahead = null;
 
         int oldLength = bodyLength;
@@ -131,12 +136,19 @@ public class SNKPlayerController : MonoBehaviour
         {
             return;
         }
+        SNKPlayerBodySegment next = segment.Behind;
+        segment.Behind = null;
 
-        segment.gameObject.transform.SetParent(trash.transform);
+        if(next != null)
+            next.Ahead = null;
+
+        segment.gameObject.transform.SetParent(trash.gameObject.transform);
         segment.transform.localPosition = UnityEngine.Vector3.zero;
+
+        
 
         bodyLength--;
 
-        MoveToTrash(segment.Behind);
+        MoveToTrash(next);
     }
 }
