@@ -2,18 +2,19 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SPCSniperTroop : MonoBehaviour
+public class SPCSniperTroop : SPCEnemyTroop
 {
-    public long pointValue = 300;
     public GameObject projectilePrefab;
-    public float health = 1;
-
     private Transform player;
 
     private bool isShooting;
 
-    private void Start()
+    protected override void Start()
     {
+        // constants
+        pointValue = 300;
+        health = 1;
+
         isShooting = false;
         player = GameObject.FindObjectOfType<SPCPlayerController>().gameObject.transform;
     }
@@ -37,28 +38,6 @@ public class SPCSniperTroop : MonoBehaviour
         transform.rotation = Quaternion.Euler(0f, 0f, rot_z - 90);
     }
 
-    private void OnTriggerEnter2D(Collider2D collision)
-    {
-        SPCProjectile proj = collision.gameObject.GetComponent<SPCProjectile>();
-        if (proj != null)
-        {
-            if (proj.PlayerProjectile)
-            {
-                GameObject.Destroy(proj.gameObject);
-                health--;
-
-                if (health <= 0)
-                {
-                    // give points (game controller)
-                    Debug.Log("You earned " + pointValue + " points");
-
-                    // destroy (maybe a custom method to play animation?)
-                    GameObject.Destroy(gameObject);
-                }
-            }
-        }
-    }
-
     private IEnumerator ShootAtPlayer()
     {
         isShooting = true;
@@ -71,4 +50,8 @@ public class SPCSniperTroop : MonoBehaviour
         isShooting = false;
     }
 
+    protected override void Die()
+    {
+        GameObject.Destroy(gameObject);
+    }
 }

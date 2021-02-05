@@ -3,20 +3,19 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [RequireComponent(typeof(Rigidbody2D))]
-public class SPCBomberTroop : MonoBehaviour
+public class SPCBomberTroop : SPCEnemyTroop
 {
-    public long pointValue = 1000;
-    public float speed = 1f;
-    public float health = 5;
-    private Rigidbody2D rb;
-
     public GameObject explosionPrefab;
-
     private bool inMotion;
+    private float speed = 1f;
 
     // Start is called before the first frame update
-    void Start()
+    protected override void Start()
     {
+        // constants
+        pointValue = 1000;
+        health = 5;
+
         rb = GetComponent<Rigidbody2D>();
         inMotion = false;
     }
@@ -45,29 +44,12 @@ public class SPCBomberTroop : MonoBehaviour
         inMotion = false;
     }
 
-    private void OnTriggerEnter2D(Collider2D collision)
+    protected override void Die()
     {
-        SPCProjectile proj = collision.gameObject.GetComponent<SPCProjectile>();
-        if (proj != null)
-        {
-            if (proj.PlayerProjectile)
-            {
-                GameObject.Destroy(proj.gameObject);
-                health--;
+        // spawn explosion
+        Instantiate(explosionPrefab, transform.position, Quaternion.identity);
 
-                if (health <= 0)
-                {
-                    // give points (game controller)
-                    Debug.Log("You earned " + pointValue + " points");
-
-                    // destroy (maybe a custom method to play animation?)
-
-                    // BLOW UP
-                    Instantiate(explosionPrefab, transform.position, Quaternion.identity);
-
-                    GameObject.Destroy(gameObject);
-                }
-            }
-        }
+        // destroy
+        GameObject.Destroy(gameObject);
     }
 }

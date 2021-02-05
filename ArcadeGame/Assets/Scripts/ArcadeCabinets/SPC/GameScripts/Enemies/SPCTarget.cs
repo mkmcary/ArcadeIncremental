@@ -1,78 +1,53 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
-using System.Numerics;
 using UnityEngine;
 
-public abstract class SPCTarget : MonoBehaviour
+public class SPCTarget : SPCEnemyTroop
 {
-    public long pointValue;
-    public bool isShooter;
-    public GameObject projectilePrefab;
-
-    protected bool isMoving;
-    protected bool isShooting;
+    private bool inMotion;
+    private float speed = 0.5f;
 
     // Start is called before the first frame update
-    protected virtual void Start()
+    protected override void Start()
     {
-        isMoving = false;
-        isShooting = false;
+        pointValue = 50;
+        health = 1;
+        inMotion = false;
+        rb = GetComponent<Rigidbody2D>();
     }
 
     // Update is called once per frame
     protected void Update()
     {
-        if(!isMoving)
+        if(!inMotion)
             StartCoroutine(Move());
-        if(isShooter && !isShooting)
-            StartCoroutine(Shoot());
     }
-
-    private void OnTriggerEnter2D(Collider2D collision)
-    {
-        SPCProjectile proj = collision.gameObject.GetComponent<SPCProjectile>();
-        if(proj != null)
-        {
-            if (proj.PlayerProjectile)
-            {
-                // give points (game controller)
-                Debug.Log("You earned " + pointValue + " points");
-
-                // destroy (maybe a custom method to play animation?)
-                GameObject.Destroy(proj.gameObject);
-                GameObject.Destroy(gameObject);
-            }
-        }
-    }
-
 
     protected virtual IEnumerator Move()
     {
-        // we shouldnt call this again until done.
-        isMoving = true;
+        inMotion = true;
 
-        // move down
-        UnityEngine.Vector3 start = transform.position;
-        UnityEngine.Vector3 target = start + new UnityEngine.Vector3(0, -1, 0);
-        for(float i = 0f; i < 1f; i += 0.01f)
-        {
-            transform.position = UnityEngine.Vector3.Lerp(start, target, i);
-            yield return new WaitForSeconds(0.01f);
-        }
+        // start moving down
+        rb.velocity = new Vector3(0, -speed, 0);
+        yield return new WaitForSeconds(0.5f);
 
-        // move back up
-        UnityEngine.Vector3 temp = target;
-        target = start;
-        start = temp;
-        for (float i = 0f; i < 1f; i += 0.01f)
-        {
-            transform.position = UnityEngine.Vector3.Lerp(start, target, i);
-            yield return new WaitForSeconds(0.01f);
-        }
+        // stop moving
+        rb.velocity = Vector3.zero;
+        yield return new WaitForSeconds(0.75f);
 
-        // we can move again
-        isMoving = false;
+        // start moving up
+        rb.velocity = new Vector3(0, speed, 0);
+        yield return new WaitForSeconds(0.5f);
+
+        // stop moving
+        rb.velocity = Vector3.zero;
+        yield return new WaitForSeconds(0.75f);
+
+        inMotion = false;
     }
 
-    protected abstract IEnumerator Shoot();
+    protected override void Die()
+    {
+        GameObject.Destroy(gameObject);
+    }
 }

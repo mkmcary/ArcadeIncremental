@@ -3,19 +3,19 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [RequireComponent(typeof(Rigidbody2D))]
-public class SPCHeavyTroop : MonoBehaviour
+public class SPCHeavyTroop : SPCEnemyTroop
 {
-    public long pointValue = 500;
     public GameObject projectilePrefab;
-    public float speed = 1f;
-    public int health = 3;
-    private Rigidbody2D rb;
-
+    private float speed = 1f;
     private bool inMotion;
 
     // Start is called before the first frame update
-    void Start()
+    protected override void Start()
     {
+        // constants
+        pointValue = 300;
+        health = 3;
+
         rb = GetComponent<Rigidbody2D>();
         inMotion = false;
     }
@@ -26,28 +26,6 @@ public class SPCHeavyTroop : MonoBehaviour
         if(!inMotion)
         {
             StartCoroutine(MoveAndShoot());
-        }
-    }
-
-    private void OnTriggerEnter2D(Collider2D collision)
-    {
-        SPCProjectile proj = collision.gameObject.GetComponent<SPCProjectile>();
-        if (proj != null)
-        {
-            if (proj.PlayerProjectile)
-            {
-                GameObject.Destroy(proj.gameObject);
-                health--;
-
-                if (health <= 0)
-                {
-                    // give points (game controller)
-                    Debug.Log("You earned " + pointValue + " points");
-
-                    // destroy (maybe a custom method to play animation?)
-                    GameObject.Destroy(gameObject);
-                }
-            }
         }
     }
 
@@ -92,5 +70,10 @@ public class SPCHeavyTroop : MonoBehaviour
         proj1.StartMoving(-0.75f, -5f, col);
         proj2.StartMoving(0, -5f, col);
         proj3.StartMoving(0.75f, -5f, col);
+    }
+
+    protected override void Die()
+    {
+        GameObject.Destroy(gameObject);
     }
 }
