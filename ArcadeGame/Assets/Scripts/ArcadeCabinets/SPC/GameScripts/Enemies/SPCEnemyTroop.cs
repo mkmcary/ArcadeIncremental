@@ -12,10 +12,14 @@ public abstract class SPCEnemyTroop : MonoBehaviour
     // rigidbody
     protected Rigidbody2D rb;
 
+    // enemy spawner
+    SPCEnemySpawner enemySpawner;
+
     // Start is called before the first frame update
     protected virtual void Start()
     {
         rb = GetComponent<Rigidbody2D>();
+        enemySpawner = GameObject.FindObjectOfType<SPCEnemySpawner>();
     }
 
     /**
@@ -43,6 +47,9 @@ public abstract class SPCEnemyTroop : MonoBehaviour
         {
             // give points (game controller)
             Debug.Log("You earned " + pointValue + " points");
+
+            // remove 1 enemy from spawner count
+            enemySpawner.EnemiesAlive--;
 
             // die
             Die();

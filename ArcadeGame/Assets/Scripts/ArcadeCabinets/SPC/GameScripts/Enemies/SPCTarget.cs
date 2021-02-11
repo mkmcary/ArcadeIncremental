@@ -13,7 +13,7 @@ public class SPCTarget : SPCEnemyTroop
         pointValue = 50;
         health = 1;
         inMotion = false;
-        rb = GetComponent<Rigidbody2D>();
+        base.Start();
     }
 
     // Update is called once per frame

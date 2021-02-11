@@ -15,9 +15,9 @@ public class SPCBomberTroop : SPCEnemyTroop
         // constants
         pointValue = 1000;
         health = 5;
-
-        rb = GetComponent<Rigidbody2D>();
         inMotion = false;
+
+        base.Start();
     }
 
     // Update is called once per frame

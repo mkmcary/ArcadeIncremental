@@ -34,6 +34,6 @@ public class SPCProjectile : MonoBehaviour
     public void StartMoving(float speed, Color color)
     {
         Rigidbody2D rb = GetComponent<Rigidbody2D>();
-        rb.velocity += new Vector2(transform.up.x * speed, transform.up.y * speed);
+        rb.velocity = new Vector2(transform.up.x * speed, transform.up.y * speed);
     }
 }

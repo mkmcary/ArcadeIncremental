@@ -17,6 +17,7 @@ public class SPCSniperTroop : SPCEnemyTroop
 
         isShooting = false;
         player = GameObject.FindObjectOfType<SPCPlayerController>().gameObject.transform;
+        base.Start();
     }
 
     // Update is called once per frame

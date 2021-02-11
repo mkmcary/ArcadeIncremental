@@ -16,8 +16,8 @@ public class SPCHeavyTroop : SPCEnemyTroop
         pointValue = 300;
         health = 3;
 
-        rb = GetComponent<Rigidbody2D>();
         inMotion = false;
+        base.Start();
     }
 
     // Update is called once per frame
