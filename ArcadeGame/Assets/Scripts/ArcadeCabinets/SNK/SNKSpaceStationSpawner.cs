@@ -11,16 +11,13 @@ public class SNKSpaceStationSpawner : MonoBehaviour
 
     private int[,] sectorMap;
 
+    private List<SNKSpaceStation> spaceStations;
+
     // Start is called before the first frame update
     void Start()
     {
+        spaceStations = new List<SNKSpaceStation>();
         GenerateMap();
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-
     }
 
     private void GenerateMap()
@@ -62,8 +59,15 @@ public class SNKSpaceStationSpawner : MonoBehaviour
                     int yPos = (i - (DIMENSION / 2)) * SECTOR_SIZE;
                     GameObject spaceStation = Instantiate(spaceStationPrefab, new Vector3(xPos, yPos, 0), Quaternion.identity);
                     spaceStation.transform.SetParent(transform);
+                    spaceStations.Add(spaceStation.GetComponent<SNKSpaceStation>());
                 }
             }
         }
+    }
+
+    public SNKSpaceStation GetRandomStation()
+    {
+        int index = Random.Range(0, spaceStations.Count - 1);
+        return spaceStations[index];
     }
 }
