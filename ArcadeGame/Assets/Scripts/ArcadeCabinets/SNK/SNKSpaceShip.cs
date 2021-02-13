@@ -94,7 +94,7 @@ public class SNKSpaceShip : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if(collision.gameObject.GetComponent<SNKPlayerBodySegment>() != null)
+        if(collision.gameObject.GetComponent<SNKPlayerHeadSegment>() != null)
         {
             Die();
         }
