@@ -89,13 +89,4 @@ public class SNKPlayerBodySegment : MonoBehaviour
         }
 
     }
-
-    private void OnTriggerEnter2D(Collider2D collision)
-    {
-        if(collision.gameObject.GetComponent<SNKSpaceStationLaser>() != null)
-        {
-            FindObjectOfType<SNKPlayerController>().health.IncrementCurrentHealth(-50);
-            GameObject.Destroy(collision.gameObject);
-        }
-    }
 }
