@@ -46,6 +46,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   laserPrefab: {fileID: 8575869308515783230, guid: 9789b0ba1cf1afb4a801f2f0d984dd31,
     type: 3}
+  SpaceStation: {fileID: 6680020608968377833}
 --- !u!1 &2144257142
 GameObject:
   m_ObjectHideFlags: 0

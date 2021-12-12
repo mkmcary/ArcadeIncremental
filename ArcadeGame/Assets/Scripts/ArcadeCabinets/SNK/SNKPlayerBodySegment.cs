@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class SNKPlayerBodySegment : MonoBehaviour
 {
+    protected SNKGameController gameController;
+
     public SNKPlayerBodySegment Ahead { get; set; }
     public SNKPlayerBodySegment Behind { get; set; }
 
@@ -28,6 +30,8 @@ public class SNKPlayerBodySegment : MonoBehaviour
     // Start is called before the first frame update
     protected virtual void Start()
     {
+        gameController = FindObjectOfType<SNKGameController>();
+
         rigid = gameObject.GetComponent<Rigidbody2D>();
         Speed = 5f;
         initialized = false;
@@ -42,18 +46,22 @@ public class SNKPlayerBodySegment : MonoBehaviour
     // Update is called once per frame
     protected virtual void Update()
     {
-        if(Ahead != null)
+        if (gameController.IsPlaying)
         {
-            if (!initialized)
+            if(Ahead != null)
             {
-                UpdateDesiredPosition();
+                if (!initialized)
+                {
+                    UpdateDesiredPosition();
+                }
+                if (transform.position == DesiredPosition)
+                {
+                    IsMoving = false;
+                }
+                transform.position = Vector3.MoveTowards(transform.position, DesiredPosition, Speed * Time.deltaTime);
             }
-            if (transform.position == DesiredPosition)
-            {
-                IsMoving = false;
-            }
-            transform.position = Vector3.MoveTowards(transform.position, DesiredPosition, Speed * Time.deltaTime);
         }
+        
         
     }
 

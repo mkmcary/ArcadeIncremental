@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class SNKSpaceStationLaser : MonoBehaviour
 {
+
     // Start is called before the first frame update
     void Start()
     {
@@ -14,14 +15,18 @@ public class SNKSpaceStationLaser : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        SNKPlayerController playerController = FindObjectOfType<SNKPlayerController>();
-        GameObject collidedObject = collision.gameObject;
-        SNKPlayerHeadSegment head = collidedObject.GetComponent<SNKPlayerHeadSegment>();
-        SNKPlayerBodySegment body = collidedObject.GetComponent<SNKPlayerBodySegment>();
-        if(head != null || body != null)
+        if (FindObjectOfType<SNKGameController>().IsPlaying)
         {
-            playerController.health.IncrementCurrentHealth(-50);
-            GameObject.Destroy(gameObject);
+            SNKPlayerController playerController = FindObjectOfType<SNKPlayerController>();
+            GameObject collidedObject = collision.gameObject;
+            SNKPlayerHeadSegment head = collidedObject.GetComponent<SNKPlayerHeadSegment>();
+            SNKPlayerBodySegment body = collidedObject.GetComponent<SNKPlayerBodySegment>();
+            if(head != null || body != null)
+            {
+                playerController.health.IncrementCurrentHealth(-50);
+                GameObject.Destroy(gameObject);
+            }
         }
+        
     }
 }

@@ -10,6 +10,7 @@ public class SNKFood : MonoBehaviour
         {
             FindObjectOfType<SNKFoodSpawner>().foodCount--;
             FindObjectOfType<SNKPlayerController>().AddBodySegment();
+            FindObjectOfType<SNKGameController>().CollectPoints(50);
             GameObject.Destroy(gameObject);
         }
     }

@@ -6,11 +6,14 @@ public class SNKSpaceStation : MonoBehaviour
 {
     public GameObject spaceShipPrefab;
     public int ShipCount { get; set; }
+    public int Rotation { get; set; }
 
+    private SNKPlayerController playerController;
 
     private void Start()
     {
         ShipCount = 0;
+        playerController = FindObjectOfType<SNKPlayerController>();
     }
 
     // Update is called once per frame
@@ -40,7 +43,7 @@ public class SNKSpaceStation : MonoBehaviour
     public void Die()
     {
         // TODO: Finish this method to give points and animation
-        FindObjectOfType<SNKPlayerController>().AddBodySegment();
+        playerController.AddBodySegment();
         GameObject.Destroy(gameObject);
     }
 
@@ -50,6 +53,12 @@ public class SNKSpaceStation : MonoBehaviour
         if(spaceShip != null && spaceShip.targetStation == this)
         {
             RecieveShip(spaceShip);
+        }
+        SNKPlayerHeadSegment player = collision.gameObject.GetComponent<SNKPlayerHeadSegment>();
+        if(player != null)
+        {
+            playerController.health.IncrementCurrentHealth(-500);
+            GameObject.Destroy(gameObject);
         }
     }
 }

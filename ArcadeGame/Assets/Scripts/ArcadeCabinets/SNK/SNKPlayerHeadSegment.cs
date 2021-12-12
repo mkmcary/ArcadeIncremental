@@ -28,30 +28,31 @@ public class SNKPlayerHeadSegment : SNKPlayerBodySegment
     // Update is called once per frame
     protected override void Update()
     {
-        if (Input.GetKeyDown(KeyCode.LeftArrow) && currentDirection != Vector3.right)
+        if (gameController.IsPlaying)
         {
-            nextDirection = Vector3.left;
-        }
-        else if (Input.GetKeyDown(KeyCode.RightArrow) && currentDirection != Vector3.left)
-        {
-            nextDirection = Vector3.right;
-        }
-        else if (Input.GetKeyDown(KeyCode.UpArrow) && currentDirection != Vector3.down)
-        {
-            nextDirection = Vector3.up;
-        }
-        else if (Input.GetKeyDown(KeyCode.DownArrow) && currentDirection != Vector3.up)
-        {
-            nextDirection = Vector3.down;
-        }
+            if (Input.GetKeyDown(KeyCode.LeftArrow) && currentDirection != Vector3.right)
+            {
+                nextDirection = Vector3.left;
+            }
+            else if (Input.GetKeyDown(KeyCode.RightArrow) && currentDirection != Vector3.left)
+            {
+                nextDirection = Vector3.right;
+            }
+            else if (Input.GetKeyDown(KeyCode.UpArrow) && currentDirection != Vector3.down)
+            {
+                nextDirection = Vector3.up;
+            }
+            else if (Input.GetKeyDown(KeyCode.DownArrow) && currentDirection != Vector3.up)
+            {
+                nextDirection = Vector3.down;
+            }
 
-        if (transform.position == DesiredPosition)
-        {
-            IsMoving = false;
+            if (transform.position == DesiredPosition)
+            {
+                IsMoving = false;
+            }
+            transform.position = Vector3.MoveTowards(transform.position, DesiredPosition, Speed * Time.deltaTime);
         }
-        transform.position = Vector3.MoveTowards(transform.position, DesiredPosition, Speed * Time.deltaTime);
-
-        
     }
 
     public override void UpdateDesiredPosition()

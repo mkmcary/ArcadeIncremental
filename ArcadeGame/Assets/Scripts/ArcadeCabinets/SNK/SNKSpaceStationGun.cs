@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class SNKSpaceStationGun : MonoBehaviour
 {
+    private SNKGameController gameController;
+
     public GameObject laserPrefab;
     private Color myColor;
 
@@ -17,6 +19,8 @@ public class SNKSpaceStationGun : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        gameController = FindObjectOfType<SNKGameController>();
+
         player = FindObjectOfType<SNKPlayerHeadSegment>().transform;
         range = 15f;
         rotationSpeed = 60f;
@@ -29,17 +33,20 @@ public class SNKSpaceStationGun : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (LookAtTarget())
+        if (gameController.IsPlaying)
         {
-            timer += Time.deltaTime;
-        }
-        else
-        {
-            timer = 0;
-        }
-        if(timer >= shootSpeed)
-        {
-            Shoot();
+            if (LookAtTarget())
+            {
+                timer += Time.deltaTime;
+            }
+            else
+            {
+                timer = 0;
+            }
+            if (timer >= shootSpeed)
+            {
+                Shoot();
+            }
         }
     }
 
@@ -48,60 +55,74 @@ public class SNKSpaceStationGun : MonoBehaviour
     {
         // Find the vector that points to the player and return if its magnitude is out of range.
         Vector3 diff = player.position - transform.position;
+
         if(diff.magnitude > range)
         {
             return false;
         }
         diff.Normalize();
 
-        float desiredRotationZ = Mathf.Atan2(diff.y, diff.x) * Mathf.Rad2Deg;
-
-        // Correct for orientation.
-        desiredRotationZ -= 90;
-        if(desiredRotationZ < -180f)
-        {
-            desiredRotationZ += 360;
-        }
-
-        // Constrain movement to the rail.
-        if (desiredRotationZ < -135f && desiredRotationZ >= -180f)
-        {
-            desiredRotationZ = -135f;
-        }
-        else if (desiredRotationZ > 135f && desiredRotationZ <= 180f)
-        {
-            desiredRotationZ = 135f;
-        }
-
         // Limit rotational speed.
-        float currentRotationZ = transform.localEulerAngles.z;
+        float currentRotationZ = transform.eulerAngles.z;
 
-        if(currentRotationZ > 180)
+        if (currentRotationZ > 180)
         {
             currentRotationZ -= 360;
         }
 
-        float rotDiff = desiredRotationZ - currentRotationZ;
-        float absRotDiff = Mathf.Abs(rotDiff);
-        float targetRotationZ = desiredRotationZ;
+        float clockwise = currentRotationZ - rotationSpeed * Time.deltaTime;
+        float counterclockwise = currentRotationZ + rotationSpeed * Time.deltaTime;
 
-        if (absRotDiff < rotationSpeed * Time.deltaTime)
+        float desiredRotationZ = Mathf.Atan2(diff.y, diff.x) * Mathf.Rad2Deg;
+
+        // Correct for orientation.
+        desiredRotationZ -= 90;
+        if (desiredRotationZ < -180f)
         {
-            // Case 1: Our target is within speed range.
-            targetRotationZ = desiredRotationZ;
-        }
-        else if (rotDiff < 0)
-        {
-            // Case 2: Our target is out of speed range clockwise.
-            targetRotationZ = currentRotationZ - rotationSpeed * Time.deltaTime;
-        }
-        else
-        {
-            // Case 3: Our target is out of speed range counter-clockwise.
-            targetRotationZ = currentRotationZ + rotationSpeed * Time.deltaTime;
+            desiredRotationZ += 360;
         }
 
-        transform.rotation = Quaternion.Euler(0f, 0f, targetRotationZ);
+        float rot = clockwise;
+        if(Mathf.Abs(desiredRotationZ - clockwise) > Mathf.Abs(desiredRotationZ - counterclockwise))
+        {
+            rot = counterclockwise;
+        }
+
+        
+
+        //// Constrain movement to the rail.
+        //if (desiredRotationZ < -135f && desiredRotationZ >= -180f)
+        //{
+        //    desiredRotationZ = -135f;
+        //}
+        //else if (desiredRotationZ > 135f && desiredRotationZ <= 180f)
+        //{
+        //    desiredRotationZ = 135f;
+        //}
+
+
+
+        //float rotDiff = desiredRotationZ - currentRotationZ;
+        //float absRotDiff = Mathf.Abs(rotDiff);
+        //float targetRotationZ = desiredRotationZ;
+
+        //if (absRotDiff < rotationSpeed * Time.deltaTime)
+        //{
+        //    // Case 1: Our target is within speed range.
+        //    targetRotationZ = desiredRotationZ;
+        //}
+        //else if (rotDiff < 0)
+        //{
+        //    // Case 2: Our target is out of speed range clockwise.
+        //    targetRotationZ = currentRotationZ - rotationSpeed * Time.deltaTime;
+        //}
+        //else
+        //{
+        //    // Case 3: Our target is out of speed range counter-clockwise.
+        //    targetRotationZ = currentRotationZ + rotationSpeed * Time.deltaTime;
+        //}
+
+        transform.rotation = Quaternion.Euler(0f, 0f, rot);
 
         return true;
     }

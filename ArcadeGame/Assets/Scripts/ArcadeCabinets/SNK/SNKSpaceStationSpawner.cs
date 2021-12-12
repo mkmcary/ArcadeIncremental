@@ -57,8 +57,10 @@ public class SNKSpaceStationSpawner : MonoBehaviour
                 {
                     int xPos = (j - (DIMENSION / 2)) * SECTOR_SIZE;
                     int yPos = (i - (DIMENSION / 2)) * SECTOR_SIZE;
-                    GameObject spaceStation = Instantiate(spaceStationPrefab, new Vector3(xPos, yPos, 0), Quaternion.identity);
+                    int rot = Random.Range(0, 4) * 90;
+                    GameObject spaceStation = Instantiate(spaceStationPrefab, new Vector3(xPos, yPos, 0), Quaternion.Euler(new Vector3(0,0,rot)));
                     spaceStation.transform.SetParent(transform);
+                    spaceStation.GetComponent<SNKSpaceStation>().Rotation = rot;
                     spaceStations.Add(spaceStation.GetComponent<SNKSpaceStation>());
                 }
             }

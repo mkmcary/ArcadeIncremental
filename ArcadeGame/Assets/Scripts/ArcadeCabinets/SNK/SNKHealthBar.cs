@@ -52,5 +52,15 @@ public class SNKHealthBar : MonoBehaviour
     {
         currentHealth += increment;
         UpdateHealthBar();
+
+        if (IsDead())
+        {
+            FindObjectOfType<SNKGameController>().EndGame();
+        }
+    }
+
+    public bool IsDead()
+    {
+        return currentHealth <= 0;
     }
 }
