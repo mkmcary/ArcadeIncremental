@@ -11,6 +11,13 @@ public class SNKGameController : ArcadeGameController
     public Text popUpText;
     public Text gainText;
 
+    //Spawners
+    public SNKSpaceStationSpawner SpaceShipSpawner;
+    public SNKFoodSpawner foodSpawner;
+
+    //Player Controller
+    public SNKPlayerController playerController;
+
     public override BigInteger InitalScore => 0;
 
     // used to indicate whether the game should be running,
@@ -26,6 +33,16 @@ public class SNKGameController : ArcadeGameController
 
         // initialize everything
         popUp.SetActive(false);
+
+        //Find all objects and kill
+        ResetObjects();
+
+        //Spawn SpaceStations and food
+        SpaceShipSpawner.StartGame();
+        foodSpawner.StartGame();
+
+        //Resets player
+        playerController.ResetPlayer();
 
         // start playing
         IsPlaying = true;
@@ -43,11 +60,11 @@ public class SNKGameController : ArcadeGameController
         //snkStatus.Tickets += tickets;
 
         // update popup
-        //popUpText.text = "Your Score: " + score
-        //    + "\nCumulative Score: " + GameOperations.BigIntToString(snkStatus.CumulativeScore)
-        //    + "\nTicket Count: " + GameOperations.BigIntToString(snkStatus.Tickets);
-        //gainText.text = "(+" + GameOperations.BigIntToString(tickets) + ")";
-        //popUp.SetActive(true);
+        popUpText.text = "Your Score: " + score
+           + "\nCumulative Score: " + GameOperations.BigIntToString(0)
+           + "\nTicket Count: " + GameOperations.BigIntToString(0);
+        gainText.text = "(+" + GameOperations.BigIntToString(tickets) + ")";
+        popUp.SetActive(true);
 
         // write to file
         base.EndGame();
@@ -60,6 +77,27 @@ public class SNKGameController : ArcadeGameController
 
         score += pointsToGive;
         UpdateScore();
+    }
+
+    private void ResetObjects()
+    {
+        SNKSpaceStation[] stations = FindObjectsOfType<SNKSpaceStation>();
+        for(int i = 0; i < stations.Length; i++)
+        {
+            GameObject.Destroy(stations[i].gameObject);
+        }
+
+        SNKSpaceShip[] ships = FindObjectsOfType<SNKSpaceShip>();
+        for (int i = 0; i < ships.Length; i++)
+        {
+            GameObject.Destroy(ships[i].gameObject);
+        }
+
+        SNKFood[] food = FindObjectsOfType<SNKFood>();
+        for (int i = 0; i < food.Length; i++)
+        {
+            GameObject.Destroy(food[i].gameObject);
+        }
     }
 
     public void ReachedObjective()

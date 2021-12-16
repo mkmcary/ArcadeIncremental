@@ -16,7 +16,7 @@ public class SNKHealthBar : MonoBehaviour
     public Text HealthText;
 
     // Start is called before the first frame update
-    void Start()
+    public void Start()
     {
         barUI = GetComponent<Slider>();
         maxHealth = FindObjectOfType<SNKPlayerController>().healthPerSegment;

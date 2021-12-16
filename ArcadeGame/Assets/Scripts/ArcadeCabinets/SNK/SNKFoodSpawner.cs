@@ -10,7 +10,7 @@ public class SNKFoodSpawner : MonoBehaviour
     public int foodCount;
 
     // Start is called before the first frame update
-    void Start()
+    public void StartGame()
     {
         foodCap = 5;
         foodCount = 0;

@@ -14,7 +14,7 @@ public class SNKSpaceStationSpawner : MonoBehaviour
     private List<SNKSpaceStation> spaceStations;
 
     // Start is called before the first frame update
-    void Start()
+    public void StartGame()
     {
         spaceStations = new List<SNKSpaceStation>();
         GenerateMap();

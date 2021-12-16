@@ -8,7 +8,7 @@ public class SNKPlayerController : MonoBehaviour
     public SNKHealthBar health;
     public BigInteger healthPerSegment = 100;
 
-    public SNKPlayerBodySegment headSegment;
+    public SNKPlayerHeadSegment headSegment;
     public GameObject bodySegment;
     private SNKPlayerBodySegment tailSegment;
 
@@ -17,12 +17,6 @@ public class SNKPlayerController : MonoBehaviour
     public bool isSelfColliding = false;
 
     public SNKTrashCan trash;
-
-    // Start is called before the first frame update
-    void Start()
-    {
-        tailSegment = headSegment;
-    }
 
     private void Update()
     {
@@ -128,6 +122,25 @@ public class SNKPlayerController : MonoBehaviour
         health.IncrementMaxHealth(-healthPerSegment * segmentsLost);
 
         isSelfColliding = false;
+    }
+
+    public void ResetPlayer()
+    {
+        SNKPlayerBodySegment current = tailSegment;
+        while(current != null && current != headSegment)
+        {
+            SNKPlayerBodySegment temp = current.Ahead;
+            MoveToTrash(current);
+            current = temp;
+        }
+
+        headSegment.transform.position = UnityEngine.Vector3.zero;
+
+        health.Start();
+
+        tailSegment = headSegment;
+
+        headSegment.Start();
     }
 
     private void MoveToTrash(SNKPlayerBodySegment segment)

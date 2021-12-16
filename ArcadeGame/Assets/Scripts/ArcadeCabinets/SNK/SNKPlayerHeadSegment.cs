@@ -12,7 +12,7 @@ public class SNKPlayerHeadSegment : SNKPlayerBodySegment
     private Vector3 nextDirection;
 
     // Start is called before the first frame update
-    protected override void Start()
+    public override void Start()
     {
         base.Start();
         nextDirection = Vector3.up;

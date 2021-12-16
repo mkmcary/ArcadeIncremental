@@ -103,13 +103,13 @@ ArcadeStatus.json
     },
     "kngStatus": {
         "tickets": {
-            "valueString": "767"
+            "valueString": "1467"
         },
         "highScore": {
             "valueString": "850"
         },
         "cumulativeScore": {
-            "valueString": "4200"
+            "valueString": "4900"
         },
         "isActive": true,
         "bananaUpgrade": {

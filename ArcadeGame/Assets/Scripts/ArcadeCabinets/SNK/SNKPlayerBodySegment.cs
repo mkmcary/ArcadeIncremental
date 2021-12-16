@@ -28,7 +28,7 @@ public class SNKPlayerBodySegment : MonoBehaviour
     protected Quaternion downRotation;
 
     // Start is called before the first frame update
-    protected virtual void Start()
+    public virtual void Start()
     {
         gameController = FindObjectOfType<SNKGameController>();
 
