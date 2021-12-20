@@ -54,15 +54,15 @@ public class SNKGameController : ArcadeGameController
 
         // calculate new data
         BigInteger tickets = score; // decide how many tickets to give
-        //SNKCabinetStatus snkStatus = arcadeStatus.SNKStatus;
-        //snkStatus.CumulativeScore += score;
-        //snkStatus.HighScore = BigInteger.Max(snkStatus.HighScore, score);
-        //snkStatus.Tickets += tickets;
+        SNKCabinetStatus snkStatus = arcadeStatus.SNKStatus;
+        snkStatus.CumulativeScore += score;
+        snkStatus.HighScore = BigInteger.Max(snkStatus.HighScore, score);
+        snkStatus.Tickets += tickets;
 
         // update popup
         popUpText.text = "Your Score: " + score
-           + "\nCumulative Score: " + GameOperations.BigIntToString(0)
-           + "\nTicket Count: " + GameOperations.BigIntToString(0);
+           + "\nCumulative Score: " + GameOperations.BigIntToString(snkStatus.CumulativeScore)
+           + "\nTicket Count: " + GameOperations.BigIntToString(snkStatus.Tickets);
         gainText.text = "(+" + GameOperations.BigIntToString(tickets) + ")";
         popUp.SetActive(true);
 

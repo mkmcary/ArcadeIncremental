@@ -96,6 +96,10 @@ public class TicketConversionController : MonoBehaviour
         {
             ticketConverts.Add(new TicketConvert("Sprites/Currency/Tickets/BRDTicket", "Magic Quest", 4, 1, arcadeStatus.BRDStatus));
         }
+        if (arcadeStatus.SNKStatus.IsActive)
+        {
+            ticketConverts.Add(new TicketConvert("Sprites/Currency/Tickets/SNKTicket", "SNK", 6, 1, arcadeStatus.SNKStatus));
+        }
 
         // Initalize the UIs
         currentSetIndex = 0;

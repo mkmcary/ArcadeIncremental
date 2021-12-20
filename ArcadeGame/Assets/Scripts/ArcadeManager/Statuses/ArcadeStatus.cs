@@ -20,6 +20,8 @@ public class ArcadeStatus
     private KNGCabinetStatus kngStatus;
     [SerializeField]
     private BRDCabinetStatus brdStatus;
+    [SerializeField]
+    private SNKCabinetStatus snkStatus;
 
     public List<LayerZeroStatus> Statuses
     {
@@ -57,6 +59,12 @@ public class ArcadeStatus
         set { brdStatus = value; }
     }
 
+    public SNKCabinetStatus SNKStatus
+    {
+        get { return snkStatus; }
+        set { snkStatus = value; }
+    }
+
     public ArcadeStatus()
     {
         statuses = new List<LayerZeroStatus>();
@@ -77,6 +85,9 @@ public class ArcadeStatus
 
         brdStatus = new BRDCabinetStatus();
         statuses.Add(brdStatus);
+
+        snkStatus = new SNKCabinetStatus();
+        statuses.Add(snkStatus);
     }
 
     public void ResetButPreserve()
@@ -99,5 +110,8 @@ public class ArcadeStatus
 
         brdStatus = (BRDCabinetStatus)brdStatus.ResetButPreserve();
         statuses.Add(brdStatus);
+
+        snkStatus = (SNKCabinetStatus)snkStatus.ResetButPreserve();
+        statuses.Add(snkStatus);
     }
 }

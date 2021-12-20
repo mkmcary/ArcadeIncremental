@@ -103,7 +103,7 @@ ArcadeStatus.json
     },
     "kngStatus": {
         "tickets": {
-            "valueString": "1467"
+            "valueString": "1742"
         },
         "highScore": {
             "valueString": "850"
@@ -143,6 +143,29 @@ ArcadeStatus.json
             "upgradeName": "Robes",
             "description": "Your robes now can handle more damage",
             "currentLevel": 1,
+            "maxLevel": 5,
+            "sType": 1
+        }
+    },
+    "snkStatus": {
+        "tickets": {
+            "valueString": "300"
+        },
+        "highScore": {
+            "valueString": "200"
+        },
+        "cumulativeScore": {
+            "valueString": "200"
+        },
+        "isActive": true,
+        "robeUpgrade": {
+            "sprite": "Sprites/ArcadeCabinets/BRD/Wizard",
+            "price": {
+                "valueString": "1000"
+            },
+            "upgradeName": "Robes",
+            "description": "Your robes now can handle more damage",
+            "currentLevel": 0,
             "maxLevel": 5,
             "sType": 1
         }

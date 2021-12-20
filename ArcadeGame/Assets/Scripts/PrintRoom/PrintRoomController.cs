@@ -72,6 +72,10 @@ public class PrintRoomController : MonoBehaviour
                 if (!arcadeStatus.BRDStatus.IsActive)
                     ResetPrinterState(printer);
                 break;
+            case TicketPrinter.TicketType.SNKTicket:
+                if (!arcadeStatus.SNKStatus.IsActive)
+                    ResetPrinterState(printer);
+                break;
             case TicketPrinter.TicketType.PrizeTicket:
                 // check if we have the ability to print prize tickets???
                 break;
@@ -131,6 +135,9 @@ public class PrintRoomController : MonoBehaviour
                 break;
             case TicketPrinter.TicketType.BRDTicket:
                 arcadeStatus.BRDStatus.Tickets += ticketReturn.Number;
+                break;
+            case TicketPrinter.TicketType.SNKTicket:
+                arcadeStatus.SNKStatus.Tickets += ticketReturn.Number;
                 break;
             case TicketPrinter.TicketType.PrizeTicket:
                 arcadeStatus.ArcadePrizeStatus.Tickets += ticketReturn.Number;

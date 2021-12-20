@@ -20,4 +20,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/ArcadeGames/BRDGameScene.unity
     guid: 9e83d0b8bb76d4f43afe7e977fbb0d24
+  - enabled: 1
+    path: Assets/Scenes/ArcadeGames/SNKGameScene.unity
+    guid: c44443fbef024ca48af9e04badaf2719
   m_configObjects: {}

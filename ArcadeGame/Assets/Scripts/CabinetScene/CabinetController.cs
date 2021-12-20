@@ -110,6 +110,10 @@ public class CabinetController : MonoBehaviour
         {
             arcadeCabinets.Add(new ArcadeCabinet("", "Sprites/CabinetScene/Placeholder/WallysWorld", cabinetMenus[3]));
         }
+        if (arcadeStatus.SNKStatus.IsActive)
+        {
+            arcadeCabinets.Add(new ArcadeCabinet("SNK", "Sprites/CabinetScene/Placeholder/BlankCabinet", cabinetMenus[4]));
+        }
     }
 
     private class ArcadeCabinet

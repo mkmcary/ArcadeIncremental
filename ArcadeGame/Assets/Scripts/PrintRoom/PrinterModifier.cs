@@ -110,6 +110,13 @@ public class PrinterModifier : MonoBehaviour
             index++;
         }
 
+        if (arcadeStatus.SNKStatus.IsActive)
+        {
+            ticketAssociation = new TicketAssociation(index, TicketPrinter.TicketType.SNKTicket, "Snake Ticket", "Sprites/Currency/Tickets/SNKTicket");
+            ticketAssociations.Add(ticketAssociation);
+            index++;
+        }
+
         // prize tickets
         if (true) // figure out condition upon which players can print prize tickets
         {
