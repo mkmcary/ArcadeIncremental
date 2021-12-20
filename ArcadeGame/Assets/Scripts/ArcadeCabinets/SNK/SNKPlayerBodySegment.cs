@@ -6,6 +6,8 @@ public class SNKPlayerBodySegment : MonoBehaviour
 {
     protected SNKGameController gameController;
 
+    public SNKPlayerController playerController;
+
     public SNKPlayerBodySegment Ahead { get; set; }
     public SNKPlayerBodySegment Behind { get; set; }
 
@@ -31,6 +33,7 @@ public class SNKPlayerBodySegment : MonoBehaviour
     public virtual void Start()
     {
         gameController = FindObjectOfType<SNKGameController>();
+        playerController = FindObjectOfType<SNKPlayerController>();
 
         rigid = gameObject.GetComponent<Rigidbody2D>();
         Speed = 5f;
@@ -41,6 +44,8 @@ public class SNKPlayerBodySegment : MonoBehaviour
         leftRotation = Quaternion.Euler(0, 0, 90);
         rightRotation = Quaternion.Euler(0, 0, 270);
         downRotation = Quaternion.Euler(0, 0, 180);
+
+        gameObject.tag = "Player";
     }
 
     // Update is called once per frame
@@ -58,7 +63,7 @@ public class SNKPlayerBodySegment : MonoBehaviour
                 {
                     IsMoving = false;
                 }
-                transform.position = Vector3.MoveTowards(transform.position, DesiredPosition, Speed * Time.deltaTime);
+                transform.position = Vector3.MoveTowards(transform.position, DesiredPosition, playerController.Speed * Time.deltaTime);
             }
         }
         

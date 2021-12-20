@@ -14,6 +14,8 @@ public class SNKPlayerController : MonoBehaviour
 
     public int bodyLength = 1;
 
+    public float Speed;
+
     public bool isSelfColliding = false;
 
     public SNKTrashCan trash;
@@ -65,6 +67,9 @@ public class SNKPlayerController : MonoBehaviour
         newSegment.BodyIndex = bodyLength++;
 
         health.IncrementMaxHealth(healthPerSegment);
+
+        // update speed
+        Speed *= 1.01f;
     }
 
     public void SelfCollide(SNKPlayerBodySegment collidedSegment)
@@ -141,6 +146,9 @@ public class SNKPlayerController : MonoBehaviour
         tailSegment = headSegment;
 
         headSegment.Start();
+
+        // Reset Speed
+        Speed = 5f;
     }
 
     private void MoveToTrash(SNKPlayerBodySegment segment)

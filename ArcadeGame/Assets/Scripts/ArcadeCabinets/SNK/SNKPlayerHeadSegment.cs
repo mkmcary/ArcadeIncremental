@@ -4,8 +4,6 @@ using UnityEngine;
 
 public class SNKPlayerHeadSegment : SNKPlayerBodySegment
 {
-    SNKPlayerController playerController;
-
     public Vector3 NextPosition { get; set; }
 
     private Vector3 currentDirection;
@@ -19,8 +17,6 @@ public class SNKPlayerHeadSegment : SNKPlayerBodySegment
         currentDirection = Vector3.up;
         DesiredPosition = transform.position + currentDirection;
         NextPosition = DesiredPosition + nextDirection;
-
-        playerController = FindObjectOfType<SNKPlayerController>();
 
         BodyIndex = 0;
     }
@@ -51,7 +47,7 @@ public class SNKPlayerHeadSegment : SNKPlayerBodySegment
             {
                 IsMoving = false;
             }
-            transform.position = Vector3.MoveTowards(transform.position, DesiredPosition, Speed * Time.deltaTime);
+            transform.position = Vector3.MoveTowards(transform.position, DesiredPosition, playerController.Speed * Time.deltaTime);
         }
     }
 
